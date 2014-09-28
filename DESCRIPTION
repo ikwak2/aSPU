@@ -1,0 +1,10 @@
+Package: aSPU
+Type: Package
+Title: Adaptive Sum of powered score test.
+Description: R codes for aSPU test in genetic association study for binaray and quantitative traits with covariates.
+Version: 0.1
+Date: 2014-09-16
+Author: Il-Youp Kwak, Junghi Kim, Wei Pan
+Maintainer: Il-Youp Kwak <ilyoup.kwak@gmail.com>
+License: MIT + file LICENSE
+URL : https://github.com/ikwak2/aSPU
