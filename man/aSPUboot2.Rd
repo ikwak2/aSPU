@@ -1,13 +1,13 @@
 \name{aSPUboot2}
 \alias{aSPUboot2}
-\title{Sum of powered score (SPU) test (boot, T0 vector)}
+\title{Sum of powered score (SPU) test (boot, version 2, matrix used in permutation)}
 \usage{
 aSPUboot2(Y, X, cov = NULL, model = (c("gaussian", "binary")),
   pow = c(1:8, Inf), n.perm = 1000)
 }
 \arguments{
   \item{Y}{phenotype data. It can be disease lables; =0 for
-  controls, =1 for cases. or It can be any quantitative
+  controls, =1 for cases. or it can be any quantitative
   traits.}
 
   \item{X}{genotype data; each row for a subject, and each
@@ -28,11 +28,13 @@ Test Statistics and p-values for SPS tests and aSPU test.
 }
 \description{
 It gives the p-values of the SPS test and aSPU test based
-on the parametric bootstrap.
+on the parametric bootstrap. (This is version 2, matrix
+version is faster but if it doesn't work, we should use
+version 1, vector version)
 }
 \examples{
 data(exdat)
-out <- aSPUboot(exdat$Y, exdat$X, cov = NULL, pow = c(1:8, Inf), n.perm = 1000)
+out <- aSPUboot(exdat$Y, exdat$X, cov = NULL, model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
 out
 }
 \seealso{
