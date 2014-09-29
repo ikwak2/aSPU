@@ -1,6 +1,6 @@
-#' Sum of powered score (SPU) test (perm, T0 vector)
+#' Sum of powered score (SPU) test (perm, version 2, matrix used in permutation)
 #'
-#' It gives the p-values of the SPS test and aSPU test based on based on the permutation of residuals
+#' It gives the p-values of the SPS test and aSPU test based on based on the permutation of residuals.  (This is version 2, matrix version is faster but if it doesn't work, we should use version 1, vector version)
 #'
 #' @param Y phenotype data. It can be disease lables; =0 for controls, =1 for cases.
 #'     or It can be any quantitative traits.
@@ -24,7 +24,7 @@
 #' @examples
 #'
 #' data(exdat)
-#' out <- aSPUperm2(exdat$Y, exdat$X, cov = NULL, pow = c(1:8, Inf), n.perm = 1000)
+#' out <- aSPUperm2(exdat$Y, exdat$X, cov = NULL, model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
 #' out
 #'
 #' @seealso \code{\link{aSPU}}, \code{\link{aSPUperm}}, \code{\link{aSPUboot}}, \code{\link{aSPUboot2}}

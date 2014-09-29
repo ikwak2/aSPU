@@ -1,9 +1,9 @@
-#' Sum of powered score (SPU) test (boot, T0 vector)
+#' Sum of powered score (SPU) test (boot, version 1, vector used in permutation)
 #'
-#' It gives the p-values of the SPS test and aSPU test based on the parametric bootstrap.
+#' It gives the p-values of the SPS test and aSPU test based on the parametric bootstrap. (This is version 1, matrix version is faster but if it doesn't work, we should use version 1, vector version)
 #'
 #' @param Y phenotype data. It can be disease lables; =0 for controls, =1 for cases.
-#' or It can be any quantitative traits.
+#' or it can be any quantitative traits.
 #'
 #' @param X genotype data; each row for a subject, and each column
 #'     for an SNP. The value of each element is the # of the copies
@@ -23,7 +23,7 @@
 #' @examples
 #'
 #' data(exdat)
-#' out <- aSPUboot(exdat$Y, exdat$X, cov = NULL, pow = c(1:8, Inf), n.perm = 1000)
+#' out <- aSPUboot(exdat$Y, exdat$X, cov = NULL, model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
 #' out
 #'
 #' @seealso \code{\link{aSPU}}, \code{\link{aSPUperm}}, \code{\link{aSPUperm2}}, \code{\link{aSPUboot2}}

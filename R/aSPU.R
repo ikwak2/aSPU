@@ -11,7 +11,7 @@
 #'
 #' @param cov covariates
 #'
-#' @param resample Use "boot" for parametric bootstrap and "perm" for residual permutations
+#' @param resample Use "perm" for residual permutations and "boot" for parametric bootstrap
 #'
 #' @param model Use "gaussian" for quantitative trait, and use "binomial" for binary trait.
 #'
@@ -25,13 +25,13 @@
 #' @examples
 #'
 #' data(exdat)
-#' out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot", pow = c(1:8, Inf), n.perm = 1000, version = 2)
+#' out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot", model = "binary", pow = c(1:8, Inf), n.perm = 1000, version = 2)
 #' out
 #'
 #' @seealso \code{\link{aSPUperm}}, \code{\link{aSPUperm2}}, \code{\link{aSPUboot}}, \code{\link{aSPUboot2}}
 
 
-aSPU <- function(Y, X, cov=NULL, resample = c("boot", "perm"), pow = c(1:8, Inf), n.perm = 1000, version = 2:1 ) {
+aSPU <- function(Y, X, cov=NULL, resample = c("boot", "perm"), model=c("gaussian", "binary"), pow = c(1:8, Inf), n.perm = 1000, version = 2:1 ) {
 
     model <- match.arg(model)
     resample <- match.arg(resample)

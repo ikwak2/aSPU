@@ -1,6 +1,6 @@
-#' Sum of powered score (SPU) test (perm, T0 vector)
+#' Sum of powered score (SPU) test (perm, version 1, vector used in permutation)
 #'
-#' It gives the p-values of the SPS test and aSPU test based on based on the permutation of residuals
+#' It gives the p-values of the SPS test and aSPU test based on based on the permutation of residuals.  (This is version 1, matrix version is faster but if it doesn't work, we should use version 1, vector version)
 #'
 #' @param Y phenotype data. It can be disease lables; =0 for controls, =1 for cases.
 #'     or It can be any quantitative traits.
