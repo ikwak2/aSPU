@@ -85,7 +85,7 @@ aSPUboot2 <- function(Y, X, cov=NULL, model=(c("gaussian", "binary")), pow=c(1:8
             ## with nuisance parameters:
             if ( model == "gaussian") {
 
-                Y0 <- yfits + sample(yresids, n, replace = T )
+                Y0 <- yfits + sample(yresids, n, replace = F )
                 tdat0<-data.frame(trait=Y0, cov)
                 fit0<-glm(trait~., data=tdat0)
                 yfits0<-fitted.values(fit0)
