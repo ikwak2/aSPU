@@ -17,7 +17,7 @@
 #'
 #' @param n.perm number of permutation
 #'
-#' @param version "1" for the use of vector T0. "2" for the use of matrix T0. Generally matrix version is faster but when n.perm is so big "2" does not work. This case we should use "1"
+#' @param version "vec" for the use of vector in permutation. "mat" for the use of matrix in permutation. Generally matrix version is faster but when n.perm is so big "mat" version does not work. This case we should use "vec" version.
 #'
 #' @export
 #' @return Test Statistics and p-values for SPS tests and aSPU test.
@@ -25,13 +25,13 @@
 #' @examples
 #'
 #' data(exdat)
-#' out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot", model = "binary", pow = c(1:8, Inf), n.perm = 1000, version = 2)
+#' out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot", model = "binary", pow = c(1:8, Inf), n.perm = 1000, version = "mat")
 #' out
 #'
 #' @seealso \code{\link{aSPUperm}}, \code{\link{aSPUperm2}}, \code{\link{aSPUboot}}, \code{\link{aSPUboot2}}
 
 
-aSPU <- function(Y, X, cov=NULL, resample = c("boot", "perm"), model=c("gaussian", "binary"), pow = c(1:8, Inf), n.perm = 1000, version = 2:1 ) {
+aSPU <- function(Y, X, cov=NULL, resample = c("boot", "perm"), model=c("gaussian", "binary"), pow = c(1:8, Inf), n.perm = 1000, version = c("mat","vec" ) {
 
     model <- match.arg(model)
     resample <- match.arg(resample)
