@@ -31,7 +31,7 @@
 #' @seealso \code{\link{aSPUperm}}, \code{\link{aSPUperm2}}, \code{\link{aSPUboot}}, \code{\link{aSPUboot2}}
 
 
-aSPU <- function(Y, X, cov=NULL, resample = c("boot", "perm"), model=c("gaussian", "binary"), pow = c(1:8, Inf), n.perm = 1000, version = c("mat","vec" ) {
+aSPU <- function(Y, X, cov=NULL, resample = c("boot", "perm"), model=c("gaussian", "binary"), pow = c(1:8, Inf), n.perm = 1000, version = c("mat","vec" ) ) {
 
     model <- match.arg(model)
     resample <- match.arg(resample)
