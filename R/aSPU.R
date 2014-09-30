@@ -39,15 +39,15 @@ aSPU <- function(Y, X, cov=NULL, resample = c("boot", "perm"), model=c("gaussian
 
     if(resample == "boot") {
         if(version == "mat") {
-            aSPUboot2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm)
+            aSPUboot2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
         } else {
-            aSPUboot(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm)
+            aSPUboot(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
         }
     } else {
         if(version == "mat") {
-            aSPUperm2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm)
+            aSPUperm2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
         } else {
-            aSPUperm(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm)
+            aSPUperm(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
         }
     }
 
