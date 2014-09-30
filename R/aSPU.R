@@ -38,13 +38,13 @@ aSPU <- function(Y, X, cov=NULL, resample = c("boot", "perm"), model=c("gaussian
     version <- match.arg(version)
 
     if(resample == "boot") {
-        if(version == 2) {
+        if(version == "mat") {
             aSPUboot2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm)
         } else {
             aSPUboot(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm)
         }
     } else {
-        if(version == 2) {
+        if(version == "mat") {
             aSPUperm2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm)
         } else {
             aSPUperm(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm)
