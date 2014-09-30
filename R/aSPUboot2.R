@@ -30,7 +30,7 @@
 
 
 
-aSPUboot2 <- function(Y, X, cov=NULL, model=(c("gaussian", "binary")), pow=c(1:8, Inf), n.perm=1000){
+aSPUboot2 <- function(Y, X, cov=NULL, model=c("gaussian", "binary"), pow=c(1:8, Inf), n.perm=1000){
 
     model <- match.arg(model)
 

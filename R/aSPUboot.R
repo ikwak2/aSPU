@@ -85,14 +85,14 @@ aSPUboot <- function(Y, X, cov=NULL, model=(c("gaussian", "binary")), pow=c(1:8,
                     tdat0 <- data.frame(trait=Y0, cov)
                     fit0 <-  glm(trait ~., data = tdat0)
                     yfits0 <- fitted.values(fit0)
-                    U0 <- t(XUs) %*% (Y0 - pis0)
+                    U0 <- t(XUs) %*% (Y0 - yfits0)
                 } else {
                     ## with nuisance parameters:
                     for(i in 1:n) Y0[i] <- sample(c(1,0), 1, prob=c(pis[i], 1-pis[i]) )
                     tdat0<-data.frame(trait=Y0, cov)
                     fit0<-glm(trait~., family=model, data=tdat0)
-                    pis0<-fitted.values(fit0)
-                    U0<-t(XUs) %*% (Y0 - pis0)
+                    yfits0<-fitted.values(fit0)
+                    U0<-t(XUs) %*% (Y0 - yfits0)
                 }
             }
 
