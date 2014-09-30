@@ -2,7 +2,7 @@
 \alias{aSPUboot}
 \title{Sum of powered score (SPU) test (boot, version 1, vector used in permutation)}
 \usage{
-aSPUboot(Y, X, cov = NULL, model = (c("gaussian", "binary")), pow = c(1:8,
+aSPUboot(Y, X, cov = NULL, model = c("gaussian", "binary"), pow = c(1:8,
   Inf), n.perm = 1000)
 }
 \arguments{
