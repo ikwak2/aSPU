@@ -82,10 +82,11 @@ aSPUperm2 <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:
                 T0s[b, j] = sum(U0^pow[j]) else T0s[b, j] = max(abs(U0))
     }
 
-    pPerm0 <- NULL
+    pPerm0 = rep(NA,length(pow))
+
     for ( j in 1:length(pow))
     {
-        pPerm0 <- c(pPerm0, round(sum(abs(Ts[j]) <= abs(T0s))/n.perm, digits = 8) )
+        pPerm0[j] = round( sum(abs(Ts[j])<=abs(T0s)) / n.perm, digits = 8)
         P0s = ( n.perm - rank( abs(T0s[,j]) ) ) / (n.perm - 1)
         if (j == 1 ) minp0  = P0s else minp0[which(minp0>P0s)] = P0s[which(minp0>P0s)]
     }
