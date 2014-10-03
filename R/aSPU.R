@@ -15,6 +15,8 @@
 #'
 #' @param model Use "gaussian" for quantitative trait, and use "binomial" for binary trait.
 #'
+#' @param pow power used in SPU test.
+#'
 #' @param n.perm number of permutation
 #'
 #' @param version "vec" for the use of vector in permutation. "mat" for the use of matrix in permutation. Generally matrix version is faster but when n.perm is so big "mat" version does not work. This case we should use "vec" version.
