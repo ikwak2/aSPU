@@ -9,7 +9,7 @@
 #'     for an SNP. The value of each element is the # of the copies
 #'     for an allele.
 #'
-#' @param cov covariates haha
+#' @param cov covariates haha  random stuff
 #'
 #' @param resample Use "perm" for residual permutations and "boot" for parametric bootstrap
 #'
