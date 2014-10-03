@@ -25,7 +25,7 @@
 #' @examples
 #'
 #' data(exdat)
-#' out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot", model = "binary", pow = c(1:8, Inf), n.perm = 1000, version = "mat")
+#' out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot", model = "binomial", pow = c(1:8, Inf), n.perm = 1000, version = "mat")
 #' out
 #'
 #' @seealso \code{\link{aSPUperm}}, \code{\link{aSPUperm2}}, \code{\link{aSPUboot}}, \code{\link{aSPUboot2}}
