@@ -34,7 +34,7 @@ should use version 1, vector version)
 }
 \examples{
 data(exdat)
-out <- aSPUperm(exdat$Y, exdat$X, cov = NULL, pow = c(1:8, Inf), n.perm = 1000)
+out <- aSPUperm(exdat$Y, exdat$X, cov = NULL, model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
 out
 }
 \seealso{

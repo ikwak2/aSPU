@@ -2,8 +2,8 @@
 \alias{aSPUboot2}
 \title{Sum of powered score (SPU) test (boot, version 2, matrix used in permutation)}
 \usage{
-aSPUboot2(Y, X, cov = NULL, model = c("gaussian", "binary"), pow = c(1:8,
-  Inf), n.perm = 1000)
+aSPUboot2(Y, X, cov = NULL, model = c("gaussian", "binomial"),
+  pow = c(1:8, Inf), n.perm = 1000)
 }
 \arguments{
   \item{Y}{phenotype data. It can be disease lables; =0 for
@@ -34,7 +34,7 @@ version 1, vector version)
 }
 \examples{
 data(exdat)
-out <- aSPUboot(exdat$Y, exdat$X, cov = NULL, model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
+out <- aSPUboot2(exdat$Y, exdat$X, cov = NULL, model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
 out
 }
 \seealso{

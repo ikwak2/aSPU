@@ -3,7 +3,8 @@
 \title{Sum of powered score (SPU) test}
 \usage{
 aSPU(Y, X, cov = NULL, resample = c("boot", "perm"), model = c("gaussian",
-  "binary"), pow = c(1:8, Inf), n.perm = 1000, version = c("mat", "vec"))
+  "binomial"), pow = c(1:8, Inf), n.perm = 1000, version = c("mat",
+  "vec"))
 }
 \arguments{
   \item{Y}{phenotype data. It can be disease lables; =0 for
@@ -14,13 +15,15 @@ aSPU(Y, X, cov = NULL, resample = c("boot", "perm"), model = c("gaussian",
   column for an SNP. The value of each element is the # of
   the copies for an allele.}
 
-  \item{cov}{covariates}
+  \item{cov}{covariates haha random stuff}
 
   \item{resample}{Use "perm" for residual permutations and
   "boot" for parametric bootstrap}
 
   \item{model}{Use "gaussian" for quantitative trait, and
   use "binomial" for binary trait.}
+
+  \item{pow}{power used in SPU test.}
 
   \item{n.perm}{number of permutation}
 
@@ -38,7 +41,7 @@ It gives the p-values of the SPS test and aSPU test.
 }
 \examples{
 data(exdat)
-out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot", model = "binary", pow = c(1:8, Inf), n.perm = 1000, version = "mat")
+out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot", model = "binomial", pow = c(1:8, Inf), n.perm = 1000, version = "mat")
 out
 }
 \seealso{
