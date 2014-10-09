@@ -2,8 +2,8 @@
 \alias{aSPU}
 \title{Sum of powered score (SPU) test}
 \usage{
-aSPU(Y, X, cov = NULL, resample = c("boot", "perm"), model = c("gaussian",
-  "binomial"), pow = c(1:8, Inf), n.perm = 1000, version = c("mat",
+aSPU(Y, X, cov = NULL, resample = c("perm", "boot"), model = c("gaussian",
+  "binomial"), pow = c(1:8, Inf), n.perm = 1000, version = c("C", "mat",
   "vec"))
 }
 \arguments{
@@ -31,7 +31,9 @@ aSPU(Y, X, cov = NULL, resample = c("boot", "perm"), model = c("gaussian",
   permutation. "mat" for the use of matrix in permutation.
   Generally matrix version is faster but when n.perm is so
   big "mat" version does not work. This case we should use
-  "vec" version.}
+  "vec" version. We have "C" version for residual
+  permutation method. It coded in C and much faster than
+  "mat" and "vec" method.}
 }
 \value{
 Test Statistics and p-values for SPS tests and aSPU test.
