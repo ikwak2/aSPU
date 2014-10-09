@@ -52,6 +52,7 @@ aSPU <- function(Y, X, cov=NULL, resample = c("perm", "boot"), model=c("gaussian
             aSPUpermC(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
         } else {
             aSPUperm(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
+        }
     }
 
 }
