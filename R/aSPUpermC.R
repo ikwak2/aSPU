@@ -80,7 +80,6 @@ aSPUpermC <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:
     n_perm = n.perm
     n_r = length(r)
 
-    dyn.load("R_get_pvs.so")
     output <- .C("R_get_pvs",
                  as.double(XUs),
                  as.double(Ts),
