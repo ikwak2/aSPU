@@ -30,7 +30,7 @@ permutation of residuals.
 }
 \examples{
 data(exdat)
-out <- SUMtestC(exdat$Y, exdat$X, cov = NULL, model = "binomial", n.perm = 1000)
+out <- SUMtest(exdat$Y, exdat$X, cov = NULL, model = "binomial", n.perm = 1000)
 out
 }
 \seealso{
