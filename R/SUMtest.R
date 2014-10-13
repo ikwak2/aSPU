@@ -72,10 +72,8 @@ SUMtest <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), n.perm=100
                  as.integer(nr_XUs),
                  as.integer(nc_XUs),
                  as.integer(n_perm),
-                 pv = as.double( 0 ),
+                 pv = as.double( c(0,0) ),
                  PACKAGE="aSPU")
 
-    pv <- output$pv
-
-    list(T = T, pv = output$pv)
+    list(T = output$pv[1], pv = output$pv[2])
 }

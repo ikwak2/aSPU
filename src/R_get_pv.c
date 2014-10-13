@@ -53,5 +53,6 @@ void get_pv(double *XUs, double T,
     if ( abss(T) < abss(T0[i]) )
       ss += 1;
   }
-  *pv = ss / n_perm;
+  pv[0] = T;
+  pv[1] = ss / n_perm;
 }
