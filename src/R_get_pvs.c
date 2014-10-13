@@ -73,7 +73,7 @@ void get_pvs(double *XUs, double *Ts,
   for( j = 0 ; j < n_pow ; j++ ) {
     ss = 0;
     for( i = 0 ; i < n_perm ; i++) {
-      if ( abss(Ts[j]) < abss(T0s[ i*n_pow + j ]) )
+      if ( abss(Ts[j]) <= abss(T0s[ i*n_pow + j ]) )
 	ss += 1;
     }
     pPerm0[j] = ss / n_perm;

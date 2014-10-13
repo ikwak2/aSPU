@@ -50,7 +50,7 @@ void get_pv(double *XUs, double T,
   //  pPerm0[j] = sum(abs(Ts[j]) <= abs(T0s[, j]))/n.perm
   ss = 0;
   for( i = 0 ; i < n_perm ; i++) {
-    if ( abss(T) < abss(T0[i]) )
+    if ( abss(T) <= abss(T0[i]) )
       ss += 1;
   }
   pv[0] = T;
