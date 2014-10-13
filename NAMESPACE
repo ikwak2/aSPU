@@ -1,7 +1,7 @@
+export(SUMtest)
 export(aSPU)
 export(aSPUboot)
 export(aSPUboot2)
 export(aSPUperm)
 export(aSPUperm2)
 export(aSPUpermC)
-useDynLib(aSPU)

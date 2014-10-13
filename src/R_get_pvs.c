@@ -6,7 +6,7 @@
 #include <R_ext/PrtUtil.h>
 #include <R_ext/Applic.h>
 #include <R_ext/Utils.h>
-#include "R_get_pvs.h"
+#include "util.h"
 
 void get_pvs(double *XUs, double *Ts,
 	     double *npow, double *r, int n_pow,
@@ -22,8 +22,8 @@ void get_pvs(double *XUs, double *Ts,
 	     double *npow, double *r, int n_pow,
 	     int nr_XUs, int nc_XUs, int n_perm, int n_r, double *pvs)
 {
-  int i, j, b, rr, cc, one, k;
-  double *pPerm0, *T0s, *r0, *U0, ss, *P0s, *minP0s, minpPerm0, minp;
+  int i, j, b, rr, cc, k;
+  double *pPerm0, *T0s, *U0, ss, *P0s, *minP0s, minpPerm0, minp;
   int *bb;
 
   pPerm0 = (double *) R_alloc ( n_pow, sizeof(double) ) ;
