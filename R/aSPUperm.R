@@ -73,8 +73,8 @@ aSPUperm <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8
     s <- sample(1:10^5,1)
 
     for (j in 1:length(pow)){
+        set.seed(s) # to ensure the same samples are drawn for each pow
         for (b in 1:n.perm){
-            set.seed(s+b*30) # to ensure the same samples are drawn for each pow
             r0 <- sample(r, length(r))
             U0 <- as.vector(t(XUs) %*% r0)
             if (pow[j] < Inf){ T0s[b] = round(sum( U0^pow[j]), digits = 8) }
