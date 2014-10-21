@@ -97,5 +97,3 @@ aSPUperm <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8
     list(Ts = Ts, pvs = pvs)
 }
 
-
-

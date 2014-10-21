@@ -9,7 +9,7 @@
 #'     for an SNP. The value of each element is the # of the copies
 #'     for an allele.
 #'
-#' @param cov covariates haha  random stuff
+#' @param cov covariates
 #'
 #' @param resample Use "perm" for residual permutations and "boot" for parametric bootstrap
 #'
@@ -22,7 +22,7 @@
 #' @param version "vec" for the use of vector in permutation. "mat" for the use of matrix in permutation. Generally matrix version is faster but when n.perm is so big "mat" version does not work. This case we should use "vec" version. We have "C" version for residual permutation method. It coded in C and much faster than "mat" and "vec" method.
 #'
 #' @export
-#' @return Test Statistics and p-values for SPS tests and aSPU test.
+#' @return Test Statistics and p-values for SPU tests and aSPU test.
 #'
 #' @examples
 #'

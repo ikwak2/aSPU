@@ -15,7 +15,7 @@ aSPU(Y, X, cov = NULL, resample = c("perm", "boot"), model = c("gaussian",
   column for an SNP. The value of each element is the # of
   the copies for an allele.}
 
-  \item{cov}{covariates haha random stuff}
+  \item{cov}{covariates}
 
   \item{resample}{Use "perm" for residual permutations and
   "boot" for parametric bootstrap}
@@ -36,10 +36,10 @@ aSPU(Y, X, cov = NULL, resample = c("perm", "boot"), model = c("gaussian",
   "mat" and "vec" method.}
 }
 \value{
-Test Statistics and p-values for SPS tests and aSPU test.
+Test Statistics and p-values for SPU tests and aSPU test.
 }
 \description{
-It gives the p-values of the SPS test and aSPU test.
+It gives the p-values of the SPU test and aSPU test.
 }
 \examples{
 data(exdat)
