@@ -27,7 +27,7 @@
 #' @seealso \code{\link{aSPU}}, \code{\link{aSPUperm2}}, \code{\link{aSPUboot}}, \code{\link{aSPUboot2}}
 
 
-aSPUWC <- function(Y, X, pow=c(1:8, Inf), n.perm=1000, rank = T){
+aSPUWC <- function(Y, X, pow=c(1:8, Inf), n.perm=1000, userank = T){
 
     n <- length(Y)
     if (is.null(X) && length(X)>0) X=as.matrix(X, ncol=1)
