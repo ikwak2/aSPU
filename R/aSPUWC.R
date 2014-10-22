@@ -59,10 +59,15 @@ aSPUWC <- function(Y, X, pow=c(1:8, Inf), n.perm=1000, userank = T){
 
    # test stat's:
     Ts<-rep(0, length(pow))
+    npow = pow
     for(j in 1:length(pow)){
-        if (pow[j] < Inf)
-            Ts[j] = sum((U/diagSDs)^pow[j]) else Ts[j] = max(abs(U/diagSDs))
-    #     VarTs[j] = var(Upow)
+        if (pow[j] < Inf) {
+            Ts[j] = sum((U/diagSDs)^pow[j])
+        } else {
+            Ts[j] = max(abs(U/diagSDs))
+            npow[j] = 0
+        }
+#     VarTs[j] = var(Upow)
     }
 
    # permutations:
