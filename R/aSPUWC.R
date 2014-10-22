@@ -21,7 +21,7 @@
 #' @examples
 #'
 #' data(exdat)
-#' out <- aSPUC(exdat$Y, exdat$X, pow = c(1:8, Inf), n.perm = 1000)
+#' out <- aSPUWC(exdat$Y, exdat$X, pow = c(1:8, Inf), n.perm = 1000)
 #' out
 #'
 #' @seealso \code{\link{aSPU}}, \code{\link{aSPUperm2}}, \code{\link{aSPUboot}}, \code{\link{aSPUboot2}}

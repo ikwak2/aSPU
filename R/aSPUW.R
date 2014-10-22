@@ -92,7 +92,5 @@ aSPUW <- function(Y, X, pow=c(1:8, Inf), n.perm=1000){
     names(pvs) = names(Ts)
 
     list(Ts = Ts, pvs = pvs)
-
-    return(pvs)
 }
 
