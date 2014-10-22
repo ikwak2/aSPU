@@ -61,7 +61,7 @@ void get_pvs2(double *XUs, double *Ts,
 	ss = 0;
 	for( b = 0 ; b < nc_XUs ; b ++) {
 	  if( ss <  abss( U0[b]/diagSDs[b] ) )
-	    ss = abss(U0[b]);
+	    ss = abss(U0[b] /diagSDs[b]  );
 	}
       }
       T0s[i*n_pow + j] = ss;
