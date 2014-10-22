@@ -1,6 +1,6 @@
 #' Sum of powered score (SPU) test
 #'
-#' It gives the p-values of the SPS test and aSPU test.
+#' It gives the p-values of the SPU test and aSPU test.
 #'
 #' @param Y phenotype data. It can be disease lables; =0 for controls, =1 for cases.
 #' or It can be any quantitative traits.
@@ -19,7 +19,7 @@
 #'
 #' @param n.perm number of permutation
 #'
-#' @param version "vec" for the use of vector in permutation. "mat" for the use of matrix in permutation. Generally matrix version is faster but when n.perm is so big "mat" version does not work. This case we should use "vec" version. We have "C" version for residual permutation method. It coded in C and much faster than "mat" and "vec" method.
+#' @param userank use similar code with original version if T, by definition if F
 #'
 #' @export
 #' @return Test Statistics and p-values for SPU tests and aSPU test.
@@ -27,32 +27,25 @@
 #' @examples
 #'
 #' data(exdat)
-#' out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot", model = "binomial", pow = c(1:8, Inf), n.perm = 1000, version = "mat")
+#' out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot", model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
 #' out
 #'
 #' @seealso \code{\link{aSPUperm}}, \code{\link{aSPUperm2}}, \code{\link{aSPUboot}}, \code{\link{aSPUboot2}}
 
 
-aSPU <- function(Y, X, cov=NULL, resample = c("perm", "boot"), model=c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000, version = c("C", "mat","vec") ) {
+aSPU <- function(Y, X, cov=NULL, resample = c("perm", "boot"), model=c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000, userank = T ) {
 
     model <- match.arg(model)
     resample <- match.arg(resample)
-    version <- match.arg(version)
 
     if(resample == "boot") {
-        if(version == "vec") {
+        if(n.perm > 10^5) {
             aSPUboot(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
         } else {
             aSPUboot2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
         }
     } else {
-        if(version == "mat") {
-            aSPUperm2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
-        } else if (version == "C") {
-            aSPUpermC(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
-        } else {
-            aSPUperm(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
-        }
+        aSPUpermC(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model, userank = userank)
     }
 
 }

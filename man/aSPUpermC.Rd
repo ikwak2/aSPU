@@ -3,7 +3,7 @@
 \title{Sum of powered score (SPU) test (perm, permutation part coded in C)}
 \usage{
 aSPUpermC(Y, X, cov = NULL, model = c("gaussian", "binomial"),
-  pow = c(1:8, Inf), n.perm = 1000)
+  pow = c(1:8, Inf), n.perm = 1000, userank = T)
 }
 \arguments{
   \item{Y}{phenotype data. It can be disease lables; =0 for
@@ -22,12 +22,15 @@ aSPUpermC(Y, X, cov = NULL, model = c("gaussian", "binomial"),
   \item{pow}{power used in SPU test.}
 
   \item{n.perm}{number of permutation}
+
+  \item{userank}{similar to the original code if TRUE, by
+  definition if FALSE}
 }
 \value{
-Test Statistics and p-values for SPS tests and aSPU test.
+Test Statistics and p-values for SPU tests and aSPU test.
 }
 \description{
-It gives the p-values of the SPS test and aSPU test based
+It gives the p-values of the SPU test and aSPU test based
 on based on the permutation of residuals.
 }
 \examples{

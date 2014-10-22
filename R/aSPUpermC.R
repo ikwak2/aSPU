@@ -1,6 +1,6 @@
 #' Sum of powered score (SPU) test (perm, permutation part coded in C)
 #'
-#' It gives the p-values of the SPS test and aSPU test based on based on the permutation of residuals.
+#' It gives the p-values of the SPU test and aSPU test based on based on the permutation of residuals.
 #'
 #' @param Y phenotype data. It can be disease lables; =0 for controls, =1 for cases.
 #'     or It can be any quantitative traits.
@@ -18,8 +18,10 @@
 #'
 #' @param n.perm number of permutation
 #'
+#' @param userank similar to the original code if TRUE, by definition if FALSE
+#'
 #' @export
-#' @return Test Statistics and p-values for SPS tests and aSPU test.
+#' @return Test Statistics and p-values for SPU tests and aSPU test.
 #'
 #' @examples
 #'
@@ -30,7 +32,7 @@
 #' @seealso \code{\link{aSPU}}, \code{\link{aSPUperm2}}, \code{\link{aSPUboot}}, \code{\link{aSPUboot2}}
 
 
-aSPUpermC <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8, Inf), n.perm=1000){
+aSPUpermC <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8, Inf), n.perm=1000, userank = T){
 
     model = match.arg(model)
 
@@ -79,6 +81,8 @@ aSPUpermC <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:
     nc_XUs = ncol(XUs)
     n_perm = n.perm
     n_r = length(r)
+    if(userank)
+        r <- jitter(r, amount = 0.0001)
 
     output <- .C("R_get_pvs",
                  as.double(XUs),

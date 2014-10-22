@@ -3,8 +3,7 @@
 \title{Sum of powered score (SPU) test}
 \usage{
 aSPU(Y, X, cov = NULL, resample = c("perm", "boot"), model = c("gaussian",
-  "binomial"), pow = c(1:8, Inf), n.perm = 1000, version = c("C", "mat",
-  "vec"))
+  "binomial"), pow = c(1:8, Inf), n.perm = 1000, userank = T)
 }
 \arguments{
   \item{Y}{phenotype data. It can be disease lables; =0 for
@@ -27,13 +26,8 @@ aSPU(Y, X, cov = NULL, resample = c("perm", "boot"), model = c("gaussian",
 
   \item{n.perm}{number of permutation}
 
-  \item{version}{"vec" for the use of vector in
-  permutation. "mat" for the use of matrix in permutation.
-  Generally matrix version is faster but when n.perm is so
-  big "mat" version does not work. This case we should use
-  "vec" version. We have "C" version for residual
-  permutation method. It coded in C and much faster than
-  "mat" and "vec" method.}
+  \item{userank}{use similar code with original version if
+  T, by definition if F}
 }
 \value{
 Test Statistics and p-values for SPU tests and aSPU test.
@@ -43,7 +37,7 @@ It gives the p-values of the SPU test and aSPU test.
 }
 \examples{
 data(exdat)
-out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot", model = "binomial", pow = c(1:8, Inf), n.perm = 1000, version = "mat")
+out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot", model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
 out
 }
 \seealso{

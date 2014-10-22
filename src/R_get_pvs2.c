@@ -8,18 +8,18 @@
 #include <R_ext/Utils.h>
 #include "util.h"
 
-void get_pvs(double *XUs, double *Ts,
-	     double *npow, double *r, int n_pow,
+void get_pvs2(double *XUs, double *Ts,
+	      double *npow, double *r, double *diagSDs, int n_pow,
 	     int nr_XUs, int nc_XUs, int n_perm, int n_r, double *pvs);
 
-void R_get_pvs(double *XUs, double *Ts,
-	       double *npow, double *r, int *n_pow,
+void R_get_pvs2(double *XUs, double *Ts,
+	       double *npow, double *r, double *diagSDs, int *n_pow,
 	       int *nr_XUs, int *nc_XUs, int *n_perm, int *n_r, double *pvs) {
-  get_pvs(XUs, Ts, npow, r, *n_pow, *nr_XUs, *nc_XUs, *n_perm, *n_r, pvs);
+  get_pvs2(XUs, Ts, npow, r, diagSDs, *n_pow, *nr_XUs, *nc_XUs, *n_perm, *n_r, pvs);
 }
 
-void get_pvs(double *XUs, double *Ts,
-	     double *npow, double *r, int n_pow,
+void get_pvs2(double *XUs, double *Ts,
+	     double *npow, double *r, double *diagSDs, int n_pow,
 	     int nr_XUs, int nc_XUs, int n_perm, int n_r, double *pvs)
 {
   int i, j, b, rr, cc, k;
@@ -55,12 +55,12 @@ void get_pvs(double *XUs, double *Ts,
       ss = 0;
       if(npow[j] != 0) {
 	for( b = 0 ; b < nc_XUs ; b ++) {
-	  ss += pow( U0[b], npow[j] );
+	  ss += pow( U0[b]/diagSDs[b] , npow[j] );
 	}
       } else {
 	ss = 0;
 	for( b = 0 ; b < nc_XUs ; b ++) {
-	  if( ss <  abss(U0[b]) )
+	  if( ss <  abss( U0[b]/diagSDs[b] ) )
 	    ss = abss(U0[b]);
 	}
       }
@@ -104,7 +104,7 @@ void get_pvs(double *XUs, double *Ts,
     }
   }
 
-  // minp = (sum( min(pPerm0) >= minP0s )+1) / (B+1)
+  // minp = (sum( min(pPerm0) => minP0s ) + 1) / B + 1
   ss = 1;
   for(i=0 ; i < n_pow; i++) {
     if( ss > pPerm0[i] )

@@ -24,10 +24,10 @@ aSPUboot2(Y, X, cov = NULL, model = c("gaussian", "binomial"),
   \item{n.perm}{number of permutation}
 }
 \value{
-Test Statistics and p-values for SPS tests and aSPU test.
+Test Statistics and p-values for SPU tests and aSPU test.
 }
 \description{
-It gives the p-values of the SPS test and aSPU test based
+It gives the p-values of the SPU test and aSPU test based
 on the parametric bootstrap. (This is version 2, matrix
 version is faster but if it doesn't work, we should use
 version 1, vector version)

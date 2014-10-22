@@ -1,6 +1,6 @@
 #' Sum of powered score (SPU) test (boot, version 2, matrix used in permutation)
 #'
-#' It gives the p-values of the SPS test and aSPU test based on the parametric bootstrap. (This is version 2, matrix version is faster but if it doesn't work, we should use version 1, vector version)
+#' It gives the p-values of the SPU test and aSPU test based on the parametric bootstrap. (This is version 2, matrix version is faster but if it doesn't work, we should use version 1, vector version)
 #'
 #' @param Y phenotype data. It can be disease lables; =0 for controls, =1 for cases.
 #' or it can be any quantitative traits.
@@ -18,7 +18,7 @@
 #' @param n.perm number of permutation
 #'
 #' @export
-#' @return Test Statistics and p-values for SPS tests and aSPU test.
+#' @return Test Statistics and p-values for SPU tests and aSPU test.
 #'
 #' @examples
 #'
