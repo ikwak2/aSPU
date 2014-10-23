@@ -58,7 +58,6 @@ void get_pvs(double *XUs, double *Ts,
 	  ss += pow( U0[b], npow[j] );
 	}
       } else {
-	ss = 0;
 	for( b = 0 ; b < nc_XUs ; b ++) {
 	  if( ss <  abss(U0[b]) )
 	    ss = abss(U0[b]);
