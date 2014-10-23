@@ -3,17 +3,17 @@
 #' It gives the p-values of the SPU test and aSPU test based on the parametric bootstrap. (This is version 1, matrix version is faster but if it doesn't work, we should use version 1, vector version)
 #'
 #' @param Y phenotype data. It can be disease lables; =0 for controls, =1 for cases.
-#' or it can be any quantitative traits.
+#' or it can be any quantitative traits. Vector with length n (number of observations)
 #'
 #' @param X genotype data; each row for a subject, and each column
 #'     for an SNP. The value of each element is the # of the copies
-#'     for an allele.
+#'     for an allele. Matrix with dimension n by g (n : number of observation, p : number of genotype data)
 #'
-#' @param cov covariates
+#' @param cov covariates. Matrix with dimension n by k (n :number of observation, k : number of covariates)
 #'
 #' @param model Use "gaussian" for quantitative trait, and use "binomial" for binary trait.
 #'
-#' @param pow power used in SPU test.
+#' @param pow power used in SPU test. Vector of g number of power.
 #'
 #' @param n.perm number of permutation
 #'
@@ -23,7 +23,8 @@
 #' @examples
 #'
 #' data(exdat)
-#' out <- aSPUboot(exdat$Y, exdat$X, cov = NULL, model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
+#' out <- aSPUboot(exdat$Y, exdat$X, cov = NULL,
+#'               model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
 #' out
 #'
 #' @seealso \code{\link{aSPU}}, \code{\link{aSPUperm}}, \code{\link{aSPUperm2}}, \code{\link{aSPUboot2}}

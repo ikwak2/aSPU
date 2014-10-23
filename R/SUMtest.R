@@ -3,13 +3,13 @@
 #' It gives the p-values of the SUM test based on the permutation of residuals.
 #'
 #' @param Y phenotype data. It can be disease lables; =0 for controls, =1 for cases.
-#'     or It can be any quantitative traits.
+#'     or It can be any quantitative traits. Vector with length n (number of observations)
 #'
 #' @param X genotype data; each row for a subject, and each column
 #'     for an SNP. The value of each element is the # of the copies
-#'     for an allele.
+#'     for an allele. Matrix with dimension n by g (n : number of observation, p : number of genotype data)
 #'
-#' @param cov covariates
+#' @param cov covariates. Matrix with dimension n by k (n :number of observation, k : number of covariates)
 #'
 #' @param model Use "gaussian" for quantitative trait (Default)
 #'    , and Use "binomial" for binary trait.

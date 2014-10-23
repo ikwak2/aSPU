@@ -8,18 +8,21 @@ aSPUpermC(Y, X, cov = NULL, model = c("gaussian", "binomial"),
 \arguments{
   \item{Y}{phenotype data. It can be disease lables; =0 for
   controls, =1 for cases.  or It can be any quantitative
-  traits.}
+  traits. Vector with length n (number of observations)}
 
   \item{X}{genotype data; each row for a subject, and each
   column for an SNP. The value of each element is the # of
-  the copies for an allele.}
+  the copies for an allele. Matrix with dimension n by g (n
+  : number of observation, p : number of genotype data)}
 
-  \item{cov}{covariates}
+  \item{cov}{covariates. Matrix with dimension n by k (n
+  :number of observation, k : number of covariates)}
 
   \item{model}{Use "gaussian" for quantitative trait
   (Default) , and Use "binomial" for binary trait.}
 
-  \item{pow}{power used in SPU test.}
+  \item{pow}{power used in SPU test. Vector of g number of
+  power.}
 
   \item{n.perm}{number of permutation}
 
@@ -35,7 +38,8 @@ on based on the permutation of residuals.
 }
 \examples{
 data(exdat)
-out <- aSPUpermC(exdat$Y, exdat$X, cov = NULL, model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
+out <- aSPUpermC(exdat$Y, exdat$X, cov = NULL,
+              model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
 out
 }
 \seealso{

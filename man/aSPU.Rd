@@ -8,13 +8,15 @@ aSPU(Y, X, cov = NULL, resample = c("perm", "boot"), model = c("gaussian",
 \arguments{
   \item{Y}{phenotype data. It can be disease lables; =0 for
   controls, =1 for cases. or It can be any quantitative
-  traits.}
+  traits. Vector with length n (number of observations)}
 
   \item{X}{genotype data; each row for a subject, and each
   column for an SNP. The value of each element is the # of
-  the copies for an allele.}
+  the copies for an allele. Matrix with dimension n by g (n
+  : number of observation, p : number of genotype data)}
 
-  \item{cov}{covariates}
+  \item{cov}{covariates. Matrix with dimension n by k (n
+  :number of observation, k : number of covariates)}
 
   \item{resample}{Use "perm" for residual permutations and
   "boot" for parametric bootstrap}
@@ -22,7 +24,8 @@ aSPU(Y, X, cov = NULL, resample = c("perm", "boot"), model = c("gaussian",
   \item{model}{Use "gaussian" for quantitative trait, and
   use "binomial" for binary trait.}
 
-  \item{pow}{power used in SPU test.}
+  \item{pow}{power used in SPU test. Vector of g number of
+  power.}
 
   \item{n.perm}{number of permutation}
 
@@ -37,7 +40,8 @@ It gives the p-values of the SPU test and aSPU test.
 }
 \examples{
 data(exdat)
-out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot", model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
+out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot",
+           model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
 out
 }
 \seealso{
