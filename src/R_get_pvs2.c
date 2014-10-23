@@ -46,10 +46,11 @@ void get_pvs2(double *XUs, double *Ts,
       U0[cc] = ss;
     }
 
+    //    for (j in 1:length(pow))
+    //      if (pow[j] < Inf)
+    //      if (pow[j] < Inf) T0s[b] = round( sum((U0/diagSDs)^pow[j]), digits=8)
+    //      if (pow[j] == Inf) T0s[b] = round( max(abs(U0/diagSDs)), digits=8)
 
-    //   if (pow[j] < Inf) {T0s[b] = round( sum((U0/diagSDs)^pow[j]), digits=8) }
-    //   if (pow[j] == Inf) {T0s[b] = round( max(abs(U0/diagSDs)), digits=8)}
-        }
     for( j = 0 ; j < (n_pow) ; j++ ) {
 
       ss = 0;
