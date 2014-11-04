@@ -60,4 +60,5 @@ void get_pvs3(double *XUs, double T,
   }
   pv[0] = T;
   pv[1] = ss / n_perm;
+}
 
