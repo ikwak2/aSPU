@@ -64,14 +64,18 @@ SUMtest <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), n.perm=100
     nr_XUs = nrow(XUs)
     nc_XUs = ncol(XUs)
     n_perm = n.perm
+    n_r = length(r)
+#    if(userank)
+#        r <- jitter(r, amount = 0.0001)
 
-    output <- .C("R_get_pv",
+    output <- .C("R_get_pvs3",
                  as.double(XUs),
                  as.double(T),
                  as.double(r),
                  as.integer(nr_XUs),
                  as.integer(nc_XUs),
                  as.integer(n_perm),
+                 as.integer(n_r),
                  pv = as.double( c(0,0) ),
                  PACKAGE="aSPU")
 
