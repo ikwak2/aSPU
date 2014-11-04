@@ -40,7 +40,6 @@ void get_pvs3(double *XUs, double T,
       }
 
     }
-    Rprintf(" \n " );
 
     double_permute(r, n_r);
 
