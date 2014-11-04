@@ -58,10 +58,10 @@ void get_pvs3(double *XUs, double T,
     if ( abss(T) <= abss(T0s[ i ]) )
       ss += 1;
   }
-  Rprintf("%f ", ss );
+  Rprintf("%f ", T0s[1] );
+  Rprintf("%f ", T0s[2] );
   pv[0] = T;
   pv[1] = ss / n_perm;
-  Rprintf("%f ", pv[1] );
 
 }
 
