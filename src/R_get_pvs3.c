@@ -23,15 +23,12 @@ void get_pvs3(double *XUs, double T,
 	      int nr_XUs, int nc_XUs, int n_perm, int n_r, double *pv)
 {
   int i, j, b, rr, cc, k;
-  double *pPerm0, *T0s, *U0, ss, *P0s, *minP0s, minpPerm0, minp;
+  double *T0s, *U0, ss, minpPerm0, minp;
   int *bb;
 
-  pPerm0 = (double *) R_alloc ( n_pow, sizeof(double) ) ;
-  T0s = (double *) R_alloc ( n_perm * n_pow, sizeof(double) ) ;
+  T0s = (double *) R_alloc ( n_perm, sizeof(double) ) ;
   U0 = (double *) R_alloc ( nc_XUs, sizeof(double) ) ;
   bb =  (int *) R_alloc ( n_r, sizeof(int) ) ;
-  P0s = (double *) R_alloc ( n_perm * n_pow, sizeof(double) ) ;
-  minP0s = (double *) R_alloc ( n_perm, sizeof(double) ) ;
 
   for( i = 0 ; i < n_perm ; i++ ) {
     // r <- sample(r, length(r))
