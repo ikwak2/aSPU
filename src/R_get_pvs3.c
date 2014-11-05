@@ -22,35 +22,20 @@ void get_pvs3(double *XUs, double T,
 	      double *r,
 	      int nr_XUs, int nc_XUs, int n_perm, int n_r, double *pv)
 {
-  int i, j, b, rr, cc;
-  double *T0s, *U0, ss;
+  int i, j, b, rr, cc, k;
+  double *pPerm0, *T0s, *U0, ss, *P0s, *minP0s, minpPerm0, minp;
   int *bb;
-  T0s = (double *) R_alloc ( n_perm, sizeof(double) ) ;
+
+  pPerm0 = (double *) R_alloc ( n_pow, sizeof(double) ) ;
+  T0s = (double *) R_alloc ( n_perm * n_pow, sizeof(double) ) ;
   U0 = (double *) R_alloc ( nc_XUs, sizeof(double) ) ;
   bb =  (int *) R_alloc ( n_r, sizeof(int) ) ;
-
+  P0s = (double *) R_alloc ( n_perm * n_pow, sizeof(double) ) ;
+  minP0s = (double *) R_alloc ( n_perm, sizeof(double) ) ;
 
   for( i = 0 ; i < n_perm ; i++ ) {
     // r <- sample(r, length(r))
-
-    if( i == 1 ) {
-      for(j = 0 ; j < n_r ; j ++ ) {
-
-	Rprintf("%f ", r[j] );
-      }
-
-    }
-
     double_permute(r, n_r);
-
-    if( i == 1 ) {
-      for(j = 0 ; j < n_r ; j ++ ) {
-
-	Rprintf("%f ", r[j] );
-      }
-
-    }
-
     // U0 <- as.vector(t(XUs) %*% r0)
     for(cc = 0 ; cc < nc_XUs ; cc++) {
       ss = 0;
@@ -59,22 +44,6 @@ void get_pvs3(double *XUs, double T,
       }
       U0[cc] = ss;
     }
-
-
-    if( i == 1 ) {
-      for(j = 0 ; j < nc_XUs ; j ++ ) {
-
-	Rprintf("%f ", U0[j] );
-      }
-    }
-
-    if( i == 2 ) {
-      for(j = 0 ; j < nc_XUs ; j ++ ) {
-
-	Rprintf("%f ", U0[j] );
-      }
-    }
-
 
     //    for (j in 1:length(pow))
     //      if (pow[j] < Inf)
