@@ -1,4 +1,3 @@
-export(SUMtest)
 export(aSPU)
 export(aSPUW)
 export(aSPUWC)
