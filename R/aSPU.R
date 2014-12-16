@@ -2,10 +2,10 @@
 #'
 #' It gives the p-values of the SPU tests and aSPU test.
 #'
-#' @param Y phenotype data. It can be disease lables; =0 for controls, =1 for cases.
+#' @param Y Response or phenotype data. It can be disease lables; =0 for controls, =1 for cases.
 #' or It can be any quantitative traits. Vector with length n (number of observations)
 #'
-#' @param X genotype data; each row for a subject, and each column
+#' @param X Genotype or other data; each row for a subject, and each column
 #'     for an SNP. The value of each element is the # of the copies
 #'     for an allele. Matrix with dimension n by g (n : number of observation, p : number of genotype data)
 #'
@@ -17,7 +17,7 @@
 #'
 #' @param pow power used in SPU test. Vector of g number of power.
 #'
-#' @param n.perm number of permutation
+#' @param n.perm number of permutations or bootstraps.
 #'
 #' @param userank use similar code with original version if T, by definition if F
 #'
@@ -49,7 +49,7 @@ aSPU <- function(Y, X, cov=NULL, resample = c("perm", "sim", "boot"), model=c("g
 
         if(resample == "sim") {
             if(n.perm > 10^5) {
-                aSPUsim(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
+                aSPUsim1(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
             } else {
                 aSPUsim2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
             }
