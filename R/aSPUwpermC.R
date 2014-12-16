@@ -1,4 +1,4 @@
-#' Variance-weighted Sum of powered score (SPUw) test; using permutations to get the p-values (NO adjustment for covariates yet, C version).
+#' Variance-weighted adptive Sum of powered score (SPUw) test; using permutations to get the p-values (NO adjustment for covariates yet, C version).
 #'
 #' It gives the p-values of the SPUw test and aSPUw test based on based on the permutation of residuals.  (NO adjustment for covariates yet, C version)
 #'
@@ -21,41 +21,59 @@
 #' @examples
 #'
 #' data(exdat)
-#' out <- aSPUWC(exdat$Y, exdat$X, pow = c(1:8, Inf), n.perm = 1000)
+#' out <- aSPUwC(exdat$Y, exdat$X, pow = c(1:8, Inf), n.perm = 1000)
 #' out
 #'
 #' @seealso \code{\link{aSPU}}, \code{\link{aSPUperm2}}, \code{\link{aSPUboot}}, \code{\link{aSPUboot2}}
 
 
-aSPUWC <- function(Y, X, pow=c(1:8, Inf), n.perm=1000, userank = T){
+aSPUwpermC <- function(Y, X, cov = NULL, model=c("gaussian", "binomial"), pow=c(1:8, Inf), n.perm=1000, userank = T){
+
+    model <- match.arg(model)
+
 
     n <- length(Y)
     if (is.null(X) && length(X)>0) X=as.matrix(X, ncol=1)
     k <- ncol(X)
 
-    Xg <- X
 
-############SSU#####################
-    Xbar<-apply(Xg, 2, mean)
-    #   Xgb<-Xg
-    #   for(i in 1:nrow(Xg))
-    #      Xgb[i,]<-Xg[i,]-Xbar
-    # faster than doing above:
-    subtract<-function(x, y) { x - y }
-    Xgb=t(apply(Xg, 1, subtract, Xbar))
 
-    r=Y-mean(Y)
+    if (is.null(cov)){
+        ## NO nuisance parameters:
+        Xg <- X
+        Xbar<-apply(Xg, 2, mean)
+        subtract<-function(x, y) { x - y }
+        Xgb=t(apply(Xg, 1, subtract, Xbar))
 
-#########Score vector:
-    U<-as.vector( t(Xg) %*% r)
-    #Var(U):
-    v0=mean(Y)*(1-mean(Y))
-    p=length(U)
-    diagCovS=rep(0, p)
-    for(i in 1:p)
-        diagCovS[i] = v0 * sum(Xgb[,i]^2)
-    diagCovS<-ifelse(diagCovS>1e-20, diagCovS, 1e-20)
-    diagSDs<-sqrt(diagCovS)
+        r=Y-mean(Y)
+
+        U<-as.vector( t(Xg) %*% r)
+
+        ##cov of the score stats:
+        CovS<- mean(Y)*(1-mean(Y))*(t(Xgb) %*% Xgb)
+
+    } else {
+        ## with nuisance parameters:
+        tdat1<-data.frame(trait=Y, cov)
+        fit1<-glm(trait~.,family=model,data=tdat1)
+        pis<-fitted.values(fit1)
+        Us<-matrix(0, nrow=n, ncol=k)
+        for(i in 1:k){
+            tdat2<-data.frame(X1=X[,i], cov)
+            fit2<-glm(X1~.,data=tdat2)
+            X1mus<-fitted.values(fit2)
+            r <- Y - pis
+            Us[, i]<-(Y - pis)*(X[,i] - X1mus)
+        }
+        U<-apply(Us, 2, sum)
+        CovS<-matrix(0, nrow=k, ncol=k)
+        for(i in 1:n)
+            CovS<-CovS + Us[i,] %*% t(Us[i,])
+    }
+
+
+    Vs<-diag(CovS)
+    diagSDs<-ifelse(Vs>1e-20, sqrt(Vs), 1e-10)
 
    # test stat's:
     Ts<-rep(0, length(pow))
