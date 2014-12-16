@@ -24,7 +24,7 @@
 #' @examples
 #'
 #' data(exdat)
-#' out <- aSPUsim(exdat$Y, exdat$X, cov = NULL, model = "binomial",
+#' out <- aSPUsim1(exdat$Y, exdat$X, cov = NULL, model = "binomial",
 #'                   pow = c(1:8, Inf), n.perm = 1000)
 #' out
 #'
