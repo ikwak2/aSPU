@@ -2,8 +2,9 @@
 \alias{aSPU}
 \title{Adaptive Sum of powered score (SPU) tests. (SPU and aSPU)}
 \usage{
-aSPU(Y, X, cov = NULL, resample = c("perm", "sim", "boot"), model = c("gaussian",
-  "binomial"), pow = c(1:8, Inf), n.perm = 1000, userank = T)
+aSPU(Y, X, cov = NULL, resample = c("perm", "sim", "boot"), 
+   model = c("gaussian", "binomial"), pow = c(1:8, Inf), 
+   n.perm = 1000, userank = T)
 }
 \arguments{
   \item{Y}{Response or phenotype data. It can be disease lables; =0 for
@@ -36,13 +37,20 @@ aSPU(Y, X, cov = NULL, resample = c("perm", "sim", "boot"), model = c("gaussian"
 \value{
 Test Statistics and p-values for SPU tests and aSPU test.
 }
+
+\references{
+  Wei Pan, Junghi Kim, Yiwei Zhang, Xiaotong Shen, Peng Wei (2014) A powerful and adaptive association test for rare variants
+  \emph{Genetics} 114.165035.
+}
+
+
 \description{
 It gives the p-values of the SPU test and aSPU test.
 }
 \examples{
 data(exdat)
 out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot",
-           model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
+         model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
 out
 }
 \seealso{

@@ -3,8 +3,9 @@
 \title{Variance-weighted adaptive Sum of powered score tests. (SPUw and
   aSPUw) }
 \usage{
-aSPUw(Y, X, cov = NULL, resample = c("perm", "sim"), model = c("gaussian",
-  "binomial"), pow = c(1:8, Inf), n.perm = 1000, userank = T)
+aSPUw(Y, X, cov = NULL, resample = c("perm", "sim"), 
+  model = c("gaussian", "binomial"), pow = c(1:8, Inf), 
+  n.perm = 1000, userank = T)
 }
 \arguments{
   \item{Y}{Response or phenotype data. It can be disease lables; =0 for
@@ -40,9 +41,16 @@ Test Statistics and p-values for SPUw tests and aSPUw test.
 It gives the p-values of the SPUw test and aSPUw test based
 on based on the permutation of residuals or simulation from its distripution.
 }
+
+\references{
+  Junghi Kim, Jeffrey R Wozniak, Bryon A Mueller, Xiaotong Shen, Wei Pan (2014) Comparison of statistical tests for group differences in brain functional networks
+  \emph{Neuroimage} \bold{101}, 681--694
+}
+
 \examples{
 data(exdat)
-out <- aSPUw(exdat$Y, exdat$X, resample = "perm", pow = c(1:8, Inf), n.perm = 1000)
+out <- aSPUw(exdat$Y, exdat$X, resample = "perm", 
+              pow = c(1:8, Inf), n.perm = 1000)
 out
 }
 \seealso{
