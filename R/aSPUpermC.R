@@ -30,7 +30,7 @@
 #'               model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
 #' out
 #'
-#' @seealso \code{\link{aSPU}}, \code{\link{aSPUperm2}}, \code{\link{aSPUboot}}, \code{\link{aSPUboot2}}
+#' @seealso \code{\link{aSPU}}
 
 
 aSPUpermC <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8, Inf), n.perm=1000, userank = T){

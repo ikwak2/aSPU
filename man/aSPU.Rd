@@ -46,7 +46,6 @@ out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot",
 out
 }
 \seealso{
-\code{\link{aSPUperm}}, \code{\link{aSPUperm2}},
-\code{\link{aSPUboot}}, \code{\link{aSPUboot2}}
+\code{\link{aSPUw}}
 }
 

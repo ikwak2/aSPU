@@ -46,7 +46,6 @@ out <- aSPUw(exdat$Y, exdat$X, resample = "perm", pow = c(1:8, Inf), n.perm = 10
 out
 }
 \seealso{
-\code{\link{aSPU}}, \code{\link{aSPUperm2}},
-\code{\link{aSPUboot}}, \code{\link{aSPUboot2}}
+\code{\link{aSPU}}
 }
 
