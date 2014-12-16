@@ -1,10 +1,4 @@
 export(aSPU)
-export(aSPUW)
-export(aSPUWC)
-export(aSPUboot)
-export(aSPUboot2)
-export(aSPUperm)
-export(aSPUperm2)
-export(aSPUpermC)
+export(aSPUw)
 
 useDynLib(aSPU)
