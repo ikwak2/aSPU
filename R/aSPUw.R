@@ -34,12 +34,12 @@
 #' @seealso \code{\link{aSPU}}, \code{\link{aSPUperm2}}, \code{\link{aSPUboot}}, \code{\link{aSPUboot2}}
 
 
-aSPUw <- function(Y, X, cov=NULL, resample = c("perm", "sim"), model=c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000, userank = T ) {
+aSPUw <- function(Y, X, cov=NULL, resample = c("perm", "asymp"), model=c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000, userank = T ) {
 
     model <- match.arg(model)
     resample <- match.arg(resample)
 
-    if(resample == "sim") {
+    if(resample == "asymp") {
         aSPUwsim(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
     } else {
         aSPUwpermC(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model, userank = userank)

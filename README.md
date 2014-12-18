@@ -1,7 +1,7 @@
 R package, aSPU
 =================
 
-IL-YOUP KWAK <ilyoup.kwak@gmail.com>, with contributions from Junghi Kim and Wei Pan.
+Wei Pan and IL-YOUP KWAK <ilyoup.kwak@gmail.com> with contributions from Junghi Kim and Zhiyuan Xu.
 
 R/aSPU is an R package for Genetic association testing method, aSPU,
 proposed by Wei Pan (Wei Pan, Junghi Kim, Yiwei Zhang, Xiaotong Shen,
