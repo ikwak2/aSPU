@@ -28,10 +28,10 @@
 #' @examples
 #'
 #' data(exdat)
-#' out <- aSPUW(exdat$Y, exdat$X, pow = c(1:8, Inf), n.perm = 1000)
+#' out <- aSPUw(exdat$Y, exdat$X, pow = c(1:8, Inf), n.perm = 1000)
 #' out
 #'
-#' @seealso \code{\link{aSPU}}, \code{\link{aSPUperm2}}, \code{\link{aSPUboot}}, \code{\link{aSPUboot2}}
+#' @seealso \code{\link{aSPU}}
 
 
 aSPUw <- function(Y, X, cov=NULL, resample = c("perm", "asymp"), model=c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000, userank = T ) {

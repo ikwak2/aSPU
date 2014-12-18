@@ -68,7 +68,7 @@ aSPUsim1 <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8
         U<-t(XUs) %*% r
         CovS<-matrix(0, nrow=k, ncol=k)
         for(i in 1:n)
-            CovS<-CovS + Us[i,] %*% t(Us[i,])
+            CovS<-CovS + XUs[i,] %*% t(XUs[i,])
     }
 
     svd.CovS<-svd(CovS)
