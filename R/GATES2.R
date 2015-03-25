@@ -29,7 +29,7 @@
 #' (gatesp <- GATES2(ldmat, logitp))
 #'
 #'
-#' @seealso \code{\link{aSPUw}}
+#' @seealso \code{\link{Hyst}} \code{\link{GatesSimes}}
 
 
 GATES2 <- function (ldmatrix, p)

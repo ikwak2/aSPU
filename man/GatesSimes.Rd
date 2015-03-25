@@ -40,6 +40,6 @@ Hongsheng Gui, Miaoxin Li, Pak C Sham and Stacey S Cherny (2011)
 Comparisons of seven algorithms for pathway analysis using the WTCCC Crohn's Disease
 }
 \seealso{
-\code{\link{aSPUw}}
+\code{\link{Hyst}}  \code{\link{GATES2}}
 }
 

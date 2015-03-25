@@ -48,6 +48,6 @@ Miao-Xin Li, Johnny S.H. Kwan and Pak C. Sham (2012)
 HYST: A Hybrid Set-Based Test for Genome-wide Association Studies, with Application to Protein-Protein Interaction-Based Association Analysis
 }
 \seealso{
-\code{\link{aSPUw}}
+\code{\link{GatesSimes}} \code{\link{GATES2}}
 }
 

@@ -38,6 +38,6 @@ Miao-Xin Li, Hong-Sheng Gui, Johnny S.H. Kwan and Pak C. Sham (2011)
 GATES: A Rapid and Powerful Gene-Based Association Test Using Extended Simes Procedure
 }
 \seealso{
-\code{\link{aSPUw}}
+\code{\link{Hyst}} \code{\link{GatesSimes}}
 }
 

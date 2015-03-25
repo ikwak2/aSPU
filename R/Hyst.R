@@ -39,7 +39,7 @@
 #' out <- Hyst(pvec = logitp, ldmatrix = ldmat, snp.info = simula$snp.info,
 #'             gene.info = simula$gene.info)
 #'
-#' @seealso \code{\link{aSPUw}}
+#' @seealso \code{\link{GatesSimes}} \code{\link{GATES2}}
 
 
 Hyst <- function(pvec, ldmatrix, snp.info, gene.info) {

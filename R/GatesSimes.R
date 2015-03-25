@@ -32,7 +32,7 @@
 #'                   gene.info = simula$gene.info)
 #'
 #'
-#' @seealso \code{\link{aSPUw}}
+#' @seealso \code{\link{Hyst}}  \code{\link{GATES2}}
 
 
 GatesSimes <- function(pvec, ldmatrix, snp.info, gene.info) {
