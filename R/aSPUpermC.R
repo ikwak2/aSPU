@@ -1,36 +1,36 @@
-#' Sum of powered score (SPU) test (perm, permutation part coded in C)
-#'
-#' It gives the p-values of the SPU test and aSPU test based on based on the permutation of residuals.
-#'
-#' @param Y phenotype data. It can be disease lables; =0 for controls, =1 for cases.
-#'     or It can be any quantitative traits. Vector with length n (number of observations)
-#'
-#' @param X genotype data; each row for a subject, and each column
-#'     for an SNP. The value of each element is the # of the copies
-#'     for an allele. Matrix with dimension n by g (n : number of observation, p : number of genotype data)
-#'
-#' @param cov covariates. Matrix with dimension n by k (n :number of observation, k : number of covariates)
-#'
-#' @param model Use "gaussian" for quantitative trait (Default)
-#'    , and Use "binomial" for binary trait.
-#'
-#' @param pow power used in SPU test. Vector of g number of power.
-#'
-#' @param n.perm number of permutation
-#'
-#' @param userank similar to the original code if TRUE, by definition if FALSE
-#'
-#' @export
-#' @return Test Statistics and p-values for SPU tests and aSPU test.
-#'
-#' @examples
-#'
-#' data(exdat)
-#' out <- aSPUpermC(exdat$Y, exdat$X, cov = NULL,
-#'               model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
-#' out
-#'
-#' @seealso \code{\link{aSPU}}
+## Sum of powered score (SPU) test (perm, permutation part coded in C)
+##
+## It gives the p-values of the SPU test and aSPU test based on based on the permutation of residuals.
+##
+## @param Y phenotype data. It can be disease lables; =0 for controls, =1 for cases.
+##     or It can be any quantitative traits. Vector with length n (number of observations)
+##
+## @param X genotype data; each row for a subject, and each column
+##     for an SNP. The value of each element is the # of the copies
+##     for an allele. Matrix with dimension n by g (n : number of observation, p : number of genotype data)
+##
+## @param cov covariates. Matrix with dimension n by k (n :number of observation, k : number of covariates)
+##
+## @param model Use "gaussian" for quantitative trait (Default)
+##    , and Use "binomial" for binary trait.
+##
+## @param pow power used in SPU test. Vector of g number of power.
+##
+## @param n.perm number of permutation
+##
+## @param userank similar to the original code if TRUE, by definition if FALSE
+##
+## @export
+## @return Test Statistics and p-values for SPU tests and aSPU test.
+##
+## @examples
+##
+## data(exdat)
+## out <- aSPUpermC(exdat$Y, exdat$X, cov = NULL,
+##               model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
+## out
+##
+## @seealso \code{\link{aSPU}}
 
 
 aSPUpermC <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8, Inf), n.perm=1000, userank = T){

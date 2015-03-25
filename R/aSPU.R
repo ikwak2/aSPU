@@ -24,6 +24,12 @@
 #' @export
 #' @return Test Statistics and p-values for SPU tests and aSPU test.
 #'
+#' @author Il-Youp Kwak, Junghi Kim, Wei Pan
+#'
+#' @references
+#' Wei Pan, Junghi Kim, Yiwei Zhang, Xiaotong Shen and Peng Wei (2014)
+#' A powerful and adaptive association test for rare variants, Genetics 114.165035
+#'
 #' @examples
 #'
 #' data(exdat)

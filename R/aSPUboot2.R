@@ -1,33 +1,33 @@
-#' Sum of powered score (SPU) test (boot, version 2, matrix used in permutation)
-#'
-#' It gives the p-values of the SPU test and aSPU test based on the parametric bootstrap. (This is version 2, matrix version is faster but if it doesn't work, we should use version 1, vector version)
-#'
-#' @param Y phenotype data. It can be disease lables; =0 for controls, =1 for cases.
-#' or it can be any quantitative traits. Vector with length n (number of observations)
-#'
-#' @param X genotype data; each row for a subject, and each column
-#'     for an SNP. The value of each element is the # of the copies
-#'     for an allele. Matrix with dimension n by g (n : number of observation, p : number of genotype data)
-#'
-#' @param cov covariates. Matrix with dimension n by k (n :number of observation, k : number of covariates)
-#'
-#' @param model Use "gaussian" for quantitative trait, and use "binomial" for binary trait.
-#'
-#' @param pow power used in SPU test. Vector of g number of power.
-#'
-#' @param n.perm number of permutation
-#'
-#' @export
-#' @return Test Statistics and p-values for SPU tests and aSPU test.
-#'
-#' @examples
-#'
-#' data(exdat)
-#' out <- aSPUboot2(exdat$Y, exdat$X, cov = NULL,
-#'                model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
-#' out
-#'
-#' @seealso \code{\link{aSPU}}, \code{\link{aSPUperm}}, \code{\link{aSPUperm2}}, \code{\link{aSPUboot}}
+## Sum of powered score (SPU) test (boot, version 2, matrix used in permutation)
+##
+## It gives the p-values of the SPU test and aSPU test based on the parametric bootstrap. (This is version 2, matrix version is faster but if it doesn't work, we should use version 1, vector version)
+##
+## @param Y phenotype data. It can be disease lables; =0 for controls, =1 for cases.
+## or it can be any quantitative traits. Vector with length n (number of observations)
+##
+## @param X genotype data; each row for a subject, and each column
+##     for an SNP. The value of each element is the # of the copies
+##     for an allele. Matrix with dimension n by g (n : number of observation, p : number of genotype data)
+##
+## @param cov covariates. Matrix with dimension n by k (n :number of observation, k : number of covariates)
+##
+## @param model Use "gaussian" for quantitative trait, and use "binomial" for binary trait.
+##
+## @param pow power used in SPU test. Vector of g number of power.
+##
+## @param n.perm number of permutation
+##
+## @export
+## @return Test Statistics and p-values for SPU tests and aSPU test.
+##
+## @examples
+##
+## data(exdat)
+## out <- aSPUboot2(exdat$Y, exdat$X, cov = NULL,
+##                model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
+## out
+##
+## @seealso \code{\link{aSPU}}, \code{\link{aSPUperm}}, \code{\link{aSPUperm2}}, \code{\link{aSPUboot}}
 
 
 

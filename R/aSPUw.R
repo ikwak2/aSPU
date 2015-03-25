@@ -25,6 +25,13 @@
 #' @export
 #' @return Test Statistics and p-values for SPUw tests and aSPUw test.
 #'
+#'
+#' @author Il-Youp Kwak, Junghi Kim, Wei Pan
+#'
+#' @references
+#' Junghi Kim, Jeffrey R Wozniak, Bryon A Mueller, Xiaotong Shen, Wei Pan (2014)
+#' Comparison of statistical tests for group differences in brain functional networks
+#'
 #' @examples
 #'
 #' data(exdat)
