@@ -8,7 +8,7 @@
 #'
 #' @param snp.info SNP information matrix, The 1st column is SNP ids, 2nd column is SNP chromosome, 3rd column indicate SNP location.
 #'
-#' @param gene.info GENE information matrix, The 1st column is SNP ids, 2nd column is SNP chromosome, 3rd column indicate SNP location.
+#' @param gene.info GENE information matrix, The 1st column is GENE ids, 2nd column is GENE chromosome, 3rd and 4th column indicate where the gene location starts and ends.
 #'
 #' @export
 #' @return p-values for each SNPs.
@@ -34,32 +34,36 @@
 #'
 #' @seealso \code{\link{Hyst}}  \code{\link{GATES2}}
 
-
 GatesSimes <- function(pvec, ldmatrix, snp.info, gene.info) {
 
-    gene.info <- gene.info[ gene.info[,4] != 0, ]
     n.gene <- nrow(gene.info)
 
-    PGs <- NULL;
-    keyGs <- NULL;
-    gpos <- 0
-    for(g in 1:n.gene) { # g = 1
+    GL <- NULL;
+    for(g in 1:n.gene) { # g = 2
 
-        if( sum(snp.info[,2]==gene.info[g,1]) == 1 ) {
-            Pg <- pvec[snp.info[,2]==gene.info[g,1]]
+        snpTF <- ( snp.info[,2] == gene.info[g,2] &
+                      gene.info[g,3] <= as.numeric(snp.info[,3]) &
+                          gene.info[g,4] >= as.numeric(snp.info[,3]) )
+
+        if( sum(snpTF) != 0)
+            GL[[g]] <- which(snpTF)
+    }
+
+    PGs <- NULL;
+    for ( i in 1:length(GL) ) { #i = 26
+        if ( length(GL[[i]]) == 1 ) {
+            Pg <- pvec[ GL[[i]] ]
         } else {
-            pvecG <- pvec[snp.info[,2]==gene.info[g,1]]
-            ldmat <- ldmatrix[snp.info[,2]==gene.info[g,1], snp.info[,2]==gene.info[g,1]]
-#            Xn <- X[controls, snp.info[,2]==gene.info[g,1]]
+            pvecG <- pvec[ GL[[i]] ]
+            ldmat <- ldmatrix[GL[[i]], GL[[i]]]
             o.pv <- order(pvecG)
             ldmat2 <- ldmat[o.pv,o.pv]
-#            ldmat <- cor(Xn[,o.pv])
             Pg <- GATES2(ldmatrix = ldmat2, p = sort(pvecG) )[1]
         }
-
         PGs <- c(PGs, Pg)
     }
 
     PgatesSime <- min( PGs * n.gene / rank(PGs) )
     PgatesSime
 }
+

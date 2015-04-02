@@ -6,17 +6,9 @@
 #'
 #' @param ldmatrix numeric. A correlation matrix of SNPs, dimensions matching the p and snps arguments.
 #'
-#' @param snp.info A matrix with snp data. Data are coded as 0, 1, 2,
-#' corresponding to homozygotes for the major allele,
-#' heterozygotes, and homozygotes for the minor allele,
-#' respectively. Each row of the matrix is one SNP and each
-#' column represents one subject.
+#' @param snp.info SNP information matrix, The 1st column is SNP ids, 2nd column is SNP chromosome, 3rd column indicate SNP location.
 #'
-#' @param gene.info A matrix with four columns with the order of gene.Name,
-#' chr, Start, and End. The name of the gene is under gene.Name.
-#' The chromosome is chr, and the start and end coordinate
-#' (start < end) are in the Start and End columns. It is suggested
-#' that the genes are sorted by their locations in the genome.
+#' @param gene.info GENE information matrix, The 1st column is GENE ids, 2nd column is GENE chromosome, 3rd and 4th column indicate where the gene location starts and ends.
 #'
 #' @export
 #' @return p-values for each SNPs.
@@ -41,35 +33,42 @@
 #'
 #' @seealso \code{\link{GatesSimes}} \code{\link{GATES2}}
 
-
 Hyst <- function(pvec, ldmatrix, snp.info, gene.info) {
-    gene.info <- gene.info[ gene.info[,4] != 0, ]
+#    gene.info <- gene.info[ gene.info[,4] != 0, ]
     n.gene <- nrow(gene.info)
+
+    GL <- NULL;
+    for(g in 1:n.gene) { # g = 2
+
+        snpTF <- ( snp.info[,2] == gene.info[g,2] &
+                      gene.info[g,3] <= as.numeric(snp.info[,3]) &
+                          gene.info[g,4] >= as.numeric(snp.info[,3]) )
+
+        if( sum(snpTF) != 0)
+            GL[[g]] <- which(snpTF)
+    }
+
 
     PGs <- NULL;
     keyGs <- NULL;
     gpos <- 0
-    for(g in 1:n.gene) { #g = 6
-        if( sum(snp.info[,2]==gene.info[g,1]) == 1 ) {
-            Pg <- pvec[snp.info[,2]==gene.info[g,1]]
-            keyG <- 1
-            M <- 1
+
+    for ( i in 1:length(GL) ) { #i = 26
+        if ( length(GL[[i]]) == 1 ) {
+            Pg <- pvec[ GL[[i]] ]
+            keyG <- GL[[i]]
         } else {
-            pvecG <- pvec[snp.info[,2]==gene.info[g,1]]
-            M <- length(pvecG)
-            ldmat <- ldmatrix[snp.info[,2]==gene.info[g,1], snp.info[,2]==gene.info[g,1]]
-#            Xn <- X[controls, snp.info[,2]==gene.info[g,1]]
+            pvecG <- pvec[ GL[[i]] ]
+            ldmat <- ldmatrix[GL[[i]], GL[[i]]]
             o.pv <- order(pvecG)
             ldmat2 <- ldmat[o.pv,o.pv]
             out <- GATES2(ldmatrix = ldmat2, p = sort(pvecG) )
-            keyG <- out[2]
             Pg <- out[1]
+#            keyG <- GL[[i]][o.pv][out[2]]
+            keyG <- GL[[i]][out[2]]
         }
-
         PGs <- c(PGs, Pg)
-        keyGs <- c(keyGs, gpos + keyG)
-        gpos = gpos + M
-
+        keyGs <- c(keyGs, keyG)
     }
 #    cat("keyGs :", keyGs);
 #    cat("\n");
@@ -80,7 +79,7 @@ Hyst <- function(pvec, ldmatrix, snp.info, gene.info) {
     sums <- 0; # i = 1 ; j = 2
     for(i in 1:(n.gene-1) )
         for(j in (i+1):n.gene) {
-            r = abs(ldmatrix[keyGs[i], keyGs[i]])
+            r = abs(ldmatrix[keyGs[i], keyGs[j]])
 #            r = abs(cor(X[,keyGs[i]], X[,keyGs[j]]) )
             sums = sums + r * (3.25 + 0.75 *r)
         }

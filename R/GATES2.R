@@ -52,6 +52,12 @@ GATES2 <- function (ldmatrix, p)
         if (snpcount.local <= 1)
             return(1)
         ev <- eigen(ldmat, only.values = TRUE)$values
+
+        if( sum(ev < 0) !=0 ) {
+            ev <- ev[ev > 0]
+            ev <- ev / sum(ev) * snpcount.local
+        }
+
         ev <- ev[ev > 1]
         snpcount.local - sum(ev - 1)
     }
