@@ -5,7 +5,8 @@
 GATES2(ldmatrix, p)
 }
 \arguments{
-  \item{ldmatrix}{The correlation matrix among SNPs,}
+  \item{ldmatrix}{numeric. A correlation matrix of SNPs,
+  dimensions matching the p and snps arguments.}
 
   \item{p}{p-value for each SNPs.}
 }

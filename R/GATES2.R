@@ -5,7 +5,7 @@
 #' There is a little modification of the code GATES in postgwas package
 #' to get key gene location for Hyst method.
 #'
-#' @param ldmatrix The correlation matrix among SNPs,
+#' @param ldmatrix numeric. A correlation matrix of SNPs, dimensions matching the p and snps arguments.
 #'
 #' @param p p-value for each SNPs.
 #'

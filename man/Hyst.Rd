@@ -19,7 +19,7 @@ Hyst(pvec, ldmatrix, snp.info, gene.info)
   column indicate where the gene location starts and ends.}
 }
 \value{
-p-values for each SNPs.
+p-value based on Hyst method.
 }
 \description{
 Get p-value using GATES-Simes method.

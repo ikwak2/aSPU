@@ -7,7 +7,8 @@ GatesSimes(pvec, ldmatrix, snp.info, gene.info)
 \arguments{
   \item{pvec}{p-values for each SNP.}
 
-  \item{ldmatrix}{The correlation matrix among SNPs,}
+  \item{ldmatrix}{numeric. A correlation matrix of SNPs,
+  dimensions matching the p and snps arguments.}
 
   \item{snp.info}{SNP information matrix, The 1st column is
   SNP ids, 2nd column is SNP chromosome, 3rd column
@@ -18,7 +19,7 @@ GatesSimes(pvec, ldmatrix, snp.info, gene.info)
   column indicate where the gene location starts and ends.}
 }
 \value{
-p-values for each SNPs.
+p-value based on Gates-Simes method.
 }
 \description{
 Get p-value using GATES-Simes method.

@@ -27,6 +27,7 @@ simula <- simPathAR1Snp(nGenes=20, nGenes1=1, nSNPlim=c(1, 20), nSNP0=1:3,
 logitp <- getlogitp(simula$Y, simula$X)
 }
 \seealso{
-\code{\link{aSPUw}}
+\code{\link{GATES2}} \code{\link{GatesSimes}}
+\code{\link{Hyst}}
 }
 

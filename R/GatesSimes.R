@@ -4,14 +4,14 @@
 #'
 #' @param pvec p-values for each SNP.
 #'
-#' @param ldmatrix The correlation matrix among SNPs,
+#' @param ldmatrix numeric. A correlation matrix of SNPs, dimensions matching the p and snps arguments.
 #'
 #' @param snp.info SNP information matrix, The 1st column is SNP ids, 2nd column is SNP chromosome, 3rd column indicate SNP location.
 #'
 #' @param gene.info GENE information matrix, The 1st column is GENE ids, 2nd column is GENE chromosome, 3rd and 4th column indicate where the gene location starts and ends.
 #'
 #' @export
-#' @return p-values for each SNPs.
+#' @return p-value based on Gates-Simes method.
 #'
 #' @author Il-Youp Kwak
 #'

@@ -19,7 +19,7 @@
 #' logitp <- getlogitp(simula$Y, simula$X)
 #'
 #'
-#' @seealso \code{\link{aSPUw}}
+#' @seealso \code{\link{GATES2}} \code{\link{GatesSimes}} \code{\link{Hyst}}
 
 
 getlogitp <- function(Y, X) {
