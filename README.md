@@ -16,7 +16,7 @@ install_github("ikwak2/aSPU")
 
 ### Window users
 
-Installation in window machine is a bit difficult. Read instruction. [here](http://cran.r-project.org/doc/manuals/R-admin.html#The-command-line-tools)
+Installation in window machine is a bit difficult. Read instruction. [here](http://cran.r-project.org/doc/manuals/R-admin.html#The-Windows-toolset)
 
 
 Here are list of things you need to install.
