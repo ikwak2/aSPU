@@ -28,7 +28,7 @@
 #' @export
 #' @return Test Statistics and p-values for SPUpathSingle tests and aSPUpathSingle test. There are three versions. "std" version is the exactly same version with the paper (Pan, Kwak and Wei 2015). "unnorm" is unnormalized one which erased the power of 1/gamma in outside of bracket and didn't divide the number of SNP for each Gene in gene level SPU statistics. equation (3) on the paper, outside power of 1/gamma is set to 1 and it didn't divide the number of gene k_g. "unstd" version it didn't divide the number of SNP for each Gene. In paper equation (3) we didn't divide the sum of weighted scores with k_g(the number of SNP).
 #'
-#' @author Il-Youp Kwak, Wei Pan
+#' @author Il-Youp Kwak, Peng Wei and Wei Pan
 #'
 #' @references
 #' Wei Pan, Il-Youp Kwak and Peng Wei (2015)

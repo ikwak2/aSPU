@@ -63,7 +63,7 @@ p.pathaspusingle<- aSPUpathSingle(dat1$Y, dat1$X, nSNPs = dat1$nSNPs,
          model = "binomial", pow=1:8, n.perm=100)
 }
 \author{
-Il-Youp Kwak, Wei Pan
+Il-Youp Kwak, Peng Wei and Wei Pan
 }
 \references{
 Wei Pan, Il-Youp Kwak and Peng Wei (2015) A Powerful and

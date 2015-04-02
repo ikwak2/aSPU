@@ -49,7 +49,8 @@ out <- aSPUw(exdat$Y, exdat$X, pow = c(1:8, Inf), n.perm = 1000)
 out
 }
 \author{
-Il-Youp Kwak, Junghi Kim, Wei Pan
+Il-Youp Kwak, Junghi Kim, Jeffrey R Wozniak, Bryon A
+Mueller, Xiaotong Shen and Wei Pan
 }
 \references{
 Junghi Kim, Jeffrey R Wozniak, Bryon A Mueller, Xiaotong

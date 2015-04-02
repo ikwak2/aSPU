@@ -49,7 +49,8 @@ out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot",
 out
 }
 \author{
-Il-Youp Kwak, Junghi Kim, Wei Pan
+Il-Youp Kwak, Junghi Kim, Yiwei Zhang, Xiaotong Shen, Peng
+Wei and Wei Pan
 }
 \references{
 Wei Pan, Junghi Kim, Yiwei Zhang, Xiaotong Shen and Peng

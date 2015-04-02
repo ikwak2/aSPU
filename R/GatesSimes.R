@@ -13,7 +13,7 @@
 #' @export
 #' @return p-value based on Gates-Simes method.
 #'
-#' @author Il-Youp Kwak
+#' @author Il-Youp Kwak, Peng Wei and Wei Pan
 #'
 #' @references
 #' Hongsheng Gui, Miaoxin Li, Pak C Sham and Stacey S Cherny (2011)

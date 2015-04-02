@@ -24,7 +24,7 @@
 #' @export
 #' @return Test Statistics and p-values for SPU tests and aSPU test.
 #'
-#' @author Il-Youp Kwak, Junghi Kim, Wei Pan
+#' @author Il-Youp Kwak, Junghi Kim, Yiwei Zhang, Xiaotong Shen, Peng Wei and Wei Pan
 #'
 #' @references
 #' Wei Pan, Junghi Kim, Yiwei Zhang, Xiaotong Shen and Peng Wei (2014)

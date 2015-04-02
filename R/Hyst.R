@@ -11,9 +11,9 @@
 #' @param gene.info GENE information matrix, The 1st column is GENE ids, 2nd column is GENE chromosome, 3rd and 4th column indicate where the gene location starts and ends.
 #'
 #' @export
-#' @return p-value based on Hyst method. 
+#' @return p-value based on Hyst method.
 #'
-#' @author Il-Youp Kwak
+#' @author Il-Youp Kwak, Peng Wei and Wei Pan
 #'
 #' @references
 #' Miao-Xin Li, Johnny S.H. Kwan and Pak C. Sham (2012)

@@ -36,7 +36,7 @@ out <- GatesSimes(pvec = logitp, ldmatrix = ldmat, snp.info = simula$snp.info,
                   gene.info = simula$gene.info)
 }
 \author{
-Il-Youp Kwak
+Il-Youp Kwak, Peng Wei and Wei Pan
 }
 \references{
 Hongsheng Gui, Miaoxin Li, Pak C Sham and Stacey S Cherny

@@ -36,7 +36,7 @@ out <- Hyst(pvec = logitp, ldmatrix = ldmat, snp.info = simula$snp.info,
             gene.info = simula$gene.info)
 }
 \author{
-Il-Youp Kwak
+Il-Youp Kwak, Peng Wei and Wei Pan
 }
 \references{
 Miao-Xin Li, Johnny S.H. Kwan and Pak C. Sham (2012) HYST:

@@ -26,7 +26,7 @@
 #' @return Test Statistics and p-values for SPUw tests and aSPUw test.
 #'
 #'
-#' @author Il-Youp Kwak, Junghi Kim, Wei Pan
+#' @author Il-Youp Kwak, Junghi Kim, Jeffrey R Wozniak, Bryon A Mueller, Xiaotong Shen and Wei Pan
 #'
 #' @references
 #' Junghi Kim, Jeffrey R Wozniak, Bryon A Mueller, Xiaotong Shen, Wei Pan (2014)
