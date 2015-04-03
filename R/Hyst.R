@@ -37,7 +37,7 @@ Hyst <- function(pvec, ldmatrix, snp.info, gene.info) {
 #    gene.info <- gene.info[ gene.info[,4] != 0, ]
     n.gene <- nrow(gene.info)
 
-    GL <- NULL;
+    GL <- list(0)
     for(g in 1:n.gene) { # g = 2
 
         snpTF <- ( snp.info[,2] == gene.info[g,2] &
