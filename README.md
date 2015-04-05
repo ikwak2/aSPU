@@ -18,6 +18,6 @@ install_github("ikwak2/aSPU")
 
 If you installed [Rtools](http://cran.r-project.org/doc/manuals/R-admin.html#The-Windows-toolset) and other softwares you can follow the command above.
 
-If you are having hard time installing Rtools or other stuffs, use [this](https://dl.dropboxusercontent.com/u/95232225/aSPU_1.2.zip) windows binary source.
+If you are having hard time installing Rtools or other stuffs, use [aSPU_1.2.zip](https://dl.dropboxusercontent.com/u/95232225/aSPU_1.2.zip), the windows binary source file.
 
 Go to 'package' tab and select 'install package(s) from local zip files' and then select 'aSPU_1.2.zip' file.
