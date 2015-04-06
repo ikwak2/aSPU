@@ -1,6 +1,6 @@
 Package: aSPU
 Version: 1.2
-Date: 3/24/2015
+Date: 4/6/2015
 Title: Adaptive Sum of powered score test.
 Description: R codes for adaptive Sum of powered score tests (SPU and aSPU), variance-weighted Sum of powered score tests(SPUw and aSPUw) and other association tests(aSPUpath, GATES, GATES-Simes, HYST, etc). The test can cooperate with genetic and other data sets with covariates. The response variable is binary or quantitative.
 Author: Wei Pan, Il-Youp Kwak
