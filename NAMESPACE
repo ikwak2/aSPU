@@ -1,11 +1,7 @@
-export(aSPUpath)
 export(aSPUpathSingle)
 export(simPathAR1Snp)
 export(aSPU)
 export(aSPUw)
 export(getlogitp)
-export(GATES2)
-export(GatesSimes)
-export(Hyst)
 
 useDynLib(aSPU)
