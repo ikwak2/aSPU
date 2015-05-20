@@ -14,20 +14,20 @@
 #'
 #' @param nSNP0 If ncSNPs = NULL, the number of causal SNPs in Gene randomly selected from nSNP0. Default is 1:3.
 #'
-#' @param LOR Association in log OR between a causal SNP and outcome
+#' @param LOR Association in log OR between a causal SNP and outcome.
 #'
-#' @param n # of cases (= # of controls)
+#' @param n # of cases (= # of controls).
 #'
-#' @param MAFlim MAF's of the SNPs are drawn from Unif(MAFlim[1], MAFlim[2])
+#' @param MAFlim MAF's of the SNPs are drawn from Unif(MAFlim[1], MAFlim[2]).
 #'
 #' @param rholim the SNPs in eahc gene are from a latent Normal
 #'                    variable with a AR(rho) corr structure, rho's are drawn
-#'                    from Unif(rholim[1], rholim[2]); the SNPs in diff genes are indep
+#'                    from Unif(rholim[1], rholim[2]); the SNPs in diff genes are independant.
 #'
-#' @param p0 background disease prevalence;i.e. intercept=log(p0/(1-p0))
+#' @param p0 background disease prevalence;i.e. intercept=log(p0/(1-p0)).
 #'
 #' @param noncausal exclude causal SNPs if TRUE, it is the simulation set up d in the paper(Pan et al 2015).
-#'                                        #'
+#'
 #' @export
 #' @return a list of the binary outcome Y (=0 or 1) and SNPs (=0, 1 or 2);
 #'               Y is a vector of length 2n; X is a matrix of 2n by nSNP.

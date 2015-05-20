@@ -21,20 +21,19 @@ simPathAR1Snp(nGenes = 10, nGenes1 = 5, nSNPs = NULL, ncSNPs = NULL,
 
 \item{nSNP0}{If ncSNPs = NULL, the number of causal SNPs in Gene randomly selected from nSNP0. Default is 1:3.}
 
-\item{LOR}{Association in log OR between a causal SNP and outcome}
+\item{LOR}{Association in log OR between a causal SNP and outcome.}
 
-\item{n}{# of cases (= # of controls)}
+\item{n}{# of cases (= # of controls).}
 
-\item{MAFlim}{MAF's of the SNPs are drawn from Unif(MAFlim[1], MAFlim[2])}
+\item{MAFlim}{MAF's of the SNPs are drawn from Unif(MAFlim[1], MAFlim[2]).}
 
 \item{rholim}{the SNPs in eahc gene are from a latent Normal
                    variable with a AR(rho) corr structure, rho's are drawn
-                   from Unif(rholim[1], rholim[2]); the SNPs in diff genes are indep}
+                   from Unif(rholim[1], rholim[2]); the SNPs in diff genes are independant.}
 
-\item{p0}{background disease prevalence;i.e. intercept=log(p0/(1-p0))}
+\item{p0}{background disease prevalence;i.e. intercept=log(p0/(1-p0)).}
 
-\item{noncausal}{exclude causal SNPs if TRUE, it is the simulation set up d in the paper(Pan et al 2015).
-#'}
+\item{noncausal}{exclude causal SNPs if TRUE, it is the simulation set up d in the paper(Pan et al 2015).}
 }
 \value{
 a list of the binary outcome Y (=0 or 1) and SNPs (=0, 1 or 2);

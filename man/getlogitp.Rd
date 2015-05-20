@@ -7,11 +7,11 @@
 getlogitp(Y, X)
 }
 \arguments{
-\item{Y}{Response or phenotype data. It can be disease lables; =0 for controls, =1 for cases.}
+\item{Y}{Response or phenotype data. It can be a disease indicator; =0 for controls, =1 for cases.}
 
 \item{X}{Genotype or other data; each row for a subject, and each column
-    for an SNP. The value of each element is the # of the copies
-    for an allele. Matrix with dimension n by p (n : number of observation, p : number of genotype data)}
+    for an SNP (or a predictor). The value of each SNP is the # of the copies
+    for an allele. A matrix with dimension n by p (n : number of observation, p : number of SNPs (or predictors) ).}
 }
 \value{
 p-values for each SNPs.
