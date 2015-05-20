@@ -47,7 +47,10 @@
 #'          gene.info = dat1$gene.info,
 #'          model = "binomial", pow=1:8, pow2=c(1, 2, 4, 8), n.perm=100)
 #' p.pathaspu
-#'
+#' ## pow = 1:8 and pow2 = 1,2,4,8
+#' ## So, there are 8*4 = 32 SPUpath p-values.
+#' ## SPUpathi,j corresponds pow = i , pow2 = j
+#' ## The last element, aSPUpath gives aSPUpath p-value.
 #'
 #' @seealso \code{\link{simPathAR1Snp}} \code{\link{aSPUpathSingle}}
 
@@ -194,15 +197,24 @@ aSPUpath <- function(Y, X, cov = NULL, model=c("binomial", "gaussian"),
     minP2 =  sum( min(pPerm2) > minP0s2 )/n.perm
 #    minPU =  sum( min(pPermU) > minP0sU )/n.perm
     minP1s<-minP2s<-minPUs<-rep(NA, length(pow2))
-    for(j2 in 1:length(pow2)){
+#    for(j2 in 1:length(pow2)){
 #        minP0s1 = apply(P0s1[, ((j2-1)*length(pow)+1):(j2*length(pow))] , 1, min)
-        minP0s2 = apply(P0s2[, ((j2-1)*length(pow)+1):(j2*length(pow))], 1, min)
+#        minP0s2 = apply(P0s2[, ((j2-1)*length(pow)+1):(j2*length(pow))], 1, min)
 #        minP0sU = apply(P0sU[, ((j2-1)*length(pow)+1):(j2*length(pow))], 1, min)
 #        minP1s[j2] =  sum( min(pPerm1[((j2-1)*length(pow)+1):(j2*length(pow))]) > minP0s1 )/n.perm
-        minP2s[j2] =  sum( min(pPerm2[((j2-1)*length(pow)+1):(j2*length(pow))]) > minP0s2 )/n.perm
+#        minP2s[j2] =  sum( min(pPerm2[((j2-1)*length(pow)+1):(j2*length(pow))]) > minP0s2 )/n.perm
 #        minPUs[j2] =  sum( min(pPermU[((j2-1)*length(pow)+1):(j2*length(pow))]) > minP0sU )/n.perm
-    }
-    stdPs=c(pPerm2, minP2s, minP2)
+#    }
+#    stdPs=c(pPerm2, minP2s, minP2)
+    stdPs=c(pPerm2, minP2)
+
+    nmvec <- NULL;
+    for(nm in paste("SPUpath",pow,",", sep=""))
+        nmvec <- c(nmvec, paste(nm, pow2, sep="") )
+
+    nmvec <- c(nmvec, "aSPUpath")
+    names(stdPs) <- nmvec
+    stdPs
 }
 
 

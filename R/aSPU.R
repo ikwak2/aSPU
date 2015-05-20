@@ -38,9 +38,16 @@
 #'            model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
 #'
 #' out$Ts
-#' # These are list of Test Statistics for SPU and aSPU tests.
+#' # This is a vector of Test Statistics for SPU and aSPU tests.
+#' # SPU1 to SPUInf corresponds with the option pow=c(1:8, Inf)
+#' # They are SPU test statistics.
+#' # The last element aSPU is minimum of them, aSPU statistic.
+#'
 #' out$pvs
-#' # These are p-values of Test Statistics for SPU and aSPU tests.
+#' # This is a vector of p-values for SPU and aSPU tests.
+#' # SPU1 to SPUInf corresponds with the option pow=c(1:8, Inf)
+#' # They are p-values for corresponding SPU tests.
+#' # The last element is p-value of aSPU test.
 #'
 #' @seealso \code{\link{aSPUw}}
 
