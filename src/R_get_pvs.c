@@ -24,12 +24,12 @@ void get_pvs(double *XUs, double *Ts,
 {
   int i, j, b, rr, cc, k;
   double *pPerm0, *T0s, *U0, ss, *P0s, *minP0s, minpPerm0, minp;
-  int *bb;
+  //  int *bb;
 
   pPerm0 = (double *) R_alloc ( n_pow, sizeof(double) ) ;
   T0s = (double *) R_alloc ( n_perm * n_pow, sizeof(double) ) ;
   U0 = (double *) R_alloc ( nc_XUs, sizeof(double) ) ;
-  bb =  (int *) R_alloc ( n_r, sizeof(int) ) ;
+  //  bb =  (int *) R_alloc ( n_r, sizeof(int) ) ;
   P0s = (double *) R_alloc ( n_perm * n_pow, sizeof(double) ) ;
   minP0s = (double *) R_alloc ( n_perm, sizeof(double) ) ;
 
