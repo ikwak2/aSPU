@@ -1,46 +1,51 @@
-#' Adaptive Sum of powered score (SPU) tests (SPU and aSPU)
+#' Sum of Powered Score (SPU) tests and adaptive SPU (aSPU) test.
 #'
 #' It gives p-values of the SPU tests and aSPU test.
 #'
-#' @param Y Response or phenotype data. It can be disease lables; =0 for controls, =1 for cases.
-#' or It can be any quantitative traits. Vector with length n (number of observations)
+#' @param Y Response or phenotype data. It can be disease indicators; =0 for controls, =1 for cases.
+#' Or it can be a quantitative trait. A vector with length n (number of observations)
 #'
 #' @param X Genotype or other data; each row for a subject, and each column
-#'     for an SNP. The value of each element is the # of the copies
-#'     for an allele. Matrix with dimension n by g (n : number of observation, p : number of genotype data)
+#'     for an SNP (or a predictor). The value of each SNP is the # of the copies
+#'     for an allele. A matrix with dimension n by p (n : number of observation, p : number of genotype data)
 #'
-#' @param cov covariates. Matrix with dimension n by k (n :number of observation, k : number of covariates)
+#' @param cov Covariates. A matrix with dimension n by k (n :number of observation, k : number of covariates)
 #'
-#' @param resample Use "perm" for residual permutations, "asymp" for simulations from the distribution and "boot" for parametric bootstrap
+#' @param resample Use "perm" for residual permutations, "sim" for simulations from the null distribution, and "boot" for parametric bootstrap.
 #'
 #' @param model Use "gaussian" for quantitative trait, and use "binomial" for binary trait.
 #'
-#' @param pow power used in SPU test. Vector of g number of power.
+#' @param pow power used in SPU test. A vector of the powers.
 #'
 #' @param n.perm number of permutations or bootstraps.
 #'
-#' @param userank use similar code with original version if T, by definition if F
+#' @return A list object, Ts : Test Statistics for the SPU and aSPU test.
+#'         pvs : p-values for the SPU and aSPU test.
 #'
-#' @export
-#' @return Test Statistics and p-values for SPU tests and aSPU test.
-#'
-#' @author Il-Youp Kwak, Junghi Kim, Yiwei Zhang, Xiaotong Shen, Peng Wei and Wei Pan
+#' @author Il-Youp Kwak, Junghi Kim, Yiwei Zhang and Wei Pan
 #'
 #' @references
 #' Wei Pan, Junghi Kim, Yiwei Zhang, Xiaotong Shen and Peng Wei (2014)
-#' A powerful and adaptive association test for rare variants, Genetics 114.165035
+#' A powerful and adaptive association test for rare variants,
+#' Genetics, 197(4), 1081-95
 #'
 #' @examples
 #'
 #' data(exdat)
+#'
+#' ## example analysis using aSPU test on exdat data.
 #' out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot",
 #'            model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
-#' out
+#'
+#' out$Ts
+#' # These are list of Test Statistics for SPU and aSPU tests.
+#' out$pvs
+#' # These are p-values of Test Statistics for SPU and aSPU tests.
 #'
 #' @seealso \code{\link{aSPUw}}
 
 
-aSPU <- function(Y, X, cov=NULL, resample = c("perm", "asymp", "boot"), model=c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000, userank = T ) {
+aSPU <- function(Y, X, cov=NULL, resample = c("perm", "sim", "boot"), model=c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000) {
 
     model <- match.arg(model)
     resample <- match.arg(resample)
@@ -53,13 +58,14 @@ aSPU <- function(Y, X, cov=NULL, resample = c("perm", "asymp", "boot"), model=c(
         }
     } else {
 
-        if(resample == "asymp") {
+        if(resample == "sim") {
             if(n.perm > 10^5) {
                 aSPUsim1(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
             } else {
                 aSPUsim2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
             }
         } else {
+            userank = T;
             aSPUpermC(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model, userank = userank)
         }
     }

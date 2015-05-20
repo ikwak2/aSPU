@@ -1,12 +1,12 @@
-#' Get logistic p-value
+#' Get the p-values of the multiple SNPs based on the Wald test in a logistic regresion model.
 #'
-#' Get p-value using logistic regresion for each SNPs
+#' Get p-value using logistic regresion for each of the multiple SNPs
 #'
 #' @param Y Response or phenotype data. It can be disease lables; =0 for controls, =1 for cases.
 #'
 #' @param X Genotype or other data; each row for a subject, and each column
 #'     for an SNP. The value of each element is the # of the copies
-#'     for an allele. Matrix with dimension n by g (n : number of observation, p : number of genotype data)
+#'     for an allele. Matrix with dimension n by p (n : number of observation, p : number of genotype data)
 #'
 #' @export
 #' @return p-values for each SNPs.

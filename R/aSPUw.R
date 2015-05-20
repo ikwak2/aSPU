@@ -1,7 +1,7 @@
-#' Variance-weighted adaptive Sum of powered score tests. (SPUw and aSPUw)
+#' Inverse variance weighted Sum of Powered Score tests (SPUw) and adaptive SPUw (aSPUw) test.
 #'
-#' It gives the p-values of the SPUw test and aSPUw test based
-#' on based on the permutation of residuals or simulation from its distripution.
+#' It gives the p-values of the SPUw tests and aSPUw test based
+#' on the permutations of the residuals or simulations from the null distripution.
 #'
 #' @param Y Response or phenotype data. It can be disease lables; =0 for controls, =1 for cases.
 #'     or It can be any quantitative traits. Vector with length n (number of observations)
@@ -20,33 +20,37 @@
 #'
 #' @param n.perm number of permutations or bootstraps
 #'
-#' @param userank use similar code with original version if T, by definition if F
-#'
 #' @export
-#' @return Test Statistics and p-values for SPUw tests and aSPUw test.
+#' @return A list object, Ts : Test Statistics for the SPUw and aSPUw test.
+#'         pvs : p-values for the SPUw and aSPUw test.
 #'
-#'
-#' @author Il-Youp Kwak, Junghi Kim, Jeffrey R Wozniak, Bryon A Mueller, Xiaotong Shen and Wei Pan
+#' @author Il-Youp Kwak, Junghi Kim and Wei Pan
 #'
 #' @references
 #' Junghi Kim, Jeffrey R Wozniak, Bryon A Mueller, Xiaotong Shen, Wei Pan (2014)
-#' Comparison of statistical tests for group differences in brain functional networks
+#' Comparison of statistical tests for group differences in brain functional networks,
+#' Neuroimage, 1;101:681-94
 #'
 #' @examples
 #'
 #' data(exdat)
 #' out <- aSPUw(exdat$Y, exdat$X, pow = c(1:8, Inf), n.perm = 1000)
-#' out
+#'
+#' out$Ts
+#' # These are list of Test Statistics for SPUw and aSPUw tests.
+#' out$pvs
+#' # These are p-values of Test Statistics for SPUw and aSPUw tests.
 #'
 #' @seealso \code{\link{aSPU}}
 
 
-aSPUw <- function(Y, X, cov=NULL, resample = c("perm", "asymp"), model=c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000, userank = T ) {
+aSPUw <- function(Y, X, cov=NULL, resample = c("perm", "sim"), model=c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000) {
 
     model <- match.arg(model)
     resample <- match.arg(resample)
+    userank = T
 
-    if(resample == "asymp") {
+    if(resample == "sim") {
         aSPUwsim(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
     } else {
         aSPUwpermC(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model, userank = userank)

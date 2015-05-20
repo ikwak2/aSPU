@@ -1,4 +1,4 @@
-#' Single-gene based approach of Adaptive Sum of powered score tests (SPUpathSingle and aSPUpathSingle)
+#' Single-gene based version of the Sum of Powered Score tests (SPUpathSingle) and adaptive SPUpathSingle (aSPUpathSingle) test.
 #'
 #' It gives p-values of the SPUpathSingle tests and aSPUpathSingle test. We considered applying SPU and aSPU tests to each gene, then using the minimum p-value to combine their p-values.
 #'
@@ -11,10 +11,11 @@
 #'
 #' @param cov covariates. Matrix with dimension n by k (n :number of observation, k : number of covariates)
 #'
-#' @param model Use "gaussian" for quantitative trait, and use "binomial" for binary trait.
+#' @param snp.info SNP information matrix, the 1st column is SNP id, 2nd column is chromosome #, 3rd column indicates SNP location.
 #'
-#' @param nSNPs a vector; each element is the number of the SNPs in the
-#'              corresponding gene
+#' @param gene.info GENE information matrix, The 1st column is GENE id, 2nd column is chromosome #, 3rd and 4th column indicate start and end positions of the gene.
+#'
+#' @param model Use "gaussian" for quantitative trait, and use "binomial" for binary trait.
 #'
 #' @param pow SNP specific power(gamma values) used in SPUpath test.
 #'
@@ -26,9 +27,8 @@
 #'                 determines how many first PCs to use.
 #'
 #' @export
-#' @return Test Statistics and p-values for SPUpathSingle tests and aSPUpathSingle test. There are three versions. "std" version is the exactly same version with the paper (Pan, Kwak and Wei 2015). "unnorm" is unnormalized one which erased the power of 1/gamma in outside of bracket and didn't divide the number of SNP for each Gene in gene level SPU statistics. equation (3) on the paper, outside power of 1/gamma is set to 1 and it didn't divide the number of gene k_g. "unstd" version it didn't divide the number of SNP for each Gene. In paper equation (3) we didn't divide the sum of weighted scores with k_g(the number of SNP).
-#'
-#' @author Il-Youp Kwak, Peng Wei and Wei Pan
+#' @return P-values for SPUpathSingle tests and aSPUpathSingle test.
+#' @author Il-Youp Kwak and Wei Pan
 #'
 #' @references
 #' Wei Pan, Il-Youp Kwak and Peng Wei (2015)
@@ -38,20 +38,37 @@
 #'
 #' dat1<-simPathAR1Snp(nGenes=20, nGenes1=5, nSNPlim=c(1, 20), nSNP0=1,
 #'                     LOR=.2, n=100, MAFlim=c(0.05, 0.4), p0=0.05 )
-#' p.pathaspusingle<- aSPUpathSingle(dat1$Y, dat1$X, nSNPs = dat1$nSNPs,
-#'          model = "binomial", pow=1:8, n.perm=100)
+#' # p-values of SPUpathSingle and aSPUpathSingle tests.
+#' p.pathaspusingle<- aSPUpathSingle(dat1$Y, dat1$X,
+#'                      snp.info = dat1$snp.info,
+#'                      gene.info = dat1$gene.info,
+#'                      model = "binomial", pow=1:8, n.perm=100)
 #'
 #' @seealso \code{\link{simPathAR1Snp}} \code{\link{aSPUpath}}
 
 aSPUpathSingle <- function(Y, X, cov = NULL, model=c("binomial", "gaussian"),
-                           nSNPs, pow=1:8, n.perm=200,
+                           snp.info, gene.info,
+                           pow=1:8, n.perm=200,
                            usePCs=F, varprop=0.95 ){
 
     model = match.arg(model)
 
+    n.gene <- nrow(gene.info)
+    GL <- list(0)
+    i = 1
+    for(g in 1:n.gene) { # g = 2
+        snpTF <- ( snp.info[,2] == gene.info[g,2] &
+                      gene.info[g,3] <= as.numeric(snp.info[,3]) &
+                          gene.info[g,4] >= as.numeric(snp.info[,3]) )
 
-##get rid of the genes with 0 SNP:
-    nSNPs = nSNPs[nSNPs>=1]
+        if( sum(snpTF) != 0){
+            GL[[i]] <- which(snpTF)
+            i = i + 1
+        }
+    }
+
+    X = X[, unlist(GL)]
+    nSNPs=unlist(lapply(GL,length))
 
     nSNPs0<-rep(0, length(nSNPs))
     if (usePCs){

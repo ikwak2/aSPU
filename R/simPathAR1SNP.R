@@ -1,14 +1,14 @@
-#' Simulating Data set.
+#' Simulating a pathway with multiple SNPs.
 #'
-#' It gives a simulation data set. Simulate a pathway with multiple genes, each one with SNPs from a latent multivariate Gaussian variable with an AR1 correlation structure.
+#' It gives a simulated SNPs consisting of multiple genes in a pathway. Each SNPs from a latent multivariate Gaussian variable with an AR1 correlation structure.
 #'
 #' @param nGenes The number of total genes.
 #'
 #' @param nGenes1 The number of causal genes.
 #'
-#' @param nSNPs A vector of length g (total number of genes). Each elements of vector indicate the number of SNPs in the gene. Default is nSNPs = NULL, in this case the number of nSNPs randomly selected from nSNPlow to nSNPup.
+#' @param nSNPs A vector, length matched with total number of genes. Each elements of vector indicate the number of SNPs in the gene. Default is nSNPs = NULL, in this case the number of nSNPs randomly selected from nSNPlow to nSNPup.
 #'
-#' @param ncSNPs A vector of length g (total number of genes). Each elements of vector indicate the number of causal SNPs in the gene. Default is ncSNPs = NULL, in this case the number of ncSNPs are randomly selected from nSNP0.
+#' @param ncSNPs A vector, length matched with total number of genes. Each elements of vector indicate the number of causal SNPs in the gene. Default is ncSNPs = NULL, in this case the number of ncSNPs are randomly selected from nSNP0.
 #'
 #' @param nSNPlim If nSNPs = NULL, the number of SNPs in Gene randomly selected from Unif(nSNPlim[1], nSNPlim[2]).
 #'
