@@ -11,7 +11,7 @@
 #' @param gene.info GENE information matrix, The 1st column is GENE id, 2nd column is chromosome #, 3rd and 4th column indicate start and end positions of the gene.
 #'
 #' @export
-#' @return A p-value
+#' @return A p-value.
 #'
 #' @author Il-Youp Kwak and Wei Pan
 #'

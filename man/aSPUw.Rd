@@ -8,22 +8,22 @@ aSPUw(Y, X, cov = NULL, resample = c("perm", "sim"), model = c("gaussian",
   "binomial"), pow = c(1:8, Inf), n.perm = 1000)
 }
 \arguments{
-\item{Y}{Response or phenotype data. It can be disease lables; =0 for controls, =1 for cases.
-    or It can be any quantitative traits. Vector with length n (number of observations)}
+\item{Y}{Response or phenotype data. It can be a disease indicator; =0 for controls, =1 for cases.
+Or it can be a quantitative trait. A vector with length n (number of observations).}
 
 \item{X}{Genotype or other data; each row for a subject, and each column
-    for an SNP. The value of each element is the # of the copies
-    for an allele. Matrix with dimension n by g (n : number of observation, p : number of genotype data)}
+    for an SNP (or a predictor). The value of each SNP is the # of the copies
+    for an allele. A matrix with dimension n by p (n : number of observation, p : number of SNPs (or predictors) ).}
 
-\item{cov}{covariates. Matrix with dimension n by k (n :number of observation, k : number of covariates)}
+\item{cov}{Covariates. A matrix with dimension n by k (n :number of observation, k : number of covariates).}
 
 \item{resample}{Use "perm" for residual permutations and "sim" for simulations from the distribution.}
 
-\item{model}{Use "gaussian" for quantitative trait, and use "binomial" for binary trait.}
+\item{model}{Use "gaussian" for a quantitative trait, and use "binomial" for a binary trait.}
 
-\item{pow}{power used in SPUw test. Vector of g number of power.}
+\item{pow}{power used in SPU test. A vector of the powers.}
 
-\item{n.perm}{number of permutations or bootstraps}
+\item{n.perm}{number of permutations or bootstraps.}
 }
 \value{
 A list object, Ts : Test Statistics for the SPUw and aSPUw test.
@@ -53,9 +53,9 @@ out$pvs
 Il-Youp Kwak, Junghi Kim and Wei Pan
 }
 \references{
-Junghi Kim, Jeffrey R Wozniak, Bryon A Mueller, Xiaotong Shen, Wei Pan (2014)
+Junghi Kim, Jeffrey R Wozniak, Bryon A Mueller, Xiaotong Shen and Wei Pan (2014)
 Comparison of statistical tests for group differences in brain functional networks,
-Neuroimage, 1;101:681-94
+Neuroimage, 1;101:681-694
 }
 \seealso{
 \code{\link{aSPU}}

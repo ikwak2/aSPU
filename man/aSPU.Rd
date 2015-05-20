@@ -8,26 +8,26 @@ aSPU(Y, X, cov = NULL, resample = c("perm", "sim", "boot"),
   model = c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000)
 }
 \arguments{
-\item{Y}{Response or phenotype data. It can be disease indicators; =0 for controls, =1 for cases.
-Or it can be a quantitative trait. A vector with length n (number of observations)}
+\item{Y}{Response or phenotype data. It can be a disease indicator; =0 for controls, =1 for cases.
+Or it can be a quantitative trait. A vector with length n (number of observations).}
 
 \item{X}{Genotype or other data; each row for a subject, and each column
     for an SNP (or a predictor). The value of each SNP is the # of the copies
-    for an allele. A matrix with dimension n by p (n : number of observation, p : number of genotype data)}
+    for an allele. A matrix with dimension n by p (n : number of observation, p : number of SNPs (or predictors) ).}
 
-\item{cov}{Covariates. A matrix with dimension n by k (n :number of observation, k : number of covariates)}
+\item{cov}{Covariates. A matrix with dimension n by k (n :number of observation, k : number of covariates).}
 
 \item{resample}{Use "perm" for residual permutations, "sim" for simulations from the null distribution, and "boot" for parametric bootstrap.}
 
-\item{model}{Use "gaussian" for quantitative trait, and use "binomial" for binary trait.}
+\item{model}{Use "gaussian" for a quantitative trait, and use "binomial" for a binary trait.}
 
 \item{pow}{power used in SPU test. A vector of the powers.}
 
 \item{n.perm}{number of permutations or bootstraps.}
 }
 \value{
-A list object, Ts : Test Statistics for the SPU and aSPU test.
-        pvs : p-values for the SPU and aSPU test.
+A list object, Ts : test statistics for the SPU tests (in the order of the specified pow) and finally for the aSPU test.
+        pvs : p-values for the SPU and aSPU tests.
 }
 \description{
 It gives p-values of the SPU tests and aSPU test.
@@ -58,6 +58,8 @@ Il-Youp Kwak, Junghi Kim, Yiwei Zhang and Wei Pan
 Wei Pan, Junghi Kim, Yiwei Zhang, Xiaotong Shen and Peng Wei (2014)
 A powerful and adaptive association test for rare variants,
 Genetics, 197(4), 1081-95
+
+Junghi Kim, Jeffrey R Wozniak, Bryon A Mueller, Xiaotong Shen and Wei Pan (2014) Comparison of statistical tests for group differences in brain functional networks, NeuroImage, 1;101:681-694
 }
 \seealso{
 \code{\link{aSPUw}}

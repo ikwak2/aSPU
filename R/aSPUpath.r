@@ -2,16 +2,16 @@
 #'
 #' It gives p-values of the SPUpath tests and aSPUpath test.
 #'
-#' @param Y Response or phenotype data. It can be disease lables; =0 for controls, =1 for cases.
-#' or It can be any quantitative traits. Vector with length n (number of observations)
+#' @param Y Response or phenotype data. It can be a disease indicator; =0 for controls, =1 for cases.
+#' Or it can be a quantitative trait. A vector with length n (number of observations).
 #'
 #' @param X Genotype or other data; each row for a subject, and each column
-#'     for an SNP. The value of each element is the # of the copies
-#'     for an allele. Matrix with dimension n by g (n : number of observation, p : number of genotype data)
+#'     for an SNP (or a predictor). The value of each SNP is the # of the copies
+#'     for an allele. A matrix with dimension n by p (n : number of observation, p : number of SNPs (or predictors) ).
 #'
-#' @param cov covariates. Matrix with dimension n by k (n :number of observation, k : number of covariates)
+#' @param cov Covariates. A matrix with dimension n by k (n :number of observation, k : number of covariates).
 #'
-#' @param model Use "gaussian" for quantitative trait, and use "binomial" for binary trait.
+#' @param model Use "gaussian" for a quantitative trait, and use "binomial" for a binary trait.
 #'
 #' @param snp.info SNP information matrix, the 1st column is SNP id, 2nd column is chromosome #, 3rd column indicates SNP location.
 #'
@@ -23,10 +23,10 @@
 #'
 #' @param n.perm number of permutations.
 #'
-#' @param usePCs indicating whether to extract PCs and then use PCs of X
+#' @param usePCs indicating whether to extract PCs and then use PCs of X.
 #'
 #' @param varprop the proportion of the variations explained (cutoff) that
-#'                 determines how many first PCs to use.
+#'                 determines how many top PCs to use.
 #'
 #' @export
 #' @return P-values for SPUpath tests and aSPUpath test.
@@ -35,7 +35,7 @@
 #'
 #' @references
 #' Wei Pan, Il-Youp Kwak and Peng Wei (2015)
-#' A Powerful and Pathway-Based Adaptive Test for Genetic Association With Common or Rare Variants (in revision)
+#' A Powerful and Pathway-Based Adaptive Test for Genetic Association With Common or Rare Variants (Submitted)
 #'
 #' @examples
 #'

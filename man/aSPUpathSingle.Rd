@@ -9,16 +9,16 @@ aSPUpathSingle(Y, X, cov = NULL, model = c("binomial", "gaussian"),
   varprop = 0.95)
 }
 \arguments{
-\item{Y}{Response or phenotype data. It can be disease lables; =0 for controls, =1 for cases.
-or It can be any quantitative traits. Vector with length n (number of observations)}
+\item{Y}{Response or phenotype data. It can be a disease indicator; =0 for controls, =1 for cases.
+Or it can be a quantitative trait. A vector with length n (number of observations).}
 
 \item{X}{Genotype or other data; each row for a subject, and each column
-    for an SNP. The value of each element is the # of the copies
-    for an allele. Matrix with dimension n by g (n : number of observation, p : number of genotype data)}
+    for an SNP (or a predictor). The value of each SNP is the # of the copies
+    for an allele. A matrix with dimension n by p (n : number of observation, p : number of SNPs (or predictors) ).}
 
-\item{cov}{covariates. Matrix with dimension n by k (n :number of observation, k : number of covariates)}
+\item{cov}{Covariates. A matrix with dimension n by k (n :number of observation, k : number of covariates).}
 
-\item{model}{Use "gaussian" for quantitative trait, and use "binomial" for binary trait.}
+\item{model}{Use "gaussian" for a quantitative trait, and use "binomial" for a binary trait.}
 
 \item{snp.info}{SNP information matrix, the 1st column is SNP id, 2nd column is chromosome #, 3rd column indicates SNP location.}
 
@@ -28,10 +28,10 @@ or It can be any quantitative traits. Vector with length n (number of observatio
 
 \item{n.perm}{number of permutations.}
 
-\item{usePCs}{indicating whether to extract PCs and then use PCs of X}
+\item{usePCs}{indicating whether to extract PCs and then use PCs of X.}
 
 \item{varprop}{the proportion of the variations explained (cutoff) that
-                determines how many first PCs to use.}
+                determines how many top PCs to use.}
 }
 \value{
 P-values for SPUpathSingle tests and aSPUpathSingle test.
@@ -57,7 +57,7 @@ Il-Youp Kwak and Wei Pan
 }
 \references{
 Wei Pan, Il-Youp Kwak and Peng Wei (2015)
-A Powerful and Pathway-Based Adaptive Test for Genetic Association With Common or Rare Variants (in revision)
+A Powerful and Pathway-Based Adaptive Test for Genetic Association With Common or Rare Variants (Submitted)
 }
 \seealso{
 \code{\link{simPathAR1Snp}} \code{\link{aSPUpath}}

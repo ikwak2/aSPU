@@ -3,22 +3,22 @@
 #' It gives the p-values of the SPUw tests and aSPUw test based
 #' on the permutations of the residuals or simulations from the null distripution.
 #'
-#' @param Y Response or phenotype data. It can be disease lables; =0 for controls, =1 for cases.
-#'     or It can be any quantitative traits. Vector with length n (number of observations)
+#' @param Y Response or phenotype data. It can be a disease indicator; =0 for controls, =1 for cases.
+#' Or it can be a quantitative trait. A vector with length n (number of observations).
 #'
 #' @param X Genotype or other data; each row for a subject, and each column
-#'     for an SNP. The value of each element is the # of the copies
-#'     for an allele. Matrix with dimension n by g (n : number of observation, p : number of genotype data)
+#'     for an SNP (or a predictor). The value of each SNP is the # of the copies
+#'     for an allele. A matrix with dimension n by p (n : number of observation, p : number of SNPs (or predictors) ).
 #'
-#' @param cov covariates. Matrix with dimension n by k (n :number of observation, k : number of covariates)
+#' @param cov Covariates. A matrix with dimension n by k (n :number of observation, k : number of covariates).
 #'
 #' @param resample Use "perm" for residual permutations and "sim" for simulations from the distribution.
 #'
-#' @param model Use "gaussian" for quantitative trait, and use "binomial" for binary trait.
+#' @param model Use "gaussian" for a quantitative trait, and use "binomial" for a binary trait.
 #'
-#' @param pow power used in SPUw test. Vector of g number of power.
+#' @param pow power used in SPU test. A vector of the powers.
 #'
-#' @param n.perm number of permutations or bootstraps
+#' @param n.perm number of permutations or bootstraps.
 #'
 #' @export
 #' @return A list object, Ts : Test Statistics for the SPUw and aSPUw test.
@@ -27,9 +27,9 @@
 #' @author Il-Youp Kwak, Junghi Kim and Wei Pan
 #'
 #' @references
-#' Junghi Kim, Jeffrey R Wozniak, Bryon A Mueller, Xiaotong Shen, Wei Pan (2014)
+#' Junghi Kim, Jeffrey R Wozniak, Bryon A Mueller, Xiaotong Shen and Wei Pan (2014)
 #' Comparison of statistical tests for group differences in brain functional networks,
-#' Neuroimage, 1;101:681-94
+#' Neuroimage, 1;101:681-694
 #'
 #' @examples
 #'

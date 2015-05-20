@@ -1,9 +1,9 @@
-#' Gene-based Association Test that uses Extended Simes procedure (GATES)
+#' Gene-based Association Test that uses an extended Simes procedure (GATES)
 #'
-#' Get p-value using GATES method. Usually it used to get genomewise p-values.
+#' Get the p-value of GATES. Usually it is used to get genomewise p-values.
 #' This function is taken from postgwas package.
 #' There is a little modification of the code GATES in postgwas package.
-#' 1) The approximated matrix may have negative eigen value, we modified it not to have negative value 2) we add one more return (the key gene location) for Hyst method.
+#' 1) The approximated matrix may have negative eigen value, we modified it not to have negative values; 2) we added one more return (the key gene location) for Hyst method.
 #'
 #' @param ldmatrix numeric. A correlation matrix of SNPs,
 #'          dimensions matching the p and snps arguments.
@@ -11,7 +11,7 @@
 #' @param p p-value for each SNPs.
 #'
 #' @export
-#' @return Combined p-values using GATES method and the key gene location.
+#' @return A p-value of GATES and the key gene location (to be used by Hyst).
 #'
 #' @references Miao-Xin Li, Hong-Sheng Gui, Johnny S.H. Kwan and Pak C. Sham (2011)
 #' GATES: A Rapid and Powerful Gene-Based Association Test Using Extended Simes Procedure

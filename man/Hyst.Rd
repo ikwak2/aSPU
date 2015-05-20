@@ -16,7 +16,7 @@ Hyst(pvec, ldmatrix, snp.info, gene.info)
 \item{gene.info}{GENE information matrix, The 1st column is GENE id, 2nd column is chromosome #, 3rd and 4th column indicate start and end positions of the gene.}
 }
 \value{
-A p-value
+A p-value.
 }
 \description{
 Get a p-value using HYST.

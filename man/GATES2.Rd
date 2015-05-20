@@ -2,7 +2,7 @@
 % Please edit documentation in R/GATES2.R
 \name{GATES2}
 \alias{GATES2}
-\title{Gene-based Association Test that uses Extended Simes procedure (GATES)}
+\title{Gene-based Association Test that uses an extended Simes procedure (GATES)}
 \usage{
 GATES2(ldmatrix, p)
 }
@@ -13,13 +13,13 @@ GATES2(ldmatrix, p)
 \item{p}{p-value for each SNPs.}
 }
 \value{
-Combined p-values using GATES method and the key gene location.
+A p-value of GATES and the key gene location (to be used by Hyst).
 }
 \description{
-Get p-value using GATES method. Usually it used to get genomewise p-values.
+Get the p-value of GATES. Usually it is used to get genomewise p-values.
 This function is taken from postgwas package.
 There is a little modification of the code GATES in postgwas package.
-1) The approximated matrix may have negative eigen value, we modified it not to have negative value 2) we add one more return (the key gene location) for Hyst method.
+1) The approximated matrix may have negative eigen value, we modified it not to have negative values; 2) we added one more return (the key gene location) for Hyst method.
 }
 \examples{
 simula <- simPathAR1Snp(nGenes=20, nGenes1=1, nSNPlim=c(1, 20), nSNP0=1:3,
