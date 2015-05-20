@@ -43,6 +43,10 @@
 #'                      snp.info = dat1$snp.info,
 #'                      gene.info = dat1$gene.info,
 #'                      model = "binomial", pow=1:8, n.perm=100)
+#' p.pathaspusingle
+#' ## pow = 1:8
+#' ## SPUpathSinglei corresponds pow = i,
+#' ## The last element, aSPUpathSingle gives aSPUpathSingle p-value.
 #'
 #' @seealso \code{\link{simPathAR1Snp}} \code{\link{aSPUpath}}
 
@@ -185,7 +189,10 @@ aSPUpathSingle <- function(Y, X, cov = NULL, model=c("binomial", "gaussian"),
     minP1 =  sum( min(pPerm1) > minP0s1 )/n.perm
     minP2 =  sum( min(pPerm2) > minP0s2 )/n.perm
     minPU =  sum( min(pPermU) > minP0sU )/n.perm
-    pvs<-list(unstdPs=c(pPerm1, minP1), stdPs=c(pPerm2, minP2), unstdPsUnnorm=c(pPermU, minPU) )
+#    pvs<-list(unstdPs=c(pPerm1, minP1), stdPs=c(pPerm2, minP2), unstdPsUnnorm=c(pPermU, minPU) )
+    pvs=c(pPerm2, minP2)
+    names(pvs) <- c(paste("SPUpathSingle",pow, sep=""), "aSPUpathSingle" )
+
     return(pvs)
 }
 

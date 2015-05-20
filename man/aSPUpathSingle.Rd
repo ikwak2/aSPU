@@ -47,6 +47,10 @@ p.pathaspusingle<- aSPUpathSingle(dat1$Y, dat1$X,
                      snp.info = dat1$snp.info,
                      gene.info = dat1$gene.info,
                      model = "binomial", pow=1:8, n.perm=100)
+p.pathaspusingle
+## pow = 1:8
+## SPUpathSinglei corresponds pow = i,
+## The last element, aSPUpathSingle gives aSPUpathSingle p-value.
 }
 \author{
 Il-Youp Kwak and Wei Pan

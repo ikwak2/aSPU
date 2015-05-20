@@ -206,15 +206,15 @@ aSPUpath <- function(Y, X, cov = NULL, model=c("binomial", "gaussian"),
 #        minPUs[j2] =  sum( min(pPermU[((j2-1)*length(pow)+1):(j2*length(pow))]) > minP0sU )/n.perm
 #    }
 #    stdPs=c(pPerm2, minP2s, minP2)
-    stdPs=c(pPerm2, minP2)
+    pvs=c(pPerm2, minP2)
 
     nmvec <- NULL;
     for(nm in paste("SPUpath",pow,",", sep=""))
         nmvec <- c(nmvec, paste(nm, pow2, sep="") )
 
     nmvec <- c(nmvec, "aSPUpath")
-    names(stdPs) <- nmvec
-    stdPs
+    names(pvs) <- nmvec
+    pvs
 }
 
 
