@@ -44,9 +44,12 @@ It gives a simulated SNPs consisting of multiple genes in a pathway. Each SNPs f
 }
 \examples{
 # Simulation set up A a) in the paper (Pan et al 2015)
-simula <- simPathAR1Snp(nGenes=20, nGenes1=1, nSNPlim=c(1, 20), nSNP0=1:3,
+\dontrun{ simula <- simPathAR1Snp(nGenes=20, nGenes1=1, nSNPlim=c(1, 20), nSNP0=1:3,
                            LOR=.2, rholim=c(0,0),
-                           n=50, MAFlim=c(0.05, 0.4), p0=0.05)
+                           n=100, MAFlim=c(0.05, 0.4), p0=0.05) }
+\dontshow{ simula <- simPathAR1Snp(nGenes=20, nGenes1=1, nSNPlim=c(1, 20), nSNP0=1:3,
+                           LOR=.2, rholim=c(0,0),
+                           n=10, MAFlim=c(0.05, 0.4), p0=0.05) }
 
 # Simulation set up A b) in the paper
 #simulb <- simPathAR1Snp(nGenes=20, nGenes1=1, nSNPlim=c(1, 100), nSNP0=1:3,

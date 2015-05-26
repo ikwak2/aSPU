@@ -35,14 +35,21 @@
 #' A Powerful and Pathway-Based Adaptive Test for Genetic Association With Common or Rare Variants (Submitted)
 #'
 #' @examples
-#'
-#' dat1<-simPathAR1Snp(nGenes=20, nGenes1=5, nSNPlim=c(1, 20), nSNP0=1,
-#'                     LOR=.2, n=100, MAFlim=c(0.05, 0.4), p0=0.05 )
+#' 
+#' \dontrun{dat1<-simPathAR1Snp(nGenes=20, nGenes1=5, nSNPlim=c(1, 20), nSNP0=1,
+#'                     LOR=.2, n=100, MAFlim=c(0.05, 0.4), p0=0.05 ) }
+#' \dontshow{dat1<-simPathAR1Snp(nGenes=20, nGenes1=5, nSNPlim=c(1, 20), nSNP0=1,
+#'                     LOR=.2, n=30, MAFlim=c(0.05, 0.4), p0=0.05 ) }
+#' 
 #' # p-values of SPUpathSingle and aSPUpathSingle tests.
-#' p.pathaspusingle<- aSPUpathSingle(dat1$Y, dat1$X,
+#' \dontrun{p.pathaspusingle<- aSPUpathSingle(dat1$Y, dat1$X,
 #'                      snp.info = dat1$snp.info,
 #'                      gene.info = dat1$gene.info,
-#'                      model = "binomial", pow=1:8, n.perm=100)
+#'                      model = "binomial", pow=1:8, n.perm=100)}
+#' \dontshow{p.pathaspusingle<- aSPUpathSingle(dat1$Y, dat1$X,
+#'                      snp.info = dat1$snp.info,
+#'                      gene.info = dat1$gene.info,
+#'                      model = "binomial", pow=1:8, n.perm=20) }
 #' p.pathaspusingle
 #' ## pow = 1:8
 #' ## SPUpathSinglei corresponds pow = i,

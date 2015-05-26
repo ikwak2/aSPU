@@ -42,13 +42,16 @@ P-values for SPUpath tests and aSPUpath test.
 It gives p-values of the SPUpath tests and aSPUpath test.
 }
 \examples{
-dat1<-simPathAR1Snp(nGenes=20, nGenes1=5, nSNPlim=c(1, 20), nSNP0=1,
-                    LOR=.2, n=100, MAFlim=c(0.05, 0.4), p0=0.05 )
+\dontrun{dat1<-simPathAR1Snp(nGenes=20, nGenes1=5, nSNPlim=c(1, 20), nSNP0=1, LOR=.2, n=100, MAFlim=c(0.05, 0.4), p0=0.05 ) }
+\dontshow{dat1<-simPathAR1Snp(nGenes=20, nGenes1=5, nSNPlim=c(1, 20), nSNP0=1, LOR=.2, n=40, MAFlim=c(0.05, 0.4), p0=0.05 ) }
 
 # p-values of SPUpath and aSPUpath tests.
-p.pathaspu<- aSPUpath(dat1$Y, dat1$X, snp.info = dat1$snp.info,
+\dontrun{p.pathaspu<- aSPUpath(dat1$Y, dat1$X, snp.info = dat1$snp.info,
          gene.info = dat1$gene.info,
-         model = "binomial", pow=1:8, pow2=c(1, 2, 4, 8), n.perm=100)
+         model = "binomial", pow=1:8, pow2=c(1, 2, 4, 8), n.perm=1000) }
+\dontshow{p.pathaspu<- aSPUpath(dat1$Y, dat1$X, snp.info = dat1$snp.info,
+         gene.info = dat1$gene.info,
+         model = "binomial", pow=1:8, pow2=c(1, 2, 4, 8), n.perm=30) }
 p.pathaspu
 ## pow = 1:8 and pow2 = 1,2,4,8
 ## So, there are 8*4 = 32 SPUpath p-values.
