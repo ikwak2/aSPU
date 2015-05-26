@@ -46,23 +46,12 @@ It gives a simulated SNPs consisting of multiple genes in a pathway. Each SNPs f
 # Simulation set up A a) in the paper (Pan et al 2015)
 simula <- simPathAR1Snp(nGenes=20, nGenes1=1, nSNPlim=c(1, 20), nSNP0=1:3,
                            LOR=.2, rholim=c(0,0),
-                           n=100, MAFlim=c(0.05, 0.4), p0=0.05)
+                           n=50, MAFlim=c(0.05, 0.4), p0=0.05)
 
 # Simulation set up A b) in the paper
-simulb <- simPathAR1Snp(nGenes=20, nGenes1=1, nSNPlim=c(1, 100), nSNP0=1:3,
-                           LOR=.2, rholim=c(0,0),
-                           n=100, MAFlim=c(0.05, 0.4), p0=0.05)
-
-# Simulation set up A c) in the paper
-simulc <- simPathAR1Snp(nGenes=20, nGenes1=1, nSNPlim=c(1, 20), nSNP0=1:3,
-                           LOR=.2, rholim=c(0,0.8),
-                           n=100, MAFlim=c(0.05, 0.4), p0=0.05)
-
-# Simulation set up A d) in the paper
-simuld <- simPathAR1Snp(nGenes=20, nGenes1=1, nSNPlim=c(1, 20), nSNP0=1:3,
-                           LOR=.2, rholim=c(0,0.8),
-                           n=100, MAFlim=c(0.05, 0.4), p0=0.05,
-                           noncausal = TRUE)
+#simulb <- simPathAR1Snp(nGenes=20, nGenes1=1, nSNPlim=c(1, 100), nSNP0=1:3,
+#                           LOR=.2, rholim=c(0,0),
+#                           n=100, MAFlim=c(0.05, 0.4), p0=0.05)
 }
 \seealso{
 \code{\link{aSPUpathSingle}} \code{\link{aSPUpath}}
