@@ -39,9 +39,9 @@
 #'
 #' @examples
 #'
-#' \dontrun{dat1<-simPathAR1Snp(nGenes=20, nGenes1=5, nSNPlim=c(1, 20), 
+#' \dontrun{dat1<-simPathAR1Snp(nGenes=20, nGenes1=5, nSNPlim=c(1, 20),
 #' 	       nSNP0=1, LOR=.2, n=100, MAFlim=c(0.05, 0.4), p0=0.05 ) }
-#' \dontshow{dat1<-simPathAR1Snp(nGenes=20, nGenes1=5, nSNPlim=c(1, 20), 
+#' \dontshow{dat1<-simPathAR1Snp(nGenes=20, nGenes1=5, nSNPlim=c(1, 20),
 #'             nSNP0=1, LOR=.2, n=40, MAFlim=c(0.05, 0.4), p0=0.05 ) }
 #'
 #' # p-values of SPUpath and aSPUpath tests.
@@ -144,9 +144,9 @@ aSPUpath <- function(Y, X, cov = NULL, model=c("binomial", "gaussian"),
                                         # Permutations:
     T0sUnnorm=T0s = StdT0s = matrix(0, nrow=n.perm, ncol=length(pow)*nGenes)
     for(b in 1:n.perm){
-        Y0 <- sample(Y, length(Y))
+        R0 <- sample(r, length(r))
 #########Null score vector:
-        U0<-t(XUs) %*% (Y0-mean(Y0))
+        U0<-t(XUs) %*% R0
 
                                         # test stat's:
         for(j in 1:length(pow))
