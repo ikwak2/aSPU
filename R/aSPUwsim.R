@@ -37,7 +37,7 @@ aSPUwsim <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8
 
     if (is.null(cov)){
         ## NO nuisance parameters:
-        Xg <- X
+        XUs <- Xg <- X
         Xbar<-apply(Xg, 2, mean)
         subtract<-function(x, y) { x - y }
         Xgb=t(apply(Xg, 1, subtract, Xbar))
@@ -54,18 +54,17 @@ aSPUwsim <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8
         tdat1<-data.frame(trait=Y, cov)
         fit1<-glm(trait~.,family=model,data=tdat1)
         pis<-fitted.values(fit1)
-        Us<-matrix(0, nrow=n, ncol=k)
+        XUs<-matrix(0, nrow=n, ncol=k)
         for(i in 1:k){
             tdat2<-data.frame(X1=X[,i], cov)
             fit2<-glm(X1~.,data=tdat2)
             X1mus<-fitted.values(fit2)
-            r <- Y - pis
-            Us[, i]<-(Y - pis)*(X[,i] - X1mus)
+            XUs[, i] <- (X[,i] - X1mus)
         }
-        U<-apply(Us, 2, sum)
+        U <- t(XUs) %*% (Y - pis)
         CovS<-matrix(0, nrow=k, ncol=k)
         for(i in 1:n)
-            CovS<-CovS + Us[i,] %*% t(Us[i,])
+            CovS<-CovS + XUs[i,] %*% t(XUs[i,])
     }
 
 
@@ -94,7 +93,7 @@ aSPUwsim <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8
         set.seed(s) # to ensure the same samples are drawn for each pow
         for(b in 1:n.perm){
             r0 <- sample(r, length(r))
-            U0<-as.vector( t(Xg) %*% r0)
+            U0<-as.vector( t(XUs) %*% r0)
      # test stat's:
             if (pow[j] < Inf) {T0s[b] = round( sum((U0/diagSDs)^pow[j]), digits=8) }
             if (pow[j] == Inf) {T0s[b] = round( max(abs(U0/diagSDs)), digits=8)}
