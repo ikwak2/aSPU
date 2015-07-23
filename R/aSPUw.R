@@ -12,7 +12,7 @@
 #'
 #' @param cov Covariates. A matrix with dimension n by k (n :number of observation, k : number of covariates).
 #'
-#' @param resample Use "perm" for residual permutations and "sim" for simulations from the distribution.
+#' @param resample Use "perm" for residual permutations, "sim" for simulations from the null distribution, and "boot" for parametric bootstrap.
 #'
 #' @param model Use "gaussian" for a quantitative trait, and use "binomial" for a binary trait.
 #'
@@ -51,7 +51,7 @@
 #' @seealso \code{\link{aSPU}}
 
 
-aSPUw <- function(Y, X, cov=NULL, resample = c("perm", "sim"), model=c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000) {
+aSPUw <- function(Y, X, cov=NULL, resample = c("perm", "sim", "boot"), model=c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000) {
 
     model <- match.arg(model)
     resample <- match.arg(resample)
@@ -60,6 +60,10 @@ aSPUw <- function(Y, X, cov=NULL, resample = c("perm", "sim"), model=c("gaussian
     if(resample == "sim") {
         aSPUwsim(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
     } else {
+        if (resample == "boot") {
+            aSPUwboot(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
+	} else {
         aSPUwpermC(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model, userank = userank)
+    	}
     }
 }

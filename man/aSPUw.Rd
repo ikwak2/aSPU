@@ -4,8 +4,8 @@
 \alias{aSPUw}
 \title{Inverse variance weighted Sum of Powered Score tests (SPUw) and adaptive SPUw (aSPUw) test.}
 \usage{
-aSPUw(Y, X, cov = NULL, resample = c("perm", "sim"), model = c("gaussian",
-  "binomial"), pow = c(1:8, Inf), n.perm = 1000)
+aSPUw(Y, X, cov = NULL, resample = c("perm", "sim", "boot"),
+  model = c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000)
 }
 \arguments{
 \item{Y}{Response or phenotype data. It can be a disease indicator; =0 for controls, =1 for cases.
@@ -17,7 +17,7 @@ Or it can be a quantitative trait. A vector with length n (number of observation
 
 \item{cov}{Covariates. A matrix with dimension n by k (n :number of observation, k : number of covariates).}
 
-\item{resample}{Use "perm" for residual permutations and "sim" for simulations from the distribution.}
+\item{resample}{Use "perm" for residual permutations, "sim" for simulations from the null distribution, and "boot" for parametric bootstrap.}
 
 \item{model}{Use "gaussian" for a quantitative trait, and use "binomial" for a binary trait.}
 

@@ -27,7 +27,7 @@
 ## @seealso \code{\link{aSPU}}, \code{\link{aSPUperm2}}, \code{\link{aSPUboot}}, \code{\link{aSPUboot2}}
 
 
-aSPUwsim <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8, Inf), n.perm=1000){
+aSPUwboot <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8, Inf), n.perm=1000){
 
     model <- match.arg(model)
 
@@ -72,8 +72,8 @@ aSPUwsim <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8
     Vs<-diag(CovS)
     diagSDs<-ifelse(Vs>1e-20, sqrt(Vs), 1e-10)
 
-    svd.CovS<-svd(CovS)
-    CovSsqrt<-svd.CovS$u %*% diag(sqrt(svd.CovS$d))
+#    svd.CovS<-svd(CovS)
+#    CovSsqrt<-svd.CovS$u %*% diag(sqrt(svd.CovS$d))
 
 
    # test stat's:
@@ -92,10 +92,8 @@ aSPUwsim <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8
     for (j in 1:length(pow)){
         set.seed(s) # to ensure the same samples are drawn for each pow
         for(b in 1:n.perm){
-            U00<-rnorm(k, 0, 1)
-            U0<-CovSsqrt %*% U00
-#            r0 <- sample(r, length(r))
-#            U0<-as.vector( t(XUs) %*% r0)
+            r0 <- sample(r, length(r))
+            U0<-as.vector( t(XUs) %*% r0)
      # test stat's:
             if (pow[j] < Inf) {T0s[b] = round( sum((U0/diagSDs)^pow[j]), digits=8) }
             if (pow[j] == Inf) {T0s[b] = round( max(abs(U0/diagSDs)), digits=8)}
