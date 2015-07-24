@@ -27,14 +27,14 @@ It gives p-values of the SPU tests and aSPU test for meta-analyzed data.
 \examples{
 data(kegg9)
 ## example analysis using aSPUM test.
-g <- gene.info[1,1]  #  SOAT1
+g <- kegg9$gene.info[1,1]  #  SOAT1
 ## Take snps mapped on gene "SOAT1" from the information of gene.info and snp.info.
-snps <- which( ( snp.info[,2] == gene.info[gene.info[,1] == g, 2] ) &
-                 (snp.info[,3] > gene.info[gene.info[,1] == g, 3] ) &
-                 (snp.info[,3] < gene.info[gene.info[,1] == g, 4] )  )
+snps <- which( ( kegg9$snp.info[,2] == kegg9$gene.info[kegg9$gene.info[,1] == g, 2] ) &
+                 (kegg9$snp.info[,3] > kegg9$gene.info[kegg9$gene.info[,1] == g, 3] ) &
+                 (kegg9$snp.info[,3] < kegg9$gene.info[kegg9$gene.info[,1] == g, 4] )  )
 ## Take subsets
-newP <- nP[snps] ;
-ldsub <- ldmatrix[snps, snps];
+newP <- kegg9$nP[snps] ;
+ldsub <- kegg9$ldmatrix[snps, snps];
 ## Get p-value for gene SOAT1. Read vignette for details.
 out <- aSPUM(newP, corrSNP=ldsub , pow=c(1,2,4,8, Inf), n.perm=100, Ps=TRUE)
 

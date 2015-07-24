@@ -34,19 +34,19 @@ ldmatrix is a correaltion matrix of SNPs from the reference population.
 data(kegg9)
 
 ## gene informations
-gene.info
+kegg9$gene.info
 
 ## SNPs mapped on 3rd and 4th gene in 9th Kegg pathway
-PPs[3:4]
+kegg9$PPs[3:4]
 
 ## snp information
-snp.info
+kegg9$snp.info
 
 ## The 1st 10 P-values of SNPs mapped on 9th Kegg pathway. 
-nP[1:10]
+kegg9$nP[1:10]
 
 ## correlation matrix among those SNPs
-ldmatrix[1:10,1:10]
+kegg9$ldmatrix[1:10,1:10]
 
 }
 \keyword{datasets}
