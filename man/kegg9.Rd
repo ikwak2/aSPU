@@ -1,4 +1,4 @@
-\docType{kegg9}
+\docType{data}
 \name{kegg9}
 \alias{kegg9}
 \title{A subset of coronary artery disease (CAD) data }
