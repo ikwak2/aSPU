@@ -26,7 +26,7 @@ CAD cases and 130,681 controls. We mapped these SNPs to the 9th KEGG
 pathway ([KEGG_STEROID_BIOSYNTHESIS](http://www.broadinstitute.org/gsea/msigdb/cards/KEGG_STEROID_BIOSYNTHESIS))
 . Let's load this subset.
 
-```{r loading, eval=FALSE}
+```{r loading}
 library(aSPU)
 data(kegg9)
 ```
@@ -72,8 +72,8 @@ kegg9$snp.info[1:10,]
 
 ## Use of aSPUM function
 
-Using the following code we can use `aSPUM()` function to get gene-wise
-p-value for each gene in 9th Kegg pathway.
+Using the following code we can use `aSPUM()` and `GATES2()` function
+to get gene-wise aSPU and GATES p-value for each gene in 9th Kegg pathway.
 ```{r gene-wise p}
 Gps<-NULL;
 gl <- NULL;
@@ -83,23 +83,61 @@ for( g in kegg9$gene.info[,1]) {
            (kegg9$snp.info[,3] > kegg9$gene.info[kegg9$gene.info[,1] == g, 3])&
            (kegg9$snp.info[,3] < kegg9$gene.info[kegg9$gene.info[,1] == g, 4]))
 
-        newP <- kegg9$nP[snps] ;
-        ldsub <- kegg9$ldmatrix[snps, snps];
+    newP <- kegg9$nP[snps] ;
+    ldsub <- kegg9$ldmatrix[snps, snps];
 
-        if( length(snps) > 0) {
-            out <- aSPUM(newP, corrSNP=ldsub , pow=c(1,2,4,8, Inf),
-                         n.perm=1000, Ps=TRUE)
-            Gps <- rbind(Gps, out$pvs)
-            gl <- c(gl, g)
-        }
+    if( length(snps) > 1) {
+        out <- aSPUM(newP, corrSNP=ldsub , pow=c(1,2,4,8, Inf),
+                     n.perm=10000, Ps=TRUE)
+
+        o.pvec = order(newP)
+        ldmat <- ldsub[o.pvec, o.pvec]
+        gatesp <- GATES2(ldmat, sort(newP))[1]
+        Gps <- rbind(Gps, c(length(newP),out$pvs, gatesp))
+        gl <- c(gl, g)
+    } else if (length(snps) == 1) {
+        out <- aSPUM(newP, corrSNP=ldsub , pow=c(1,2,4,8, Inf),
+                     n.perm=10000, Ps=TRUE)
+        gatesp <- newP
+        Gps <- rbind(Gps, c(length(newP),out$pvs, gatesp) )
+        gl <- c(gl, g)
     }
+}
+colnames(Gps)[1] <- "nSNP"
 rownames(Gps) <- gl
 Gps
 ```
 
+The row of `Gps` means each gene, 1st column indicate the number of
+SNPs for each gene. 2nd to 6th column indicate SPUM p-values for each
+power ( 1,2,4,8 and Inf), 7th column indicate aSPUM p-value and 8th
+column indicate p-value of GATES method.
+We can see that a gene `LIPA` is very significant.
+
+```{r pathway2}
+g = "LIPA"
+    snps <-
+    which( ( kegg9$snp.info[,2] == kegg9$gene.info[kegg9$gene.info[,1]==g,2]) &
+           (kegg9$snp.info[,3] > kegg9$gene.info[kegg9$gene.info[,1] == g, 3])&
+           (kegg9$snp.info[,3] < kegg9$gene.info[kegg9$gene.info[,1] == g, 4]))
+
+newP <- kegg9$nP[snps] ;
+newP
+
+```
+`LIPA` have `r length(newP)` SNPs mapped and we can see that there are
+many significant SNPs. It makes sense that SPUM(1) have less p-value
+then SPUM(inf) since there are multiple significant SNPs. GATES have
+more power when there are small number of significant SNPs in the
+Gene (similar to minP test), so aSPUM have less p-value than GATES.
+
 ## Use of aSPUMpath function
 
 We can see get p-value for pathways as follows.
+Let's perform pathway based analysis using aSPUMpath, Gates-Simes and
+HYST.
+
+
 ```{r pathway p}
 out.g <- GatesSimes(pvec = kegg9$nP, ldmatrix = kegg9$ldmatrix,
                     snp.info=kegg9$snp.info, gene.info = kegg9$gene.info)
@@ -107,7 +145,7 @@ out.g <- GatesSimes(pvec = kegg9$nP, ldmatrix = kegg9$ldmatrix,
 out.h <- Hyst(pvec = kegg9$nP, ldmatrix = kegg9$ldmatrix,
               snp.info=kegg9$snp.info, gene.info = kegg9$gene.info)
 
-out.a <- aSPUMpath(kegg9$nP, corrSNP = kegg9$ldmatrix, pow=c(1:8, Inf),
+out.a <- aSPUMpath(kegg9$nP, corrSNP = kegg9$ldmatrix, pow=c(1,2,4,8, Inf),
                    pow2 = c(1,2,4,8),
                    snp.info=kegg9$snp.info, gene.info = kegg9$gene.info,
                    n.perm=1000, Ps = TRUE)
@@ -115,5 +153,25 @@ out.a <- aSPUMpath(kegg9$nP, corrSNP = kegg9$ldmatrix, pow=c(1:8, Inf),
 out.g; out.h; out.a
 
 ```
+
+As we can see from the gene-wise analysis, there is only one very
+significant gene `LIPA`. In this situation Gates-Simes works well and
+Gate-Simes p-value is `r out.g`. On the other hand, HYST works well
+when there are many significant genes with similar effects. It makes
+sense to have p-value of `r out.h` for HYST.
+
+On the other hand, aSPUMpath adaptively consider all SPUMpath(i,j)
+methods.
+
+
+
+
+
+
+
+
+The p-value using
+
 `out.g` is for Gates-Simes, `out.h` is for HYST and `out.a` is for
 `aSPUMpath`.
+
