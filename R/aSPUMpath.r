@@ -169,14 +169,16 @@ aSPUMpath <- function(Zs, corrSNP, pow=c(1,2,4,8, Inf),
     pvs=c(pPerm2, minP2)
 
     nmvec <- NULL;
-    for(nm in paste("SPUMpath",pow,",", sep=""))
-        nmvec <- c(nmvec, paste(nm, pow2, sep="") )
+    for(ii in pow2) {
+    	   for(jj in pow) {
+           	  nmvec <- c(nmvec, paste("SPUMpath",jj,",",ii,sep=""))
+           }
+    }
 
     nmvec <- c(nmvec, "aSPUMpath")
     names(pvs) <- nmvec
     pvs
 
-#    stdPs=c(pPerm2, minP2s, minP2)
 }
 
 

@@ -214,8 +214,15 @@ aSPUpath <- function(Y, X, cov = NULL, model=c("binomial", "gaussian"),
     pvs=c(pPerm2, minP2)
 
     nmvec <- NULL;
-    for(nm in paste("SPUpath",pow,",", sep=""))
-        nmvec <- c(nmvec, paste(nm, pow2, sep="") )
+    for(ii in pow2) {
+    	   for(jj in pow) {
+           	  nmvec <- c(nmvec, paste("SPUMpath",jj,",",ii,sep=""))
+           }
+    }
+
+#    nmvec <- NULL;
+#    for(nm in paste("SPUpath",pow,",", sep=""))
+#        nmvec <- c(nmvec, paste(nm, pow2, sep="") )
 
     nmvec <- c(nmvec, "aSPUpath")
     names(pvs) <- nmvec
