@@ -33,7 +33,7 @@ snps <- which( ( snp.info[,2] == gene.info[gene.info[,1] == g, 2] ) &
                  (snp.info[,3] > gene.info[gene.info[,1] == g, 3] ) &
                  (snp.info[,3] < gene.info[gene.info[,1] == g, 4] )  )
 ## Take subsets
-newP <- nZ[snps] ;
+newP <- nP[snps] ;
 ldsub <- ldmatrix[snps, snps];
 ## Get p-value for gene SOAT1. Read vignette for details.
 out <- aSPUM(newP, corrSNP=ldsub , pow=c(1,2,4,8, Inf), n.perm=100, Ps=TRUE)
