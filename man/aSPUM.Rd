@@ -9,13 +9,13 @@ aSPUM(Zs, corrSNP, pow = c(1, 2, 4, 8, Inf), n.perm = 1000, Ps = FALSE)
 \arguments{
 \item{Zs}{Z-scores for each SNPs. It could be P-values if the Ps option is TRUE.}
 
+\item{corrSNP}{Correaltion matirx of SNPs. Estimated from the reference population.}
+
 \item{pow}{power used in SPU test. A vector of the powers.}
 
 \item{n.perm}{number of permutations or bootstraps.}
 
 \item{Ps}{TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.}
-
-\item{CorrSNP}{Correaltion matirx of SNPs. Estimated from the reference population.}
 }
 \value{
 A list object, Ts : test statistics for the SPU tests (in the order of the specified pow) and finally for the aSPU test.

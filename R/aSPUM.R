@@ -4,7 +4,7 @@
 #'
 #' @param Zs Z-scores for each SNPs. It could be P-values if the Ps option is TRUE. 
 #'
-#' @param CorrSNP Correaltion matirx of SNPs. Estimated from the reference population.
+#' @param corrSNP Correaltion matirx of SNPs. Estimated from the reference population.
 #'
 #' @param pow power used in SPU test. A vector of the powers.
 #'
