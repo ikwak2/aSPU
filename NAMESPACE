@@ -1,11 +1,16 @@
 export(aSPUpath)
+export(aSPUMpath)
 export(aSPUpathSingle)
 export(simPathAR1Snp)
 export(aSPU)
+export(aSPUM)
 export(aSPUw)
 export(getlogitp)
 export(GATES2)
 export(GatesSimes)
 export(Hyst)
+
+importFrom("stats", "fitted.values", "glm", "pchisq", "prcomp",
+            "qnorm", "rnorm", "runif")
 
 useDynLib(aSPU)

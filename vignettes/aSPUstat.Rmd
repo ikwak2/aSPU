@@ -1,0 +1,119 @@
+---
+title: "aSPU for Meta Analized Data (aSPUM() and aSPUMpath())"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{aSPU for Meta Analized Data}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+# funqtl: QTL mapping with function-valued traits
+
+```{r knitr_options, echo=FALSE, results=FALSE}
+library(knitr)
+opts_chunk$set(fig.width = 12)
+```
+
+This vignette illustrates the use of the aSPU package for
+meta-analyzed data.
+
+
+## Data
+
+We will consider the analysis of a coronary artery disease (CAD)
+data from the CARDIoGRAM and C4D consortium. The data set contains P value
+data for coronary artery disease (CAD). This study comprised 63,746
+CAD cases and 130,681 controls. We mapped these SNPs to the 9th KEGG
+pathway ([KEGG_STEROID_BIOSYNTHESIS](http://www.broadinstitute.org/gsea/msigdb/cards/KEGG_STEROID_BIOSYNTHESIS))
+. Let's load this subset.
+
+```{r loading, eval=FALSE}
+library(aSPU)
+data(kegg9)
+```
+The 9th Kegg pathway contains 16 genes.
+
+```{r kegg1}
+gene.info
+```
+
+The `PPs` is a list object contains the SNP information for each genes.
+```{r kegg2}
+## SNPs mapped on 3rd and 4th genes of 9th Kegg pathway
+PPs[3:4]
+```
+
+The `Ps` object contains p-value information for mapped
+SNPs. Total `r length(Ps)`SNPs are mapped on 9th kegg pathway.
+
+```{r kegg3}
+length(Ps)
+Ps[1:10]
+```
+
+Using [plink](http://pngu.mgh.harvard.edu/~purcell/plink/index.shtml),
+we mapped our SNPs to the reference population ( Hapmap CEU phase 2
+). We dropped the SNPs of minor allele frequency (MAF) less then 5
+percent. Among `r length(Ps)` SNPs mapped on 9th Kegg pathway, `r
+length(nP)` SNPs are mapped on the refference data. P-values of these
+SNPs and correlation matirx of SNPs using the reference population,
+saved on `nP` and `ldmatrix` object.
+
+```{r kegg4}
+nP[1:10]
+ldmatrix[1:10,1:10]
+```
+The `snp.info` data object have snp information for each mapped
+SNPs. The 1st column is rsID, 2nd column is Chr, 3rd column is
+location and 4th column is p-value.
+
+```{r kegg4}
+snp.info[1:10,]
+```
+
+## Use of aSPUM function
+
+Using the following code we can use `aSPUM()` function to get gene-wise
+p-value for each gene in 9th Kegg pathway.
+```{r gene-wise p}
+    Gps<-NULL;
+    gl <- NULL;
+    for( g in gene.info[,1]) {
+      snps <- which( ( snp.info2[,2] == gene.info[gene.info[,1] == g, 2] ) &
+                    (snp.info2[,3] > gene.info[gene.info[,1] == g, 3] ) &
+                    (snp.info2[,3] < gene.info[gene.info[,1] == g, 4] )  )
+
+      newP <- nP[snps] ;
+      ldsub <- ldmatrix[snps, snps];
+
+      if( length(snps) > 0) {
+        out <- aSPUM(newP, corrSNP=ldsub , pow=c(1,2,4,8, Inf), n.perm=100, Ps=TRUE)
+        Gps <- rbind(Gps, out$pvs)
+        gl <- c(gl, g)
+      }
+    }
+    rownames(Gps) <- gl
+    Gps
+```
+
+## Use of aSPUMpath function
+
+We can see get p-value for pathways as follows.
+```{r pathway p}
+out.g <- GatesSimes(pvec = nP, ldmatrix = ldmatrix,
+                    snp.info=snp.info, gene.info = gene.info)
+
+out.h <- Hyst(pvec = nP, ldmatrix = ldmatrix,
+              snp.info=snp.info, gene.info = gene.info)
+
+out.a <- aSPUMpath(nP, corrSNP = ldmatrix, pow=c(1:8, Inf),
+                   pow2 = c(1,2,4,8),
+                   snp.info=snp.info, gene.info = gene.info,
+                   n.perm=100, Ps = TRUE)
+
+out.g; out.h; out.a
+
+```
+`out.g` is for Gates-Simes, `out.h` is for HYST and `out.a` is for
+`aSPUMpath`.
