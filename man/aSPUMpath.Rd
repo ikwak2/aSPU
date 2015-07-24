@@ -21,6 +21,8 @@ aSPUMpath(Zs, corrSNP, pow = c(1, 2, 4, 8, Inf), pow2 = c(1, 2, 4, 8),
 \item{gene.info}{GENE information matrix, The 1st column is GENE id, 2nd column is chromosome #, 3rd and 4th column indicate start and end positions of the gene.}
 
 \item{n.perm}{number of permutations.}
+
+\item{Ps}{TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.}
 }
 \value{
 P-values for SPUMpath tests and aSPUMpath test.
