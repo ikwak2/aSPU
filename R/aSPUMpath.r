@@ -16,6 +16,8 @@
 #'
 #' @param n.perm number of permutations.
 #'
+#' @param Ps TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.
+#'
 #' @export
 #' @return P-values for SPUMpath tests and aSPUMpath test.
 #'
