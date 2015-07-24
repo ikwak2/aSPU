@@ -34,7 +34,7 @@ data(kegg9)
 # p-values of SPUpath and aSPUpath tests.
 out.a <- aSPUMpath(nZ, varSNP = ldmatrix, pow=c(1:8, Inf),
                   pow2 = c(1,2,4,8), varprop = .95,
-                  snp.info=snp.info2, gene.info = gene.info,
+                  snp.info=snp.info, gene.info = gene.info,
                   n.perm=100, Ps = TRUE)
 }
 \author{
