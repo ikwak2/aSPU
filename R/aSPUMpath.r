@@ -58,16 +58,8 @@ aSPUMpath <- function(Zs, corrSNP, pow=c(1,2,4,8, Inf),
         if( sum(snpTF) != 0){
             GL[[i]] <- which(snpTF)
             GLch <- c(GLch, gene.info[g,2])
-#            Covtemp <- corrSNP[which(snpTF), which(snpTF)]
-#            eS <- eigen(Covtemp, symmetric = TRUE)
-#            ev <- eS$values
-#            k1 <- length(ev)
-#            GL.CovSsqrt[[i]] <- eS$vectors %*% diag(sqrt(pmax(ev, 0)), k1)
             i = i + 1
 
-#    eS <- eigen(CovS, symmetric = TRUE)
-#    ev <- eS$values
-#    CovSsqrt <- eS$vectors %*% diag(sqrt(pmax(ev, 0)), k)
         }
     }
 
@@ -93,21 +85,9 @@ aSPUMpath <- function(Zs, corrSNP, pow=c(1,2,4,8, Inf),
 
 
     Zs = Zs[unlist(GL)]
-#    corrSNP = corrSNP[ unlist(GL), unlist(GL) ]
-#    CovS <- corrSNP
     nSNPs0=unlist(lapply(GL,length))
 
     k <- length(Zs)
-#    n <- dim(corrSNP)[1]
-#    vars <- diag(corrSNP) * (n-1)
-
-#    U <- Zs * sqrt(vars * Ybar * (1 - Ybar) )
-#    CovS <- corrSNP * (n-1) * Ybar * (1 - Ybar)
-
-#    svd.CovS <- svd(CovS)
-#    CovSsqrt <- svd.CovS$u %*% diag(sqrt(svd.CovS$d))
-
-
     if(Ps == TRUE)
         Zs <- qnorm(1 - Zs/2)
 
@@ -152,9 +132,6 @@ aSPUMpath <- function(Zs, corrSNP, pow=c(1,2,4,8, Inf),
                 if (pow[j] < Inf){
                     a = (sum(U0[indx]^pow[j]))
 
-#                    T0sUnnorm[b, (j-1)*nGenes+iGene] = a
-
-#                    T0s[b, (j-1)*nGenes+iGene] = sign(a)*((abs(a)) ^(1/pow[j]))
                     StdT0s[b, (j-1)*nGenes+iGene] = sign(a)*((abs(a)/nSNPs0[iGene]) ^(1/pow[j]))
                 }
 
@@ -167,12 +144,8 @@ aSPUMpath <- function(Zs, corrSNP, pow=c(1,2,4,8, Inf),
     T0s2<-matrix(0, nrow=n.perm, ncol=length(pow)*length(pow2))
     for(j2 in 1:length(pow2)){
         for(j in 1:length(pow)){
-#            TsU[(j2-1)*length(pow) +j] = sum(TsUnnorm[((j-1)*nGenes+1):(j*nGenes)]^pow2[j2])
-#            Ts1[(j2-1)*length(pow) +j] = sum(Ts[((j-1)*nGenes+1):(j*nGenes)]^pow2[j2])
             Ts2[(j2-1)*length(pow) +j] = sum(StdTs[((j-1)*nGenes+1):(j*nGenes)]^pow2[j2])
             for(b in 1:n.perm){
-#                T0sU[b, (j2-1)*length(pow) +j] = sum(T0sUnnorm[b, ((j-1)*nGenes+1):(j*nGenes)]^pow2[j2])
-#                T0s1[b, (j2-1)*length(pow) +j] = sum(T0s[b, ((j-1)*nGenes+1):(j*nGenes)]^pow2[j2])
                 T0s2[b, (j2-1)*length(pow) +j] = sum(StdT0s[b, ((j-1)*nGenes+1):(j*nGenes)]^pow2[j2])
             }
         }
@@ -183,38 +156,27 @@ aSPUMpath <- function(Zs, corrSNP, pow=c(1,2,4,8, Inf),
     pvs = NULL;
 
     for(j in 1:(length(pow)*length(pow2))) {
-#        pPermU[j] = sum( abs(TsU[j]) < abs(T0sU[,j]))/n.perm
-#        pPerm1[j] = sum( abs(Ts1[j]) < abs(T0s1[,j]))/n.perm
         pPerm2[j] = sum( abs(Ts2[j]) < abs(T0s2[,j]))/n.perm
     }
-#    P0s1 = PermPvs(T0s1)
     P0s2 = PermPvs(T0s2)
-#    P0sU = PermPvs(T0sU)
-#    minP0s1 = apply(P0s1, 1, min)
     minP0s2 = apply(P0s2, 1, min)
-#    minP0sU = apply(P0sU, 1, min)
-#    minP1 =  sum( min(pPerm1) > minP0s1 )/n.perm
     minP2 =  sum( min(pPerm2) > minP0s2 )/n.perm
-#    minPU =  sum( min(pPermU) > minP0sU )/n.perm
-    minP1s<-minP2s<-minPUs<-rep(NA, length(pow2))
+    minP2s <- rep(NA, length(pow2))
     for(j2 in 1:length(pow2)){
-#        minP0s1 = apply(P0s1[, ((j2-1)*length(pow)+1):(j2*length(pow))] , 1, min)
         minP0s2 = apply(P0s2[, ((j2-1)*length(pow)+1):(j2*length(pow))], 1, min)
-#        minP0sU = apply(P0sU[, ((j2-1)*length(pow)+1):(j2*length(pow))], 1, min)
-#        minP1s[j2] =  sum( min(pPerm1[((j2-1)*length(pow)+1):(j2*length(pow))]) > minP0s1 )/n.perm
         minP2s[j2] =  sum( min(pPerm2[((j2-1)*length(pow)+1):(j2*length(pow))]) > minP0s2 )/n.perm
-#        minPUs[j2] =  sum( min(pPermU[((j2-1)*length(pow)+1):(j2*length(pow))]) > minP0sU )/n.perm
     }
-    stdPs=c(pPerm2, minP2s, minP2)
+    pvs=c(pPerm2, minP2)
+
+    nmvec <- NULL;
+    for(nm in paste("SPUMpath",pow,",", sep=""))
+        nmvec <- c(nmvec, paste(nm, pow2, sep="") )
+
+    nmvec <- c(nmvec, "aSPUMpath")
+    names(pvs) <- nmvec
+    pvs
+
+#    stdPs=c(pPerm2, minP2s, minP2)
 }
-
-
-
-
-
-
-
-
-
 
 
