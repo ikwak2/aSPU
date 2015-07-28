@@ -53,8 +53,8 @@ kegg9$Ps[1:10]
 Using [plink](http://pngu.mgh.harvard.edu/~purcell/plink/index.shtml),
 we mapped our SNPs to the reference population ( Hapmap CEU phase 2
 ). We dropped the SNPs of minor allele frequency (MAF) less then 5
-percent. Among `r length(kegg9$Ps)` SNPs mapped on 9th Kegg pathway, `r
-length(kegg9$nP)` SNPs are mapped on the refference data. P-values of these
+percent. Among `r length(kegg9$Ps)` SNPs mapped on 9th Kegg pathway,
+`r length(kegg9$nP)` SNPs are mapped on the reference data. P-values of these
 SNPs and correlation matirx of SNPs using the reference population,
 saved on `nP` and `ldmatrix` object.
 
@@ -112,7 +112,7 @@ The row of `Gps` means each gene, 1st column indicate the number of
 SNPs for each gene. 2nd to 6th column indicate SPUM p-values for each
 power ( 1,2,4,8 and Inf), 7th column indicate aSPUM p-value and 8th
 column indicate p-value of GATES method.
-We can see that a gene `LIPA` is very significant.
+We can see that a gene _LIPA_ is very significant.
 
 ```{r pathway2}
 g = "LIPA"
@@ -125,7 +125,7 @@ newP <- kegg9$nP[snps] ;
 newP
 
 ```
-`LIPA` have `r length(newP)` SNPs mapped and we can see that there are
+_LIPA_ have `r length(newP)` SNPs mapped and we can see that there are
 many significant SNPs. It makes sense that SPUM(1) have less p-value
 then SPUM(inf) since there are multiple significant SNPs. GATES have
 more power when there are small number of significant SNPs in the
@@ -133,7 +133,7 @@ Gene (similar to minP test), so aSPUM have less p-value than GATES.
 
 ## Use of aSPUMpath function
 
-We can see get p-value for pathways as follows.
+We can get p-value for pathways as follows.
 Let's perform pathway based analysis using aSPUMpath, Gates-Simes and
 HYST.
 
@@ -157,21 +157,9 @@ out.g; out.h; out.a
 As we can see from the gene-wise analysis, there is only one very
 significant gene `LIPA`. In this situation Gates-Simes works well and
 Gate-Simes p-value is `r out.g`. On the other hand, HYST works well
-when there are many significant genes with similar effects. It makes
-sense to have p-value of `r out.h` for HYST.
+when there are many significant genes with similar effects.
 
-On the other hand, aSPUMpath adaptively consider all SPUMpath(i,j)
-methods.
-
-
-
-
-
-
-
-
-The p-value using
-
-`out.g` is for Gates-Simes, `out.h` is for HYST and `out.a` is for
-`aSPUMpath`.
-
+The aSPUMpath adaptively consider all SPUMpath(i,j). We can see that
+the p-value decrease as our 2nd parameter , `pow2`, increases. It makes
+sense because larger `pow2` is more effective if there are fewer
+associated genes.
