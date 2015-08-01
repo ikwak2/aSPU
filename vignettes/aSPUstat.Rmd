@@ -69,9 +69,9 @@ location and 4th column is p-value.
 kegg9$snp.info[1:10,]
 ```
 
-## Use of aSPUM function
+## Use of aSPUs function
 
-Using the following code we can use `aSPUM()` and `GATES2()` function
+Using the following code we can use `aSPUs()` and `GATES2()` function
 to get gene-wise aSPU and GATES p-value for each gene in 9th Kegg pathway.
 ```{r gene-wise p}
 Gps<-NULL;
@@ -86,7 +86,7 @@ for( g in kegg9$gene.info[,1]) {
     ldsub <- kegg9$ldmatrix[snps, snps];
 
     if( length(snps) > 1) {
-        out <- aSPUM(newP, corrSNP=ldsub , pow=c(1,2,4,8, Inf),
+        out <- aSPUs(newP, corrSNP=ldsub , pow=c(1,2,4,8, Inf),
                      n.perm=10000, Ps=TRUE)
 
         o.pvec = order(newP)
@@ -108,8 +108,8 @@ Gps
 ```
 
 The row of `Gps` means each gene, 1st column indicate the number of
-SNPs for each gene. 2nd to 6th column indicate SPUM p-values for each
-power ( 1,2,4,8 and Inf), 7th column indicate aSPUM p-value and 8th
+SNPs for each gene. 2nd to 6th column indicate SPUs p-values for each
+power ( 1,2,4,8 and Inf), 7th column indicate aSPUs p-value and 8th
 column indicate p-value of GATES method.
 We can see that a gene _LIPA_ is very significant.
 
@@ -128,12 +128,12 @@ _LIPA_ have `r length(newP)` SNPs mapped and we can see that there are
 many significant SNPs. It makes sense that SPUs(1) have less p-value
 then SPUs(inf) since there are multiple significant SNPs. GATES have
 more power when there are small number of significant SNPs in the
-Gene (similar to minP test), so aSPUM have less p-value than GATES.
+Gene (similar to minP test), so aSPUs have less p-value than GATES.
 
-## Use of aSPUMpath function
+## Use of aSPUsPath function
 
 We can get p-value for pathways as follows.
-Let's perform pathway based analysis using aSPUMpath, Gates-Simes and
+Let's perform pathway based analysis using aSPUsPath, Gates-Simes and
 HYST.
 
 
