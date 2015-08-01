@@ -1,9 +1,9 @@
 ---
-title: "aSPU for Meta Analized Data (aSPUM() and aSPUMpath())"
+title: "Adaptive Gene- and Pathway- Trait Association testing with GWAS Summary Statistics (aSPUs() and aSPUsPath())"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{aSPU for Meta Analized Data}
+  %\VignetteIndexEntry{aSPU with GWAS Summary Statistics}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
@@ -13,8 +13,7 @@ library(knitr)
 opts_chunk$set(fig.width = 12)
 ```
 
-This vignette illustrates the use of the aSPU package for
-meta-analyzed data.
+This vignette illustrates the use of the aSPU package with GWAS Summary Statistics. 
 
 
 ## Data
@@ -96,7 +95,7 @@ for( g in kegg9$gene.info[,1]) {
         Gps <- rbind(Gps, c(length(newP),out$pvs, gatesp))
         gl <- c(gl, g)
     } else if (length(snps) == 1) {
-        out <- aSPUM(newP, corrSNP=ldsub , pow=c(1,2,4,8, Inf),
+        out <- aSPUs(newP, corrSNP=ldsub , pow=c(1,2,4,8, Inf),
                      n.perm=10000, Ps=TRUE)
         gatesp <- newP
         Gps <- rbind(Gps, c(length(newP),out$pvs, gatesp) )
@@ -126,8 +125,8 @@ newP
 
 ```
 _LIPA_ have `r length(newP)` SNPs mapped and we can see that there are
-many significant SNPs. It makes sense that SPUM(1) have less p-value
-then SPUM(inf) since there are multiple significant SNPs. GATES have
+many significant SNPs. It makes sense that SPUs(1) have less p-value
+then SPUs(inf) since there are multiple significant SNPs. GATES have
 more power when there are small number of significant SNPs in the
 Gene (similar to minP test), so aSPUM have less p-value than GATES.
 
@@ -145,7 +144,7 @@ out.g <- GatesSimes(pvec = kegg9$nP, ldmatrix = kegg9$ldmatrix,
 out.h <- Hyst(pvec = kegg9$nP, ldmatrix = kegg9$ldmatrix,
               snp.info=kegg9$snp.info, gene.info = kegg9$gene.info)
 
-out.a <- aSPUMpath(kegg9$nP, corrSNP = kegg9$ldmatrix, pow=c(1,2,4,8, Inf),
+out.a <- aSPUsPath(kegg9$nP, corrSNP = kegg9$ldmatrix, pow=c(1,2,4,8, Inf),
                    pow2 = c(1,2,4,8),
                    snp.info=kegg9$snp.info, gene.info = kegg9$gene.info,
                    n.perm=1000, Ps = TRUE)
@@ -159,7 +158,7 @@ significant gene `LIPA`. In this situation Gates-Simes works well and
 Gate-Simes p-value is `r out.g`. On the other hand, HYST works well
 when there are many significant genes with similar effects.
 
-The aSPUMpath adaptively consider all SPUMpath(i,j). We can see that
+The aSPUsPath adaptively consider all SPUsPath(i,j). We can see that
 the p-value decrease as our 2nd parameter , `pow2`, increases. It makes
 sense because larger `pow2` is more effective if there are fewer
 associated genes.

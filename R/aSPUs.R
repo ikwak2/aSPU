@@ -1,6 +1,6 @@
-#' Sum of Powered Score (SPU) tests and adaptive SPU (aSPU) test for meta-analyzed data.
+#' Sum of Powered Score (SPUs) tests and adaptive SPU (aSPUs) test with GWAS summary statistics.
 #'
-#' It gives p-values of the SPU tests and aSPU test for meta-analyzed data.
+#' It gives p-values of the SPUs tests and aSPUs test with GWAS summary statistics.
 #'
 #' @param Zs Z-scores for each SNPs. It could be P-values if the Ps option is TRUE. 
 #'
@@ -37,7 +37,7 @@
 #' newP <- kegg9$nP[snps] ;
 #' ldsub <- kegg9$ldmatrix[snps, snps];
 #' ## Get p-value for gene SOAT1. Read vignette for details.
-#' out <- aSPUM(newP, corrSNP=ldsub , pow=c(1,2,4,8, Inf), n.perm=100, Ps=TRUE)
+#' out <- aSPUs(newP, corrSNP=ldsub , pow=c(1,2,4,8, Inf), n.perm=100, Ps=TRUE)
 #'
 #' out$Ts
 #' # This is a vector of Test Statistics for SPUM and aSPUM tests.
@@ -53,7 +53,7 @@
 #'
 #' @seealso \code{\link{aSPUw}} \code{\link{aSPU}}
 
-aSPUM <- function(Zs, corrSNP, pow = c(1,2,4,8, Inf), n.perm = 1000, Ps = FALSE)
+aSPUs <- function(Zs, corrSNP, pow = c(1,2,4,8, Inf), n.perm = 1000, Ps = FALSE)
 {
     n <- length(Zs)
     k <- n
@@ -104,7 +104,7 @@ aSPUM <- function(Zs, corrSNP, pow = c(1,2,4,8, Inf), n.perm = 1000, Ps = FALSE)
     Paspu <- (sum(minp0 <= min(pPerm0)) + 1)/(n.perm + 1)
     pvs <- c(pPerm0, Paspu)
     Ts <- c(Ts, min(pPerm0))
-    names(Ts) <- c(paste("SPUM", pow, sep = ""), "aSPUM")
+    names(Ts) <- c(paste("SPUs", pow, sep = ""), "aSPUs")
     names(pvs) = names(Ts)
     list(Ts = Ts, pvs = pvs)
 }
