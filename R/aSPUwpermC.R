@@ -58,6 +58,7 @@ aSPUwpermC <- function(Y, X, cov = NULL, model=c("gaussian", "binomial"), pow=c(
         fit1<-glm(trait~.,family=model,data=tdat1)
         pis<-fitted.values(fit1)
         XUs<-matrix(0, nrow=n, ncol=k)
+	r <- Y - pis
         for(i in 1:k){
             tdat2<-data.frame(X1=X[,i], cov)
             fit2<-glm(X1~.,data=tdat2)
