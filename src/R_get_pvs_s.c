@@ -8,48 +8,27 @@
 #include <R_ext/Utils.h>
 #include "util.h"
 
-double randn (double mu, double sigma)
-{
-  double U1, U2, W, mult;
-  static double X1, X2;
-  static int call = 0;
-
-  if (call == 1)
-    {
-      call = !call;
-      return (mu + sigma * (double) X2);
-    }
-
-  do
-    {
-      U1 = -1 + ((double) rand () / RAND_MAX) * 2;
-      U2 = -1 + ((double) rand () / RAND_MAX) * 2;
-      W = pow (U1, 2) + pow (U2, 2);
-    }
-  while (W >= 1 || W == 0);
-
-  mult = sqrt ((-2 * log (W)) / W);
-  X1 = U1 * mult;
-  X2 = U2 * mult;
-
-  call = !call;
-
-  return (mu + sigma * (double) X1);
+double randn() {
+    double u = ((double) rand() / (RAND_MAX)) * 2 - 1;
+    double v = ((double) rand() / (RAND_MAX)) * 2 - 1;
+    double r = u * u + v * v;
+    if (r == 0 || r > 1) return sampleNormal();
+    double c = sqrt(-2 * log(r) / r);
+    return u * c;
 }
 
-
 void get_pvs_s(double *Zs, double *CovSsqrt, double *Ts,
-	       double *npow, int *seeds, int n_pow, int n_Zs,
+	       double *npow, int n_pow, int n_Zs,
 	       int n_perm, int Ps, double *pvs);
 
 void R_get_pvs_s(double *Zs, double *CovSsqrt, double *Ts,
-		 double *npow, int *seeds, int *n_pow, int *n_Zs,
+		 double *npow, int *n_pow, int *n_Zs,
 		 int *n_perm, int *Ps, double *pvs) {
-  get_pvs_s(Zs, CovSsqrt, Ts, npow, seeds, *n_pow, *n_Zs, *n_perm, *Ps, pvs);
+  get_pvs_s(Zs, CovSsqrt, Ts, npow, *n_pow, *n_Zs, *n_perm, *Ps, pvs);
 }
 
 void get_pvs_s(double *Zs, double *CovSsqrt, double *Ts,
-	       double *npow, int *seeds, int n_pow, int n_Zs,
+	       double *npow, int n_pow, int n_Zs,
 	       int n_perm, int Ps, double *pvs)
 {
   int i, j, b, rr, cc, k;
@@ -70,7 +49,7 @@ void get_pvs_s(double *Zs, double *CovSsqrt, double *Ts,
     //    printf("Random smp :");
 
     for(j = 0 ; j < n_Zs ; j++ ) {
-      nR[j] = randn(0,1);
+      nR[j] = randn;
       //      printf("%f  ", nR[j]);
     }
     //    printf("\n");
