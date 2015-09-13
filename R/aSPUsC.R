@@ -102,6 +102,9 @@ aSPUsC <- function(Zs, corrSNP, pow = c(1,2,4,8, Inf), n.perm = 1000, Ps = FALSE
                  pvs = as.double( rep(0,n_pow + 1) ),
                  PACKAGE="aSPU")
 
+    pvs <- output$pvs
+
+    Ts <- c(Ts, min(pvs[1:length(pow)]))
     names(Ts) <- c(paste("SPUs", pow, sep = ""), "aSPUs")
     names(pvs) = names(Ts)
     list(Ts = Ts, pvs = pvs)
