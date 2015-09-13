@@ -12,7 +12,7 @@ double randn() {
     double u = ((double) rand() / (RAND_MAX)) * 2 - 1;
     double v = ((double) rand() / (RAND_MAX)) * 2 - 1;
     double r = u * u + v * v;
-    if (r == 0 || r > 1) return sampleNormal();
+    if (r == 0 || r > 1) return randn();
     double c = sqrt(-2 * log(r) / r);
     return u * c;
 }
@@ -49,7 +49,7 @@ void get_pvs_s(double *Zs, double *CovSsqrt, double *Ts,
     //    printf("Random smp :");
 
     for(j = 0 ; j < n_Zs ; j++ ) {
-      nR[j] = randn;
+      nR[j] = randn();
       //      printf("%f  ", nR[j]);
     }
     //    printf("\n");
