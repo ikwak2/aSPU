@@ -159,27 +159,6 @@ float r4_normal_01 ( int *seed )
 }
 
 
-/**********************************************************************
- *
- * random_int
- *
- * Generates a random int integer between "low" and "high", inclusive.
- *
- *  Input:
- *
- *    low
- *
- *    high
- *
- **********************************************************************/
-int random_int(int low, int high)
-{
-  return((int)(unif_rand()*(double)(high - low + 1)) + low);
-}
-
-
-
-
 
 
 
