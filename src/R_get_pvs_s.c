@@ -23,7 +23,7 @@ void get_pvs_s(double *Zs, double *CovSsqrt, double *Ts,
 	       int n_perm, int Ps, double *pvs)
 {
   int i, j, b, rr, cc, k;
-  double *pPerm0, *T0s, *U0, *nR, ss, *P0s, *minP0s, minpPerm0, minp;
+  double *pPerm0, *T0s, *U0, ss, *P0s, *minP0s, minpPerm0, minp;
   //  int *bb;
 
   //  nR = (double *) R_alloc ( n_Zs, sizeof(double) ) ;
