@@ -6,7 +6,7 @@
 #include <R_ext/PrtUtil.h>
 #include <R_ext/Applic.h>
 #include <R_ext/Utils.h>
-
+#include "util.h"
 
 # include <complex.h>
 # include <time.h>
@@ -177,45 +177,11 @@ int random_int(int low, int high)
   return((int)(unif_rand()*(double)(high - low + 1)) + low);
 }
 
-/**********************************************************************
- *
- * double_permute
- *
- *   This function randomly permutes a vector of doubles
- *
- * Input:
- *
- *   array = vector of doubles; on output, it contains a random
- *           permutation of the input vector
- *
- *   len   = length of the vector
- *
- **********************************************************************/
-void double_permute(double *array, int len)
-{
-  int i, which;
-  double tmp;
-
-  for(i=0; i < len; i++) {
-    which = random_int(i, len-1);
-    tmp = array[which];
-    array[which] = array[i];
-    array[i] = tmp;
-  }
-}
-
-
-double abss(double a) {
-  if (a < 0) {
-    return(-a);
-  } else {
-    return(a);
-  }
-}
 
 
 
-//float r4_normal_01 ( int *seed )
+
+
 
 
 void get_pvs_s(double *Zs, double *CovSsqrt, double *Ts,
