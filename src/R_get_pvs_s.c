@@ -42,7 +42,7 @@ void get_pvs_s(double *Zs, double *CovSsqrt, double *Ts,
     //    for(j = 0 ; j < n_Zs ; j++ ) {
     //     nR[j] = rnms;
       //      printf("%f  ", nR[j]);
-    }
+    //    }
     //    printf("\n");
 
     // 	U0<-CovSsqrt %*% U00
