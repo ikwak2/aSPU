@@ -100,7 +100,6 @@ aSPUsC <- function(Zs, corrSNP, pow = c(1,2,4,8, Inf), n.perm = 1000, Ps = FALSE
 #    dyn.load("R_get_pvs_s.so")
     output <- .C("R_get_pvs_s",
                  as.double(Zs),
-                 as.double(CovSsqrt),
                  as.double(Ts),
                  as.double(npow),
                  as.double(rnms),

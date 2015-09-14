@@ -8,71 +8,38 @@
 #include <R_ext/Utils.h>
 #include "util.h"
 
-void get_pvs_s(double *Zs, double *CovSsqrt, double *Ts,
+void get_pvs_s(double *Zs, double *Ts,
 	       double *npow, double *rnms, int n_pow, int n_Zs,
 	       int n_perm, int Ps, double *pvs);
 
-void R_get_pvs_s(double *Zs, double *CovSsqrt, double *Ts,
+void R_get_pvs_s(double *Zs, double *Ts,
 		 double *npow, double *rnms, int *n_pow, int *n_Zs,
 		 int *n_perm, int *Ps, double *pvs) {
-  get_pvs_s(Zs, CovSsqrt, Ts, npow, rnms, *n_pow, *n_Zs, *n_perm, *Ps, pvs);
+  get_pvs_s(Zs, Ts, npow, rnms, *n_pow, *n_Zs, *n_perm, *Ps, pvs);
 }
 
-void get_pvs_s(double *Zs, double *CovSsqrt, double *Ts,
+void get_pvs_s(double *Zs, double *Ts,
 	       double *npow, double *rnms, int n_pow, int n_Zs,
 	       int n_perm, int Ps, double *pvs)
 {
   int i, j, b, rr, cc, k;
   double *pPerm0, *T0s, *U0, ss, *P0s, *minP0s, minpPerm0, minp;
-  //  int *bb;
 
-  //  nR = (double *) R_alloc ( n_Zs, sizeof(double) ) ;
   pPerm0 = (double *) R_alloc ( n_pow, sizeof(double) ) ;
   T0s = (double *) R_alloc ( n_perm * n_pow, sizeof(double) ) ;
   U0 = (double *) R_alloc ( n_Zs, sizeof(double) ) ;
-  //  bb =  (int *) R_alloc ( n_r, sizeof(int) ) ;
   P0s = (double *) R_alloc ( n_perm * n_pow, sizeof(double) ) ;
   minP0s = (double *) R_alloc ( n_perm, sizeof(double) ) ;
 
 
   for( i = 0 ; i < n_perm ; i++ ) {
-    //        U00<-rnorm(k, 0, 1)
-    //    printf("Random smp :");
-
-    //    for(j = 0 ; j < n_Zs ; j++ ) {
-    //     nR[j] = rnms;
-      //      printf("%f  ", nR[j]);
-    //    }
-    //    printf("\n");
-
-    // 	U0<-CovSsqrt %*% U00
-
-    //    printf("Random smp2 :");
-
-    //    for(cc = 0 ; cc < n_Zs ; cc++) {
-    //   ss = 0;
-    //  for(rr = 0 ; rr < n_Zs ; rr++) {
-    //	//	ss += CovSsqrt[ rr*n_Zs + cc ] * nR[rr] ;
-    //	ss += CovSsqrt[ rr*n_Zs + cc ] * rnms[ n_Zs * i + rr ] ;
-
-	//	printf("%f ", CovSsqrt[rr*n_Zs + cc]);
-    //  }
 
     for(rr = 0 ; rr < n_Zs ; rr++) {
       if( Ps == 1 )
 	U0[rr] = abss(rnms[ n_Zs * i + rr ] );
       else
 	U0[rr] = rnms[ n_Zs * i + rr ] ;
-      //      printf("%f  ", U0[cc]);
     }
-    //printf("\n");
-//printf("\n");
-
-    //    for(j = 0 ; j < n_Zs ; j++ ) {
-    // printf("%f  ", U0[j]);
-    //}
-    //printf("\n");
-
 
     for( j = 0 ; j < (n_pow) ; j++ ) {
 
