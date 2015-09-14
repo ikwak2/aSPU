@@ -49,19 +49,20 @@ void get_pvs_s(double *Zs, double *CovSsqrt, double *Ts,
 
     //    printf("Random smp2 :");
 
-    for(cc = 0 ; cc < n_Zs ; cc++) {
-      ss = 0;
-      for(rr = 0 ; rr < n_Zs ; rr++) {
-	//	ss += CovSsqrt[ rr*n_Zs + cc ] * nR[rr] ;
-	ss += CovSsqrt[ rr*n_Zs + cc ] * rnms[ n_Zs * i + rr ] ;
+    //    for(cc = 0 ; cc < n_Zs ; cc++) {
+    //   ss = 0;
+    //  for(rr = 0 ; rr < n_Zs ; rr++) {
+    //	//	ss += CovSsqrt[ rr*n_Zs + cc ] * nR[rr] ;
+    //	ss += CovSsqrt[ rr*n_Zs + cc ] * rnms[ n_Zs * i + rr ] ;
 
 	//	printf("%f ", CovSsqrt[rr*n_Zs + cc]);
-      }
+    //  }
 
+    for(rr = 0 ; rr < n_Zs ; rr++) {
       if( Ps == 1 )
-	U0[cc] = abss(ss);
+	U0[rr] = abss(rnms[ n_Zs * i + rr ] );
       else
-	U0[cc] = ss;
+	U0[rr] = rnms[ n_Zs * i + rr ] ;
       //      printf("%f  ", U0[cc]);
     }
     //printf("\n");

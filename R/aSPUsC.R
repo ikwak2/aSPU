@@ -85,8 +85,16 @@ aSPUsC <- function(Zs, corrSNP, pow = c(1,2,4,8, Inf), n.perm = 1000, Ps = FALSE
     n_pow = length(pow)
     n_Zs = length(Zs)
     n_perm = n.perm
-    rnms <- rnorm(n_Zs*n_perm)
-#    seeds = sample(1:10000000,n_Zs*n_perm)
+
+
+    CovSsqrt %*% rnorm(n_Zs)
+
+    A <- matrix(rnorm(n_Zs*n_perm), n_Zs, n_perm)
+
+
+    rnms <- c(apply(A, 2, function(x) CovSsqrt %*% x))
+    ##    rnorm(n_Zs*n_perm)
+    ##    seeds = sample(1:10000000,n_Zs*n_perm)
     Pss <- ifelse(Ps, 1,0)
 
 #    dyn.load("R_get_pvs_s.so")
