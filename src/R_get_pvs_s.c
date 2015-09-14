@@ -28,7 +28,7 @@ void get_pvs_s(double *Zs, double *Ts,
   pPerm0 = (double *) R_alloc ( n_pow, sizeof(double) ) ;
   T0s = (double *) R_alloc ( n_pow, sizeof(double) ) ;
   U0 = (double *) R_alloc ( n_Zs, sizeof(double) ) ;
-  P0s = (double *) R_alloc ( n_perm * n_pow, sizeof(double) ) ;
+  P0s = (double *) R_alloc ( n_pow, sizeof(double) ) ;
   minP0s = (double *) R_alloc ( n_perm, sizeof(double) ) ;
 
 
@@ -91,17 +91,17 @@ void get_pvs_s(double *Zs, double *Ts,
 	    ss++;
 	}
       }
-      P0s[ i*n_pow + j] = (ss + 1) / n_perm ;
+      P0s[ j] = (ss + 1) / n_perm ;
     }
   }
   //  if (j==1) minp0=P0s else minp0[which(minp0>P0s)]=P0s[which(minp0>P0s)]
   for(i = 0 ; i < n_perm ; i++ ) {
-    minP0s[i] = P0s[i*n_pow + 0]  ;
+    minP0s[i] = P0s[ 0]  ;
   }
   for(j = 1 ; j < n_pow ; j ++) {
     for(i = 0 ; i < n_perm ; i++ ) {
-      if(minP0s[i] > P0s[i*n_pow + j])
-	minP0s[i] = P0s[i*n_pow + j];
+      if(minP0s[i] > P0s[ j])
+	minP0s[i] = P0s[ j];
     }
   }
 
