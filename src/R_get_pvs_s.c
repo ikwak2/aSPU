@@ -82,6 +82,29 @@ void get_pvs_s(double *Zs, double *Ts,
 
   //	P0s = (n.perm-rank(abs(T0s)))/(n.perm - 1)
 
+  for( j = 0 ; j < n_pow ; j++ ) {
+    for( i = 0 ; i < n_perm ; i++) {
+      ss = 0;
+      for( k = 0 ; k < n_perm ; k++) {
+	if(k != i) {
+	  if ( abss(T0s[ i*n_pow + j]) <= abss(T0s[ k*n_pow + j]) )
+	    ss++;
+	}
+      }
+      P0s[ i*n_pow + j] = (ss + 1) / n_perm ;
+    }
+  }
+  //  if (j==1) minp0=P0s else minp0[which(minp0>P0s)]=P0s[which(minp0>P0s)]
+  for(i = 0 ; i < n_perm ; i++ ) {
+    minP0s[i] = P0s[i*n_pow + 0]  ;
+  }
+  for(j = 1 ; j < n_pow ; j ++) {
+    for(i = 0 ; i < n_perm ; i++ ) {
+      if(minP0s[i] > P0s[i*n_pow + j])
+	minP0s[i] = P0s[i*n_pow + j];
+    }
+  }
+
 
   // pvs <- c(pPerm0, minP)
   for(i = 0 ; i < n_pow; i++ ) {
