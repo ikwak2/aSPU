@@ -36,7 +36,7 @@ void get_pvs_s(double *Zs, double *Ts,
 
     for(rr = 0 ; rr < n_Zs ; rr++) {
       if( Ps == 1 )
-	U0[rr] = abss(rnms[ n_Zs * i + rr ] );
+	U0[rr] = fabs(rnms[ n_Zs * i + rr ] );
       else
 	U0[rr] = rnms[ n_Zs * i + rr ] ;
     }
@@ -50,8 +50,8 @@ void get_pvs_s(double *Zs, double *Ts,
 	}
       } else {
 	for( b = 0 ; b < n_Zs ; b ++) {
-	  if( ss <  abss(U0[b]) )
-	    ss = abss(U0[b]);
+	  if( ss <  fabs(U0[b]) )
+	    ss = fabs(U0[b]);
 	}
       }
       T0s[i*n_pow + j] = ss;
@@ -69,7 +69,7 @@ void get_pvs_s(double *Zs, double *Ts,
   for( j = 0 ; j < n_pow ; j++ ) {
     ss = 0;
     for( i = 0 ; i < n_perm ; i++) {
-      if ( abss(Ts[j]) <= abss(T0s[ i*n_pow + j ]) )
+      if ( fabs(Ts[j]) <= fabs(T0s[ i*n_pow + j ]) )
 	ss += 1;
 
       //      printf("%f  ", T0s[i*n_pow + j ] );
@@ -87,8 +87,8 @@ void get_pvs_s(double *Zs, double *Ts,
       ss = 0;
       for( k = 0 ; k < n_perm ; k++) {
 	if(k != i) {
-	  //	  if ( abss(T0s[ i*n_pow + j]) <= abss(T0s[ k*n_pow + j]) )
-	  //	    ss++;
+	  if ( fabs(T0s[ i*n_pow + j]) <= fabs(T0s[ k*n_pow + j]) )
+	    ss++;
 	}
       }
       P0s[ i*n_pow + j] = (ss + 1) / n_perm ;
