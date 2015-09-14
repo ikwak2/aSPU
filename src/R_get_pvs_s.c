@@ -35,7 +35,7 @@ void get_pvs_s(double *Zs, double *Ts,
   for(i = 0 ; i < n_pow; i++ ) {
     pvs[i] = i;
   }
-  pvs[n_pow] = minp;
+  pvs[n_pow] = 1;
 }
 
 
