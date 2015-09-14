@@ -32,6 +32,58 @@ void get_pvs_s(double *Zs, double *Ts,
   minP0s = (double *) R_alloc ( n_perm, sizeof(double) ) ;
 
 
+  for( i = 0 ; i < n_perm ; i++ ) {
+
+    for(rr = 0 ; rr < n_Zs ; rr++) {
+      if( Ps == 1 )
+	U0[rr] = abss(rnms[ n_Zs * i + rr ] );
+      else
+	U0[rr] = rnms[ n_Zs * i + rr ] ;
+    }
+
+    for( j = 0 ; j < (n_pow) ; j++ ) {
+
+      ss = 0;
+      if(npow[j] != 0) {
+	for( b = 0 ; b < n_Zs ; b ++) {
+	  ss += pow( U0[b], npow[j] );
+	}
+      } else {
+	for( b = 0 ; b < n_Zs ; b ++) {
+	  if( ss <  abss(U0[b]) )
+	    ss = abss(U0[b]);
+	}
+      }
+      T0s[i*n_pow + j] = ss;
+    }
+  }
+  //  printf("\n");
+
+
+  //  for( j = 0 ; j < n_pow ; j++) {
+  //    printf("%f ", Ts[j]);
+  //  }
+  //  printf("\n");
+
+
+  for( j = 0 ; j < n_pow ; j++ ) {
+    ss = 0;
+    for( i = 0 ; i < n_perm ; i++) {
+      if ( abss(Ts[j]) <= abss(T0s[ i*n_pow + j ]) )
+	ss += 1;
+
+      //      printf("%f  ", T0s[i*n_pow + j ] );
+    }
+    pPerm0[j] = ss / n_perm;
+    //    printf("%f  ", pPerm0[j]);
+    //    printf("\n");
+  }
+  //  printf("\n");
+
+  //	P0s = (n.perm-rank(abs(T0s)))/(n.perm - 1)
+
+
+  // pvs <- c(pPerm0, minP)
   for(i = 0 ; i < n_pow; i++ ) {
     pvs[i] = i;
   }
