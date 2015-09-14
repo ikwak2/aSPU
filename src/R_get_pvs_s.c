@@ -28,7 +28,7 @@ void get_pvs_s(double *Zs, double *Ts,
   pPerm0 = (double *) R_alloc ( n_pow, sizeof(double) ) ;
   T0s = (double *) R_alloc ( n_pow, sizeof(double) ) ;
   U0 = (double *) R_alloc ( n_Zs, sizeof(double) ) ;
-  P0s = (double *) R_alloc ( n_perm * n_pow, sizeof(double) ) ;
+%  P0s = (double *) R_alloc ( n_perm * n_pow, sizeof(double) ) ;
   minP0s = (double *) R_alloc ( n_perm, sizeof(double) ) ;
 
 
@@ -54,7 +54,7 @@ void get_pvs_s(double *Zs, double *Ts,
 	    ss = fabs(U0[b]);
 	}
       }
-      T0s[i*n_pow + j] = ss;
+      T0s[ j] = ss;
     }
   }
   //  printf("\n");
