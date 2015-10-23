@@ -44,6 +44,10 @@ out.a
 Il-Youp Kwak and Wei Pan
 }
 \references{
+Il-Youp Kwak, Wei Pan (2015)
+Adaptive Gene- and Pathway-Trait Association Testing with GWAS Summary Statistics,
+in revision.
+
 Wei Pan, Il-Youp Kwak and Peng Wei (2015)
 A Powerful and Pathway-Based Adaptive Test for Genetic Association With Common or Rare Variants (Submitted)
 }
