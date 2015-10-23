@@ -13,11 +13,16 @@
 #' @param Ps TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.
 #'
 #' @return A list object, Ts : test statistics for the SPU tests (in the order of the specified pow) and finally for the aSPU test.
-#'         pvs : p-values for the SPU and aSPU tests.
+#'         pvs : p-values for the SPUs and aSPUs tests.
 #'
 #' @author Il-Youp Kwak and Wei Pan
 #'
 #' @references
+#'
+#' Il-Youp Kwak, Wei Pan (2015)
+#' Adaptive Gene- and Pathway-Trait Association Testing with GWAS Summary Statistics,
+#' in revision.
+#'
 #' Wei Pan, Junghi Kim, Yiwei Zhang, Xiaotong Shen and Peng Wei (2014)
 #' A powerful and adaptive association test for rare variants,
 #' Genetics, 197(4), 1081-95
@@ -41,15 +46,15 @@
 #'
 #' out$Ts
 #' # This is a vector of Test Statistics for SPUM and aSPUM tests.
-#' # SPU1 to SPUInf corresponds with the option pow=c(1:8, Inf)
-#' # They are SPU test statistics.
-#' # The last element aSPUM is minimum of them, aSPUM statistic.
+#' # SPUs1 to SPUsInf corresponds with the option pow=c(1:8, Inf)
+#' # They are SPUs test statistics.
+#' # The last element aSPUs is minimum of them, aSPUs statistic.
 #'
 #' out$pvs
-#' # This is a vector of p-values for SPUM and aSPUM tests.
-#' # SPUM1 to SPUMInf corresponds with the option pow=c(1:8, Inf)
-#' # They are p-values for corresponding SPUM tests.
-#' # The last element is p-value of aSPUM test.
+#' # This is a vector of p-values for SPUs and aSPUs tests.
+#' # SPUs1 to SPUsInf corresponds with the option pow=c(1:8, Inf)
+#' # They are p-values for corresponding SPUs tests.
+#' # The last element is p-value of aSPUs test.
 #'
 #' @seealso \code{\link{aSPUw}} \code{\link{aSPU}}
 
