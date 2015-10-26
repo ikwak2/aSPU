@@ -14,6 +14,7 @@ export(GEEaSPU)
 importFrom(gee, gee)
 importFrom(MASS, ginv, mvrnorm)
 importFrom("stats", "fitted.values", "glm", "pchisq", "prcomp",
-            "qnorm", "rnorm", "runif")
+            "qnorm", "rnorm", "runif", "cov", "fitted", "formula", "var")
+importFrom("utils", "head", "tail")
 
 useDynLib(aSPU)
