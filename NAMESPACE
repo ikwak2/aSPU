@@ -10,7 +10,9 @@ export(GATES2)
 export(GatesSimes)
 export(Hyst)
 
+import(gee)
+import(MASS)
 importFrom("stats", "fitted.values", "glm", "pchisq", "prcomp",
-            "qnorm", "rnorm", "runif", "gee", "MASS")
+            "qnorm", "rnorm", "runif")
 
 useDynLib(aSPU)
