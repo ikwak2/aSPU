@@ -9,6 +9,7 @@ export(getlogitp)
 export(GATES2)
 export(GatesSimes)
 export(Hyst)
+export(GEEaSPU)
 
 import(gee)
 import(MASS)
