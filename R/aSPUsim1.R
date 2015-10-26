@@ -50,8 +50,12 @@ aSPUsim1 <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8
         Xgb<-Xg
         for(i in 1:nrow(Xg))
             Xgb[i,]<-Xg[i,]-Xbar
-        CovS <- mean(Y)*(1-mean(Y))*(t(Xgb) %*% Xgb)
 
+	if( model == "binomial" ) {
+            CovS <- mean(Y)*(1-mean(Y))*(t(Xgb) %*% Xgb)
+	} else {
+            CovS <- var(Y)*(t(Xgb) %*% Xgb)
+	}
     } else {
         tdat1<-data.frame(trait=Y, cov)
         fit1<-glm(trait~.,family=model,data=tdat1)

@@ -10,11 +10,11 @@
 #'
 #' @param pow power used in GEEaSPU test. A vector of the powers.
 #'
-#' @param n.perm number of permutations or bootstraps.
+#' @param n.sim number of simulations
 #'
-#' @return p-values for the SPUs and aSPUs tests.
+#' @return p-values for the GEE-SPU and GEE-aSPU test.
 #'
-#' @author Il-Youp Kwak and Wei Pan
+#' @author Junghi Kim, Wei Pan and Il-Youp Kwak
 #'
 #' @references
 #'

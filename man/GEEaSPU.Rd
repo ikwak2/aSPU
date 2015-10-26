@@ -14,12 +14,12 @@ GEEaSPU(traits, geno, Z = NULL, family = c("binomial", "gaussian"),
 
 \item{Z}{covariates.}
 
-\item{n.perm}{number of permutations or bootstraps.}
-
 \item{pow}{power used in GEEaSPU test. A vector of the powers.}
+
+\item{n.sim}{number of simulations}
 }
 \value{
-p-values for the SPUs and aSPUs tests.
+p-values for the GEE-SPU and GEE-aSPU test.
 }
 \description{
 It gives p-values of the GEESPU tests and GEEaSPU test.
@@ -32,7 +32,7 @@ out <- GEEaSPU(traits, geno, Z = NULL,family = "gaussian",
 		  gamma = c(1:8,Inf), n.perm = 1000)
 }
 \author{
-Il-Youp Kwak and Wei Pan
+Junghi Kim, Wei Pan and Il-Youp Kwak
 }
 \references{
 Il-Youp Kwak, Wei Pan (2015)
