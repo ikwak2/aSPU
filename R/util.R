@@ -120,7 +120,7 @@ GEE <- function(traits, geno, Z = NULL,family = c("binomial", "gaussian"), corst
    }
 
    ## calculate V where Us ~ N(0, V)
-   ## under H0 the null distribution of the score vector for β is asymptotically Normal
+   ## under H0 the null distribution of the score vector for beta is asymptotically Normal
    ## I11 is the covariance matrix of gamma; I22 is the covariance matrix of beta;
 
 	# recall followins defined
