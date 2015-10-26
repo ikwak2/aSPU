@@ -8,7 +8,9 @@
 #'
 #' @param Z covariates.
 #'
-#' @param pow power used in GEEaSPU test. A vector of the powers.
+#' @param model Use "gaussian" for a quantitative trait, and use "binomial" for a binary trait.
+#'
+#' @param gamma power used in GEEaSPU test. A vector of the powers.
 #'
 #' @param n.sim number of simulations
 #'
@@ -18,30 +20,24 @@
 #'
 #' @references
 #'
-#' Il-Youp Kwak, Wei Pan (2015)
-#' Adaptive Gene- and Pathway-Trait Association Testing with GWAS Summary Statistics,
-#' in revision.
-#'
-#' Wei Pan, Junghi Kim, Yiwei Zhang, Xiaotong Shen and Peng Wei (2014)
-#' A powerful and adaptive association test for rare variants,
-#' Genetics, 197(4), 1081-95
-#'
-#' Junghi Kim, Jeffrey R Wozniak, Bryon A Mueller, Xiaotong Shen and Wei Pan (2014) Comparison of statistical tests for group differences in brain functional networks, NeuroImage, 1;101:681-694
+#' Yiwei Zhang, Zhiyuan Xu, Xiaotong Shen, Wei Pan (2014)
+#' Testing for association with multiple traits in generalized estimation equations, with application to neuroimaging data.
+#' Neuroimage. 1;96:309-25 
 #'
 #' @examples
 #'
 #' traits <- matrix(rnorm(100*5, 0,1), ncol=5)
 #' Z <- rnorm(100, 2, 0.5)
 #' geno <- rbinom(100, 2, 0.5)
-#' out <- GEEaSPU(traits, geno, Z = NULL,family = "gaussian", 
-#'		  gamma = c(1:8,Inf), n.perm = 1000)
+#' out <- GEEaSPU(traits, geno, Z = NULL, model = "gaussian", 
+#'		  gamma = c(1:8,Inf), n.sim = 100)
 #'
 
 GEEaSPU <- function(traits, geno, 
-	  Z = NULL, family = c("binomial", "gaussian"), 
-	  gamma = c(1:8,Inf), n.perm=10000) {
+	  Z = NULL, model = c("binomial", "gaussian"), 
+	  gamma = c(1:8,Inf), n.sim=1000) {
 
-   Score <- GEE(traits = traits, geno = geno, Z = Z,family = family)
+   Score <- GEE(traits = traits, geno = geno, Z = Z,family = model)
    U <- Score$U
    V <- Score$Cov
    GEEspu.score(U = U, V = V, gamma = gamma, B = n.perm)

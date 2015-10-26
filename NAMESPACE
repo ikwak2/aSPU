@@ -11,6 +11,6 @@ export(GatesSimes)
 export(Hyst)
 
 importFrom("stats", "fitted.values", "glm", "pchisq", "prcomp",
-            "qnorm", "rnorm", "runif")
+            "qnorm", "rnorm", "runif", "gee", "MASS")
 
 useDynLib(aSPU)
