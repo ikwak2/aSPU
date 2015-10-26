@@ -1,4 +1,4 @@
-#' GEEaSPU test.
+#' GEEaSPU test for association with multiple traits in generalized estimation equations.
 #'
 #' It gives p-values of the GEESPU tests and GEEaSPU test.
 #'

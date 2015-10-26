@@ -2,7 +2,7 @@
 % Please edit documentation in R/GEEaSPU.R
 \name{GEEaSPU}
 \alias{GEEaSPU}
-\title{GEEaSPU test.}
+\title{GEEaSPU test for association with multiple traits in generalized estimation equations.}
 \usage{
 GEEaSPU(traits, geno, Z = NULL, model = c("binomial", "gaussian"),
   gamma = c(1:8, Inf), n.sim = 1000)
