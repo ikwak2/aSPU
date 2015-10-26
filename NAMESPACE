@@ -11,8 +11,8 @@ export(GatesSimes)
 export(Hyst)
 export(GEEaSPU)
 
-import(gee)
-import(MASS)
+importFrom(gee, gee)
+importFrom(MASS, ginv)
 importFrom("stats", "fitted.values", "glm", "pchisq", "prcomp",
             "qnorm", "rnorm", "runif")
 
