@@ -40,7 +40,7 @@ GEEaSPU <- function(traits, geno,
    Score <- GEE(traits = traits, geno = geno, Z = Z,family = model)
    U <- Score$U
    V <- Score$Cov
-   GEEspu.score(U = U, V = V, gamma = gamma, B = n.perm)
+   GEEspu.score(U = U, V = V, gamma = gamma, B = n.sim)
 
 }
 
