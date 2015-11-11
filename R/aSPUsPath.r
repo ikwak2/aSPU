@@ -123,7 +123,7 @@ aSPUsPath <- function(Zs, corrSNP, pow=c(1,2,4,8, Inf),
         U00<-rnorm(ko, 0, 1)
         U0 <- NULL;
         for( ss in 1:length(CH)) { # ss = 21
-          U0 <- c(U0, CH.CovSsqrt[[ss]] %*% U00[CH[[ss]]])
+          U0[CH[[ss]]] <- c(U0, CH.CovSsqrt[[ss]] %*% U00[CH[[ss]]])
         }
 
         if(Ps == TRUE)
@@ -135,7 +135,6 @@ aSPUsPath <- function(Zs, corrSNP, pow=c(1,2,4,8, Inf),
 		   indx=(SNPstart:(SNPstart+nSNPs0[iGene]-1))
                 if (pow[j] < Inf){
                     a = (sum(U0[indx]^pow[j]))
-
                     StdT0s[b, (j-1)*nGenes+iGene] = sign(a)*((abs(a)/nSNPs0[iGene]) ^(1/pow[j]))
                 }
 
