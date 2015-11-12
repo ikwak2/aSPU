@@ -120,8 +120,8 @@ aSPUsPath <- function(Zs, corrSNP, pow=c(1,2,4,8, Inf),
     T0sUnnorm=T0s = StdT0s = matrix(0, nrow=n.perm, ncol=length(pow)*nGenes)
     for(b in 1:n.perm){
 
-        U00<-rnorm(ko, 0, 1)
-        U0 <- NULL;
+        U00<-rnorm(k, 0, 1)
+        U0 <- rep(0,k)
         for( ss in 1:length(CH)) { # ss = 21
           U0[CH[[ss]]] <- c(U0, CH.CovSsqrt[[ss]] %*% U00[CH[[ss]]])
         }
