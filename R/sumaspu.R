@@ -45,43 +45,76 @@
 #'
 #' @seealso \code{\link{minP}} \code{\link{estcov}}
 
-sumaspu = function(Z, v, pow = c(1:4, Inf), B){
+sumaspu <- function(Z, v, B, pow, tranform = FALSE){
+    if (tranform){
+        v <- ginv(v)
+        Z <- tcrossprod(Z, v)
+    }
 
-    N = dim(Z)[1]; K = dim(Z)[2]
+    if (is.vector(Z)) {
+        N <- 1; K <- length(Z)
+    }else {
+        N <- dim(Z)[1]; K <- dim(Z)[2]
+    }
+
     set.seed(1000)
-    Z0 = rmvnorm(B, sigma=v)
-    pval = matrix(NA, N,10)
+    Z0 <- rmvnorm(B, mean = rep(0, nrow(v)), sigma = v)
+    pval <- matrix(0, N, length(pow)+1)
 
-    ## SPU(1:8)
-    for(k in 1:8){
-        zb = abs(rowSums(Z^k))
-        z0b = abs(rowSums(Z0^k))
+    ponum <- pow[pow < Inf]
+    ## SPU for integer power
+    for(k0 in 1:length(ponum)){
+        k <- ponum[k0]
+        if (N == 1) {
+            z1 <- abs(sum(Z^k))
+        } else {
+            z1 <- abs(rowSums(Z^k))
+        }
+        z0b <- abs(rowSums(Z0^k))
         for(i in 1:N){
-            pval[i,k] = (1+sum(z0b>zb[i]))/(B+1)
+            pval[i,k0] <- (1+sum(z0b>z1[i]))/(B+1)
         }
     }
 
     ## SPU(max)
-    z1 = apply(abs(Z), 1, max)
-    z0 = apply(abs(Z0), 1, max)
-    for(i in 1:N){
-        pval[i,9] = (1+sum(z0>z1[i]))/(B+1)
+    if (Inf %in% pow){
+        if(N == 1) {
+            z1 <- max(abs(Z))
+        } else {
+            z1 <- rowMaxs(abs(Z))
+        }
+        z0 <- rowMaxs(abs(Z0))
+        for(i in 1:N){
+            pval[i,length(pow)] = (1+sum(z0>z1[i]))/(B+1)
+        }
     }
 
     ## aSPU
-    p1m = apply(pval[,1:9], 1, min)
-    p0 = matrix(NA, B,9)
-    for(k in 1:8){
-        zb = abs(rowSums(Z0^k))
-        p0[,k] = (1+B-rank(abs(zb)))/B
+    if (N == 1) {
+        p1m <- min(pval[,1:length(pow)])
+    } else {
+        p1m <- rowMins(pval[,1:length(pow)])
     }
-    zb = apply(abs(Z0), 1, max)
-    p0[,9] = (1+B-rank(zb))/B
-    p0m = apply(p0, 1, min)
+    p0 <- matrix(NA, B, length(pow))
+    for(k0 in 1:length(ponum)){
+        k <- ponum[k0]
+        zb <- abs(rowSums(Z0^k))
+        p0[,k0] <- (1+B-rank(abs(zb)))/B
+    }
+
+
+    if (Inf %in% pow){
+        zb <- rowMaxs(abs(Z0))
+        p0[,length(pow)] = (1+B-rank(zb))/B
+    }
+    p0m = rowMins(p0)
     for(i in 1:N){
-        pval[i,10] = (1+sum(p0m<p1m[i]))/(B+1)
+        pval[i,length(pow)+1] = (1+sum(p0m<p1m[i]))/(B+1)
     }
-    colnames(pval) <- c(paste("SPU", 1:9, sep=""), "aSPU")
+
+    if(Inf %in% pow) s <- c(paste("SPU", ponum, sep=""),"SPUInf","aSPU") else {
+                                                                             s <- c(paste("SPU", ponum, sep=""),"aSPU")}
+    colnames(pval) <- s
     rownames(pval) <- rownames(Z)
     return(pval)
 }

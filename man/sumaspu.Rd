@@ -4,16 +4,16 @@
 \alias{sumaspu}
 \title{An Adaptive Association Test for Multiple Phenotypes with GWAS Summary Statistics.(SNP based)}
 \usage{
-sumaspu(Z, v, pow = c(1:4, Inf), B)
+sumaspu(Z, v, B, pow, tranform = FALSE)
 }
 \arguments{
 \item{Z}{matrix of summary Z-scores, SNPs in rows and traits in columns. Or a vector of summary Z-scores for a single snp}
 
 \item{v}{estimated covariance matrix based on the summary Z-scores (output of estcov)}
 
-\item{pow}{power used in SPU test. A vector of the powers.}
-
 \item{B}{number of Monte Carlo samples simulated to compute p-values}
+
+\item{pow}{power used in SPU test. A vector of the powers.}
 
 \item{tranform}{if TRUE, the inference is made on transformed Z}
 }
