@@ -10,12 +10,17 @@ export(GATES2)
 export(GatesSimes)
 export(Hyst)
 export(GEEaSPU)
+export(minP)
+export(estcov)
+export(sumaspu)
 
 importFrom(gee, gee)
 importFrom(MASS, ginv, mvrnorm)
-importFrom(mvtnorm, rmvnorm)
+importFrom(mvtnorm, rmvnorm, pmvnorm)
+importFrom(matrixStats, rowMins, rowMaxs)
 importFrom("stats", "fitted.values", "glm", "pchisq", "prcomp",
-            "qnorm", "rnorm", "runif", "cov", "fitted", "formula", "var")
+            "qnorm", "rnorm", "runif", "cov", "fitted", "formula", "var", "cor")
 importFrom("utils", "head", "tail")
+
 
 useDynLib(aSPU)
