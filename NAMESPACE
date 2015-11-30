@@ -13,6 +13,7 @@ export(GEEaSPU)
 
 importFrom(gee, gee)
 importFrom(MASS, ginv, mvrnorm)
+importFrom(mvtnorm, rmvnorm)
 importFrom("stats", "fitted.values", "glm", "pchisq", "prcomp",
             "qnorm", "rnorm", "runif", "cov", "fitted", "formula", "var")
 importFrom("utils", "head", "tail")

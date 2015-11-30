@@ -53,7 +53,6 @@
 #'
 #' @seealso \code{\link{aSPUw}}
 
-
 aSPU <- function(Y, X, cov=NULL, resample = c("perm", "sim", "boot"), model=c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000) {
 
     model <- match.arg(model)
@@ -66,16 +65,10 @@ aSPU <- function(Y, X, cov=NULL, resample = c("perm", "sim", "boot"), model=c("g
             aSPUboot2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
         }
     } else {
-
         if(resample == "sim") {
-            if(n.perm > 10^5) {
-                aSPUsim1(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
-            } else {
-                aSPUsim2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
-            }
+            aSPUsimC2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)            
         } else {
-            userank = T;
-            aSPUpermC(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model, userank = userank)
+            aSPUpermC2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
         }
     }
 }
