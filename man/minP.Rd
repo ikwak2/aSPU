@@ -10,10 +10,6 @@ minP(Zi, v)
 \item{Zi}{a vector of summary Z-scores for single SNP}
 
 \item{v}{estimated covariance matrix based on the summary Z-scores (output of estcov)}
-
-\item{tranform}{if TRUE, the inference is made on transformed Z}
-
-\item{B}{number of Monte Carlo samples simulated to compute p-values}
 }
 \value{
 return exact minP test

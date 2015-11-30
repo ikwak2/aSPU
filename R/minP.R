@@ -6,10 +6,6 @@
 #'
 #' @param v estimated covariance matrix based on the summary Z-scores (output of estcov)
 #'
-#' @param tranform if TRUE, the inference is made on transformed Z
-#' 
-#' @param B number of Monte Carlo samples simulated to compute p-values
-#'
 #' @return return exact minP test
 #'
 #' @author Junghi Kim, Yun Bai and Wei Pan 
