@@ -31,7 +31,7 @@
 ## @seealso \code{\link{aSPU}}, \code{\link{aSPUperm}}, \code{\link{aSPUboot}}, \code{\link{aSPUboot2}}
 
 
-aSPUsim2 <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8, Inf), n.perm=1000){
+aSPUsimC2 <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8, Inf), n.perm=1000){
 
     model = match.arg(model)
 
