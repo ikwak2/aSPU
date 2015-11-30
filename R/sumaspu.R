@@ -6,6 +6,8 @@
 #'
 #' @param v estimated covariance matrix based on the summary Z-scores (output of estcov)
 #'
+#' @param pow power used in SPU test. A vector of the powers.
+#'
 #' @param tranform if TRUE, the inference is made on transformed Z
 #' 
 #' @param B number of Monte Carlo samples simulated to compute p-values
@@ -43,7 +45,7 @@
 #'
 #' @seealso \code{\link{minP}} \code{\link{estcov}}
 
-sumaspu = function(Z, v, B){
+sumaspu = function(Z, v, pow = c(1:4, Inf), B){
 
     N = dim(Z)[1]; K = dim(Z)[2]
     set.seed(1000)
