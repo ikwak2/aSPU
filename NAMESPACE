@@ -12,7 +12,7 @@ export(Hyst)
 export(GEEaSPU)
 export(minP)
 export(estcov)
-export(sumaspu)
+export(MTaSPUs)
 
 importFrom(gee, gee)
 importFrom(MASS, ginv, mvrnorm)
