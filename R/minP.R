@@ -30,11 +30,11 @@
 #'
 #' 
 #' v <- estcov(allZ)
-#' sumaspu(Z = allZ, v = v, B = 100, pow = c(1:4, Inf), tranform = FALSE)
-#' sumaspu(Z = allZ[1,], v = v, B = 100, pow = c(1:4, Inf), tranform = FALSE)
+#' MTaSPUs(Z = allZ, v = v, B = 100, pow = c(1:4, Inf), tranform = FALSE)
+#' MTaSPUs(Z = allZ[1,], v = v, B = 100, pow = c(1:4, Inf), tranform = FALSE)
 #' minP(Zi= allZ[1,], v = v)
 #'
-#' @seealso \code{\link{estcov}} \code{\link{sumaspu}}
+#' @seealso \code{\link{estcov}} \code{\link{MTaSPUs}}
 
 minP <- function(Zi, v){
     n <- dim(v)[1]

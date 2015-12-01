@@ -1,6 +1,6 @@
 #' estcov
 #'
-#' Estimated covariance matrix based on the summary Z-scores
+#' Estimate covariance matrix based on the summary Z-scores
 #'
 #' @param allZ matrix of summary Z-scores for all SNP. each row for SNP; each column for single trait
 #'
@@ -28,11 +28,11 @@
 #'
 #' 
 #' v <- estcov(allZ)
-#' sumaspu(Z = allZ, v = v, B = 100, pow = c(1:4, Inf), tranform = FALSE)
-#' sumaspu(Z = allZ[1,], v = v, B = 100, pow = c(1:4, Inf), tranform = FALSE)
+#' MTaSPUs(Z = allZ, v = v, B = 100, pow = c(1:4, Inf), tranform = FALSE)
+#' MTaSPUs(Z = allZ[1,], v = v, B = 100, pow = c(1:4, Inf), tranform = FALSE)
 #' minP(Zi= allZ[1,], v = v)
 #'
-#' @seealso \code{\link{sumaspu}} \code{\link{minP}}
+#' @seealso \code{\link{MTaSPUs}} \code{\link{minP}}
 
 estcov <- function(allZ){
     n.snp <- dim(allZ)[1]

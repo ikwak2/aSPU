@@ -13,7 +13,7 @@ estcov(allZ)
 estimated correlation matrix
 }
 \description{
-Estimated covariance matrix based on the summary Z-scores
+Estimate covariance matrix based on the summary Z-scores
 }
 \examples{
 
@@ -32,8 +32,8 @@ rownames(allZ) <- paste("snp", 1:n.snp, sep="")
 
 
 v <- estcov(allZ)
-sumaspu(Z = allZ, v = v, B = 100, pow = c(1:4, Inf), tranform = FALSE)
-sumaspu(Z = allZ[1,], v = v, B = 100, pow = c(1:4, Inf), tranform = FALSE)
+MTaSPUs(Z = allZ, v = v, B = 100, pow = c(1:4, Inf), tranform = FALSE)
+MTaSPUs(Z = allZ[1,], v = v, B = 100, pow = c(1:4, Inf), tranform = FALSE)
 minP(Zi= allZ[1,], v = v)
 
 }
@@ -44,6 +44,6 @@ Junghi Kim, Yun Bai and Wei Pan
 Junghi Kim, Yun Bai and Wei Pan (2016) An Adaptive Association Test for Multiple Phenotypes with GWAS Summary Statistics, Genetic Epidemiology DOI 10.1002/gepi.21931
 }
 \seealso{
-\code{\link{sumaspu}} \code{\link{minP}}
+\code{\link{MTaSPUs}} \code{\link{minP}}
 }
 
