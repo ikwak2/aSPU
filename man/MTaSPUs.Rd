@@ -2,7 +2,7 @@
 % Please edit documentation in R/MTaSPUs.R
 \name{MTaSPUs}
 \alias{MTaSPUs}
-\title{An Adaptive Association Test for Multiple Phenotypes with GWAS Summary Statistics.(SNP based)}
+\title{An adaptive association test for multiple phenotypes with GWAS summary statistics.(SNP based)}
 \usage{
 MTaSPUs(Z, v, B, pow, tranform = FALSE)
 }
@@ -23,7 +23,7 @@ compute p-values for SPU(gamma) i.e. pow=1:8, and infinity
             each row for single SNP
 }
 \description{
-SNP based Adaptive Association Test for Multiple Phenotypes with GWAS Summary Statistics.
+SNP based adaptive association test for multiple phenotypes with GWAS summary statistics.
 }
 \examples{
 

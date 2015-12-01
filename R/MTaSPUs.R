@@ -1,6 +1,6 @@
-#' An Adaptive Association Test for Multiple Phenotypes with GWAS Summary Statistics.(SNP based)
+#' An adaptive association test for multiple phenotypes with GWAS summary statistics.(SNP based)
 #'
-#' SNP based Adaptive Association Test for Multiple Phenotypes with GWAS Summary Statistics.
+#' SNP based adaptive association test for multiple phenotypes with GWAS summary statistics.
 #'
 #' @param Z matrix of summary Z-scores, SNPs in rows and traits in columns. Or a vector of summary Z-scores for a single snp
 #'
