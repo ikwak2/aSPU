@@ -15,7 +15,7 @@ R/aSPU is an R package for Genetic association testing methods such as aSPU, aSP
 | aSPUsPath     | Summary    | Single trait; pathway-based                    |
 | GEEaSPU       | Individual | Multiple traits; single SNP based              |
 | MTaSPUs       | Summary    | Multiple traits; single SNP based              |
-|---------------|------------|------------------------------------------------|
+
 
 *Data type indicate the structure of data set. "Individual" for individual level data. "Summary" for summary statistics data (such as Z scores or p-values of each SNP) 
 
