@@ -24,12 +24,15 @@ R/aSPU is an R package for Genetic association testing methods such as aSPU, aSP
 For 'aSPU'
 ```
 Wei Pan, Junghi Kim, Yiwei Zhang, Xiaotong Shen and Peng Wei (2014)
-A powerful and adaptive association test for rare variants, Genetics, 197(4), 1081-95
+A powerful and adaptive association test for rare variants,
+Genetics, 197(4), 1081-95
 ```
 
 For 'aSPUw'
 ```
-Junghi Kim, Jeffrey R Wozniak, Bryon A Mueller, Xiaotong Shen and Wei Pan (2014) Comparison of statistical tests for group differences in brain functional networks, NeuroImage, 1;101:681-694
+Junghi Kim, Jeffrey R Wozniak, Bryon A Mueller, Xiaotong Shen and Wei Pan (2014)
+Comparison of statistical tests for group differences in brain functional networks,
+NeuroImage, 1;101:681-694
 ```
 
 For 'aSPUpath'
