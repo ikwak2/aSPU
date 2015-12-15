@@ -57,7 +57,7 @@
 #' ## SPUpathi,j corresponds pow = i , pow2 = j
 #' ## The last element, aSPUpath gives aSPUpath p-value.
 #'
-#' @seealso \code{\link{simPathAR1Snp}} \code{\link{aSPUpathSingle}}
+#' @seealso \code{\link{simPathAR1Snp}} 
 
 aSPUpath <- function(Y, X, cov = NULL, model=c("binomial", "gaussian"),
                      snp.info, gene.info, pow=c(1:8, Inf), pow2=c(1,2,4,8),

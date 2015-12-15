@@ -50,6 +50,6 @@ Adaptive Gene- and Pathway-Trait Association Testing with GWAS Summary Statistic
 Bioinformatics, doi: 10.1093/bioinformatics/btv719
 }
 \seealso{
-\code{\link{simPathAR1Snp}} \code{\link{aSPUpathSingle}} \code{\link{aSPUpath}}
+\code{\link{aSPUs}}
 }
 

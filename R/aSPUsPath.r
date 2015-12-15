@@ -38,7 +38,7 @@
 #'                   n.perm=10, Ps = TRUE)
 #' out.a
 #'
-#' @seealso \code{\link{simPathAR1Snp}} \code{\link{aSPUpathSingle}} \code{\link{aSPUpath}}
+#' @seealso \code{\link{aSPUs}}
 
 aSPUsPath <- function(Zs, corrSNP, pow=c(1,2,4,8, Inf),
                       pow2 = c(1,2,4,8), 

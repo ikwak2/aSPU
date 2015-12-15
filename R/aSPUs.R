@@ -50,7 +50,7 @@
 #' # They are p-values for corresponding SPUs tests.
 #' # The last element is p-value of aSPUs test.
 #'
-#' @seealso \code{\link{aSPUw}} \code{\link{aSPU}}
+#' @seealso \code{\link{aSPUw}} \code{\link{aSPU}} \code{\link{aSPUsPath}}
 
 aSPUs <- function(Zs, corrSNP, pow = c(1,2,4,8, Inf), n.perm = 1000, Ps = FALSE)
 {

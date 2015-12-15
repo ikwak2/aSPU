@@ -49,7 +49,7 @@
 #'
 #'
 #'
-#' @seealso \code{\link{aSPUpathSingle}} \code{\link{aSPUpath}}
+#' @seealso \code{\link{aSPUpath}}
 
 
 simPathAR1Snp<-function(nGenes=10, nGenes1=5, nSNPs=NULL, ncSNPs = NULL,

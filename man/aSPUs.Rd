@@ -61,6 +61,6 @@ Adaptive Gene- and Pathway-Trait Association Testing with GWAS Summary Statistic
 Bioinformatics, doi: 10.1093/bioinformatics/btv719
 }
 \seealso{
-\code{\link{aSPUw}} \code{\link{aSPU}}
+\code{\link{aSPUw}} \code{\link{aSPU}} \code{\link{aSPUsPath}}
 }
 
