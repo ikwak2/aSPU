@@ -1,4 +1,4 @@
-#' Sum of Powered Score (SPUs) tests and adaptive SPU (aSPUs) test with GWAS summary statistics.
+#' Sum of Powered Score (SPUs) tests and adaptive SPU (aSPUs) test for single trait - SNP set association with GWAS summary statistics.
 #'
 #' It gives p-values of the SPUs tests and aSPUs test with GWAS summary statistics.
 #'
@@ -21,13 +21,7 @@
 #'
 #' Il-Youp Kwak, Wei Pan (2015)
 #' Adaptive Gene- and Pathway-Trait Association Testing with GWAS Summary Statistics,
-#' in revision.
-#'
-#' Wei Pan, Junghi Kim, Yiwei Zhang, Xiaotong Shen and Peng Wei (2014)
-#' A powerful and adaptive association test for rare variants,
-#' Genetics, 197(4), 1081-95
-#'
-#' Junghi Kim, Jeffrey R Wozniak, Bryon A Mueller, Xiaotong Shen and Wei Pan (2014) Comparison of statistical tests for group differences in brain functional networks, NeuroImage, 1;101:681-694
+#' Bioinformatics, doi: 10.1093/bioinformatics/btv719
 #'
 #' @examples
 #'

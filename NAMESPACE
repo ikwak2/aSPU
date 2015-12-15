@@ -1,6 +1,5 @@
 export(aSPUpath)
 export(aSPUsPath)
-export(aSPUpathSingle)
 export(simPathAR1Snp)
 export(aSPU)
 export(aSPUs)

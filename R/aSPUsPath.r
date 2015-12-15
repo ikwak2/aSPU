@@ -1,4 +1,4 @@
-#' Pathway based Sum of Powered Score tests (SPUsPath) and adaptive SPUpath (aSPUsPath) test with GWAS summary statistics.
+#' Pathway based Sum of Powered Score tests (SPUsPath) and adaptive SPUpath (aSPUsPath) test for single trait - pathway association with GWAS summary statistics.
 #'
 #' It gives p-values of the SPUsPath tests and aSPUsPath test with GWAS summary statistics.
 #'
@@ -26,10 +26,7 @@
 #' @references
 #' Il-Youp Kwak, Wei Pan (2015)
 #' Adaptive Gene- and Pathway-Trait Association Testing with GWAS Summary Statistics,
-#' in revision.
-#'
-#' Wei Pan, Il-Youp Kwak and Peng Wei (2015)
-#' A Powerful and Pathway-Based Adaptive Test for Genetic Association With Common or Rare Variants (Submitted)
+#' Bioinformatics, doi: 10.1093/bioinformatics/btv719
 #'
 #' @examples
 #' data(kegg9)

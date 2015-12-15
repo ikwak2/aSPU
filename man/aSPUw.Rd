@@ -2,7 +2,7 @@
 % Please edit documentation in R/aSPUw.R
 \name{aSPUw}
 \alias{aSPUw}
-\title{Inverse variance weighted Sum of Powered Score tests (SPUw) and adaptive SPUw (aSPUw) test.}
+\title{Inverse variance weighted Sum of Powered Score tests (SPUw) and adaptive SPUw (aSPUw) test for single trait - SNP set association.}
 \usage{
 aSPUw(Y, X, cov = NULL, resample = c("perm", "sim", "boot"),
   model = c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000)

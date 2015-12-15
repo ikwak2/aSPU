@@ -1,4 +1,4 @@
-#' Inverse variance weighted Sum of Powered Score tests (SPUw) and adaptive SPUw (aSPUw) test.
+#' Inverse variance weighted Sum of Powered Score tests (SPUw) and adaptive SPUw (aSPUw) test for single trait - SNP set association.
 #'
 #' It gives the p-values of the SPUw tests and aSPUw test based
 #' on the permutations of the residuals or simulations from the null distripution.

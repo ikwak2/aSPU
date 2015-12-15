@@ -1,4 +1,4 @@
-#' Sum of Powered Score (SPU) tests and adaptive SPU (aSPU) test.
+#' Sum of Powered Score (SPU) tests and adaptive SPU (aSPU) test for single trait - SNP set association.
 #'
 #' It gives p-values of the SPU tests and aSPU test.
 #'

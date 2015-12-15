@@ -1,4 +1,4 @@
-#' Pathway based Sum of Powered Score tests (SPUpath) and adaptive SPUpath (aSPUpath) test.
+#' Pathway based Sum of Powered Score tests (SPUpath) and adaptive SPUpath (aSPUpath) test for single trait - pathway association.
 #'
 #' It gives p-values of the SPUpath tests and aSPUpath test.
 #'
@@ -35,7 +35,7 @@
 #'
 #' @references
 #' Wei Pan, Il-Youp Kwak and Peng Wei (2015)
-#' A Powerful and Pathway-Based Adaptive Test for Genetic Association With Common or Rare Variants (Submitted)
+#' A Powerful and Pathway-Based Adaptive Test for Genetic Association With Common or Rare Variants, Am. J. Hum. Genet. 97, 86-98
 #'
 #' @examples
 #'

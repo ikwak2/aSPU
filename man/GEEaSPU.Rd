@@ -2,7 +2,7 @@
 % Please edit documentation in R/GEEaSPU.R
 \name{GEEaSPU}
 \alias{GEEaSPU}
-\title{GEEaSPU test for association with multiple traits in generalized estimation equations.}
+\title{GEEaSPU test for association with multiple traits - single SNP in generalized estimation equations.}
 \usage{
 GEEaSPU(traits, geno, Z = NULL, model = c("binomial", "gaussian"),
   gamma = c(1:8, Inf), n.sim = 1000)
@@ -41,6 +41,6 @@ Junghi Kim, Wei Pan and Il-Youp Kwak
 \references{
 Yiwei Zhang, Zhiyuan Xu, Xiaotong Shen, Wei Pan (2014)
 Testing for association with multiple traits in generalized estimation equations, with application to neuroimaging data.
-Neuroimage. 1;96:309-25
+Neuroimage. 96:309-25
 }
 

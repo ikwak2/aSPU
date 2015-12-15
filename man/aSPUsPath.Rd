@@ -2,7 +2,7 @@
 % Please edit documentation in R/aSPUsPath.r
 \name{aSPUsPath}
 \alias{aSPUsPath}
-\title{Pathway based Sum of Powered Score tests (SPUsPath) and adaptive SPUpath (aSPUsPath) test with GWAS summary statistics.}
+\title{Pathway based Sum of Powered Score tests (SPUsPath) and adaptive SPUpath (aSPUsPath) test for single trait - pathway association with GWAS summary statistics.}
 \usage{
 aSPUsPath(Zs, corrSNP, pow = c(1, 2, 4, 8, Inf), pow2 = c(1, 2, 4, 8),
   snp.info, gene.info, n.perm = 1000, Ps = FALSE)
@@ -47,10 +47,7 @@ Il-Youp Kwak and Wei Pan
 \references{
 Il-Youp Kwak, Wei Pan (2015)
 Adaptive Gene- and Pathway-Trait Association Testing with GWAS Summary Statistics,
-in revision.
-
-Wei Pan, Il-Youp Kwak and Peng Wei (2015)
-A Powerful and Pathway-Based Adaptive Test for Genetic Association With Common or Rare Variants (Submitted)
+Bioinformatics, doi: 10.1093/bioinformatics/btv719
 }
 \seealso{
 \code{\link{simPathAR1Snp}} \code{\link{aSPUpathSingle}} \code{\link{aSPUpath}}

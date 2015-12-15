@@ -2,7 +2,7 @@
 % Please edit documentation in R/aSPUpath.r
 \name{aSPUpath}
 \alias{aSPUpath}
-\title{Pathway based Sum of Powered Score tests (SPUpath) and adaptive SPUpath (aSPUpath) test.}
+\title{Pathway based Sum of Powered Score tests (SPUpath) and adaptive SPUpath (aSPUpath) test for single trait - pathway association.}
 \usage{
 aSPUpath(Y, X, cov = NULL, model = c("binomial", "gaussian"), snp.info,
   gene.info, pow = c(1:8, Inf), pow2 = c(1, 2, 4, 8), n.perm = 200,
@@ -67,7 +67,7 @@ Il-Youp Kwak and Wei Pan
 }
 \references{
 Wei Pan, Il-Youp Kwak and Peng Wei (2015)
-A Powerful and Pathway-Based Adaptive Test for Genetic Association With Common or Rare Variants (Submitted)
+A Powerful and Pathway-Based Adaptive Test for Genetic Association With Common or Rare Variants, Am. J. Hum. Genet. 97, 86-98
 }
 \seealso{
 \code{\link{simPathAR1Snp}} \code{\link{aSPUpathSingle}}
