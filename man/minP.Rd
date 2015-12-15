@@ -4,18 +4,18 @@
 \alias{minP}
 \title{minP test.}
 \usage{
-minP(Zi, v)
+minP(Zi, r)
 }
 \arguments{
 \item{Zi}{a vector of summary Z-scores for single SNP}
 
-\item{v}{estimated covariance matrix based on the summary Z-scores (output of estcov)}
+\item{r}{estimated correlation matrix based on the summary Z-scores (output of estcov)}
 }
 \value{
 return exact minP test
 }
 \description{
-Return exact minP test.
+Return exact minP test p-value for multiple trait - single SNP association.
 }
 \examples{
 
@@ -33,17 +33,17 @@ colnames(allZ) <- paste("trait", 1:n.traits, sep="")
 rownames(allZ) <- paste("snp", 1:n.snp, sep="")
 
 
-v <- estcov(allZ)
-MTaSPUs(Z = allZ, v = v, B = 100, pow = c(1:4, Inf), tranform = FALSE)
-MTaSPUs(Z = allZ[1,], v = v, B = 100, pow = c(1:4, Inf), tranform = FALSE)
-minP(Zi= allZ[1,], v = v)
+r <- estcov(allZ)
+MTaSPUs(Z = allZ, r = r, B = 100, pow = c(1:4, Inf), tranform = FALSE)
+MTaSPUs(Z = allZ[1,], r = r, B = 100, pow = c(1:4, Inf), tranform = FALSE)
+minP(Zi= allZ[1,], r = r)
 
 }
 \author{
 Junghi Kim, Yun Bai and Wei Pan
 }
 \references{
-Junghi Kim, Yun Bai and Wei Pan (2016) An Adaptive Association Test for Multiple Phenotypes with GWAS Summary Statistics, Genetic Epidemiology DOI 10.1002/gepi.21931
+Junghi Kim, Yun Bai and Wei Pan (2015) An Adaptive Association Test for Multiple Phenotypes with GWAS Summary Statistics, Genetic Epidemiology, 8:651-663
 }
 \seealso{
 \code{\link{estcov}} \code{\link{MTaSPUs}}

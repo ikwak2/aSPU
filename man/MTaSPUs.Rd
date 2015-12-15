@@ -2,14 +2,14 @@
 % Please edit documentation in R/MTaSPUs.R
 \name{MTaSPUs}
 \alias{MTaSPUs}
-\title{An adaptive association test for multiple phenotypes with GWAS summary statistics.(SNP based)}
+\title{An adaptive association test for single multiple trait - single SNP with GWAS summary statistics.}
 \usage{
-MTaSPUs(Z, v, B, pow, tranform = FALSE)
+MTaSPUs(Z, r, B, pow, tranform = FALSE)
 }
 \arguments{
 \item{Z}{matrix of summary Z-scores, SNPs in rows and traits in columns. Or a vector of summary Z-scores for a single snp}
 
-\item{v}{estimated covariance matrix based on the summary Z-scores (output of estcov)}
+\item{r}{estimated correlation matrix based on the summary Z-scores (output of estcov)}
 
 \item{B}{number of Monte Carlo samples simulated to compute p-values}
 
@@ -41,17 +41,17 @@ colnames(allZ) <- paste("trait", 1:n.traits, sep="")
 rownames(allZ) <- paste("snp", 1:n.snp, sep="")
 
 
-v <- estcov(allZ)
-MTaSPUs(Z = allZ, v = v, B = 100, pow = c(1:4, Inf), tranform = FALSE)
-MTaSPUs(Z = allZ[1,], v = v, B = 100, pow = c(1:4, Inf), tranform = FALSE)
-minP(Zi= allZ[1,], v = v)
+r <- estcov(allZ)
+MTaSPUs(Z = allZ, r = r, B = 100, pow = c(1:4, Inf), tranform = FALSE)
+MTaSPUs(Z = allZ[1,], r = r, B = 100, pow = c(1:4, Inf), tranform = FALSE)
+minP(Zi= allZ[1,], r = r)
 
 }
 \author{
 Junghi Kim, Yun Bai and Wei Pan
 }
 \references{
-Junghi Kim, Yun Bai and Wei Pan (2016) An Adaptive Association Test for Multiple Phenotypes with GWAS Summary Statistics, Genetic Epidemiology DOI 10.1002/gepi.21931
+Junghi Kim, Yun Bai and Wei Pan (2015) An Adaptive Association Test for Multiple Phenotypes with GWAS Summary Statistics, Genetic Epidemiology, 8:651-663
 }
 \seealso{
 \code{\link{minP}} \code{\link{estcov}}

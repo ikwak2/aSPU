@@ -27,10 +27,10 @@
 #' rownames(allZ) <- paste("snp", 1:n.snp, sep="")
 #'
 #' 
-#' v <- estcov(allZ)
-#' MTaSPUs(Z = allZ, v = v, B = 100, pow = c(1:4, Inf), tranform = FALSE)
-#' MTaSPUs(Z = allZ[1,], v = v, B = 100, pow = c(1:4, Inf), tranform = FALSE)
-#' minP(Zi= allZ[1,], v = v)
+#' r <- estcov(allZ)
+#' MTaSPUs(Z = allZ, r = r, B = 100, pow = c(1:4, Inf), tranform = FALSE)
+#' MTaSPUs(Z = allZ[1,], r = r, B = 100, pow = c(1:4, Inf), tranform = FALSE)
+#' minP(Zi= allZ[1,], r = r)
 #'
 #' @seealso \code{\link{MTaSPUs}} \code{\link{minP}}
 

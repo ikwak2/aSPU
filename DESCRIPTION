@@ -1,8 +1,8 @@
 Package: aSPU
 Version: 1.39
-Date: 2015-11-30
+Date: 2015-12-15
 Title: Adaptive Sum of Powered Score Test
-Description: R codes for the (adaptive) Sum of Powered Score ('SPU' and 'aSPU') tests, inverse variance weighted Sum of Powered score ('SPUw' and 'aSPUw') tests and gene-based and some pathway based association tests (Pathway based Sum of Powered Score tests ('SPUpath') and adaptive 'SPUpath' ('aSPUpath') test, Gene-based Association Test that uses an extended Simes procedure ('GATES'), Hybrid Set-based Test ('HYST'), extended version of 'GATES' test for pathway-based association testing ('Gates-Simes'). ). The tests can be used with genetic and other data sets with covariates. The response variable is binary or quantitative.
+Description: R codes for the (adaptive) Sum of Powered Score ('SPU' and 'aSPU') tests, inverse variance weighted Sum of Powered score ('SPUw' and 'aSPUw') tests and gene-based and some pathway based association tests (Pathway based Sum of Powered Score tests ('SPUpath'), adaptive 'SPUpath' ('aSPUpath') test, 'GEEaSPU' test for association with multiple traits - single SNP in generalized estimation equations, 'MTaSPUs' test for association with multiple traits - single SNP with GWAS summary statistics, Gene-based Association Test that uses an extended Simes procedure ('GATES'), Hybrid Set-based Test ('HYST') and extended version of 'GATES' test for pathway-based association testing ('GATES-Simes'). ). The tests can be used with genetic and other data sets with covariates. The response variable is binary or quantitative. Visit the website below (URL) for more details. 
 Author: Il-Youp Kwak and others (See Author(s) in each function manual)
 Maintainer: Il-Youp Kwak <ikwak@umn.edu>
 Suggests: knitr
