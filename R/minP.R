@@ -37,8 +37,8 @@
 #' @seealso \code{\link{estcov}} \code{\link{MTaSPUs}}
 
 minP <- function(Zi, r){
-    n <- dim(v)[1]
+    n <- dim(r)[1]
     x <- as.numeric(max(abs(Zi)))
-    return(as.numeric(1 - pmvnorm(lower=c(rep(-x,n)), upper=c(rep(x,n)), mean=c(rep(0,n)), sigma=v)))
+    return(as.numeric(1 - pmvnorm(lower=c(rep(-x,n)), upper=c(rep(x,n)), mean=c(rep(0,n)), sigma=r)))
 }
 

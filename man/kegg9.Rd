@@ -6,10 +6,11 @@
 data(kegg9)
 }
 \description{
-  Data on coronary artery disease / myocardial infarction have been
-contributed by CARDIoGRAMplusC4D investigators and have been downloaded
-from www.CARDIOGRAMPLUSC4D.ORG
-The data set contains P value data for coronary artery disease (CAD). 
+  Data on coronary artery disease, myocardial infarction have been
+  contributed by CARDIoGRAMplusC4D investigators and have been
+  downloaded from www.CARDIOGRAMPLUSC4D.ORG
+
+  The data set contains P value data for coronary artery disease (CAD). 
 We mapped these SNPs to the 9th KEGG pathway. 
 
 gene.info is a contains 16 gene information of 9th Kegg pathway. 
@@ -52,7 +53,7 @@ kegg9$ldmatrix[1:10,1:10]
 
 }
 \references{
-Schunkert H, König IR, Kathiresan S, Reilly MP, Assimes TL, Holm H et
+Schunkert H, Konig IR, Kathiresan S, Reilly MP, Assimes TL, Holm H et
 al. (2011) Large-scale association analysis identifies 13 new susceptibility
 loci for coronary artery disease. Nat Genet. 43: 333-338
 }
