@@ -14,7 +14,7 @@
 #'
 #' @param n.sim number of simulations.
 #'
-#' @param corrstr correlation among traits.
+#' @param corstr a character string specifying the correlation structure. The following are permitted: "independence", "fixed", "stat_M_dep", "non_stat_M_dep", "exchangeable", "AR-M" and "unstructured" 
 #'
 #' @return p-values for the GEE-SPU and GEE-aSPU test.
 #'
@@ -30,17 +30,16 @@
 #'
 #' traits <- matrix(rnorm(100*5, 0,1), ncol=5)
 #' Z <- rnorm(100, 2, 0.5)
-#' corrstr = diag(5)
 #' geno <- rbinom(100, 2, 0.5)
 #' out <- GEEaSPU(traits, geno, Z = NULL, model = "gaussian", 
-#'		  gamma = c(1:8,Inf), n.sim = 100, corrstr = corrstr)
+#'		  gamma = c(1:8,Inf), n.sim = 100)
 #'
 
 GEEaSPU <- function(traits, geno, 
 	  Z = NULL, model = c("binomial", "gaussian"), 
-	  gamma = c(1:8,Inf), n.sim=1000, corrstr) {
+	  gamma = c(1:8,Inf), n.sim=1000, corstr = "independence") {
 
-   Score <- GEE(traits = traits, geno = geno, Z = Z,family = model, corrstr = corrstr)
+   Score <- GEE(traits = traits, geno = geno, Z = Z,family = model, corstr = corstr)
    U <- Score$U
    V <- Score$Cov
    out <- GEEspu.score(U = U, V = V, gamma = gamma, B = n.sim)

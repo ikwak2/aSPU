@@ -5,7 +5,7 @@
 \title{The SPU and aSPU tests for multiple traits - single SNP association in generalized estimating equations.}
 \usage{
 GEEaSPU(traits, geno, Z = NULL, model = c("binomial", "gaussian"),
-  gamma = c(1:8, Inf), n.sim = 1000, corrstr)
+  gamma = c(1:8, Inf), n.sim = 1000, corstr = "independence")
 }
 \arguments{
 \item{traits}{trait matrix. The row for individuals and the column for traits.}
@@ -20,7 +20,7 @@ GEEaSPU(traits, geno, Z = NULL, model = c("binomial", "gaussian"),
 
 \item{n.sim}{number of simulations.}
 
-\item{corrstr}{correlation among traits.}
+\item{corstr}{a character string specifying the correlation structure. The following are permitted: "independence", "fixed", "stat_M_dep", "non_stat_M_dep", "exchangeable", "AR-M" and "unstructured"}
 }
 \value{
 p-values for the GEE-SPU and GEE-aSPU test.
@@ -32,10 +32,9 @@ It gives p-values of the GEESPU tests and GEEaSPU test.
 
 traits <- matrix(rnorm(100*5, 0,1), ncol=5)
 Z <- rnorm(100, 2, 0.5)
-corrstr = diag(5)
 geno <- rbinom(100, 2, 0.5)
 out <- GEEaSPU(traits, geno, Z = NULL, model = "gaussian", 
-	  gamma = c(1:8,Inf), n.sim = 100, corrstr = corrstr)
+	  gamma = c(1:8,Inf), n.sim = 100)
 
 }
 \author{
