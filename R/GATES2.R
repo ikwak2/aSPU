@@ -1,4 +1,4 @@
-#' Gene-based Association Test that uses an extended Simes procedure (GATES)
+#' Gene-based Association Test that uses an extended Simes procedure (GATES) for single trait - SNP set association
 #'
 #' Get the p-value of GATES. Usually it is used to get genomewise p-values.
 #' This function is taken from postgwas package.

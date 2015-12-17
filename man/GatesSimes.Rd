@@ -2,7 +2,7 @@
 % Please edit documentation in R/GatesSimes.R
 \name{GatesSimes}
 \alias{GatesSimes}
-\title{GATES-Simes test for pathway-based association testing}
+\title{GATES-Simes test for single trait - pathway association.}
 \usage{
 GatesSimes(pvec, ldmatrix, snp.info, gene.info)
 }

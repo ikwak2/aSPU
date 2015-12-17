@@ -2,7 +2,7 @@
 % Please edit documentation in R/GATES2.R
 \name{GATES2}
 \alias{GATES2}
-\title{Gene-based Association Test that uses an extended Simes procedure (GATES)}
+\title{Gene-based Association Test that uses an extended Simes procedure (GATES) for single trait - SNP set association}
 \usage{
 GATES2(ldmatrix, p)
 }

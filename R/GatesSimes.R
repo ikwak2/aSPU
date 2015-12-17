@@ -1,4 +1,4 @@
-#' GATES-Simes test for pathway-based association testing
+#' GATES-Simes test for single trait - pathway association.
 #'
 #' Get the p-value of GATES-Simes. It uses an extended Simes procedure to combine GATES p-values across multiple genes in a pathway.
 #'
