@@ -30,9 +30,10 @@
 #'
 #' traits <- matrix(rnorm(100*5, 0,1), ncol=5)
 #' Z <- rnorm(100, 2, 0.5)
+#' corrstr = diag(5)
 #' geno <- rbinom(100, 2, 0.5)
 #' out <- GEEaSPU(traits, geno, Z = NULL, model = "gaussian", 
-#'		  gamma = c(1:8,Inf), n.sim = 100)
+#'		  gamma = c(1:8,Inf), n.sim = 100, corrstr = corrstr)
 #'
 
 GEEaSPU <- function(traits, geno, 
