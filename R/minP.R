@@ -1,6 +1,6 @@
 #' minP test.
 #'
-#' Return exact minP test p-value for multiple trait - single SNP association. 
+#' Return exact minP test p-value for multiple traits - single SNP association. 
 #'
 #' @param Zi a vector of summary Z-scores for single SNP
 #'

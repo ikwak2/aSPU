@@ -1,15 +1,15 @@
 #' estcov
 #'
-#' Estimate covariance matrix based on the summary Z-scores
+#' Estimate the covariance matrix of multiple traits based on their (null) summary Z-scores.
 #'
-#' @param allZ matrix of summary Z-scores for all SNP. each row for SNP; each column for single trait
+#' @param allZ matrix of summary Z-scores for all SNP. each row for SNP; each column for single trait.
 #'
-#' @return estimated correlation matrix
+#' @return estimated correlation matrix.
 #'
 #' @author Junghi Kim, Yun Bai and Wei Pan 
 #'
 #' @references
-#' Junghi Kim, Yun Bai and Wei Pan (2016) An Adaptive Association Test for Multiple Phenotypes with GWAS Summary Statistics, Genetic Epidemiology DOI 10.1002/gepi.21931
+#' Junghi Kim, Yun Bai and Wei Pan (2015) An Adaptive Association Test for Multiple Phenotypes with GWAS Summary Statistics, Genetic Epidemiology, 8:651-663
 #'
 #' @examples
 #'

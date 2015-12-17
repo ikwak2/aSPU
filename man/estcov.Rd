@@ -7,13 +7,13 @@
 estcov(allZ)
 }
 \arguments{
-\item{allZ}{matrix of summary Z-scores for all SNP. each row for SNP; each column for single trait}
+\item{allZ}{matrix of summary Z-scores for all SNP. each row for SNP; each column for single trait.}
 }
 \value{
-estimated correlation matrix
+estimated correlation matrix.
 }
 \description{
-Estimate covariance matrix based on the summary Z-scores
+Estimate the covariance matrix of multiple traits based on their (null) summary Z-scores.
 }
 \examples{
 
@@ -41,7 +41,7 @@ minP(Zi= allZ[1,], r = r)
 Junghi Kim, Yun Bai and Wei Pan
 }
 \references{
-Junghi Kim, Yun Bai and Wei Pan (2016) An Adaptive Association Test for Multiple Phenotypes with GWAS Summary Statistics, Genetic Epidemiology DOI 10.1002/gepi.21931
+Junghi Kim, Yun Bai and Wei Pan (2015) An Adaptive Association Test for Multiple Phenotypes with GWAS Summary Statistics, Genetic Epidemiology, 8:651-663
 }
 \seealso{
 \code{\link{MTaSPUs}} \code{\link{minP}}

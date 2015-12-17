@@ -1,4 +1,4 @@
-#' GEEaSPU test for association with multiple traits - single SNP in generalized estimation equations.
+#' The SPU and aSPU tests for multiple traits - single SNP association in generalized estimating equations.
 #'
 #' It gives p-values of the GEESPU tests and GEEaSPU test.
 #'
@@ -12,7 +12,9 @@
 #'
 #' @param gamma power used in GEEaSPU test. A vector of the powers.
 #'
-#' @param n.sim number of simulations
+#' @param n.sim number of simulations.
+#'
+#' @param corrstr correlation among traits.
 #'
 #' @return p-values for the GEE-SPU and GEE-aSPU test.
 #'
@@ -35,9 +37,9 @@
 
 GEEaSPU <- function(traits, geno, 
 	  Z = NULL, model = c("binomial", "gaussian"), 
-	  gamma = c(1:8,Inf), n.sim=1000) {
+	  gamma = c(1:8,Inf), n.sim=1000, corrstr) {
 
-   Score <- GEE(traits = traits, geno = geno, Z = Z,family = model)
+   Score <- GEE(traits = traits, geno = geno, Z = Z,family = model, corrstr = corrstr)
    U <- Score$U
    V <- Score$Cov
    out <- GEEspu.score(U = U, V = V, gamma = gamma, B = n.sim)

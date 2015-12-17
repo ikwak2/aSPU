@@ -2,10 +2,10 @@
 % Please edit documentation in R/GEEaSPU.R
 \name{GEEaSPU}
 \alias{GEEaSPU}
-\title{GEEaSPU test for association with multiple traits - single SNP in generalized estimation equations.}
+\title{The SPU and aSPU tests for multiple traits - single SNP association in generalized estimating equations.}
 \usage{
 GEEaSPU(traits, geno, Z = NULL, model = c("binomial", "gaussian"),
-  gamma = c(1:8, Inf), n.sim = 1000)
+  gamma = c(1:8, Inf), n.sim = 1000, corrstr)
 }
 \arguments{
 \item{traits}{trait matrix. The row for individuals and the column for traits.}
@@ -18,7 +18,9 @@ GEEaSPU(traits, geno, Z = NULL, model = c("binomial", "gaussian"),
 
 \item{gamma}{power used in GEEaSPU test. A vector of the powers.}
 
-\item{n.sim}{number of simulations}
+\item{n.sim}{number of simulations.}
+
+\item{corrstr}{correlation among traits.}
 }
 \value{
 p-values for the GEE-SPU and GEE-aSPU test.

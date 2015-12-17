@@ -2,7 +2,7 @@
 % Please edit documentation in R/MTaSPUs.R
 \name{MTaSPUs}
 \alias{MTaSPUs}
-\title{An adaptive association test for single multiple trait - single SNP with GWAS summary statistics.}
+\title{The SPU and aSPU tests for multiple traits - single SNP association with GWAS summary statistics.}
 \usage{
 MTaSPUs(Z, r, B, pow, tranform = FALSE)
 }

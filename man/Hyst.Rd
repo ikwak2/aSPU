@@ -2,7 +2,7 @@
 % Please edit documentation in R/Hyst.R
 \name{Hyst}
 \alias{Hyst}
-\title{HYST (Hybrid Set-based Test)}
+\title{HYST (Hybrid Set-based Test) for single trait - pathway association}
 \usage{
 Hyst(pvec, ldmatrix, snp.info, gene.info)
 }

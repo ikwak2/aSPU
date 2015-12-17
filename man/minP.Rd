@@ -15,7 +15,7 @@ minP(Zi, r)
 return exact minP test
 }
 \description{
-Return exact minP test p-value for multiple trait - single SNP association.
+Return exact minP test p-value for multiple traits - single SNP association.
 }
 \examples{
 

@@ -1,4 +1,4 @@
-#' HYST (Hybrid Set-based Test)
+#' HYST (Hybrid Set-based Test) for single trait - pathway association 
 #'
 #' Get a p-value using HYST.
 #'

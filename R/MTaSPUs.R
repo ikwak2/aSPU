@@ -1,4 +1,4 @@
-#' An adaptive association test for single multiple trait - single SNP with GWAS summary statistics.
+#' The SPU and aSPU tests for multiple traits - single SNP association with GWAS summary statistics.
 #'
 #' SNP based adaptive association test for multiple phenotypes with GWAS summary statistics.
 #'
