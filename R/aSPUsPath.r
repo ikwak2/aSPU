@@ -4,7 +4,9 @@
 #'
 #' @param Zs Z-scores for each SNPs. It could be P-values if the Ps option is TRUE. 
 #'
-#' @param corrSNP Correaltion matirx of SNPs. Estimated from the reference population.
+#' @param corrSNP Correlation matirx of the SNPs to be tested; estimated from a
+#' reference panel (based on the same set of the reference alleles as
+#' used in calculating Z-scores).
 #'
 #' @param snp.info SNP information matrix, the 1st column is SNP id, 2nd column is chromosome #, 3rd column indicates SNP location.
 #'

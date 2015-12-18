@@ -10,7 +10,9 @@ aSPUsPath(Zs, corrSNP, pow = c(1, 2, 4, 8, Inf), pow2 = c(1, 2, 4, 8),
 \arguments{
 \item{Zs}{Z-scores for each SNPs. It could be P-values if the Ps option is TRUE.}
 
-\item{corrSNP}{Correaltion matirx of SNPs. Estimated from the reference population.}
+\item{corrSNP}{Correlation matirx of the SNPs to be tested; estimated from a
+reference panel (based on the same set of the reference alleles as
+used in calculating Z-scores).}
 
 \item{pow}{SNP specific power(gamma values) used in SPUpath test.}
 
