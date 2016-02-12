@@ -54,7 +54,7 @@
 #' @seealso \code{\link{aSPUw}}
 
 aSPU <- function(Y, X, cov=NULL, resample = c("perm", "sim", "boot"), model=c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000) {
-
+    X <- as.matrix(X)
     model <- match.arg(model)
     resample <- match.arg(resample)
 
