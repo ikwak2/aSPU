@@ -52,7 +52,7 @@ aSPUperm2 <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:
         tdat1 <- data.frame(trait=Y, cov)
         fit1 <- glm(trait~., family = model, data=tdat1)
         yfits <- fitted.values(fit1)
-        yresids <- fit1$residuals
+        yresids <- Y - yfits
  #       fit1res1<-summary(fit1)
  #       sigma0<-sqrt(fit1res1$dispersion)
 

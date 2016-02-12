@@ -70,9 +70,16 @@ aSPUsim1 <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8
         }
         r<-Y - pis
         U<-t(XUs) %*% r
-        CovS<-matrix(0, nrow=k, ncol=k)
-        for(i in 1:n)
-            CovS<-CovS + XUs[i,] %*% t(XUs[i,])
+        
+        if( model == "binomial" ) {
+            CovS <- mean(pis*(1-pis))*(t(Xgb) %*% Xgb)
+        } else {
+            CovS <- var(r)*(t(Xgb) %*% Xgb)
+        }
+        
+#        CovS<-matrix(0, nrow=k, ncol=k)
+#        for(i in 1:n)
+#            CovS<-CovS + XUs[i,] %*% t(XUs[i,])
     }
 
     svd.CovS<-svd(CovS)
