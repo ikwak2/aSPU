@@ -78,9 +78,9 @@ aSPUsimC2 <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:
         U <- t(XUs) %*% (Y - yfits)
 
         if( model == "binomial" ) {
-            CovS <- mean(pis*(1-pis))*(t(Xgb) %*% Xgb)
+            CovS <- mean(yfits*(1-yfits))*(t(Xgb) %*% Xgb)
         } else {
-            CovS <- var(r)*(t(Xgb) %*% Xgb)
+            CovS <- var(yresids)*(t(Xgb) %*% Xgb)
         }        
 
 #        CovS<-matrix(0, nrow=k, ncol=k)
