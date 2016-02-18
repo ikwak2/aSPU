@@ -47,13 +47,18 @@ aSPUwboot <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:
         U<-as.vector( t(Xg) %*% r)
 
         ##cov of the score stats:
-        CovS<- mean(Y)*(1-mean(Y))*(t(Xgb) %*% Xgb)
-
+        if( model == "binomial" ) {
+            CovS <- mean(Y)*(1-mean(Y))*(t(Xgb) %*% Xgb)
+        } else {
+            CovS <- var(Y)*(t(Xgb) %*% Xgb)
+        }
+        
     } else {
         ## with nuisance parameters:
         tdat1<-data.frame(trait=Y, cov)
         fit1<-glm(trait~.,family=model,data=tdat1)
         pis<-fitted.values(fit1)
+        yresids <- Y - pis
         XUs<-matrix(0, nrow=n, ncol=k)
         for(i in 1:k){
             tdat2<-data.frame(X1=X[,i], cov)
@@ -62,9 +67,14 @@ aSPUwboot <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:
             XUs[, i] <- (X[,i] - X1mus)
         }
         U <- t(XUs) %*% (Y - pis)
-        CovS<-matrix(0, nrow=k, ncol=k)
-        for(i in 1:n)
-            CovS<-CovS + XUs[i,] %*% t(XUs[i,])
+        
+        if( model == "binomial" ) {
+            CovS <- mean(pis*(1-pis))*(t(XUs) %*% XUs)
+        } else {
+            CovS <- var(yresids)*(t(XUs) %*% XUs)
+        }        
+        
+
     }
 
 
