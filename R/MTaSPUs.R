@@ -47,7 +47,7 @@
 
 MTaSPUs <- function(Z, r, B, pow, tranform = FALSE){
     if (tranform){
-        v <- ginv(v)
+        v <- ginv(r)
         Z <- tcrossprod(Z, v)
     }
 
@@ -58,7 +58,7 @@ MTaSPUs <- function(Z, r, B, pow, tranform = FALSE){
     }
 
     set.seed(1000)
-    Z0 <- rmvnorm(B, mean = rep(0, nrow(v)), sigma = v)
+    Z0 <- rmvnorm(B, mean = rep(0, nrow(r)), sigma = r)
     pval <- matrix(0, N, length(pow)+1)
 
     ponum <- pow[pow < Inf]
