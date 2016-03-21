@@ -30,8 +30,8 @@
 #'
 #' 
 #' r <- estcov(allZ)
-#' MTaSPUs(Z = allZ, r = r, B = 100, pow = c(1:4, Inf), tranform = FALSE)
-#' MTaSPUs(Z = allZ[1,], r = r, B = 100, pow = c(1:4, Inf), tranform = FALSE)
+#' MTaSPUs(Z = allZ, v = r, B = 100, pow = c(1:4, Inf), transform = FALSE)
+#' MTaSPUs(Z = allZ[1,], v = r, B = 100, pow = c(1:4, Inf), transform = FALSE)
 #' minP(Zi= allZ[1,], r = r)
 #'
 #' @seealso \code{\link{estcov}} \code{\link{MTaSPUs}}
