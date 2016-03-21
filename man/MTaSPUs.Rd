@@ -42,8 +42,8 @@ rownames(allZ) <- paste("snp", 1:n.snp, sep="")
 
 
 r <- estcov(allZ)
-MTaSPUs(Z = allZ, r = r, B = 100, pow = c(1:4, Inf), transform = FALSE)
-MTaSPUs(Z = allZ[1,], r = r, B = 100, pow = c(1:4, Inf), transform = FALSE)
+MTaSPUs(Z = allZ, v = v, B = 100, pow = c(1:4, Inf), transform = FALSE)
+MTaSPUs(Z = allZ[1,], v = v, B = 100, pow = c(1:4, Inf), transform = FALSE)
 minP(Zi= allZ[1,], r = r)
 
 }
