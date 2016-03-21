@@ -17,7 +17,7 @@ importFrom(gee, gee)
 importFrom(MASS, ginv, mvrnorm)
 importFrom(mvtnorm, rmvnorm, pmvnorm)
 importFrom(matrixStats, rowMins, rowMaxs)
-importFrom("stats", "fitted.values", "glm", "pchisq", "prcomp",
+importFrom("stats", "fitted.values", "glm", "pchisq", "prcomp", "approx",
             "qnorm", "pnorm", "rnorm", "runif", "cov", "fitted", "formula", "var", "cor")
 importFrom("utils", "head", "tail")
 importFrom(Rcpp, evalCpp)
