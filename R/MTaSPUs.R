@@ -8,9 +8,9 @@
 #'
 #' @param pow power used in SPU test. A vector of the powers.
 #'
-#' @param tranform if TRUE, the inference is made on transformed Z
+#' @param transform if TRUE, the inference is made on transformed Z
 #' 
-#' @param B number of Monte Carlo samples simulated to compute p-values
+#' @param B number of Monte Carlo samples simulated to compute p-values, the maximum number of MC simulations is 1e8
 #'
 #' @return compute p-values for SPU(gamma) i.e. pow=1:8, and infinity
 #'             aSPU, based on the minimum p-values over SPU(power)
@@ -45,76 +45,18 @@
 #'
 #' @seealso \code{\link{minP}} \code{\link{estcov}}
 
-MTaSPUs <- function(Z, r, B, pow, tranform = FALSE){
-    if (tranform){
-        v <- ginv(v)
-        Z <- tcrossprod(Z, v)
-    }
-
-    if (is.vector(Z)) {
-        N <- 1; K <- length(Z)
-    }else {
-        N <- dim(Z)[1]; K <- dim(Z)[2]
-    }
-
-    set.seed(1000)
-    Z0 <- rmvnorm(B, mean = rep(0, nrow(v)), sigma = v)
-    pval <- matrix(0, N, length(pow)+1)
-
-    ponum <- pow[pow < Inf]
-    ## SPU for integer power
-    for(k0 in 1:length(ponum)){
-        k <- ponum[k0]
-        if (N == 1) {
-            z1 <- abs(sum(Z^k))
-        } else {
-            z1 <- abs(rowSums(Z^k))
-        }
-        z0b <- abs(rowSums(Z0^k))
-        for(i in 1:N){
-            pval[i,k0] <- (1+sum(z0b>z1[i]))/(B+1)
-        }
-    }
-
-    ## SPU(max)
-    if (Inf %in% pow){
-        if(N == 1) {
-            z1 <- max(abs(Z))
-        } else {
-            z1 <- rowMaxs(abs(Z))
-        }
-        z0 <- rowMaxs(abs(Z0))
-        for(i in 1:N){
-            pval[i,length(pow)] = (1+sum(z0>z1[i]))/(B+1)
-        }
-    }
-
-    ## aSPU
-    if (N == 1) {
-        p1m <- min(pval[,1:length(pow)])
-    } else {
-        p1m <- rowMins(pval[,1:length(pow)])
-    }
-    p0 <- matrix(NA, B, length(pow))
-    for(k0 in 1:length(ponum)){
-        k <- ponum[k0]
-        zb <- abs(rowSums(Z0^k))
-        p0[,k0] <- (1+B-rank(abs(zb)))/B
-    }
-
-
-    if (Inf %in% pow){
-        zb <- rowMaxs(abs(Z0))
-        p0[,length(pow)] = (1+B-rank(zb))/B
-    }
-    p0m = rowMins(p0)
-    for(i in 1:N){
-        pval[i,length(pow)+1] = (1+sum(p0m<p1m[i]))/(B+1)
-    }
-
-    if(Inf %in% pow) s <- c(paste("SPU", ponum, sep=""),"SPUInf","aSPU") else {
-                                                                             s <- c(paste("SPU", ponum, sep=""),"aSPU")}
-    colnames(pval) <- s
-    rownames(pval) <- rownames(Z)
-    return(pval)
+MTaSPUs <- function(Z, v, B, pow, transform = FALSE){
+   # -- Z: matrix of summary Z-scores, SNPs in rows and traits in columns  
+   # -- Or a vector of summary Z-scores for a single snp
+   # -- v: output of estcov
+   # --    estimated estimated correlation matrix  based on the summary Z-scores
+   # -- transform: if TRUE, the inference is made on transformed Z
+   # -- B: number of Monte Carlo samples simulated to compute p-values max(B)=1e8
+   # -- results: compute p-values for SPU(gamma) i.e. pow=1:8, and infinity
+   # --          aSPU, based on the minimum p-values over SPU(power)
+   # --          each row for single SNP    
+	if (B < 1e8) p <- MTaSPUsmallB(Z, v, B, pow, transform) else  p <- MTaSPUsB1e8(Z, v, pow, transform)
+	return(p)
 }
+
+
