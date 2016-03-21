@@ -4,7 +4,7 @@
 #'
 #' @param Z matrix of summary Z-scores, SNPs in rows and traits in columns. Or a vector of summary Z-scores for a single snp
 #'
-#' @param r estimated correlation matrix based on the summary Z-scores (output of estcov)
+#' @param v estimated correlation matrix based on the summary Z-scores (output of estcov)
 #'
 #' @param pow power used in SPU test. A vector of the powers.
 #'

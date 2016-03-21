@@ -9,13 +9,13 @@ MTaSPUs(Z, v, B, pow, transform = FALSE)
 \arguments{
 \item{Z}{matrix of summary Z-scores, SNPs in rows and traits in columns. Or a vector of summary Z-scores for a single snp}
 
+\item{v}{estimated correlation matrix based on the summary Z-scores (output of estcov)}
+
 \item{B}{number of Monte Carlo samples simulated to compute p-values, the maximum number of MC simulations is 1e8}
 
 \item{pow}{power used in SPU test. A vector of the powers.}
 
 \item{transform}{if TRUE, the inference is made on transformed Z}
-
-\item{r}{estimated correlation matrix based on the summary Z-scores (output of estcov)}
 }
 \value{
 compute p-values for SPU(gamma) i.e. pow=1:8, and infinity
