@@ -64,7 +64,7 @@ You can check that MTaSPUsSetC is much faster here. The speed was similar when n
 
 To use Python version, first save files in '.txt' format.
 
-```{r corF}
+```{r wrwr}
 #write.table(ZsF, quote=FALSE, row.names=FALSE, col.names=FALSE, file="ZsF.txt")
 #write.table(corPheF, quote=FALSE, row.names=FALSE, col.names=FALSE, file="corPheF.txt")
 #write.table(corSNPF, quote=FALSE, row.names=FALSE, col.names=FALSE, file="corSNPF.txt")
@@ -86,7 +86,7 @@ Now lets try it to Man data.
 
 ```
 Wait, here we got much small p-value using 'PsM' input. Why is it so? This can be answered from 'corSNPM', 'corPheM' and 'ZsM'.
-```{r corZs}
+```{r Zsmcors}
 ZsM
 corSNPM
 corPheM
