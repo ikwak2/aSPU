@@ -35,7 +35,7 @@
 #'
 #' @seealso \code{\link{MTaSPUsSetC}} 
 
-MTaSPUsC <- function(Zs, corSNP, corPhe, pow=c(1,2,4,8),
+MTaSPUsSetC <- function(Zs, corSNP, corPhe, pow=c(1,2,4,8),
                      pow2 = c(1,2,4,8),
                      n.perm=5000,
                      Ps = FALSE) {
