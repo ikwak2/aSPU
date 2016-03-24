@@ -12,6 +12,8 @@ export(GEEaSPU)
 export(minP)
 export(estcov)
 export(MTaSPUs)
+export(MTaSPUsSet)
+export(MTaSPUsSetC)
 
 importFrom(gee, gee)
 importFrom(MASS, ginv, mvrnorm)

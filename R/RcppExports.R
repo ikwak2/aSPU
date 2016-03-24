@@ -9,3 +9,7 @@ calcT0sim <- function(CvSqrt, powV, nperm) {
     .Call('aSPU_calcT0sim', PACKAGE = 'aSPU', CvSqrt, powV, nperm)
 }
 
+calcT0simM2 <- function(A, B, powV, pow2V, nperm, Pval, Ts) {
+    .Call('aSPU_calcT0simM2', PACKAGE = 'aSPU', A, B, powV, pow2V, nperm, Pval, Ts)
+}
+

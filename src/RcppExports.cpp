@@ -33,3 +33,20 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// calcT0simM2
+Rcpp::List calcT0simM2(arma::mat A, arma::mat B, arma::mat powV, arma::mat pow2V, int nperm, int Pval, arma::mat Ts);
+RcppExport SEXP aSPU_calcT0simM2(SEXP ASEXP, SEXP BSEXP, SEXP powVSEXP, SEXP pow2VSEXP, SEXP npermSEXP, SEXP PvalSEXP, SEXP TsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< arma::mat >::type A(ASEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type B(BSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type powV(powVSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type pow2V(pow2VSEXP);
+    Rcpp::traits::input_parameter< int >::type nperm(npermSEXP);
+    Rcpp::traits::input_parameter< int >::type Pval(PvalSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type Ts(TsSEXP);
+    __result = Rcpp::wrap(calcT0simM2(A, B, powV, pow2V, nperm, Pval, Ts));
+    return __result;
+END_RCPP
+}
