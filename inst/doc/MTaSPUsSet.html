@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="date" content="2016-03-24" />
+
+<title>Adaptive Gene - Multitrait Association testing with GWAS Summary Statistics (MTaSPUsSet() )</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0A%7D%0Apre%20%7B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div id="header">
+<h1 class="title">Adaptive Gene - Multitrait Association testing with GWAS Summary Statistics (MTaSPUsSet() )</h1>
+<h4 class="date"><em>2016-03-24</em></h4>
+</div>
+
+
+<p>This vignette illustrates the use of the MTaSPUsSet test, an adaptive gene-multitrait association testing with GWAS summary statistics.</p>
+<div id="data" class="section level2">
+<h2>Data</h2>
+<p>We will consider testing a gene named <code>SAMD11</code> using GWAS summary statistics of Genetic Investigation of ANthropometric Traits (GIANT) consortium data.</p>
+<p>Let’s load the data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(aSPU)</code></pre></div>
+<pre><code>## Loading required package: gee
+## Loading required package: MASS
+## Loading required package: mvtnorm
+## Loading required package: matrixStats
+## matrixStats v0.50.1 (2015-12-14) successfully loaded. See ?matrixStats for help.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(SAMD11)
+<span class="kw">attach</span>(SAMD11)</code></pre></div>
+<p><code>ZsM</code> and <code>PsM</code> are Z-scores and P-values for GIANT Man data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(ZsM,<span class="dv">3</span>)</code></pre></div>
+<pre><code>##              BMIm HeightM   HIPm    WCm WeightM   WHRm
+## rs4951864  -1.150   0.789 -0.539 -0.706  -0.628 -0.468
+## rs12132517  1.372  -0.755  0.690  0.824   0.842  0.279
+## rs11240777  1.036   0.878  0.755  1.670   1.254  1.175</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">PsM</code></pre></div>
+<pre><code>##            BMIm HeightM HIPm   WCm WeightM WHRm
+## rs4951864  0.25    0.43 0.59 0.480    0.53 0.64
+## rs12132517 0.17    0.45 0.49 0.410    0.40 0.78
+## rs11240777 0.30    0.38 0.45 0.095    0.21 0.24</code></pre>
+<p><code>corSNPM</code> and <code>corPheM</code> are correlation among SNPs and Phenotypes respectively for GIANT Man data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(corSNPM,<span class="dv">2</span>)</code></pre></div>
+<pre><code>##            rs4951864 rs12132517 rs11240777
+## rs4951864       1.00      -0.89      -0.49
+## rs12132517     -0.89       1.00       0.44
+## rs11240777     -0.49       0.44       1.00</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(corPheM,<span class="dv">2</span>)</code></pre></div>
+<pre><code>##        V4    V6    V8   V12  V16   V18
+## V4   1.00 -0.02  0.12  0.27 0.56  0.07
+## V6  -0.02  1.00  0.00 -0.01 0.08  0.00
+## V8   0.12  0.00  1.00  0.27 0.16 -0.01
+## V12  0.27 -0.01  0.27  1.00 0.25  0.34
+## V16  0.56  0.08  0.16  0.25 1.00  0.03
+## V18  0.07  0.00 -0.01  0.34 0.03  1.00</code></pre>
+<p><code>ZsF</code> and <code>PsF</code> are Z-scores and P-values for GIANT Woman data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(ZsF,<span class="dv">3</span>)</code></pre></div>
+<pre><code>##              BMIw HeightW   HIPw    WCw WeightW   WHRw
+## rs4951864   0.628   0.345  0.674  1.405   0.643  1.150
+## rs12132517 -0.789  -0.412 -0.935 -1.555  -0.860 -1.227
+## rs11240777 -0.385   0.215 -0.482 -0.496  -0.025 -0.305</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">PsF</code></pre></div>
+<pre><code>##            BMIw HeightW HIPw  WCw WeightW WHRw
+## rs4951864  0.53    0.73 0.50 0.16    0.52 0.25
+## rs12132517 0.43    0.68 0.35 0.12    0.39 0.22
+## rs11240777 0.70    0.83 0.63 0.62    0.98 0.76</code></pre>
+<p><code>corSNPF</code> and <code>corPheF</code> are correlation among SNPs and Phenotypes respectively for GIANT Woman data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(corSNPF,<span class="dv">2</span>)</code></pre></div>
+<pre><code>##            rs4951864 rs12132517 rs11240777
+## rs4951864       1.00      -0.89      -0.49
+## rs12132517     -0.89       1.00       0.44
+## rs11240777     -0.49       0.44       1.00</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(corPheF,<span class="dv">2</span>)</code></pre></div>
+<pre><code>##        V5    V7    V9   V13  V17   V19
+## V5   1.00 -0.01  0.19  0.30 0.66  0.03
+## V7  -0.01  1.00 -0.01 -0.01 0.04 -0.01
+## V9   0.19 -0.01  1.00  0.29 0.21 -0.02
+## V13  0.30 -0.01  0.29  1.00 0.29  0.32
+## V17  0.66  0.04  0.21  0.29 1.00  0.02
+## V19  0.03 -0.01 -0.02  0.32 0.02  1.00</code></pre>
+<p>You can see that <code>corSNPM</code> and <code>corSNPF</code> are same. Yes, they are calculated from the reference population (here from 1000 genome CEU panel). They are same under H0 no matter what phenotype is.</p>
+<p>Now, let’s perform <code>MTaSPUsSet</code> and <code>MTaSPUsSetC</code> functions. <code>MTaSPUsSetC</code> is C coded version. The C coded version is faster when n.perm &lt; 10^4. However it used n.perm <span class="math inline">\(\times\)</span> npow1 <span class="math inline">\(\times\)</span> npow2 space in calculation while R version just used n.perm space in calculation. So R version is faster when n.perm is big like n.perm = 10^6.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(outFZC &lt;-<span class="st"> </span><span class="kw">MTaSPUsSetC</span>(ZsF, <span class="dt">corSNP=</span>corSNPF, <span class="dt">corPhe =</span> corPheF,
+           <span class="dt">pow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>),  <span class="dt">pow2 =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>), <span class="dt">n.perm=</span><span class="dv">100</span>, <span class="dt">Ps=</span><span class="ot">FALSE</span>))</code></pre></div>
+<pre><code>## MTSPUs1,1 MTSPUs2,1 MTSPUs4,1 MTSPUs8,1 MTSPUs1,2 MTSPUs2,2 MTSPUs4,2 
+##      0.51      0.94      0.95      0.95      0.69      0.75      0.71 
+## MTSPUs8,2 MTSPUs1,4 MTSPUs2,4 MTSPUs4,4 MTSPUs8,4 MTSPUs1,8 MTSPUs2,8 
+##      0.68      0.80      0.77      0.74      0.73      0.81      0.76 
+## MTSPUs4,8 MTSPUs8,8   MTaSPUs 
+##      0.76      0.76      0.80</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(outFZ &lt;-<span class="st"> </span><span class="kw">MTaSPUsSet</span>(ZsF, <span class="dt">corSNP=</span>corSNPF, <span class="dt">corPhe =</span> corPheF,
+           <span class="dt">pow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>),  <span class="dt">pow2 =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>), <span class="dt">n.perm=</span><span class="dv">100</span>, <span class="dt">Ps=</span><span class="ot">FALSE</span>))</code></pre></div>
+<pre><code>## MTSPUsSet1,1 MTSPUsSet1,2 MTSPUsSet1,4 MTSPUsSet1,8 MTSPUsSet2,1 
+##    0.4900000    0.9800000    0.9800000    0.9800000    0.6800000 
+## MTSPUsSet2,2 MTSPUsSet2,4 MTSPUsSet2,8 MTSPUsSet4,1 MTSPUsSet4,2 
+##    0.7100000    0.6900000    0.6600000    0.7400000    0.7300000 
+## MTSPUsSet4,4 MTSPUsSet4,8 MTSPUsSet8,1 MTSPUsSet8,2 MTSPUsSet8,4 
+##    0.6600000    0.6400000    0.7600000    0.7000000    0.6800000 
+## MTSPUsSet8,8   MTaSPUsSet 
+##    0.6800000    0.7821782</code></pre>
+<p>You can check that <code>MTaSPUsSetC</code> is much faster here. The speed was similar when n.perm=10^4 for this example and R coded version is faster when n.perm &gt; 10^4. If the speed matters, you can try python version. it is a bit faster then R version. (like 1.5 times)</p>
+<p>To use Python version, first save files in <code>.txt</code> format.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#write.table(ZsF, quote=FALSE, row.names=FALSE, col.names=FALSE, file=&quot;ZsF.txt&quot;)</span>
+<span class="co">#write.table(corPheF, quote=FALSE, row.names=FALSE, col.names=FALSE, file=&quot;corPheF.txt&quot;)</span>
+<span class="co">#write.table(corSNPF, quote=FALSE, row.names=FALSE, col.names=FALSE, file=&quot;corSNPF.txt&quot;)</span></code></pre></div>
+<p><code>MTaSPUsSet.py</code> function in <a href="https://github.com/ikwak2/aSPU_py">py/aSPU_py</a> do the same job with <code>./MTaSPUsSet.py ZsF.txt corPheF.txt corSNPF.txt 100 outF.txt</code>.</p>
+<p>We can use the P-values for the same task. Put P-value matrix <code>PsF</code> and use <code>Ps=TRUE</code> option.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(outFPC &lt;-<span class="st"> </span><span class="kw">MTaSPUsSetC</span>(PsF, <span class="dt">corSNP=</span>corSNPF, <span class="dt">corPhe =</span> corPheF,
+           <span class="dt">pow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>),  <span class="dt">pow2 =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>), <span class="dt">n.perm=</span><span class="dv">100</span>, <span class="dt">Ps=</span><span class="ot">TRUE</span>))</code></pre></div>
+<pre><code>## MTSPUs1,1 MTSPUs2,1 MTSPUs4,1 MTSPUs8,1 MTSPUs1,2 MTSPUs2,2 MTSPUs4,2 
+##      0.67      0.72      0.77      0.76      0.77      0.81      0.81 
+## MTSPUs8,2 MTSPUs1,4 MTSPUs2,4 MTSPUs4,4 MTSPUs8,4 MTSPUs1,8 MTSPUs2,8 
+##      0.81      0.81      0.82      0.84      0.84      0.83      0.82 
+## MTSPUs4,8 MTSPUs8,8   MTaSPUs 
+##      0.82      0.81      0.82</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(outFP &lt;-<span class="st"> </span><span class="kw">MTaSPUsSet</span>(PsF, <span class="dt">corSNP=</span>corSNPF, <span class="dt">corPhe =</span> corPheF,
+           <span class="dt">pow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>),  <span class="dt">pow2 =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>), <span class="dt">n.perm=</span><span class="dv">100</span>, <span class="dt">Ps=</span><span class="ot">TRUE</span>))</code></pre></div>
+<pre><code>## MTSPUsSet1,1 MTSPUsSet1,2 MTSPUsSet1,4 MTSPUsSet1,8 MTSPUsSet2,1 
+##    0.5800000    0.6800000    0.7200000    0.6800000    0.7100000 
+## MTSPUsSet2,2 MTSPUsSet2,4 MTSPUsSet2,8 MTSPUsSet4,1 MTSPUsSet4,2 
+##    0.7300000    0.7200000    0.7200000    0.7800000    0.7400000 
+## MTSPUsSet4,4 MTSPUsSet4,8 MTSPUsSet8,1 MTSPUsSet8,2 MTSPUsSet8,4 
+##    0.7200000    0.7100000    0.7500000    0.7500000    0.7400000 
+## MTSPUsSet8,8   MTaSPUsSet 
+##    0.7400000    0.7623762</code></pre>
+<p>Now, let’s try it to GIANT Man data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(outMPC &lt;-<span class="st"> </span><span class="kw">MTaSPUsSetC</span>(PsM, <span class="dt">corSNP=</span>corSNPM, <span class="dt">corPhe =</span> corPheM,
+           <span class="dt">pow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>),  <span class="dt">pow2 =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>), <span class="dt">n.perm=</span><span class="dv">100</span>, <span class="dt">Ps=</span><span class="ot">TRUE</span>))</code></pre></div>
+<pre><code>## MTSPUs1,1 MTSPUs2,1 MTSPUs4,1 MTSPUs8,1 MTSPUs1,2 MTSPUs2,2 MTSPUs4,2 
+##      0.29      0.40      0.51      0.57      0.47      0.57      0.64 
+## MTSPUs8,2 MTSPUs1,4 MTSPUs2,4 MTSPUs4,4 MTSPUs8,4 MTSPUs1,8 MTSPUs2,8 
+##      0.68      0.61      0.68      0.71      0.71      0.67      0.69 
+## MTSPUs4,8 MTSPUs8,8   MTaSPUs 
+##      0.70      0.70      0.43</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(outMZC &lt;-<span class="st"> </span><span class="kw">MTaSPUsSetC</span>(ZsM, <span class="dt">corSNP=</span>corSNPM, <span class="dt">corPhe =</span> corPheM,
+           <span class="dt">pow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>),  <span class="dt">pow2 =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>), <span class="dt">n.perm=</span><span class="dv">100</span>, <span class="dt">Ps=</span><span class="ot">FALSE</span>))</code></pre></div>
+<pre><code>## MTSPUs1,1 MTSPUs2,1 MTSPUs4,1 MTSPUs8,1 MTSPUs1,2 MTSPUs2,2 MTSPUs4,2 
+##      0.04      0.17      0.36      0.41      0.55      0.67      0.75 
+## MTSPUs8,2 MTSPUs1,4 MTSPUs2,4 MTSPUs4,4 MTSPUs8,4 MTSPUs1,8 MTSPUs2,8 
+##      0.76      0.72      0.76      0.77      0.78      0.77      0.77 
+## MTSPUs4,8 MTSPUs8,8   MTaSPUs 
+##      0.77      0.77      0.12</code></pre>
+<p>Wait, here we got much small p-value using <code>PsM</code> input. Why is it so? This can be answered from <code>corSNPM</code>, <code>corPheM</code> and <code>ZsM</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(ZsM,<span class="dv">3</span>)</code></pre></div>
+<pre><code>##              BMIm HeightM   HIPm    WCm WeightM   WHRm
+## rs4951864  -1.150   0.789 -0.539 -0.706  -0.628 -0.468
+## rs12132517  1.372  -0.755  0.690  0.824   0.842  0.279
+## rs11240777  1.036   0.878  0.755  1.670   1.254  1.175</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(corSNPM,<span class="dv">2</span>)</code></pre></div>
+<pre><code>##            rs4951864 rs12132517 rs11240777
+## rs4951864       1.00      -0.89      -0.49
+## rs12132517     -0.89       1.00       0.44
+## rs11240777     -0.49       0.44       1.00</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(corPheM,<span class="dv">2</span>)</code></pre></div>
+<pre><code>##        V4    V6    V8   V12  V16   V18
+## V4   1.00 -0.02  0.12  0.27 0.56  0.07
+## V6  -0.02  1.00  0.00 -0.01 0.08  0.00
+## V8   0.12  0.00  1.00  0.27 0.16 -0.01
+## V12  0.27 -0.01  0.27  1.00 0.25  0.34
+## V16  0.56  0.08  0.16  0.25 1.00  0.03
+## V18  0.07  0.00 -0.01  0.34 0.03  1.00</code></pre>
+<p>In <code>corSNPM</code>, correlation between <code>rs4951864</code> and others are negative. The second column of <code>ZsM</code> looks a bit odd. Here I suspected coding error. P-values for each SNP and beta estimate was provided from the download page of GIANT data. I transformed P-values to Z-scores by <code>absZs = qnorm(1 - (Zs)/2)</code> and then multiplied the sign of beta estimates to recover the original Z-scores. Maybe I am wrong somewhere. So I didn’t used P-scores as input in GIANT data analysis.</p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
