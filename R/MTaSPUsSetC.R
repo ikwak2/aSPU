@@ -28,12 +28,13 @@
 #' @examples
 #'
 #' data(SAMD11)
+#' attach(SAMD11)
 #' ## example analysis using aSPUM test.
+#' (outFZC <- MTaSPUsSetC(ZsF, corSNP=corSNPF, corPhe = corPheF,
+#'       pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=10, Ps=FALSE))
 #'
-#' outFP <- MTaSPUsC(SAMD11$ZsF, corSNP=SAMD11$corSNPF, corPhe = SAMD11$corPheF, pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=FALSE)
 #' 
-#'
-#' @seealso \code{\link{MTaSPUsSetC}} 
+#' @seealso \code{\link{MTaSPUsSet}} 
 
 MTaSPUsSetC <- function(Zs, corSNP, corPhe, pow=c(1,2,4,8),
                      pow2 = c(1,2,4,8),

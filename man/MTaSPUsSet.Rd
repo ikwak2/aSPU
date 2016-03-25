@@ -30,8 +30,12 @@ It gives p-values of the MTSPUsSet tests and MTaSPUsSet test with GWAS summary s
 \examples{
 
 data(SAMD11)
+attach(SAMD11)
 ## example analysis using aSPUM test.
-outFP <- MTaSPUs(SAMD11$ZsF, corSNP=SAMD11$corSNPF, corPhe = SAMD11$corPheF, pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=FALSE)
+(outFZ <- MTaSPUsSet(ZsF, corSNP=corSNPF, corPhe = corPheF,
+      pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=10, Ps=FALSE))
+
+
 }
 \author{
 Il-Youp Kwak and Wei Pan

@@ -17,7 +17,7 @@ This vignette illustrates the use of the MTaSPUsSet test, an adaptive gene-multi
 
 ## Data
 
-We will consider testing a gene named 'SAMD11' using GWAS summary statistics of Genetic
+We will consider testing a gene named `SAMD11` using GWAS summary statistics of Genetic
 Investigation of ANthropometric Traits (GIANT) consortium data.
 
 Let's load the data.
@@ -27,42 +27,44 @@ data(SAMD11)
 attach(SAMD11)
 ```
 
-'ZsM' and 'PsM' are Z-scores and P-values for GIANT Man data.
+`ZsM` and `PsM` are Z-scores and P-values for GIANT Man data.
 ```{r ZsPsM}
-ZsM
+round(ZsM,3)
 PsM
 ```
 
-'corSNPM' and 'corPheM' are correlation among SNPs and Phenotypes respectively for GIANT Man data. 
+`corSNPM` and `corPheM` are correlation among SNPs and Phenotypes respectively for GIANT Man data. 
 ```{r corM}
-corSNPM
-corPheM
+round(corSNPM,2)
+round(corPheM,2)
 ```
 
-'ZsF' and 'PsF' are Z-scores and P-values for GIANT Woman data.
+`ZsF` and `PsF` are Z-scores and P-values for GIANT Woman data.
 ```{r ZsPsF}
-ZsF
+round(ZsF,3)
 PsF
 ```
 
-'corSNPF' and 'corPheF' are correlation among SNPs and Phenotypes respectively for GIANT Woman data. 
+`corSNPF` and `corPheF` are correlation among SNPs and Phenotypes respectively for GIANT Woman data. 
 ```{r corF}
-corSNPF
-corPheF
+round(corSNPF,2)
+round(corPheF,2)
 ```
 
-You can see that 'corSNPM' and 'corSNPF' are same. Yes, they are calculated from the reference population (here from 1000 genome CEU panel). They are same under H0 no matter what phenotype is.  
+You can see that `corSNPM` and `corSNPF` are same. Yes, they are calculated from the reference population (here from 1000 genome CEU panel). They are same under H0 no matter what phenotype is.  
 
-Now, let's perform MTaSPUsSet() and MTaSPUsSetC() functions. MTaSPUsSetC is C coded version. The C coded version is faster when n.perm < 10^4. However it used n.perm*npow1*npow2 space in calculation while R version just used n.perm space in calculation. So R version is faster when n.perm is big like n.perm = 10^7. 
+Now, let's perform `MTaSPUsSet` and `MTaSPUsSetC` functions. `MTaSPUsSetC` is C coded version. The C coded version is faster when n.perm < 10^4. However it used n.perm $\times$ npow1 $\times$ npow2 space in calculation while R version just used n.perm space in calculation. So R version is faster when n.perm is big like n.perm = 10^6. 
 
 ```{r outFZ}
-(outFZC <- MTaSPUsSetC(ZsF, corSNP=corSNPF, corPhe = corPheF, pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=FALSE))
-(outFZ <- MTaSPUsSet(ZsF, corSNP=corSNPF, corPhe = corPheF, pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=FALSE))
+(outFZC <- MTaSPUsSetC(ZsF, corSNP=corSNPF, corPhe = corPheF,
+           pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=FALSE))
+(outFZ <- MTaSPUsSet(ZsF, corSNP=corSNPF, corPhe = corPheF,
+           pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=FALSE))
 ```
 
-You can check that MTaSPUsSetC is much faster here. The speed was similar when n.perm=10^4 for this example and R coded version is faster when n.perm > 10^4. If the speed matters, you can try python version. it is a bit faster then R version. (like 1.5 times)
+You can check that `MTaSPUsSetC` is much faster here. The speed was similar when n.perm=10^4 for this example and R coded version is faster when n.perm > 10^4. If the speed matters, you can try python version. it is a bit faster then R version. (like 1.5 times)
 
-To use Python version, first save files in '.txt' format.
+To use Python version, first save files in `.txt` format.
 
 ```{r wrwr}
 #write.table(ZsF, quote=FALSE, row.names=FALSE, col.names=FALSE, file="ZsF.txt")
@@ -70,26 +72,31 @@ To use Python version, first save files in '.txt' format.
 #write.table(corSNPF, quote=FALSE, row.names=FALSE, col.names=FALSE, file="corSNPF.txt")
 
 ```
-'MTaSPUsSet.py' function in [py/aSPU_py](https://github.com/ikwak2/aSPU_py) do the same job with './MTaSPUsSet.py ZsF.txt corPheF.txt corSNPF.txt 100 outF.txt'. 
+`MTaSPUsSet.py` function in [py/aSPU_py](https://github.com/ikwak2/aSPU_py) do the same job with 
+```{py}
+#./MTaSPUsSet.py ZsF.txt corPheF.txt corSNPF.txt 100 outF.txt
+```
 
-
-We can use the P-values for the same task. Put P-value matrix 'PsF' and use 'Ps=TRUE' option.
+We can use the P-values for the same task. Put P-value matrix `PsF` and use `Ps=TRUE` option.
 ```{r outFP}
-(outFPC <- MTaSPUsSetC(PsF, corSNP=corSNPF, corPhe = corPheF, pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=TRUE))
-(outFP <- MTaSPUsSet(PsF, corSNP=corSNPF, corPhe = corPheF, pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=TRUE))
+(outFPC <- MTaSPUsSetC(PsF, corSNP=corSNPF, corPhe = corPheF,
+           pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=TRUE))
+(outFP <- MTaSPUsSet(PsF, corSNP=corSNPF, corPhe = corPheF,
+           pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=TRUE))
 ```
 
-Now lets try it to Man data. 
+Now, let's try it to GIANT Man data. 
 ```{r outMPZ}
-(outMPC <- MTaSPUsSetC(PsM, corSNP=corSNPM, corPhe = corPheM, pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=TRUE))
-(outMZC <- MTaSPUsSetC(ZsM, corSNP=corSNPM, corPhe = corPheM, pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=FALSE))
-
+(outMPC <- MTaSPUsSetC(PsM, corSNP=corSNPM, corPhe = corPheM,
+           pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=TRUE))
+(outMZC <- MTaSPUsSetC(ZsM, corSNP=corSNPM, corPhe = corPheM,
+           pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=FALSE))
 ```
-Wait, here we got much small p-value using 'PsM' input. Why is it so? This can be answered from 'corSNPM', 'corPheM' and 'ZsM'.
+Wait, here we got much small p-value using `PsM` input. Why is it so? This can be answered from `corSNPM`, `corPheM` and `ZsM`.
 ```{r Zsmcors}
-ZsM
-corSNPM
-corPheM
+round(ZsM,3)
+round(corSNPM,2)
+round(corPheM,2)
 ```
-In 'corSNPM', correlation between 'rs4951864' and others are negative. The second column of 'ZsM' looks a bit odd. Here I suspected coding error. There were only P-values were available from the website. I transformed it to Z-scores by 'abZs = qnorm(1 - (Zs)/2)' and then multiply the sign of beta estimates for each SNP to recover sign. Maybe there were wrong somewhere. So I didn't used Z-scores in GIANT data analysis and used P-valeus in analysis. (Using Z-scores, MTaSPUsSet identified much more number of genes)
+In `corSNPM`, correlation between `rs4951864` and others are negative. The second column of `ZsM` looks a bit odd. Here I suspected coding error. P-values for each SNP and beta estimate was provided from the download page of GIANT data. I transformed P-values to Z-scores by `absZs = qnorm(1 - (Zs)/2)` and then multiplied the sign of beta estimates to recover the original Z-scores. Maybe I am wrong somewhere. So I didn't used P-scores as input in GIANT data analysis.
 
