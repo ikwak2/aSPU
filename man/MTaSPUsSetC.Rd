@@ -30,9 +30,10 @@ It gives p-values of the MTSPUsSet tests and MTaSPUsSet test with GWAS summary s
 \examples{
 
 data(SAMD11)
+attach(SAMD11)
 ## example analysis using aSPUM test.
-
-outFP <- MTaSPUsC(SAMD11$ZsF, corSNP=SAMD11$corSNPF, corPhe = SAMD11$corPheF, pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=FALSE)
+(outFZC <- MTaSPUsSetC(ZsF, corSNP=corSNPF, corPhe = corPheF,
+      pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=10, Ps=FALSE))
 
 
 }
@@ -45,6 +46,6 @@ Multiple-trait, gene-level adaptive association testing
   with GWAS summary statistics.
 }
 \seealso{
-\code{\link{MTaSPUsSetC}}
+\code{\link{MTaSPUsSet}}
 }
 

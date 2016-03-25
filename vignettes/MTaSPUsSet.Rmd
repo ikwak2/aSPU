@@ -72,10 +72,7 @@ To use Python version, first save files in `.txt` format.
 #write.table(corSNPF, quote=FALSE, row.names=FALSE, col.names=FALSE, file="corSNPF.txt")
 
 ```
-`MTaSPUsSet.py` function in [py/aSPU_py](https://github.com/ikwak2/aSPU_py) do the same job with 
-```{py}
-#./MTaSPUsSet.py ZsF.txt corPheF.txt corSNPF.txt 100 outF.txt
-```
+`MTaSPUsSet.py` function in [py/aSPU_py](https://github.com/ikwak2/aSPU_py) do the same job with `./MTaSPUsSet.py ZsF.txt corPheF.txt corSNPF.txt 100 outF.txt`.
 
 We can use the P-values for the same task. Put P-value matrix `PsF` and use `Ps=TRUE` option.
 ```{r outFP}
