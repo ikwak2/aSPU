@@ -25,8 +25,7 @@ used in calculating Z-scores).}
 \item{Ps}{TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.}
 }
 \value{
-A list object, Ts : test statistics for the SPU tests (in the order of the specified pow) and finally for the aSPU test.
-        pvs : p-values for the SPUs and aSPUs tests.
+A vector object, MTSPUsSet test P values and MTaSPUsSet P value.
 }
 \description{
 It gives p-values of the MTSPUsSet tests and MTaSPUsSet test with GWAS summary statistics.

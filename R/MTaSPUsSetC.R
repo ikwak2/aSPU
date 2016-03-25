@@ -18,8 +18,7 @@
 #'
 #' @param Ps TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.
 #'
-#' @return A list object, Ts : test statistics for the SPU tests (in the order of the specified pow) and finally for the aSPU test.
-#'         pvs : p-values for the SPUs and aSPUs tests.
+#' @return A vector object, MTSPUsSet test P values and MTaSPUsSet P value.
 #'
 #' @author Il-Youp Kwak and Wei Pan
 #'
