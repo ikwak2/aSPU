@@ -10,15 +10,19 @@ MTaSPUsSetC(Zs, corSNP, corPhe, pow = c(1, 2, 4, 8), pow2 = c(1, 2, 4, 8),
 \arguments{
 \item{Zs}{Z-scores for each SNPs. It could be P-values if the Ps option is TRUE.}
 
-\item{pow}{power used in SPU test. A vector of the powers.}
+\item{corSNP}{Correlation matirx of the SNPs to be tested; estimated from a
+reference panel (based on the same set of the reference alleles as
+used in calculating Z-scores).}
+
+\item{corPhe}{Correlation matirx of phenotypes to be tested; Estimated from Z-scores.}
+
+\item{pow}{SNP specific power(gamma values) used in MTSPUsSet test.}
+
+\item{pow2}{GENE specific power(gamma values) used in MTSPUsSet test.}
 
 \item{n.perm}{number of permutations or bootstraps.}
 
 \item{Ps}{TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.}
-
-\item{corrSNP}{Correlation matirx of the SNPs to be tested; estimated from a
-reference panel (based on the same set of the reference alleles as
-used in calculating Z-scores).}
 }
 \value{
 A list object, Ts : test statistics for the SPU tests (in the order of the specified pow) and finally for the aSPU test.
