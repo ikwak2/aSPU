@@ -13,25 +13,26 @@ library(knitr)
 opts_chunk$set(fig.width = 12)
 ```
 
-This vignette illustrates the use of the MTaSPUsSet test, an adaptive gene-multitrait association testing with GWAS summary statistics. 
+This vignette illustrates the use of MTaSPUsSet test, an adaptive gene-multitrait association testing with GWAS summary statistics. 
 
 ## Data
 
 We will consider testing a gene named `SAMD11` using GWAS summary statistics of Genetic
-Investigation of ANthropometric Traits (GIANT) consortium data.
+Investigation of ANthropometric Traits (GIANT) consortium data. We mapped SNPs and Phenotypes related to gene `SAMD11` first and saved it in `SAMD11` Rdata set in aSPU package for example.
 
-Let's load the data.
+Let's load `SAMD11` data first.
 ```{r loading}
 library(aSPU)
 data(SAMD11)
 attach(SAMD11)
 ```
 
-`ZsM` and `PsM` are Z-scores and P-values for GIANT Man data.
+`ZsM` and `PsM` are Z-scores and P-values for GIANT Man data mapped on gene `SAMD11`.
 ```{r ZsPsM}
 round(ZsM,3)
 PsM
 ```
+Both `ZsM` and `PsM` are `r dim(PsM)[1]` by `r dim(PsM)[2]` matrix. Row represent SNPs and column represent phenotypes. `r dim(PsM)[1]` SNPs are mapped on gene `SAMD11` and `r dim(PsM)[2]` number of phenotypes are considered in testing.
 
 `corSNPM` and `corPheM` are correlation among SNPs and Phenotypes respectively for GIANT Man data. 
 ```{r corM}
@@ -39,7 +40,7 @@ round(corSNPM,2)
 round(corPheM,2)
 ```
 
-`ZsF` and `PsF` are Z-scores and P-values for GIANT Woman data.
+`ZsF` and `PsF` are Z-scores and P-values for GIANT Woman data mapped on gene `SAMD11`.
 ```{r ZsPsF}
 round(ZsF,3)
 PsF
@@ -51,9 +52,9 @@ round(corSNPF,2)
 round(corPheF,2)
 ```
 
-You can see that `corSNPM` and `corSNPF` are same. Yes, they are calculated from the reference population (here from 1000 genome CEU panel). They are same under H0 no matter what phenotype is.  
+You can see that `corSNPM` and `corSNPF` are same. Yes, they are calculated from the reference population (here, we used 1000 genome CEU panel). They are same under H0 no matter what phenotype is.  
 
-Now, let's perform `MTaSPUsSet` and `MTaSPUsSetC` functions. `MTaSPUsSetC` is C coded version. The C coded version is faster when n.perm < 10^4. However it used n.perm $\times$ npow1 $\times$ npow2 space in calculation while R version just used n.perm space in calculation. So R version is faster when n.perm is big like n.perm = 10^6. 
+Now, let's perform `MTaSPUsSet` and `MTaSPUsSetC` functions. `MTaSPUsSetC` is C coded version it impemented using Rcpp and RcppArmadillo package. The C coded version is faster when n.perm < 10^4. However it used (n.perm $\times$ npow1 $\times$ npow2 space) in calculation while R version just used n.perm space in calculation (complexity of C version is higher). So R version is faster when n.perm is big like n.perm = 10^6. 
 
 ```{r outFZ}
 (outFZC <- MTaSPUsSetC(ZsF, corSNP=corSNPF, corPhe = corPheF,
@@ -62,7 +63,7 @@ Now, let's perform `MTaSPUsSet` and `MTaSPUsSetC` functions. `MTaSPUsSetC` is C 
            pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=FALSE))
 ```
 
-You can check that `MTaSPUsSetC` is much faster here. The speed was similar when n.perm=10^4 for this example and R coded version is faster when n.perm > 10^4. If the speed matters, you can try python version. it is a bit faster then R version. (like 1.5 times)
+You can check that `MTaSPUsSetC` is much faster here. The speed was similar when n.perm=10^4 for this example and R coded version is faster when n.perm > 10^4. If the speed matters, you can try python version which have same complexity as R version. it is a bit faster then R version. (like 1.5 times)
 
 To use Python version, first save files in `.txt` format.
 
@@ -74,26 +75,29 @@ To use Python version, first save files in `.txt` format.
 ```
 `MTaSPUsSet.py` function in [py/aSPU_py](https://github.com/ikwak2/aSPU_py) do the same job with `./MTaSPUsSet.py ZsF.txt corPheF.txt corSNPF.txt 100 outF.txt`.
 
-We can use the P-values for the same task. Put P-value matrix `PsF` and use `Ps=TRUE` option.
+
+Next, We can use the P-values for MTaSPUsSet test using `MTaSPUsSetC` and `MTaSPUsSet` functions. Put P-value matrix `PsF` and set `Ps=TRUE` in the option.
 ```{r outFP}
 (outFPC <- MTaSPUsSetC(PsF, corSNP=corSNPF, corPhe = corPheF,
            pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=TRUE))
 (outFP <- MTaSPUsSet(PsF, corSNP=corSNPF, corPhe = corPheF,
            pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=TRUE))
 ```
+Results are not much different.
 
-Now, let's try it to GIANT Man data. 
+
+Next, let's try MTaSPUsSet test using GIANT Man data with input of P-values and Z-scores.
 ```{r outMPZ}
 (outMPC <- MTaSPUsSetC(PsM, corSNP=corSNPM, corPhe = corPheM,
            pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=TRUE))
 (outMZC <- MTaSPUsSetC(ZsM, corSNP=corSNPM, corPhe = corPheM,
            pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=FALSE))
 ```
-Wait, here we got much small p-value using `PsM` input. Why is it so? This can be answered from `corSNPM`, `corPheM` and `ZsM`.
+This time we got smaller P-value using `PsM` input than `ZsM` input. Why is it so? This can be answered from `corSNPM`, `corPheM` and `ZsM`.
 ```{r Zsmcors}
 round(ZsM,3)
 round(corSNPM,2)
 round(corPheM,2)
 ```
-In `corSNPM`, correlation between `rs4951864` and others are negative. The second column of `ZsM` looks a bit odd. Here I suspected coding error. P-values for each SNP and beta estimate was provided from the download page of GIANT data. I transformed P-values to Z-scores by `absZs = qnorm(1 - (Zs)/2)` and then multiplied the sign of beta estimates to recover the original Z-scores. Maybe I am wrong somewhere. So I didn't used P-scores as input in GIANT data analysis.
+In `corSNPM`, correlation between `rs4951864` and others are negative. The second column of `ZsM` looks a bit odd. Here I suspected some errors in beta estimates. P-values for each SNP and beta estimate was provided from the download page of GIANT data. I transformed P-values to Z-scores by `absZs = qnorm(1 - (Zs)/2)` and then multiplied the sign of beta estimates to recover the original Z-scores. Maybe I am wrong somewhere or provided beta estimates are not all correct. In this case, it would be better to analyze using P-values rather than using Z-scores.
 
