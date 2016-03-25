@@ -93,7 +93,7 @@ Next, let's try MTaSPUsSet test using GIANT Man data with input of P-values and 
 (outMZC <- MTaSPUsSetC(ZsM, corSNP=corSNPM, corPhe = corPheM,
            pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=FALSE))
 ```
-This time we got smaller P-value using `PsM` input than `ZsM` input. Why is it so? This can be answered from `corSNPM`, `corPheM` and `ZsM`.
+This time we got smaller P-value using `ZsM` input than `PsM` input. Why is it so? This can be answered from `corSNPM`, `corPheM` and `ZsM`.
 ```{r Zsmcors}
 round(ZsM,3)
 round(corSNPM,2)
