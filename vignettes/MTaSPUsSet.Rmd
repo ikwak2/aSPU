@@ -18,7 +18,7 @@ This vignette illustrates the use of MTaSPUsSet test, an adaptive gene-multitrai
 ## Data
 
 We will consider testing a gene named `SAMD11` using GWAS summary statistics of Genetic
-Investigation of ANthropometric Traits (GIANT) consortium data. We mapped SNPs and Phenotypes related to gene `SAMD11` first and saved it in `SAMD11` Rdata set in aSPU package for example.
+Investigation of ANthropometric Traits (GIANT) consortium data. We mapped SNPs and Phenotypes related to gene `SAMD11`,  and we saved it as `SAMD11` Rdata file in aSPU package for example.
 
 Let's load `SAMD11` data first.
 ```{r loading}
