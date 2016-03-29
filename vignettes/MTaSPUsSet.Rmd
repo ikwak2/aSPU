@@ -27,7 +27,8 @@ data(SAMD11)
 attach(SAMD11)
 ```
 
-`ZsM` and `PsM` are Z-scores and P-values for GIANT Man data mapped on gene `SAMD11`.
+`ZsM` and `PsM` are Z-scores and P-values for GIANT Man data mapped on gene `SAMD11`. (We used [MAGMA](http://ctg.cncr.nl/software/magma) software to map rs ids to genes. )
+
 ```{r ZsPsM}
 round(ZsM,3)
 PsM
