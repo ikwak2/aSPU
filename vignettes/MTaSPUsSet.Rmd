@@ -18,7 +18,7 @@ This vignette illustrates the use of MTaSPUsSet test, an adaptive gene-multitrai
 ## Data
 
 We will consider testing a gene named `SAMD11` using GWAS summary statistics of Genetic
-Investigation of ANthropometric Traits (GIANT) consortium data. We mapped SNPs and Phenotypes related to gene `SAMD11`,  and we saved it as `SAMD11` Rdata file in aSPU package for example.
+Investigation of ANthropometric Traits ([GIANT](https://www.broadinstitute.org/collaboration/giant/index.php/GIANT_consortium_data_files)) consortium data. We mapped SNPs and Phenotypes related to gene `SAMD11`,  and we saved it as `SAMD11` Rdata file in aSPU package for example.
 
 Let's load `SAMD11` data first.
 ```{r loading}
@@ -100,5 +100,5 @@ round(ZsM,3)
 round(corSNPM,2)
 round(corPheM,2)
 ```
-In `corSNPM`, correlation between `rs4951864` and others are negative. The second column of `ZsM` looks a bit odd. It could be probable science the p-value is not very much significant and `rs11240777` might be related a bit with `Height`. However It might be related to the coding error. The original data set did not provide Z-scores. P-values for each SNP and beta estimate was provided from the download page of GIANT data. I transformed P-values to Z-scores by `absZs = qnorm(1 - (Ps)/2)` and then multiplied the sign of beta estimates to recover the original Z-scores. Maybe I am wrong somewhere or provided beta estimates are not all correct. In any case, it would be safe to analyze GIANT data using P-values rather than using Z-scores.
+In `corSNPM`, correlation between `rs4951864` and others are negative. The second column of `ZsM` looks a bit odd. It could be probable since the p-value is not very much significant and `rs11240777` might be related a bit with `Height`. However It might be related to the coding error as well. The original data set did not provide Z-scores. P-values for each SNP and beta estimate was provided in the download page of GIANT data. I transformed P-values to Z-scores by `absZs = qnorm(1 - (Ps)/2)` and then multiplied the sign of beta estimates to recover the original Z-scores. Maybe I am wrong somewhere or provided beta estimates are not all correct. In any case, it would be safe to analyze GIANT data using P-values rather than using Z-scores.
 
