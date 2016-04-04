@@ -14,6 +14,7 @@ export(estcov)
 export(MTaSPUs)
 export(MTaSPUsSet)
 export(MTaSPUsSetC)
+export(MTaSPUsSetPath)
 
 importFrom(gee, gee)
 importFrom(MASS, ginv, mvrnorm)
