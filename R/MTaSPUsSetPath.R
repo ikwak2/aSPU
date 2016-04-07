@@ -52,6 +52,7 @@
 #'
 #' @seealso \code{\link{MTaSPUsSetC}}, \code{\link{MTaSPUsSet}}
 
+
 MTaSPUsSetPath <- function(Zs, corPhe, corSNP, pow1=c(1,2,4,8),
                            pow2 = c(1,2,4,8),
                            pow3 = c(1,2,4,8),
@@ -87,7 +88,7 @@ MTaSPUsSetPath <- function(Zs, corPhe, corSNP, pow1=c(1,2,4,8),
         eS <- eigen(Covtemp, symmetric = TRUE)
         ev <- eS$values
         k1 <- length(ev)
-        CH.CovSsqrt[[i]] <- eS$vectors %*% diag(sqrt(pmax(ev, 0)), k1)
+        CH.CovSsqrt[[i]] <-  eS$vectors %*% diag(sqrt(pmax(ev, 0)), k1) %*% t(eS$vectors)
     }
 
     Zs = Zs[unlist(GL),]
@@ -103,30 +104,28 @@ MTaSPUsSetPath <- function(Zs, corPhe, corSNP, pow1=c(1,2,4,8),
     if(Ps == TRUE)
         Zs <- qnorm(1 - Zs/2)
 
+    ## Permutations:
     StdTs <- list(0)
-    nGenes=length(nSNPs0)
+    StdT0s <- list(0)
     for(np in 1:nphe) {
         StdTs[[np]] <- rep(0, length(pow1)*nGenes)
+        StdT0s[[np]] = matrix(0, nrow=n.perm, ncol=length(pow1)*nGenes)
+    }
+
+    ## test stat's: SPUs
+    for(np in 1:nphe) {
         for(j in 1:length(pow1))
             for(iGene in 1:nGenes){
                 if (iGene==1) SNPstart=1 else SNPstart=sum(nSNPs0[1:(iGene-1)])+1
                 indx=(SNPstart:(SNPstart+nSNPs0[iGene]-1))
                 if (pow1[j] < Inf){
-                    a= (sum(Zs[indx,np]^pow1[j]))
-                    StdTs[[np]][(j-1)*nGenes+iGene] = sign(a)*((abs(a)/nSNPs0[iGene]) ^(1/pow1[j]))
-                } else {
-                    StdTs[[np]][(j-1)*nGenes+iGene] =max(abs(Zs[indx,np]))
-                }
+                    aa = (sum(Zs[indx,np]^pow1[j]))
+                    StdTs[[np]][(j-1)*nGenes+iGene] = sign(aa)*((abs(aa)/nSNPs0[iGene]) ^(1/pow1[j]))
+                } else StdTs[[np]][(j-1)*nGenes+iGene] = max(abs(Zs[indx,np]))
             }
-    }
-    
-    ## Permutations:
-    StdT0s <- list(0)
-    for(np in 1:nphe) {
-        StdT0s[[np]] = matrix(0, nrow=n.perm, ncol=length(pow1)*nGenes)
-    }
-    ##    StdT0s= matrix(0, nrow=n.perm, ncol=length(pow1)*nGenes)
+    }        
 
+    
     for(b in 1:n.perm){
         
         ## U00<-rnorm(nsnp, 0, 1)
@@ -147,18 +146,15 @@ MTaSPUsSetPath <- function(Zs, corPhe, corSNP, pow1=c(1,2,4,8),
                     if (pow1[j] < Inf){
                         a = (sum(U0[indx,np]^pow1[j]))
                         StdT0s[[np]][b, (j-1)*nGenes+iGene] = sign(a)*((abs(a)/nSNPs0[iGene]) ^(1/pow1[j]))
+#                        aa = (sum(Zs[indx,np]^pow1[j]))
+#                        StdTs[[np]][(j-1)*nGenes+iGene] = sign(aa)*((abs(aa)/nSNPs0[iGene]) ^(1/pow1[j]))
+
                     } else StdT0s[[np]][b, (j-1)*nGenes+iGene] = max(abs(U0[indx,np]))
                 }
-        }
-
-
-
-
-
-        
+        }        
     }
 
-                                        #combine gene-level stats to obtain pathway-lelev stats:
+    ##combine gene-level stats to obtain pathway-lelev stats:
 
     Ts2 <- list(0)
     T0s2 <- list(0)
@@ -192,12 +188,12 @@ MTaSPUsSetPath <- function(Zs, corPhe, corSNP, pow1=c(1,2,4,8),
                 Ts3[ (p3-1)*length(pow1)*length(pow2) + (p2-1)*length(pow1) + p1] = aa
 
                 for(b in 1:n.perm) {
-                    aa <- 0
+                    aaa <- 0
                     for(np in 1:nphe) {
-                        aa = aa + T0s2[[np]][b,(p2-1)*length(pow1) + p1] ^ pow3[p3]
+                        aaa = aaa + T0s2[[np]][b,(p2-1)*length(pow1) + p1] ^ pow3[p3]
                     }
 
-                    T0s3[b, (p3-1)*length(pow1)*length(pow2) + (p2-1)*length(pow1) + p1] = aa
+                    T0s3[b, (p3-1)*length(pow1)*length(pow2) + (p2-1)*length(pow1) + p1] = aaa
                 }
             }
         }
