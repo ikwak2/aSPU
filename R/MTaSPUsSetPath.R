@@ -88,7 +88,7 @@ MTaSPUsSetPath <- function(Zs, corPhe, corSNP, pow1=c(1,2,4,8),
         eS <- eigen(Covtemp, symmetric = TRUE)
         ev <- eS$values
         k1 <- length(ev)
-        CH.CovSsqrt[[i]] <-  eS$vectors %*% diag(sqrt(pmax(ev, 0)), k1) %*% t(eS$vectors)
+        CH.CovSsqrt[[i]] <-  diag(sqrt(pmax(ev, 0)), k1) %*% t(eS$vectors)
     }
 
     Zs = Zs[unlist(GL),]
@@ -99,7 +99,7 @@ MTaSPUsSetPath <- function(Zs, corPhe, corSNP, pow1=c(1,2,4,8),
 
     e.U <- eigen(U)
     e.U$values[ e.U$values < 0 ] = 0
-    A <- e.U$vectors %*% diag(sqrt(e.U$values)) %*% t(e.U$vectors)
+    A <- e.U$vectors %*% diag(sqrt(e.U$values))
 
     if(Ps == TRUE)
         Zs <- qnorm(1 - Zs/2)
