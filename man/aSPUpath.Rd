@@ -14,9 +14,9 @@ Or it can be a quantitative trait. A vector with length n (number of observation
 
 \item{X}{Genotype or other data; each row for a subject, and each column
 for an SNP (or a predictor). The value of each SNP is the # of the copies
-for an allele. A matrix with dimension n by p (n : number of observation, p : number of SNPs (or predictors) ).}
+for an allele. A matrix with dimension n by k (n : number of observation, k : number of SNPs (or predictors) ).}
 
-\item{cov}{Covariates. A matrix with dimension n by k (n :number of observation, k : number of covariates).}
+\item{cov}{Covariates. A matrix with dimension n by p (n :number of observation, p : number of covariates).}
 
 \item{model}{Use "gaussian" for a quantitative trait, and use "binomial" for a binary trait.}
 

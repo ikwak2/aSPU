@@ -7,9 +7,9 @@
 ##
 ## @param X genotype data; each row for a subject, and each column
 ##     for an SNP. The value of each element is the # of the copies
-##     for an allele. Matrix with dimension n by g (n : number of observation, p : number of genotype data)
+##     for an allele. Matrix with dimension n by k (n : number of observation, k : number of genotype data)
 ##
-## @param cov covariates. Matrix with dimension n by k (n :number of observation, k : number of covariates)
+## @param cov covariates. Matrix with dimension n by p (n :number of observation, p : number of covariates)
 ##
 ## @param model Use "gaussian" for quantitative trait, and use "binomial" for binary trait.
 ##
