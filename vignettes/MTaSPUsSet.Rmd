@@ -1,6 +1,7 @@
 ---
 title: "Adaptive Gene - Multitrait Association testing with GWAS Summary Statistics (MTaSPUsSet() )"
 date: "`r Sys.Date()`"
+author: "Il-Youp Kwak"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{gene - multitrait aSPU with GWAS Summary Statistics}
@@ -21,8 +22,11 @@ We first downloaded GWAS summary statistics of Genetic
 Investigation of ANthropometric Traits ([GIANT](https://www.broadinstitute.org/collaboration/giant/index.php/GIANT_consortium_data_files)) consortium data. We get the genomic coordinates of SNPs using [SnpTracker](http://grass.cgs.hku.hk/limx/snptracker/) software using hg19, and then we mapped SNPs to Genes using [MAGMA](http://ctg.cncr.nl/software/magma) software using build 37. We will consider testing a gene named *SAMD11* for example.
 
 Let's load *SAMD11* data first.
-```{r loading}
+```{r loading, include=FALSE}
 library(aSPU)
+```
+
+```{r loading2}
 data(SAMD11)
 attach(SAMD11)
 ```
@@ -54,6 +58,8 @@ round(corPheF,2)
 ```
 
 You can see that `corSNPM` and `corSNPF` are same. Yes, they are calculated from the reference population (here, we used 1000 genome CEU panel). They are same under H0 no matter what phenotype is.  
+
+## Data analysis
 
 Now, let's perform `MTaSPUsSet` and `MTaSPUsSetC` functions. `MTaSPUsSetC` is C coded version it impemented using Rcpp and RcppArmadillo package. The C coded version is faster when n.perm < 10^4. However it used (n.perm $\times$ npow1 $\times$ npow2 space) in calculation while R version just used n.perm space in calculation (complexity of C version is higher). So R version is faster when n.perm is big like n.perm = 10^6. 
 
@@ -103,10 +109,8 @@ round(corPheM,2)
 In `corSNPM`, correlation between `rs4951864` and others are negative. The second column of `ZsM` looks a bit odd. It could be probable since the p-value is not very much significant and `rs11240777` might be related a bit with `Height`. However It might be related to the coding error as well. The original data set did not provide Z-scores. P-values for each SNP and beta estimate was provided in the download page of GIANT data. I transformed P-values to Z-scores by `absZs = qnorm(1 - (Ps)/2)` and then multiplied the sign of beta estimates to recover the original Z-scores. Maybe I am wrong somewhere or provided beta estimates are not all correct. In any case, it would be safe to analyze GIANT data using P-values rather than using Z-scores.
 
 
-## Data Visualization
-So far, we demostrated how we can use the software. In this section we will visualize some identified genes to demonstrate the usefullness of our method.
 
-```{r plots}
+```{r plots, echo=FALSE}
 plotG <- function(Ps, zlim = NULL, main = NULL, yt = NULL, title = "SNPs") {        
     log10P <- -log(Ps,10)  
     pos = 1:nrow(log10P)
@@ -157,16 +161,34 @@ plotLD <- function(ldmatrix, zlim = NULL, main = NULL, yt = NULL, title = "SNPs"
 
 ```
 
-Gene *LCORL* and Gene *RASA2* are two of identified genes by [MGAS](http://www.ncbi.nlm.nih.gov/pubmed/25431328) using [KGG](http://grass.cgs.hku.hk/limx/kgg/) software.
 
-```{r plot_MGAS}
+## Data Visualization of some detected genes
+So far, we demostrated how we can use the software. In this section we will visualize some identified genes. 
+
+Gene *LCORL* and *RASA2* are two of identified genes by [MGAS](http://www.ncbi.nlm.nih.gov/pubmed/25431328) using [KGG](http://grass.cgs.hku.hk/limx/kgg/) software.  
+
+```{r plot_MGAS, echo=FALSE, fig.width=7, fig.height=7}
 data(someGs)
 par(mfrow = c(2,2))
-plotG(Ps1, main = "RPGRIP1L", title="SNPs", zlim = c(0,12), yt = -1.4)
-#panel.text(280, 33, expression(paste(list(gamma[1],gamma[2]), " = (2,1)") ), cex = 1.2, font = 2)
-
-
-
-
+plotG(someGs$LCORL[[1]], main = "LCORL (P-values)", zlim = c(0,18))
+plotG(someGs$RASA2[[1]], main = "RASA2 (P-values)", zlim = c(0,12))
+plotLD(abs(someGs$LCORL[[2]]), main = "LCORL (LDmatrix)")
+plotLD(abs(someGs$RASA2[[2]]), main = "RASA2 (LDmatrix)")
 ```
 
+
+In the Figure, we draw image of $-\log_{10}$ transformed P-values for each SNP and trait.
+Gene *LCORL* was the most significant gene. As we can see from the Figure, there are many very significant SNPs for trait Height in Gene *LCORL*. No doubt MGAS and MTaSPUsSet identified this gene.
+
+MGAS use extended Simes procedure so it considers top few p-values in their algorithm. Thus, MGAS works well with sparse signal such as *RASA2*. Since the signal is sparse, MTaSPUsSet detect this gene with larger $\gamma_1$ and $\gamma_2$. With ($\gamma_1, \gamma_2$) = (1,8), (2,8), (4,8) and (8,8), MTaSPUsSet P-values were less than 1e-7 with $10^7$ permutations.
+
+```{r plot_MT, echo=FALSE, fig.width=7, fig.height=7}
+data(someGs)
+par(mfrow = c(2,2))
+plotG(someGs$STK33[[1]], main = "STK33 (P-values)", zlim = c(0,12))
+plotG(someGs$RPGRIP1L[[1]], main = "RPGRIP1L (P-values)", zlim = c(0,12))
+plotLD(abs(someGs$STK33[[2]]), main = "STK33 (LDmatrix)")
+plotLD(abs(someGs$RPGRIP1L[[2]]), main = "RPGRIP1L (LDmatrix)")
+```
+
+MTaSPUsSet test have advantage in detecting genes loke *STK33* and *RPGRIP1L*. We can see that signals are widely spread. MTaSPUsSet test have higher power with smaller $\gamma_1$ and $\gamma_2$. As we can see from the figure, each P-values are not very big. These genes would be hard to detect using SNP based, or gene - single trait association testing. However, MTaSPUsSet test can detect these genes by aggregating signals for all traits and SNPs. 
