@@ -19,7 +19,7 @@ This vignette illustrates the use of MTaSPUsSet test, an adaptive gene-multitrai
 ## Data preparation
 
 We first downloaded GWAS summary statistics of Genetic
-Investigation of ANthropometric Traits ([GIANT](https://www.broadinstitute.org/collaboration/giant/index.php/GIANT_consortium_data_files)) consortium data. We get the genomic coordinates of SNPs using [SnpTracker](http://grass.cgs.hku.hk/limx/snptracker/) software using hg19, and then we mapped SNPs to Genes using [MAGMA](http://ctg.cncr.nl/software/magma) software using build 37. We will consider testing a gene named *SAMD11* for example.
+Investigation of ANthropometric Traits ([GIANT](https://www.broadinstitute.org/collaboration/giant/index.php/GIANT_consortium_data_files)) consortium data. We get the genomic coordinates of SNPs using [SnpTracker](http://grass.cgs.hku.hk/limx/snptracker/) software (hg19 used), and then we mapped SNPs to Genes using [MAGMA](http://ctg.cncr.nl/software/magma) software (build 37 used). We will consider testing a gene named *SAMD11* for example.
 
 Let's load *SAMD11* data first.
 ```{r loading, include=FALSE}
