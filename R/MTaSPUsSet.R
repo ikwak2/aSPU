@@ -40,28 +40,40 @@
 #' @seealso \code{\link{MTaSPUsSetC}} 
 
 
+P = cbind( c(1,.2), c(.2,1))
+R = cbind( c(1, .1, 0), c(.1,1,.1), c(0,.1,1))
+
+Zs = cbind( c(.2, .3, -.1), c(.1, .1, -.1))
+corSNP = R
+corPhe = P
+vecZ <- c(t(Zs))
+RR <- kronecker(R, P, FUN = "*")
 MTaSPUsSet <- function(Zs, corSNP, corPhe, pow=c(1,2,4,8),
-                       pow2 = c(1,2,4,8), n.perm=5000, Ps = FALSE) {
+                       pow2 = c(1,2,4,8), n.perm=5000, Ps = FALSE, Score = FALSE) {
 
     nsnp <- dim(Zs)[1]
     nphe <- dim(Zs)[2]
-
+    
     V <- corSNP
     U <- corPhe
-
+    
     e.U <- eigen(U)
     e.U$values[ e.U$values < 0 ] = 0
     A <- e.U$vectors %*% diag(sqrt(e.U$values)) %*% t(e.U$vectors)
     e.V <- eigen(V)
     e.V$values[ e.V$values < 0 ] = 0
     B <- e.V$vectors %*% diag(sqrt(e.V$values)) %*% t(e.V$vectors)
-
+    
     Zs <- as.matrix(Zs)
     if(Ps == TRUE)
         Zs <- qnorm(1 - Zs/2)
-
+    
     Ts <- rep(0, length(pow)*length(pow2))
 
+    vecZ <- c(t(Zs))
+    kRP <- kronecker(R, P, FUN = "*")
+    Tsc <- vecZ %*% ginv(kRP) %*% vecZ
+    
     for(p1 in 1:length(pow)) {
         for(p2 in 1:length(pow2)) {
 
@@ -75,10 +87,24 @@ MTaSPUsSet <- function(Zs, corSNP, corPhe, pow=c(1,2,4,8),
 
 ####
 ## residual permutation
-    pPerm0 = rep(NA,length(pow)*length(pow2) )
+    pPerm0 = rep(NA,length(pow)*length(pow2)+1)
                                         #    T0s1 = numeric(length(pow)*length(pow2) )
     T0s = numeric(n.perm)
+    Tsc0 = numeric(n.perm)
     s <- sample(1:10^5,1)
+
+    set.seed(s) # to ensure the same samples are drawn for each pow
+    for (b in 1:n.perm){
+        Z <- matrix(rnorm(n=nsnp*nphe, 0,1), nphe, nsnp)
+        Z0 <- t(A %*% Z %*% B)
+        
+        if(Ps == TRUE)
+            Z0 <- abs(Z0)
+        
+        vecZ <- c(t(Z0))
+        Tsc0[b] <- vecZ %*% ginv(kRP) %*% vecZ
+    }
+    pPerm0[length(pow)*length(pow2)+1] = round( sum(abs(Tsc)<=abs(Tsc0)) / n.perm, digits = 8)
 
     for (p1 in 1:length(pow)){
         for (p2 in 1:length(pow2)){
@@ -98,6 +124,7 @@ MTaSPUsSet <- function(Zs, corSNP, corPhe, pow=c(1,2,4,8),
             }
 
             pPerm0[p2 + (p1-1) * length(pow2)] = round( sum(abs(Ts[p2 + (p1-1) * length(pow2)])<=abs(T0s)) / n.perm, digits = 8)
+            
             P0s = ( (n.perm-rank(abs(T0s))) + 1 )/(n.perm)
             if (p2 + (p1-1) * length(pow2) == 1 ) minp0=P0s else minp0[which(minp0>P0s)]=P0s[which(minp0>P0s)]
         }

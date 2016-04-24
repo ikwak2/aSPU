@@ -1,9 +1,9 @@
 \docType{data}
-\name{SAMD11}
-\alias{SAMD11}
+\name{someGs}
+\alias{someGs}
 \title{An example data for MTaSPUsSet test}
 \usage{
-data(SAMD11)
+data(someGs)
 }
 \description{
   Genetic Investigation of ANthropometric Traits (GIANT) consortium
@@ -13,26 +13,27 @@ data(SAMD11)
   circumference(HIP). The data is downloadable from
   https://www.broadinstitute.org/collaboration/giant/index.php/GIANT_consortium_data_files
 
-  We mapped SNPs on gene SAMD11. This subdata contains P values, Z
-  scores of SNPs mapped on gene SAMD11. It also contains correlation
-  among SNPs and correlation among phenotypes for demostrated example of
+  We mapped SNPs on gene LCORL, RASA2, STK33 and RPGRIP1L. This subdata
+  contains P values, correlation matrices for demostrated example of
   MTaSPUsSet test. 
   
 }
 \examples{
-data(SAMD11)
+data(someGs)
 
-## Z-scores for man
-SAMD11$ZsM
+## P-values for LCORL
+someGs$LCORL[[1]]
 
-## P-values for man
-SAMD11$PsM
+## correlation matrix for LCORL
+someGs$LCORL[[2]]
 
-## correlation among SNPs for man
-SAMD11$corSNPM
+## P-values for RASA2
+someGs$RASA2[[1]]
 
-## correlation among phenotypes for man
-SAMD11$corPheM
+## correlation matrix for LCORL
+someGs$RASA2[[2]]
+
+# See vignettes for more details.
 
 }
 \references{

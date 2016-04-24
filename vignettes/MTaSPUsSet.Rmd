@@ -15,25 +15,25 @@ opts_chunk$set(fig.width = 12)
 
 This vignette illustrates the use of MTaSPUsSet test, an adaptive gene-multitrait association testing with GWAS summary statistics. 
 
-## Data
+## Data preparation
 
-We will consider testing a gene named `SAMD11` using GWAS summary statistics of Genetic
-Investigation of ANthropometric Traits ([GIANT](https://www.broadinstitute.org/collaboration/giant/index.php/GIANT_consortium_data_files)) consortium data. We mapped SNPs and Phenotypes related to gene `SAMD11`,  and we saved it as `SAMD11` Rdata file in aSPU package for example.
+We first downloaded GWAS summary statistics of Genetic
+Investigation of ANthropometric Traits ([GIANT](https://www.broadinstitute.org/collaboration/giant/index.php/GIANT_consortium_data_files)) consortium data. We get the genomic coordinates of SNPs using [SnpTracker](http://grass.cgs.hku.hk/limx/snptracker/) software using hg19, and then we mapped SNPs to Genes using [MAGMA](http://ctg.cncr.nl/software/magma) software using build 37. We will consider testing a gene named *SAMD11* for example.
 
-Let's load `SAMD11` data first.
+Let's load *SAMD11* data first.
 ```{r loading}
 library(aSPU)
 data(SAMD11)
 attach(SAMD11)
 ```
 
-`ZsM` and `PsM` are Z-scores and P-values for GIANT Man data mapped on gene `SAMD11`. (We used [MAGMA](http://ctg.cncr.nl/software/magma) software to map rs ids to genes. )
+`ZsM` and `PsM` are Z-scores and P-values for GIANT Man data mapped on gene *SAMD11*. (We used [MAGMA](http://ctg.cncr.nl/software/magma) software to map rs ids to genes. )
 
 ```{r ZsPsM}
 round(ZsM,3)
 PsM
 ```
-Both `ZsM` and `PsM` are `r dim(PsM)[1]` by `r dim(PsM)[2]` matrix. Row represent SNPs and column represent phenotypes. `r dim(PsM)[1]` SNPs are mapped on gene `SAMD11` and `r dim(PsM)[2]` number of phenotypes are considered in testing.
+Both `ZsM` and `PsM` are `r dim(PsM)[1]` by `r dim(PsM)[2]` matrix. Row represent SNPs and column represent phenotypes. `r dim(PsM)[1]` SNPs are mapped on gene *SAMD11* and `r dim(PsM)[2]` number of phenotypes are considered in testing.
 
 `corSNPM` and `corPheM` are correlation among SNPs and Phenotypes respectively for GIANT Man data. 
 ```{r corM}
@@ -41,7 +41,7 @@ round(corSNPM,2)
 round(corPheM,2)
 ```
 
-`ZsF` and `PsF` are Z-scores and P-values for GIANT Woman data mapped on gene `SAMD11`.
+`ZsF` and `PsF` are Z-scores and P-values for GIANT Woman data mapped on gene *SAMD11*.
 ```{r ZsPsF}
 round(ZsF,3)
 PsF
@@ -101,4 +101,72 @@ round(corSNPM,2)
 round(corPheM,2)
 ```
 In `corSNPM`, correlation between `rs4951864` and others are negative. The second column of `ZsM` looks a bit odd. It could be probable since the p-value is not very much significant and `rs11240777` might be related a bit with `Height`. However It might be related to the coding error as well. The original data set did not provide Z-scores. P-values for each SNP and beta estimate was provided in the download page of GIANT data. I transformed P-values to Z-scores by `absZs = qnorm(1 - (Ps)/2)` and then multiplied the sign of beta estimates to recover the original Z-scores. Maybe I am wrong somewhere or provided beta estimates are not all correct. In any case, it would be safe to analyze GIANT data using P-values rather than using Z-scores.
+
+
+## Data Visualization
+So far, we demostrated how we can use the software. In this section we will visualize some identified genes to demonstrate the usefullness of our method.
+
+```{r plots}
+plotG <- function(Ps, zlim = NULL, main = NULL, yt = NULL, title = "SNPs") {        
+    log10P <- -log(Ps,10)  
+    pos = 1:nrow(log10P)
+    y = 1:ncol(log10P)
+    log10P <- log10P
+    val <- sqrt(seq(0, 1, len=251))
+    col <- rgb(1, rev(val), rev(val))
+
+    if(is.null(yt)) {
+        yt = -length(pos)/15
+    }
+
+    if(is.null(zlim)) {
+        maxP <- max(log10P, na.rm=TRUE)
+        zlim <- c(0, maxP)
+    }
+    image.plot(pos, y, log10P, xaxt="n", yaxt="n", ylab="", xlab="",
+                    zlim=zlim, col=col, mgp=c(2.6, 1, 0), bty="n", main = main )
+    title(xlab=title, mgp=c(1, 0, 0))
+    text(yt,1,"BMI", xpd = TRUE)
+    text(yt,2,"Height", xpd = TRUE)
+    text(yt,3,"HIP", xpd = TRUE)
+    text(yt,4,"WC", xpd = TRUE)
+    text(yt,5,"Weight", xpd = TRUE)
+    text(yt,6,"WHR", xpd = TRUE)
+}
+
+plotLD <- function(ldmatrix, zlim = NULL, main = NULL, yt = NULL, title = "SNPs") {
+#    log10P <- -log(Ps,10)
+    pos = 1:nrow(ldmatrix)
+    y = 1:ncol(ldmatrix)
+    val <- sqrt(seq(0, 1, len=251))
+    col <- rgb(1, rev(val), rev(val))
+
+    if(is.null(yt)) {
+        yt = -length(pos)/15
+    }
+
+    if(is.null(zlim)) {
+        maxP <- max(ldmatrix, na.rm=TRUE)
+        zlim <- c(0, maxP)
+    }
+    image.plot(pos, y, ldmatrix, xaxt="n", yaxt="n", ylab="", xlab="",
+        zlim=zlim, col=col, mgp=c(2.6, 1, 0), bty="n", main = main )
+    title(xlab=title, mgp=c(1, 0, 0))
+    title(ylab=title, mgp=c(1, 0, 0))
+}
+
+```
+
+Gene *LCORL* and Gene *RASA2* are two of identified genes by [MGAS](http://www.ncbi.nlm.nih.gov/pubmed/25431328) using [KGG](http://grass.cgs.hku.hk/limx/kgg/) software.
+
+```{r plot_MGAS}
+data(someGs)
+par(mfrow = c(2,2))
+plotG(Ps1, main = "RPGRIP1L", title="SNPs", zlim = c(0,12), yt = -1.4)
+#panel.text(280, 33, expression(paste(list(gamma[1],gamma[2]), " = (2,1)") ), cex = 1.2, font = 2)
+
+
+
+
+```
 
