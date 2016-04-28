@@ -25,7 +25,7 @@
 #' @param Ps TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.
 #'
 #' @export
-#' @return P-values for SPUMpath tests and aSPUMpath test.
+#' @return P-values for MTSPUsSetpath tests and MTaSPUsSetpPath test.
 #'
 #' @author Il-Youp Kwak and Wei Pan
 #'
@@ -48,10 +48,12 @@
 #' varPhe = cbind( c( 1, -.1),
 #'                c(-.1,1) )
 #'
-#' gene.info = data.frame( Gnm = c( "G1", "G2"), chr = c(1,3), loc1 = c(0, 0), loc2 = c(10,10) )
+#' gene.info = data.frame( Gnm = c( "G1", "G2"), chr = c(1,3),
+#'                     loc1 = c(0, 0), loc2 = c(10,10) )
 #' snp.info = data.frame( rsid = c("rs1", "rs2", "rs3", "rs4", "rs5"),
 #'                 chr = c(1,1,3,3,3), loc = c(1,2,1,2,3) )
-#'  out <- MTaSPUsSetPath(Zs, corPhe = varPhe, corSNP=varSNP, n.perm = 100, snp.info = snp.info, gene.info = gene.info)
+#'  out <- MTaSPUsSetPath(Zs, corPhe = varPhe, corSNP=varSNP,
+#'             n.perm = 100, snp.info = snp.info, gene.info = gene.info)
 #' out
 #'
 #' @seealso \code{\link{MTaSPUsSetC}}, \code{\link{MTaSPUsSet}}

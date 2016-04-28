@@ -35,33 +35,14 @@ used in calculating Z-scores).}
 
 \item{Ps}{TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.}
 
-\item{Zs}{Z-scores for each SNPs. It could be P-values if the Ps option is TRUE.}
-
-\item{corrSNP}{Correlation matirx of the SNPs to be tested; estimated from a
-reference panel (based on the same set of the reference alleles as
-used in calculating Z-scores).}
-
-\item{snp.info}{SNP information matrix, the 1st column is SNP id, 2nd column is chromosome #, 3rd column indicates SNP location.}
-
-\item{gene.info}{GENE information matrix, The 1st column is GENE id, 2nd column is chromosome #, 3rd and 4th column indicate start and end positions of the gene.}
-
-\item{pow}{SNP specific power(gamma values) used in SPUpath test.}
-
-\item{pow2}{GENE specific power(gamma values) used in SPUpath test.}
-
-\item{n.perm}{number of permutations.}
-
-\item{Ps}{TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.}
 }
 \value{
 P-values for SPUMpath tests and aSPUMpath test.
 
-P-values for SPUMpath tests and aSPUMpath test.
 }
 \description{
 It gives p-values of the MTSPUsSetPath tests and MTaSPUsSetPath test with GWAS summary statistics.
 
-It gives p-values of the MTSPUsSetPath tests and MTaSPUsSetPath test with GWAS summary statistics.
 }
 \examples{
 
@@ -77,49 +58,24 @@ varSNP = cbind( c( 1, .1,0, 0, .11),
 varPhe = cbind( c( 1, -.1),
                c(-.1,1) )
 
-gene.info = data.frame( Gnm = c( "G1", "G2"), chr = c(1,3), loc1 = c(0, 0), loc2 = c(10,10) )
+gene.info = data.frame( Gnm = c( "G1", "G2"), chr = c(1,3),
+                        loc1 = c(0, 0), loc2 = c(10,10) )
 snp.info = data.frame( rsid = c("rs1", "rs2", "rs3", "rs4", "rs5"),
                 chr = c(1,1,3,3,3), loc = c(1,2,1,2,3) )
- out <- MTaSPUsSetPath(Zs, corPhe = varPhe, corSNP=varSNP, n.perm = 100, snp.info = snp.info, gene.info = gene.info)
-out
-
-
-Zs <- cbind ( c( 0.3, 0.2, 0.1,0.5,1.2),
-          c(-.1, .3,-.1,.1,1.2) )
-
-varSNP = cbind( c( 1, .1,0, 0, .11),
-               c(.1,1, 0, 0, 0),
-               c(0,0, 1, 0, 0),
-               c(0,0, 0, 1, 0),
-               c(.11,0,0,0,1) )
-
-varPhe = cbind( c( 1, -.1),
-               c(-.1,1) )
-
-gene.info = data.frame( Gnm = c( "G1", "G2"), chr = c(1,3), loc1 = c(0, 0), loc2 = c(10,10) )
-snp.info = data.frame( rsid = c("rs1", "rs2", "rs3", "rs4", "rs5"),
-                chr = c(1,1,3,3,3), loc = c(1,2,1,2,3) )
- out <- MTaSPUsSetPath(Zs, corPhe = varPhe, corSNP=varSNP, n.perm = 100, snp.info = snp.info, gene.info = gene.info)
+ out <- MTaSPUsSetPath(Zs, corPhe = varPhe, corSNP=varSNP,
+        n.perm = 100, snp.info = snp.info, gene.info = gene.info)
 out
 
 }
 \author{
-Il-Youp Kwak and Wei Pan
-
 Il-Youp Kwak and Wei Pan
 }
 \references{
 Il-Youp Kwak, Wei Pan (2016)
 Multiple-trait, gene-level adaptive association testing
   with GWAS summary statistics
-
-Il-Youp Kwak, Wei Pan (2016)
-Multiple-trait, gene-level adaptive association testing
-  with GWAS summary statistics
 }
 \seealso{
-\code{\link{MTaSPUsSetC}}, \code{\link{MTaSPUsSet}}
-
 \code{\link{MTaSPUsSetC}}, \code{\link{MTaSPUsSet}}
 }
 
