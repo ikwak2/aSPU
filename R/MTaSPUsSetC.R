@@ -25,8 +25,8 @@
 #' @references
 #'
 #' Il-Youp Kwak, Wei Pan (2016)
-#' Multiple-trait, gene-level adaptive association testing
-#'   with GWAS summary statistics.
+#'Gene- and pathway-based association tests for multiple
+#'      traits with GWAS summary statistics
 #'
 #' @examples
 #'
