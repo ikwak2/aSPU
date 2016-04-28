@@ -1,6 +1,6 @@
 Package: aSPU
-Version: 1.43
-Date: 2016-4-24
+Version: 1.42
+Date: 2016-4-28
 Title: Adaptive Sum of Powered Score Test
 Description: R codes for the (adaptive) Sum of Powered Score ('SPU' and 'aSPU')
     tests, inverse variance weighted Sum of Powered score ('SPUw' and 'aSPUw') tests
@@ -19,7 +19,7 @@ Description: R codes for the (adaptive) Sum of Powered Score ('SPU' and 'aSPU')
     association with individual-level data ('aSPUpath'), (4) Single trait-pathway
     association with summary statistics ('aSPUsPath'), (5) Multiple traits-single
     'SNP' association with individual-level data ('GEEaSPU'), (6) Multiple traits-
-    single SNP association with summary statistics ('MTaSPUs').
+    single SNP association with summary statistics ('MTaSPUs'), (7) Multiple traits-`SNP' set association with summary statistics(`MTaSPUsSet'), (8) Multiple traits-pathway association with summary statistics(`MTaSPUsSetPath').
 Author: Il-Youp Kwak and others (See Author(s) in each function manual)
 Maintainer: Il-Youp Kwak <ikwak@umn.edu>
 Suggests:

@@ -61,12 +61,12 @@ MTaSPUsSetPath <- function(Zs, corPhe, corSNP, pow1=c(1,2,4,8),
 
     nsnp <- dim(Zs)[1]
     nphe <- dim(Zs)[2]
-    n.gene <- nrow(gene.info)
+    nGenes <- nrow(gene.info)
     GL <- list(0)
     GLch <- NULL
                                         #   GL.CovSsqrt <- list(0)
     i = 1
-    for(g in 1:n.gene) { # g = 1
+    for(g in 1:nGenes) { # g = 1
         snpTF <- ( snp.info[,2] == gene.info[g,2] &
                    gene.info[g,3] <= as.numeric(snp.info[,3]) &
                    gene.info[g,4] >= as.numeric(snp.info[,3]) )
@@ -88,7 +88,7 @@ MTaSPUsSetPath <- function(Zs, corPhe, corSNP, pow1=c(1,2,4,8),
         eS <- eigen(Covtemp, symmetric = TRUE)
         ev <- eS$values
         k1 <- length(ev)
-        CH.CovSsqrt[[i]] <-  diag(sqrt(pmax(ev, 0)), k1) %*% t(eS$vectors)
+        CH.CovSsqrt[[i]] <- diag(sqrt(pmax(ev, 0)), k1) %*% t(eS$vectors)
     }
 
     Zs = Zs[unlist(GL),]
@@ -112,20 +112,6 @@ MTaSPUsSetPath <- function(Zs, corPhe, corSNP, pow1=c(1,2,4,8),
         StdT0s[[np]] = matrix(0, nrow=n.perm, ncol=length(pow1)*nGenes)
     }
 
-    ## test stat's: SPUs
-    for(np in 1:nphe) {
-        for(j in 1:length(pow1))
-            for(iGene in 1:nGenes){
-                if (iGene==1) SNPstart=1 else SNPstart=sum(nSNPs0[1:(iGene-1)])+1
-                indx=(SNPstart:(SNPstart+nSNPs0[iGene]-1))
-                if (pow1[j] < Inf){
-                    aa = (sum(Zs[indx,np]^pow1[j]))
-                    StdTs[[np]][(j-1)*nGenes+iGene] = sign(aa)*((abs(aa)/nSNPs0[iGene]) ^(1/pow1[j]))
-                } else StdTs[[np]][(j-1)*nGenes+iGene] = max(abs(Zs[indx,np]))
-            }
-    }        
-
-    
     for(b in 1:n.perm){
         
         ## U00<-rnorm(nsnp, 0, 1)
@@ -146,8 +132,8 @@ MTaSPUsSetPath <- function(Zs, corPhe, corSNP, pow1=c(1,2,4,8),
                     if (pow1[j] < Inf){
                         a = (sum(U0[indx,np]^pow1[j]))
                         StdT0s[[np]][b, (j-1)*nGenes+iGene] = sign(a)*((abs(a)/nSNPs0[iGene]) ^(1/pow1[j]))
-#                        aa = (sum(Zs[indx,np]^pow1[j]))
-#                        StdTs[[np]][(j-1)*nGenes+iGene] = sign(aa)*((abs(aa)/nSNPs0[iGene]) ^(1/pow1[j]))
+                        aa = (sum(Zs[indx,np]^pow1[j]))
+                        StdTs[[np]][(j-1)*nGenes+iGene] = sign(aa)*((abs(aa)/nSNPs0[iGene]) ^(1/pow1[j]))
 
                     } else StdT0s[[np]][b, (j-1)*nGenes+iGene] = max(abs(U0[indx,np]))
                 }
@@ -226,4 +212,3 @@ MTaSPUsSetPath <- function(Zs, corPhe, corSNP, pow1=c(1,2,4,8),
     pvs
 
 }
-
