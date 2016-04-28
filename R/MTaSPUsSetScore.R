@@ -1,6 +1,6 @@
-#' gene-Multitrait Sum of Powered Score (MTSPUsSet) tests and adaptive MTSPUsSet (MTaSPUsSet) test for multi trait - SNP set association with GWAS summary statistics.
+#' gene-Multitrait Sum of Powered Score (MTSPUsSetScore) tests and adaptive MTSPUsSet (MTaSPUsSet) test for multi trait - SNP set association with GWAS summary statistics. (Score version added)
 #'
-#' It gives p-values of the MTSPUsSet tests and MTaSPUsSet test with GWAS summary statistics.
+#' It gives p-values of the MTSPUsSet tests MTScore and MTaSPUsSet_Score test with GWAS summary statistics.
 #'
 #' @param Zs Z-scores for each SNPs. It could be P-values if the Ps option is TRUE. 
 #'
@@ -18,7 +18,7 @@
 #'
 #' @param Ps TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.
 #'
-#' @return A vector object, MTSPUsSet test P values and MTaSPUsSet P value.
+#' @return A vector object, MTSPUsSet test, MTScore test P values and MTaSPUsSet_Score P value.
 #'
 #' @author Il-Youp Kwak and Wei Pan
 #'
@@ -33,16 +33,15 @@
 #' data(SAMD11)
 #' attach(SAMD11)
 #' ## example analysis using aSPUM test.
-#' (outFZ <- MTaSPUsSet(ZsF, corSNP=corSNPF, corPhe = corPheF,
+#' (outFZ <- MTaSPUsSetScore(ZsF, corSNP=corSNPF, corPhe = corPheF,
 #'       pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=10, Ps=FALSE))
 #'
 #' 
 #' @seealso \code{\link{MTaSPUsSetC}} 
 
 
-MTaSPUsSet <- function(Zs, corSNP, corPhe, pow=c(1,2,4,8),
+MTaSPUsSetScore <- function(Zs, corSNP, corPhe, pow=c(1,2,4,8),
                        pow2 = c(1,2,4,8), n.perm=5000, Ps = FALSE) {
-
     nsnp <- dim(Zs)[1]
     nphe <- dim(Zs)[2]
     
@@ -62,6 +61,10 @@ MTaSPUsSet <- function(Zs, corSNP, corPhe, pow=c(1,2,4,8),
     
     Ts <- rep(0, length(pow)*length(pow2))
 
+    vecZ <- c(t(Zs))
+    kRP <- kronecker(V, U, FUN = "*")
+    Tsc <- vecZ %*% ginv(kRP) %*% vecZ
+    
     for(p1 in 1:length(pow)) {
         for(p2 in 1:length(pow2)) {
 
@@ -75,10 +78,26 @@ MTaSPUsSet <- function(Zs, corSNP, corPhe, pow=c(1,2,4,8),
 
 ####
 ## residual permutation
-    pPerm0 = rep(NA,length(pow)*length(pow2))
+    pPerm0 = rep(NA,length(pow)*length(pow2)+1)
                                         #    T0s1 = numeric(length(pow)*length(pow2) )
     T0s = numeric(n.perm)
+    Tsc0 = numeric(n.perm)
     s <- sample(1:10^5,1)
+
+    set.seed(s) # to ensure the same samples are drawn for each pow
+    for (b in 1:n.perm){
+        Z <- matrix(rnorm(n=nsnp*nphe, 0,1), nphe, nsnp)
+        Z0 <- t(A %*% Z %*% B)
+        
+        if(Ps == TRUE)
+            Z0 <- abs(Z0)
+        
+        vecZ <- c(t(Z0))
+        Tsc0[b] <- vecZ %*% ginv(kRP) %*% vecZ
+    }
+    pPerm0[length(pow)*length(pow2)+1] = round(sum(rep(abs(Tsc),n.perm) <= abs(Tsc0)) / n.perm, digits = 8)
+    P0s = ( (n.perm-rank(abs(T0s))) + 1 )/(n.perm)
+    minp0=P0s
 
     for (p1 in 1:length(pow)){
         for (p2 in 1:length(pow2)){
@@ -98,8 +117,9 @@ MTaSPUsSet <- function(Zs, corSNP, corPhe, pow=c(1,2,4,8),
             }
 
             pPerm0[p2 + (p1-1) * length(pow2)] = round( sum(abs(Ts[p2 + (p1-1) * length(pow2)])<=abs(T0s)) / n.perm, digits = 8)
+            
             P0s = ( (n.perm-rank(abs(T0s))) + 1 )/(n.perm)
-            if (p2 + (p1-1) * length(pow2) == 1 ) minp0=P0s else minp0[which(minp0>P0s)]=P0s[which(minp0>P0s)]
+            minp0[which(minp0>P0s)]=P0s[which(minp0>P0s)]
         }
 
     }
@@ -111,7 +131,7 @@ MTaSPUsSet <- function(Zs, corSNP, corPhe, pow=c(1,2,4,8),
     for(nm in paste("MTSPUsSet",pow,",", sep=""))
         nmvec <- c(nmvec, paste(nm, pow2, sep="") )
 
-    nmvec <- c(nmvec, "MTaSPUsSet")
+    nmvec <- c(nmvec, "Score", "MTaSPUsSet")
     names(pvs) <- nmvec
     pvs
 }

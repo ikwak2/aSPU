@@ -13,6 +13,7 @@ export(minP)
 export(estcov)
 export(MTaSPUs)
 export(MTaSPUsSet)
+export(MTaSPUsSetScore)
 export(MTaSPUsSetC)
 export(MTaSPUsSetPath)
 
