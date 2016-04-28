@@ -8,7 +8,7 @@ MTaSPUsSet(Zs, corSNP, corPhe, pow = c(1, 2, 4, 8), pow2 = c(1, 2, 4, 8),
   n.perm = 5000, Ps = FALSE)
 }
 \arguments{
-\item{Zs}{Z-scores for each SNPs. It could be P-values if the Ps option is TRUE.}
+\item{Zs}{Z-score matrix. row represent SNPs and column represent traits. It could be P-values if the Ps option is TRUE.}
 
 \item{corSNP}{Correlation matirx of the SNPs to be tested; estimated from a
 reference panel (based on the same set of the reference alleles as

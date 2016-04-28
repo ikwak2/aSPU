@@ -13,9 +13,19 @@ MTaSPUsSetPath(Zs, corPhe, corSNP, pow1 = c(1, 2, 4, 8), pow2 = c(1, 2, 4,
   Ps = FALSE)
 }
 \arguments{
-\item{Zs}{Z-scores for each SNPs. It could be P-values if the Ps option is TRUE.}
+\item{Zs}{Z-score matrix. row represent SNPs and column represent traits. It could be P-values if the Ps option is TRUE.}
 
-\item{pow2}{GENE specific power(gamma values) used in SPUpath test.}
+\item{corPhe}{Correlation matirx of phenotypes to be tested; Estimated from Z-scores.}
+
+\item{corSNP}{Correlation matirx of the SNPs to be tested; estimated from a
+reference panel (based on the same set of the reference alleles as
+used in calculating Z-scores).}
+
+\item{pow1}{SNP specific power(gamma values) used in MTSPUsSetPath test.}
+
+\item{pow2}{GENE specific power(gamma values) used in MTSPUsSetPath test.}
+
+\item{pow3}{Trait specific power(gamma values) used in MTSPUsSetPath test.}
 
 \item{snp.info}{SNP information matrix, the 1st column is SNP id, 2nd column is chromosome #, 3rd column indicates SNP location.}
 
@@ -24,12 +34,6 @@ MTaSPUsSetPath(Zs, corPhe, corSNP, pow1 = c(1, 2, 4, 8), pow2 = c(1, 2, 4,
 \item{n.perm}{number of permutations.}
 
 \item{Ps}{TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.}
-
-\item{corrSNP}{Correlation matirx of the SNPs to be tested; estimated from a
-reference panel (based on the same set of the reference alleles as
-used in calculating Z-scores).}
-
-\item{pow}{SNP specific power(gamma values) used in SPUpath test.}
 
 \item{Zs}{Z-scores for each SNPs. It could be P-values if the Ps option is TRUE.}
 

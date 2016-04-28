@@ -2,19 +2,23 @@
 #'
 #' It gives p-values of the MTSPUsSetPath tests and MTaSPUsSetPath test with GWAS summary statistics.
 #'
-#' @param Zs Z-scores for each SNPs. It could be P-values if the Ps option is TRUE. 
+#' @param Zs Z-score matrix. row represent SNPs and column represent traits. It could be P-values if the Ps option is TRUE. 
 #'
-#' @param corrSNP Correlation matirx of the SNPs to be tested; estimated from a
+#' @param corSNP Correlation matirx of the SNPs to be tested; estimated from a
 #' reference panel (based on the same set of the reference alleles as
 #' used in calculating Z-scores).
 #'
+#' @param corPhe Correlation matirx of phenotypes to be tested; Estimated from Z-scores.
+#' 
 #' @param snp.info SNP information matrix, the 1st column is SNP id, 2nd column is chromosome #, 3rd column indicates SNP location.
 #'
 #' @param gene.info GENE information matrix, The 1st column is GENE id, 2nd column is chromosome #, 3rd and 4th column indicate start and end positions of the gene.
 #'
-#' @param pow SNP specific power(gamma values) used in SPUpath test.
+#' @param pow1 SNP specific power(gamma values) used in MTSPUsSetPath test.
 #'
-#' @param pow2 GENE specific power(gamma values) used in SPUpath test.
+#' @param pow2 GENE specific power(gamma values) used in MTSPUsSetPath test.
+#'
+#' @param pow3 Trait specific power(gamma values) used in MTSPUsSetPath test.
 #'
 #' @param n.perm number of permutations.
 #'
