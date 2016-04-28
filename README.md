@@ -7,14 +7,16 @@ R/aSPU is an R package for Genetic association testing methods such as aSPU, aSP
 
 ### Summary table 
 
-| Function Name | Data Type  | Description                                    |
-|---------------|------------|------------------------------------------------|
-| aSPU, aSPUw   | Individual | Single trait; gene-based                       |
-| aSPUs         | Summary    | Single trait; gene-based                       |
-| aSPUpath      | Individual | Single trait; pathway-based                    |
-| aSPUsPath     | Summary    | Single trait; pathway-based                    |
-| GEEaSPU       | Individual | Multiple traits; single SNP based              |
-| MTaSPUs       | Summary    | Multiple traits; single SNP based              |
+| Function Name    | Data Type  | Description                                    |
+|------------------|------------|------------------------------------------------|
+| aSPU, aSPUw      | Individual | Single trait; gene-based                       |
+| aSPUs            | Summary    | Single trait; gene-based                       |
+| aSPUpath         | Individual | Single trait; pathway-based                    |
+| aSPUsPath        | Summary    | Single trait; pathway-based                    |
+| GEEaSPU          | Individual | Multiple traits; single SNP based              |
+| MTaSPUs          | Summary    | Multiple traits; single SNP based              |
+| MTaSPUsSet       | Summary    | Multiple traits; gene-based                    |
+| MTaSPUsSetPath   | Summary    | Multiple traits; pathway-based                 |
 
 
 *Data type indicate the structure of data set. "Individual" for individual level data. "Summary" for summary statistics data (such as Z scores or p-values of each SNP) 
@@ -56,12 +58,19 @@ Testing for association with multiple traits in generalized estimation equations
 Neuroimage. 96:309-25
 ```
 
-For 'MTaSPUs''
+For 'MTaSPUs'
 ```
 Junghi Kim, Yun Bai and Wei Pan (2015)
 An Adaptive Association Test for Multiple Phenotypes with GWAS Summary Statistics,
 Genetic Epidemiology, 8:651-663
 ```
+
+For 'MTaSPUsSet' and 'MTaSPUsSetPath'
+```
+Il-Youp Kwak, Wei Pan (2016)
+Gene- and pathway-based association tests for multiple traits with GWAS summary statistics
+```
+
 
 For 'GATES'
 ```
