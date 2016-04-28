@@ -61,7 +61,7 @@ You can see that `corSNPM` and `corSNPF` are same. Yes, they are calculated from
 
 ## Data analysis
 
-Now, let's perform `MTaSPUsSet` and `MTaSPUsSetC` functions. `MTaSPUsSetC` is C coded version it impemented using Rcpp and RcppArmadillo package. The C coded version is faster when n.perm < 10^4. However it used (n.perm $\times$ npow1 $\times$ npow2 space) in calculation while R version just used n.perm space in calculation (complexity of C version is higher). So R version is faster when n.perm is big like n.perm = 10^6. 
+Now, let's perform `MTaSPUsSet` and `MTaSPUsSetC` functions. `MTaSPUsSetC` is C coded version it impemented using Rcpp and RcppArmadillo package. The C coded version is faster when n.perm < 10^4. However it used (n.perm $\times$ npow1 $\times$ npow2 space) in calculation while R version just used n.perm space in calculation (complexity of C version is higher). So R version is faster when n.perm is big like n.perm = $10^6$. Thus, use C version for the 1st screening using n.perm = 1000 or $10^5$ for all the genes, and increase the number of permutation for the genens with small p-value. 
 
 ```{r outFZ}
 (outFZC <- MTaSPUsSetC(ZsF, corSNP=corSNPF, corPhe = corPheF,
