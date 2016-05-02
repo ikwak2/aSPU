@@ -21,7 +21,7 @@ R/aSPU is an R package for Genetic association testing methods such as aSPU, aSP
 
 *Data type indicate the structure of data set. "Individual" for individual level data. "Summary" for summary statistics data (such as Z scores or p-values of each SNP) 
 
-Some [tutorials](http://www.tc.umn.edu/~ikwak/tutorials/index.html) are available.
+Some [tutorials](http://www.tc.umn.edu/~ikwak/tutorials/index.html) are available for aSPUs, aSPUsPath and MTaSPUsSet. 
 
 ### Citations
 
