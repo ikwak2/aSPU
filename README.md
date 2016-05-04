@@ -23,7 +23,7 @@ R/aSPU is an R package for Genetic association testing methods such as aSPU, aSP
 
 ### Tutorials 
 
-Some [tutorials](http://www.tc.umn.edu/~ikwak/tutorials/index.html) for aSPUs, aSPUsPath and MTaSPUsSet are available
+Some [tutorials](https://github.com/ikwak2/aSPU_tutorials) for aSPUs, aSPUsPath and MTaSPUsSet are available. 
  - [Mapping Snp to Gene](http://www.tc.umn.edu/~ikwak/tutorials/mappingSnpToGene2.html)
  - [Getting correlation estimate among SNPs from reference panel](http://www.tc.umn.edu/~ikwak/tutorials/CorrFromRef.html)
  - [R and Perl codes to perform aSPUs and MTaSPUsSet](http://www.tc.umn.edu/~ikwak/tutorials/ForMTgenes.html)
