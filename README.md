@@ -27,6 +27,7 @@ Some [tutorials](https://github.com/ikwak2/aSPU_tutorials) for aSPUs, aSPUsPath 
  - [Mapping Snp to Gene](http://www.tc.umn.edu/~ikwak/tutorials/mappingSnpToGene2.html)
  - [Getting correlation estimate among SNPs from reference panel](http://www.tc.umn.edu/~ikwak/tutorials/CorrFromRef.html)
  - [R and Perl codes to perform aSPUs and MTaSPUsSet](http://www.tc.umn.edu/~ikwak/tutorials/ForMTgenes.html)
+ - [Pathway data manipulation](http://www.tc.umn.edu/~ikwak/tutorials/pathwayMani.html)
  - [Speed comparison using R, awk and Perl](http://www.tc.umn.edu/~ikwak/tutorials/SpeedComp.html)
  - [Vignette for aSPUs and aSPUsPath](http://www.tc.umn.edu/~ikwak/tutorials/aSPUstat.html)
  - [Vignette for MTaSPUsSet](http://www.tc.umn.edu/~ikwak/tutorials/MTaSPUsSet.html)
