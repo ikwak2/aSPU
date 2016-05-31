@@ -1,6 +1,6 @@
 ## Adaptive Sum of powered score (SPU) tests (SPU and aSPU) (distribution based)
 ##
-## It gives the p-values of the SPU(1), SPU(2) and minP tests and aSPU test based on the distribution of them
+## It gives the p-values of the SPU(1), SPU(2) and minP tests and aSPU test based on the distribution of them.
 ##
 ## @param Y phenotype data. It can be disease lables; =0 for controls, =1 for cases.
 ##     or It can be any quantitative traits. Vector with length n (number of observations)

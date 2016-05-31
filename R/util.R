@@ -1,6 +1,5 @@
 ### SSU #################
 
-
 SumSqU<-function(U, CovS){
     if (is.null(dim(CovS))) {# only one-dim:
         Tscore<- sum(U^2 /CovS)
