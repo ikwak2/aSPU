@@ -47,11 +47,8 @@ aSPUsim2 <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8
 #        sigma0 = sqrt(sum(yresids^2)/(n-1))
         yfits <- rep(mean(Y), n)
 
-        Xbar<-apply(Xg, 2, mean)
-        Xgb<-Xg
-        for(i in 1:nrow(Xg))
-            Xgb[i,]<-Xg[i,]-Xbar
-
+        Xgb <- apply(X, 2, function(x)(x-mean(x)) )
+        
 	if( model == "binomial" ) {
             CovS <- mean(Y)*(1-mean(Y))*(t(Xgb) %*% Xgb)
 	} else {
