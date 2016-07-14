@@ -2,7 +2,7 @@
 % Please edit documentation in R/aSPUr.R
 \name{aSPUr}
 \alias{aSPUr}
-\title{Robust Sum of powered score (SPU) tests and aSPU test for a quantitatiev trait}
+\title{Robust Sum of powered score (SPUr) tests and aSPUr test for a quantitatiev trait}
 \usage{
 aSPUr(Y, X, cov = NULL, pow = c(1:8, Inf), B = 1000, C = 1.345)
 }
@@ -15,15 +15,15 @@ for an allele. A matrix with dimension n by k (n : number of observation, k : nu
 
 \item{cov}{Covariates. A matrix with dimension n by k2 (n :number of observation, k2 : number of covariates).}
 
-\item{pow}{power used in SPU test. A vector of the powers.}
+\item{pow}{power used in SPUr test. A vector of the powers.}
 
 \item{B}{number of bootstraps.}
 
 \item{C}{Constant in huber loss function. C = 1.345 is chosen to maintain a high efficiency for a Normal error.}
 }
 \value{
-p-values of the SPU tests in the order of supplied pow values;
-        finally, the p-value of the aSPU test (that combines the
+p-values of the SPUr tests in the order of supplied pow values;
+        finally, the p-value of the aSPUr test (that combines the
           SPUs tests with pow by taking their min P-value and adjust for
           multiple testing).
 }

@@ -1,4 +1,4 @@
-#' Robust Sum of powered score (SPU) tests and aSPU test for a quantitatiev trait
+#' Robust Sum of powered score (SPUr) tests and aSPUr test for a quantitatiev trait
 #'
 #' The test is based on the Huber loss function and using the nonparametric bootstrap for inference (i.e. bootstrapping residuals; simulation may NOT work for "small n, large p")
 #'
@@ -12,12 +12,12 @@
 #'
 #' @param C Constant in huber loss function. C = 1.345 is chosen to maintain a high efficiency for a Normal error. 
 #'
-#' @param pow power used in SPU test. A vector of the powers.
+#' @param pow power used in SPUr test. A vector of the powers.
 #'
 #' @param B number of bootstraps.
 #'
-#' @return p-values of the SPU tests in the order of supplied pow values;
-#'         finally, the p-value of the aSPU test (that combines the
+#' @return p-values of the SPUr tests in the order of supplied pow values;
+#'         finally, the p-value of the aSPUr test (that combines the
 #'           SPUs tests with pow by taking their min P-value and adjust for
 #'           multiple testing).
 #'
