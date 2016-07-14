@@ -1,6 +1,6 @@
 Package: aSPU
-Version: 1.42
-Date: 2016-5-2
+Version: 1.43
+Date: 2016-7-13
 Title: Adaptive Sum of Powered Score Test
 Description: R codes for the (adaptive) Sum of Powered Score ('SPU' and 'aSPU')
     tests, inverse variance weighted Sum of Powered score ('SPUw' and 'aSPUw') tests
@@ -14,7 +14,7 @@ Description: R codes for the (adaptive) Sum of Powered Score ('SPU' and 'aSPU')
     of 'GATES' test for pathway-based association testing ('GATES-Simes'). ).
     The tests can be used with genetic and other data sets with covariates. The
     response variable is binary or quantitative. Summary; (1) Single trait-'SNP' set
-    association with individual-level data ('aSPU', 'aSPUw'), (2) Single trait-'SNP'
+    association with individual-level data ('aSPU', 'aSPUw', 'aSPUr'), (2) Single trait-'SNP'
     set association with summary statistics ('aSPUs'), (3) Single trait-pathway
     association with individual-level data ('aSPUpath'), (4) Single trait-pathway
     association with summary statistics ('aSPUsPath'), (5) Multiple traits-single
