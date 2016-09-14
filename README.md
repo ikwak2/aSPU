@@ -67,14 +67,14 @@ For 'aSPUs' and 'aSPUsPath'
 ```
 Il-Youp Kwak, Wei Pan (2015)
 Adaptive Gene- and Pathway-Trait Association Testing with GWAS Summary Statistics,
-Bioinformatics, doi: 10.1093/bioinformatics/btv719
+Bioinformatics, 32(8), 1178-1184
 ```
 
 For 'GEEaSPU'
 ```
 Yiwei Zhang, Zhiyuan Xu, Xiaotong Shen, Wei Pan (2014)
 Testing for association with multiple traits in generalized estimation equations, with application to neuroimaging data,
-Neuroimage. 96:309-25
+Neuroimage. 96, 309-325
 ```
 
 For 'MTaSPUs'
@@ -87,7 +87,7 @@ Genetic Epidemiology, 8:651-663
 For 'MTaSPUsSet' and 'MTaSPUsSetPath'
 ```
 Il-Youp Kwak, Wei Pan (2016)
-Gene- and pathway-based association tests for multiple traits with GWAS summary statistics
+Gene- and pathway-based association tests for multiple traits with GWAS summary statistics, accepted for publication in Bioinformatics. 
 ```
 
 
