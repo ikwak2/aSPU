@@ -61,6 +61,13 @@ aSPUwpermC <- function(Y, X, cov = NULL, model=c("gaussian", "binomial"), pow=c(
     } else {
         ## with nuisance parameters:
         tdat1<-data.frame(trait=Y, cov)
+
+        if(is.null(colnames(cov))) {
+            colnames(tdat1) = c("trait", paste("cov",1:dim(cov)[2],sep=""))
+        } else {
+            colnames(tdat1) = c("trait", colnames(cov))
+        }
+        
         fit1<-glm(trait~.,family=model,data=tdat1)
         pis<-fitted.values(fit1)
         XUs<-matrix(0, nrow=n, ncol=k)
