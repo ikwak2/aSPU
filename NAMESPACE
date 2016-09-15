@@ -18,6 +18,7 @@ export(MTaSPUsSet)
 export(MTaSPUsSetScore)
 export(MTaSPUsSetC)
 export(MTaSPUsSetPath)
+export(plotPmat)
 
 importFrom(gee, gee)
 importFrom(MASS, ginv, mvrnorm)
