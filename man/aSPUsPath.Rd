@@ -4,13 +4,13 @@
 \alias{aSPUsPath}
 \title{Pathway based Sum of Powered Score tests (SPUsPath) and adaptive SPUpath (aSPUsPath) test for single trait - pathway association with GWAS summary statistics.}
 \usage{
-aSPUsPath(Zs, corrSNP, pow = c(1, 2, 4, 8, Inf), pow2 = c(1, 2, 4, 8),
+aSPUsPath(Zs, corSNP, pow = c(1, 2, 4, 8, Inf), pow2 = c(1, 2, 4, 8),
   snp.info, gene.info, n.perm = 1000, Ps = FALSE)
 }
 \arguments{
 \item{Zs}{Z-scores for each SNPs. It could be P-values if the Ps option is TRUE.}
 
-\item{corrSNP}{Correlation matirx of the SNPs to be tested; estimated from a
+\item{corSNP}{Correlation matirx of the SNPs to be tested; estimated from a
 reference panel (based on the same set of the reference alleles as
 used in calculating Z-scores).}
 
@@ -36,7 +36,7 @@ It gives p-values of the SPUsPath tests and aSPUsPath test with GWAS summary sta
 data(kegg9)
 
 # p-values of SPUpath and aSPUpath tests.
-out.a <- aSPUsPath(kegg9$nP, corrSNP = kegg9$ldmatrix, pow=c(1:8, Inf),
+out.a <- aSPUsPath(kegg9$nP, corSNP = kegg9$ldmatrix, pow=c(1:8, Inf),
                   pow2 = c(1,2,4,8), 
                   snp.info=kegg9$snp.info, gene.info = kegg9$gene.info,
                   n.perm=10, Ps = TRUE)
