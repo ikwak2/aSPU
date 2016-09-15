@@ -61,7 +61,7 @@ aSPUw <- function(Y, X, cov=NULL, resample = c("perm", "sim", "boot"), model=c("
         aSPUwsim(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
     } else {
         if (resample == "boot") {
-            aSPUwboot(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
+            aSPUwboot2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
 	} else {
         aSPUwpermC(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model, userank = userank)
     	}

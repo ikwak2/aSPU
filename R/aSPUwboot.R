@@ -26,6 +26,125 @@
 ##
 ## @seealso \code{\link{aSPU}}, \code{\link{aSPUperm2}}, \code{\link{aSPUboot}}, \code{\link{aSPUboot2}}
 
+aSPUwboot2 <- function(Y, X, cov=NULL, model=c("gaussian", "binomial"), pow=c(1:8, Inf), n.perm=1000){
+
+    model <- match.arg(model)
+
+    n <- length(Y)
+    if (is.null(X) && length(X)>0) X=as.matrix(X, ncol=1)
+    k <- ncol(X)
+
+    if (is.null(cov)){
+        ## NO nuisance parameters:
+        ##cov of the score stats:
+        
+        XUs <- Xg <- X
+        Xbar<-apply(Xg, 2, mean)
+        subtract<-function(x, y) { x - y }
+        Xgb=t(apply(Xg, 1, subtract, Xbar))        
+        r=Y-mean(Y)
+        yresids <- Y-mean(Y)
+
+        U<-as.vector( t(Xg) %*% r)
+
+        
+        if( model == "binomial" ) {
+            CovS <- mean(Y)*(1-mean(Y))*(t(Xgb) %*% Xgb)
+        } else {
+            CovS <- var(Y)*(t(Xgb) %*% Xgb)
+        }
+    } else {
+
+        ## with nuisance parameters:
+        tdat1<-data.frame(trait=Y, cov)
+        fit1<-glm(trait~.,family=model,data=tdat1)
+        pis<-fitted.values(fit1)
+        yresids <- Y - pis
+        XUs<-matrix(0, nrow=n, ncol=k)
+        for(i in 1:k){
+            tdat2<-data.frame(X1=X[,i], cov)
+            fit2<-glm(X1~.,data=tdat2)
+            X1mus<-fitted.values(fit2)
+            XUs[, i] <- (X[,i] - X1mus)
+        }
+        U <- t(XUs) %*% (Y - pis)
+        
+        if( model == "binomial" ) {
+            CovS <- mean(pis*(1-pis))*(t(XUs) %*% XUs)
+        } else {
+            CovS <- var(yresids)*(t(XUs) %*% XUs)
+        }
+       
+    }
+
+    Vs<-diag(CovS)
+    diagSDs<-ifelse(Vs>1e-20, sqrt(Vs), 1e-10)
+
+
+                                        # test stat's:
+
+    Ts <- rep(0, length(pow))
+    for(j in 1:length(pow)){
+        if (pow[j] < Inf)
+            Ts[j] = sum((U/diagSDs)^pow[j]) else Ts[j] = max(abs(U/diagSDs))
+    }
+
+                                        # bootstrap:
+    T0s = matrix(0, nrow=n.perm, ncol=length(pow))
+    Y0 = Y
+    for(b in 1:n.perm){
+        if (is.null(cov)) {
+            Y0 <- sample(Y, length(Y))
+#########Null score vector:
+            U0 <- t(Xg) %*% (Y0-mean(Y0))
+        } else {
+             ## with nuisance parameters:
+            if ( model == "gaussian") {
+                
+                Y0 <- pis + sample(yresids, n, replace = F )
+                tdat0<-data.frame(trait=Y0, cov)
+                fit0<-glm(trait~., data=tdat0)
+                yfits0<-fitted.values(fit0)
+                U0<-t(XUs) %*% (Y0 - yfits0)
+            } else {
+                ## with nuisance parameters:
+                for(i in 1:n) Y0[i] <- sample(c(1,0), 1, prob=c(pis[i], 1-pis[i]) )
+                tdat0<-data.frame(trait=Y0, cov)
+                fit0<-glm(trait~., family=model, data=tdat0)
+                yfits0<-fitted.values(fit0)
+                U0<-t(XUs) %*% (Y0 - yfits0)
+            }
+            
+        }
+
+        ## test stat's:
+
+        for(j in 1:length(pow))
+            if (pow[j] < Inf)
+                T0s[b, j] = sum((U0/diagSDs)^pow[j]) else T0s[b, j] = max(abs(U0/diagSDs))
+    
+        
+    }
+
+    pPerm0 = rep(NA,length(pow))
+    for ( j in 1:length(pow))
+    {
+        pPerm0[j] = round( sum(abs(Ts[j])<=abs(T0s[,j])) / n.perm, digits = 8)
+        P0s = ( ( n.perm - rank( abs(T0s[,j]) ) ) + 1 ) / (n.perm)
+        if (j == 1 ) minp0  = P0s else minp0[which(minp0>P0s)] = P0s[which(minp0>P0s)]
+    }
+    
+    Paspu <- (sum(minp0 <= min(pPerm0)) + 1) / (n.perm+1)
+    pvs <- c(pPerm0, Paspu)
+    
+    Ts <- c(Ts, min(pPerm0))
+    names(Ts) <- c(paste("SPUw", pow, sep=""), "aSPUw")
+    names(pvs) = names(Ts)
+    
+    list(Ts = Ts, pvs = pvs)
+    
+}
+
 
 aSPUwboot <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8, Inf), n.perm=1000){
 
