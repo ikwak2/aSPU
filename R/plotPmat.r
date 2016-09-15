@@ -30,7 +30,7 @@
 #'            c(0.03, 0.3, 0.3, 0.00001, .2),
 #'            c(0.01, 0.2, 0.4, 0.001, .0001) )
 #'
-#' We can visualize it using plotPmat function.
+#' ## We can visualize it using plotPmat function.
 #' plotPmat(Ps)
 #' 
 #' 
