@@ -86,7 +86,7 @@ for( g in kegg9$gene.info[,1]) {
     ldsub <- kegg9$ldmatrix[snps, snps];
 
     if( length(snps) > 1) {
-        out <- aSPUs(newP, corrSNP=ldsub , pow=c(1,2,4,8, Inf),
+        out <- aSPUs(newP, corSNP=ldsub , pow=c(1,2,4,8, Inf),
                      n.perm=10000, Ps=TRUE)
 
         o.pvec = order(newP)
@@ -95,7 +95,7 @@ for( g in kegg9$gene.info[,1]) {
         Gps <- rbind(Gps, c(length(newP),out$pvs, gatesp))
         gl <- c(gl, g)
     } else if (length(snps) == 1) {
-        out <- aSPUs(newP, corrSNP=ldsub , pow=c(1,2,4,8, Inf),
+        out <- aSPUs(newP, corSNP=ldsub , pow=c(1,2,4,8, Inf),
                      n.perm=10000, Ps=TRUE)
         gatesp <- newP
         Gps <- rbind(Gps, c(length(newP),out$pvs, gatesp) )
@@ -144,7 +144,7 @@ out.g <- GatesSimes(pvec = kegg9$nP, ldmatrix = kegg9$ldmatrix,
 out.h <- Hyst(pvec = kegg9$nP, ldmatrix = kegg9$ldmatrix,
               snp.info=kegg9$snp.info, gene.info = kegg9$gene.info)
 
-out.a <- aSPUsPath(kegg9$nP, corrSNP = kegg9$ldmatrix, pow=c(1,2,4,8, Inf),
+out.a <- aSPUsPath(kegg9$nP, corSNP = kegg9$ldmatrix, pow=c(1,2,4,8, Inf),
                    pow2 = c(1,2,4,8),
                    snp.info=kegg9$snp.info, gene.info = kegg9$gene.info,
                    n.perm=1000, Ps = TRUE)
