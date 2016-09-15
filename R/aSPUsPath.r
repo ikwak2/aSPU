@@ -4,7 +4,7 @@
 #'
 #' @param Zs Z-scores for each SNPs. It could be P-values if the Ps option is TRUE. 
 #'
-#' @param corrSNP Correlation matirx of the SNPs to be tested; estimated from a
+#' @param corSNP Correlation matirx of the SNPs to be tested; estimated from a
 #' reference panel (based on the same set of the reference alleles as
 #' used in calculating Z-scores).
 #'
@@ -34,7 +34,7 @@
 #' data(kegg9)
 #'
 #' # p-values of SPUpath and aSPUpath tests.
-#' out.a <- aSPUsPath(kegg9$nP, corrSNP = kegg9$ldmatrix, pow=c(1:8, Inf),
+#' out.a <- aSPUsPath(kegg9$nP, corSNP = kegg9$ldmatrix, pow=c(1:8, Inf),
 #'                   pow2 = c(1,2,4,8), 
 #'                   snp.info=kegg9$snp.info, gene.info = kegg9$gene.info,
 #'                   n.perm=10, Ps = TRUE)
@@ -43,7 +43,7 @@
 #'
 #' @seealso \code{\link{aSPUs}}
 
-aSPUsPath <- function(Zs, corrSNP, pow=c(1,2,4,8, Inf),
+aSPUsPath <- function(Zs, corSNP, pow=c(1,2,4,8, Inf),
                       pow2 = c(1,2,4,8), 
                       snp.info, gene.info, n.perm=1000,
                       Ps = FALSE) {
@@ -73,7 +73,7 @@ aSPUsPath <- function(Zs, corrSNP, pow=c(1,2,4,8, Inf),
    for( i in 1:length(chrs) ) { # i = 2
       c = chrs[i]
       CH[[i]] <- unlist(GL[which( GLch == c )])
-      Covtemp <- corrSNP[CH[[i]], CH[[i]]]
+      Covtemp <- corSNP[CH[[i]], CH[[i]]]
       eS <- eigen(Covtemp, symmetric = TRUE)
       ev <- eS$values
       k1 <- length(ev)
