@@ -4,12 +4,12 @@
 \alias{aSPUs}
 \title{Sum of Powered Score (SPUs) tests and adaptive SPU (aSPUs) test for single trait - SNP set association with GWAS summary statistics.}
 \usage{
-aSPUs(Zs, corrSNP, pow = c(1:8, Inf), n.perm = 1000, Ps = FALSE)
+aSPUs(Zs, corSNP, pow = c(1:8, Inf), n.perm = 1000, Ps = FALSE)
 }
 \arguments{
 \item{Zs}{Z-scores for each SNPs. It could be P-values if the Ps option is TRUE.}
 
-\item{corrSNP}{Correlation matirx of the SNPs to be tested; estimated from a
+\item{corSNP}{Correlation matirx of the SNPs to be tested; estimated from a
 reference panel (based on the same set of the reference alleles as
 used in calculating Z-scores).}
 
@@ -39,7 +39,7 @@ snps <- which( ( kegg9$snp.info[,2] == kegg9$gene.info[kegg9$gene.info[,1] == g,
 newP <- kegg9$nP[snps] ;
 ldsub <- kegg9$ldmatrix[snps, snps];
 ## Get p-value for gene SOAT1. Read vignette for details.
-out <- aSPUs(newP, corrSNP=ldsub , pow=c(1:8, Inf), n.perm=100, Ps=TRUE)
+out <- aSPUs(newP, corSNP=ldsub , pow=c(1:8, Inf), n.perm=100, Ps=TRUE)
 
 out$Ts
 # This is a vector of Test Statistics for SPUM and aSPUM tests.

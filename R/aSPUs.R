@@ -4,7 +4,7 @@
 #'
 #' @param Zs Z-scores for each SNPs. It could be P-values if the Ps option is TRUE. 
 #'
-#' @param corrSNP Correlation matirx of the SNPs to be tested; estimated from a
+#' @param corSNP Correlation matirx of the SNPs to be tested; estimated from a
 #' reference panel (based on the same set of the reference alleles as
 #' used in calculating Z-scores).
 #'
@@ -38,7 +38,7 @@
 #' newP <- kegg9$nP[snps] ;
 #' ldsub <- kegg9$ldmatrix[snps, snps];
 #' ## Get p-value for gene SOAT1. Read vignette for details.
-#' out <- aSPUs(newP, corrSNP=ldsub , pow=c(1:8, Inf), n.perm=100, Ps=TRUE)
+#' out <- aSPUs(newP, corSNP=ldsub , pow=c(1:8, Inf), n.perm=100, Ps=TRUE)
 #'
 #' out$Ts
 #' # This is a vector of Test Statistics for SPUM and aSPUM tests.
@@ -54,7 +54,7 @@
 #'
 #' @seealso \code{\link{aSPUw}} \code{\link{aSPU}} \code{\link{aSPUsPath}}
 
-aSPUs <- function(Zs, corrSNP, pow = c(1:8, Inf), n.perm = 1000, Ps = FALSE)
+aSPUs <- function(Zs, corSNP, pow = c(1:8, Inf), n.perm = 1000, Ps = FALSE)
 {
     n <- length(Zs)
     k <- n
@@ -62,7 +62,7 @@ aSPUs <- function(Zs, corrSNP, pow = c(1:8, Inf), n.perm = 1000, Ps = FALSE)
       Zs <- qnorm(1 - Zs/2)
 
     U <- Zs
-    CovS <- corrSNP
+    CovS <- corSNP
 
     eS <- eigen(CovS, symmetric = TRUE)
     ev <- eS$values
