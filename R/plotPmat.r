@@ -69,7 +69,7 @@ plotPmat <- function(Ps, zlim=NULL, main = NULL, yt = NULL, xlab = "SNPs", thres
     }
 
     par(mar=c(3.1, 3.6, 3.6, 0.6), las=1)
-    layout(cbind(1, 2), width=c(4.72, 1.28))
+    layout(cbind(1, 2), widths=c(4.72, 1.28))
     image(pos, y, t(log10P), xaxt="n", yaxt="n",  ylab="", xlab="",
           zlim=zlim, col=col, mgp=c(2.6, 1, 0), bty="n", main = main)
     title(xlab=xlab, mgp=c(2, 0, 0))
@@ -86,7 +86,7 @@ plotPmat <- function(Ps, zlim=NULL, main = NULL, yt = NULL, xlab = "SNPs", thres
     par(mar=c(8.1, 0.6, 4.6, 4.1))
     image(0, lodscale, t(cbind(ls2)), xaxt="n", xlab="", yaxt="n",
           col=col, zlim=zlim)
-    axis(side=4, at=pretty(lodscale), lab=abs(pretty(lodscale)))
+    axis(side=4, at=pretty(lodscale), labels=abs(pretty(lodscale)))
 #    title(main = expression(paste("-", log[10], "P") ))
     text(1, zlim[2]+1, expression(paste("-", log[10], "P") ), xpd=TRUE)
 }
