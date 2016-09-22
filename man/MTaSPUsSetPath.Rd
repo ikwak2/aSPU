@@ -6,7 +6,7 @@
 \usage{
 MTaSPUsSetPath(Zs, corPhe, corSNP, pow1 = c(1, 2, 4, 8), pow2 = c(1, 2, 4,
   8), pow3 = c(1, 2, 4, 8), snp.info, gene.info, n.perm = 1000,
-  Ps = FALSE)
+  Ps = FALSE, prune = TRUE)
 }
 \arguments{
 \item{Zs}{Z-score matrix. row represent SNPs and column represent traits. It could be P-values if the Ps option is TRUE.}
@@ -30,6 +30,8 @@ used in calculating Z-scores).}
 \item{n.perm}{number of permutations.}
 
 \item{Ps}{TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.}
+
+\item{prune}{if it is TRUE, do pruing before the test using pruneSNP function.}
 }
 \value{
 P-values for MTSPUsSetpath tests and MTaSPUsSetpPath test.
@@ -66,7 +68,7 @@ Il-Youp Kwak and Wei Pan
 \references{
 Il-Youp Kwak, Wei Pan (2016)
 Gene- and pathway-based association tests for multiple
-      traits with GWAS summary statistics
+     traits with GWAS summary statistics, Bioinformatics, doi:10.1093/bioinformatics/btw577
 }
 \seealso{
 \code{\link{MTaSPUsSetC}}, \code{\link{MTaSPUsSet}}

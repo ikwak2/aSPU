@@ -24,6 +24,8 @@
 #'
 #' @param Ps TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.
 #'
+#' @param prune if it is TRUE, do pruing before the test using pruneSNP function. 
+#'
 #' @export
 #' @return P-values for MTSPUsSetpath tests and MTaSPUsSetpPath test.
 #'
@@ -32,7 +34,7 @@
 #' @references
 #' Il-Youp Kwak, Wei Pan (2016)
 #' Gene- and pathway-based association tests for multiple
-#'       traits with GWAS summary statistics
+#'      traits with GWAS summary statistics, Bioinformatics, doi:10.1093/bioinformatics/btw577
 #'
 #' @examples
 #'
@@ -63,8 +65,31 @@ MTaSPUsSetPath <- function(Zs, corPhe, corSNP, pow1=c(1,2,4,8),
                            pow2 = c(1,2,4,8),
                            pow3 = c(1,2,4,8),
                            snp.info, gene.info, n.perm=1000,
-                           Ps = FALSE) {
+                           Ps = FALSE, prune = TRUE) {
+    if( dim(corSNP)[1] != dim(corSNP)[2] ){
+        stop(" corSNP should be correlation matrix with same number of rows and columns. ")
+    }
 
+    if( dim(corPhe)[1] != dim(corPhe)[2] ){
+        stop(" corSNP should be correlation matrix with same number of rows and columns. ")
+    }
+
+    if( dim(Zs)[1] != ncol(corSNP) ) {
+        stop(" The number of rows (SNPs) do not match with correlation matrix among SNPs (corSNP) ")
+    }
+
+    if( dim(Zs)[1] != ncol(corSNP) ) {
+        stop(" The number of columns (traits) do not match with correlation matrix among traits (corPhe) ")
+    }
+
+    if(prune== TRUE) {
+        pr <- pruneSNP(corSNP)
+        if( length(pr$to.erase) > 0 ) {
+            Zs <- as.matrix(Zs[-pr$to.erase,])
+            corSNP <- corSNP[-pr$to.erase, -pr$to.erase]
+        }
+    }
+    
     nsnp <- dim(Zs)[1]
     nphe <- dim(Zs)[2]
     nGenes <- nrow(gene.info)

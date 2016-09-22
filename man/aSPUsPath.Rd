@@ -5,7 +5,7 @@
 \title{Pathway based Sum of Powered Score tests (SPUsPath) and adaptive SPUpath (aSPUsPath) test for single trait - pathway association with GWAS summary statistics.}
 \usage{
 aSPUsPath(Zs, corSNP, pow = c(1, 2, 4, 8, Inf), pow2 = c(1, 2, 4, 8),
-  snp.info, gene.info, n.perm = 1000, Ps = FALSE)
+  snp.info, gene.info, n.perm = 1000, Ps = FALSE, prune = TRUE)
 }
 \arguments{
 \item{Zs}{Z-scores for each SNPs. It could be P-values if the Ps option is TRUE.}
@@ -25,6 +25,8 @@ used in calculating Z-scores).}
 \item{n.perm}{number of permutations.}
 
 \item{Ps}{TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.}
+
+\item{prune}{if it is TRUE, do pruing before the test using pruneSNP function.}
 }
 \value{
 P-values for SPUMpath tests and aSPUMpath test.

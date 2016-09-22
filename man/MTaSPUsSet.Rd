@@ -5,7 +5,7 @@
 \title{gene-Multitrait Sum of Powered Score (MTSPUsSet) tests and adaptive MTSPUsSet (MTaSPUsSet) test for multi trait - SNP set association with GWAS summary statistics.}
 \usage{
 MTaSPUsSet(Zs, corSNP, corPhe, pow = c(1, 2, 4, 8), pow2 = c(1, 2, 4, 8),
-  n.perm = 5000, Ps = FALSE)
+  n.perm = 5000, Ps = FALSE, prune = TRUE)
 }
 \arguments{
 \item{Zs}{Z-score matrix. row represent SNPs and column represent traits. It could be P-values if the Ps option is TRUE.}
@@ -23,6 +23,8 @@ used in calculating Z-scores).}
 \item{n.perm}{number of permutations or bootstraps.}
 
 \item{Ps}{TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.}
+
+\item{prune}{if it is TRUE, do pruing before the test using pruneSNP function.}
 }
 \value{
 A vector object, MTSPUsSet test P values and MTaSPUsSet P value.
@@ -34,7 +36,7 @@ It gives p-values of the MTSPUsSet tests and MTaSPUsSet test with GWAS summary s
 
 data(SAMD11)
 attach(SAMD11)
-## example analysis using aSPUM test.
+## example analysis using MTaSPUsSet test.
 (outFZ <- MTaSPUsSet(ZsF, corSNP=corSNPF, corPhe = corPheF,
       pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=10, Ps=FALSE))
 
@@ -46,7 +48,7 @@ Il-Youp Kwak and Wei Pan
 \references{
 Il-Youp Kwak, Wei Pan (2016)
 Gene- and pathway-based association tests for multiple
-     traits with GWAS summary statistics
+     traits with GWAS summary statistics, Bioinformatics, doi:10.1093/bioinformatics/btw577
 }
 \seealso{
 \code{\link{MTaSPUsSetC}}

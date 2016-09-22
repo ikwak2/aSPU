@@ -20,6 +20,8 @@
 #'
 #' @param Ps TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.
 #'
+#' @param prune if it is TRUE, do pruing before the test using pruneSNP function. 
+#'
 #' @export
 #' @return P-values for SPUMpath tests and aSPUMpath test.
 #'
@@ -46,8 +48,24 @@
 aSPUsPath <- function(Zs, corSNP, pow=c(1,2,4,8, Inf),
                       pow2 = c(1,2,4,8), 
                       snp.info, gene.info, n.perm=1000,
-                      Ps = FALSE) {
+                      Ps = FALSE, prune=TRUE) {
 
+    if(prune== TRUE) {
+        pr <- pruneSNP(corSNP)
+        if( length(pr$to.erase) > 0 ) {
+            Zs <- Zs[-pr$to.erase]
+            corSNP <- corSNP[-pr$to.erase, -pr$to.erase]
+        }
+    }
+    
+    if( length(Zs) <= 1 ) {
+        stop("less than 1 SNP.")
+    }
+
+    if ( !( length(Zs) == dim(corSNP)[1] & dim(corSNP)[2] == dim(corSNP)[1] ) ) {
+        stop("dimension do not match. Check dimension of Zs and corSNP.")
+    }
+    
     ko <- length(Zs)
     n.gene <- nrow(gene.info)
     GL <- list(0)
