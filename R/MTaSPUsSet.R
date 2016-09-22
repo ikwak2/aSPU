@@ -127,7 +127,7 @@ MTaSPUsSet <- function(Zs, corSNP, corPhe, pow=c(1,2,4,8),
                 }
             }
 
-            pPerm0[p2 + (p1-1) * length(pow2)] = round( sum(abs(Ts[p2 + (p1-1) * length(pow2)])<=abs(T0s)) / n.perm, digits = 8)
+            pPerm0[p2 + (p1-1) * length(pow2)] = sum(abs(Ts[p2 + (p1-1) * length(pow2)])<=abs(T0s)) / n.perm
             P0s = ( (n.perm-rank(abs(T0s))) + 1 )/(n.perm)
             if (p2 + (p1-1) * length(pow2) == 1 ) minp0=P0s else minp0[which(minp0>P0s)]=P0s[which(minp0>P0s)]
         }

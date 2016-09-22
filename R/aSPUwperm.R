@@ -107,7 +107,7 @@ aSPUwperm <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:
             if (pow[j] == Inf) {T0s[b] = round( max(abs(U0/diagSDs)), digits=8)}
         }
 
-        pPerm0[j] = round((sum(abs(Ts[j]) <= abs(T0s)))/(n.perm), digits=8)
+        pPerm0[j] = (sum(abs(Ts[j]) <= abs(T0s)))/(n.perm)
         P0s = (n.perm-rank(abs(T0s))+1)/(n.perm)
         if (j==1) minp0=P0s else minp0[which(minp0>P0s)]=P0s[which(minp0>P0s)]
                                         # cat("g=",g,"\n")
