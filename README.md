@@ -52,8 +52,8 @@ NeuroImage, 1;101:681-694
 
 For 'aSPUr'
 ```
-Peng Wei, Ying Cao, Yiwei Zhang, Zhiyuan Xu, Il-Youp Kwak, Eric Boerwinkle, Wei Pan (2016)
-On Robust Association Testing for Quantitative Traits and Rare Variants, Submitted.
+Peng Wei, Ying Cao, Yiwei Zhang, Zhiyuan Xu, Il-Youp Kwak, Eric Boerwinkle, Wei Pan (In press)
+On Robust Association Testing for Quantitative Traits and Rare Variants, G3.
 ```
 
 For 'aSPUpath'
@@ -87,7 +87,7 @@ Genetic Epidemiology, 8:651-663
 For 'MTaSPUsSet' and 'MTaSPUsSetPath'
 ```
 Il-Youp Kwak, Wei Pan (2016)
-Gene- and pathway-based association tests for multiple traits with GWAS summary statistics, accepted for publication in Bioinformatics. 
+Gene- and pathway-based association tests for multiple traits with GWAS summary statistics, Bioinformatics. doi:10.1093/bioinformatics/btw577
 ```
 
 
