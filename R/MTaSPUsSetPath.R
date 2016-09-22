@@ -87,6 +87,7 @@ MTaSPUsSetPath <- function(Zs, corPhe, corSNP, pow1=c(1,2,4,8),
         if( length(pr$to.erase) > 0 ) {
             Zs <- as.matrix(Zs[-pr$to.erase,])
             corSNP <- corSNP[-pr$to.erase, -pr$to.erase]
+            snp.info <- snp.info[ snp.info[,1] %in% names(Zs), ] 
         }
     }
     

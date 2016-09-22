@@ -55,6 +55,7 @@ aSPUsPath <- function(Zs, corSNP, pow=c(1,2,4,8, Inf),
         if( length(pr$to.erase) > 0 ) {
             Zs <- Zs[-pr$to.erase]
             corSNP <- corSNP[-pr$to.erase, -pr$to.erase]
+            snp.info <- snp.info[ snp.info[,1] %in% names(Zs), ] 
         }
     }
     

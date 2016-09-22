@@ -50,6 +50,16 @@
 #' @seealso \code{\link{aSPUs}} \code{\link{aSPUsPath}} \code{\link{MTaSPUsSet}}
 
 pruneSNP <- function(corSNP, rup = .95, rdown = -.95) {
+
+    if(!is.matrix(corSNP)) {
+        stop("corSNP should be a matrix")
+    }
+    if(ncol(corSNP) != nrow(corSNP) )
+        stop("corSNP is a correlation matirx. the number of rows and columns should match")
+
+    if(ncol(corSNP) <= 1 )
+        stop(" only 1 SNP, nothing to prune.")
+    
     ers <- NULL
     while( sum( corSNP < -0.95 ) > 0 ) {
         toerase <- which( apply( corSNP < rdown, 1, sum) == max( apply( corSNP < rdown, 1, sum) ) )

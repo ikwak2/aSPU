@@ -95,10 +95,9 @@ for( g in kegg9$gene.info[,1]) {
         Gps <- rbind(Gps, c(length(newP),out$pvs, gatesp))
         gl <- c(gl, g)
     } else if (length(snps) == 1) {
-        out <- aSPUs(newP, corSNP=ldsub , pow=c(1,2,4,8, Inf),
-                     n.perm=10000, Ps=TRUE)
+        out <- newP
         gatesp <- newP
-        Gps <- rbind(Gps, c(length(newP),out$pvs, gatesp) )
+        Gps <- rbind(Gps, c(length(newP),rep(out,6), gatesp) )
         gl <- c(gl, g)
     }
 }
