@@ -27,7 +27,7 @@ importFrom(mvtnorm, rmvnorm, pmvnorm)
 importFrom(matrixStats, rowMins, rowMaxs)
 importFrom(fields, image.plot)
 importFrom("stats", "fitted.values", "glm", "pchisq", "prcomp", "approx",
-            "qnorm", "pnorm", "rnorm", "runif", "cov", "fitted", "formula", "var", "cor")
+            "qnorm", "pnorm", "rnorm", "runif", "cov", "fitted", "formula", "var", "cor", "mad")
 importFrom("utils", "head", "tail")
 importFrom(grDevices, rgb)
 importFrom(graphics, par, layout, image, title, text, axis)
