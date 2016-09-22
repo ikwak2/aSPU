@@ -158,6 +158,7 @@ aSPUr<-function(Y, X, cov=NULL, pow=c(1:8, Inf), B=1000,C=1.345){
     minP0s = apply(P0s, 1, min)
     minP =  sum( min(pPerm0) >= minP0s )/B
     pvs<-c(pPerm0, minP)
+    names(pvs) <- c(paste("SPUr", pow, sep=""), "aSPUr")
     return(pvs) 
 }  
 
