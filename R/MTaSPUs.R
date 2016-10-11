@@ -55,7 +55,9 @@ MTaSPUs <- function(Z, v, B, pow, transform = FALSE){
    # -- results: compute p-values for SPU(gamma) i.e. pow=1:8, and infinity
    # --          aSPU, based on the minimum p-values over SPU(power)
    # --          each row for single SNP    
-	if (B < 1e8) p <- MTaSPUsmallB(Z, v, B, pow, transform) else  p <- MTaSPUsB1e8(Z, v, pow, transform)
+
+    ##	if (B < 1e8) p <- MTaSPUsmallB(Z, v, B, pow, transform) else  p <- MTaSPUsB1e8(Z, v, pow, transform)
+    p <- MTaSPUsmallB(Z, v, B, pow, transform)
 	return(p)
 }
 
