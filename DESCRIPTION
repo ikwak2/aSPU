@@ -1,6 +1,6 @@
 Package: aSPU
-Version: 1.44
-Date: 2016-9-22
+Version: 1.45
+Date: 2016-10-10
 Title: Adaptive Sum of Powered Score Test
 Description: R codes for the (adaptive) Sum of Powered Score ('SPU' and 'aSPU')
     tests, inverse variance weighted Sum of Powered score ('SPUw' and 'aSPUw') tests
