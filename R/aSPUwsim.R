@@ -86,8 +86,8 @@ aSPUwsim <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8
     
     Vs<-diag(CovS)
     diagSDs<-ifelse(Vs>1e-20, sqrt(Vs), 1e-10)
-    
-    svd.CovS<-svd(CovS/Vs)
+
+    svd.CovS<-svd(CovS)
     CovSsqrt<-svd.CovS$u %*% diag(sqrt(svd.CovS$d))
 
 
