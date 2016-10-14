@@ -105,8 +105,8 @@ aSPUboot <- function(Y, X, cov=NULL, model=c("gaussian", "binomial"), pow=c(1:8,
                 }
             }
 
-            if (pow[j] < Inf){ T0s[b] = round(  sum( U0^pow[j]), digits = 8) }
-            if (pow[j] == Inf) {T0s[b] = round( max(abs(U0)), digits = 8) }
+            if (pow[j] < Inf){ T0s[b] = sum( U0^pow[j]) }
+            if (pow[j] == Inf) {T0s[b] = max(abs(U0)) }
         }
         pPerm0[j] = sum(abs(Ts[j])<=abs(T0s)) / n.perm
         P0s = ( (n.perm-rank(abs(T0s))) + 1 ) /(n.perm)
