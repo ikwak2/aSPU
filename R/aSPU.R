@@ -67,7 +67,7 @@ aSPU <- function(Y, X, cov=NULL, resample = c("perm", "boot", "sim"), model=c("g
     } else {
         if(resample == "sim") {
             if(n.perm > 10^5) {
-                aSPUsim(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
+                aSPUsim1(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
             } else {
                 aSPUsimC2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
             }
