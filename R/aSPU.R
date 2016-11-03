@@ -1,6 +1,6 @@
 #' Sum of Powered Score (SPU) tests and adaptive SPU (aSPU) test for single trait - SNP set association.
 #'
-#' It gives p-values of the SPU tests and aSPU test.
+#' It gives p-values of the SPU tests and aSPU test. 
 #'
 #' @param Y Response or phenotype data. It can be a disease indicator; =0 for controls, =1 for cases.
 #' Or it can be a quantitative trait. A vector with length n (number of observations).
@@ -53,7 +53,7 @@
 #'
 #' @seealso \code{\link{aSPUw}}
 
-aSPU <- function(Y, X, cov=NULL, resample = c("perm", "sim", "boot"), model=c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000) {
+aSPU <- function(Y, X, cov=NULL, resample = c("perm", "boot", "sim"), model=c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000) {
     X <- as.matrix(X)
     model <- match.arg(model)
     resample <- match.arg(resample)
@@ -66,9 +66,17 @@ aSPU <- function(Y, X, cov=NULL, resample = c("perm", "sim", "boot"), model=c("g
         }
     } else {
         if(resample == "sim") {
-            aSPUsimC2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)            
+            if(n.perm > 10^5) {
+                aSPUsim(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
+            } else {
+                aSPUsimC2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
+            }
         } else {
-            aSPUpermC2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
+            if(n.perm > 10^5) {
+                aSPUperm(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
+            } else {
+                aSPUpermC2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
+            }
         }
     }
 }

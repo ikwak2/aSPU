@@ -51,19 +51,26 @@
 #' @seealso \code{\link{aSPU}}
 
 
-aSPUw <- function(Y, X, cov=NULL, resample = c("perm", "sim", "boot"), model=c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000) {
+aSPUw <- function(Y, X, cov=NULL, resample = c("perm", "boot", "sim"), model=c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000) {
 
     model <- match.arg(model)
     resample <- match.arg(resample)
     userank = T
-
     if(resample == "sim") {
         aSPUwsim(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
     } else {
         if (resample == "boot") {
-            aSPUwboot2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
-	} else {
-        aSPUwpermC(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model, userank = userank)
-    	}
+            if(n.perm > 10^5) {
+                aSPUwboot(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
+            } else {
+                aSPUwboot2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
+            }
+        } else {
+            if(n.perm > 10^5) {
+                aSPUwperm(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
+            } else {
+                aSPUwpermC(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model, userank = userank)
+            }
+        }
     }
 }
