@@ -4,7 +4,7 @@
 \alias{aSPUw}
 \title{Inverse variance weighted Sum of Powered Score tests (SPUw) and adaptive SPUw (aSPUw) test for single trait - SNP set association.}
 \usage{
-aSPUw(Y, X, cov = NULL, resample = c("perm", "sim", "boot"),
+aSPUw(Y, X, cov = NULL, resample = c("perm", "boot", "sim"),
   model = c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000)
 }
 \arguments{

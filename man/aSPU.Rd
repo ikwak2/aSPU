@@ -4,7 +4,7 @@
 \alias{aSPU}
 \title{Sum of Powered Score (SPU) tests and adaptive SPU (aSPU) test for single trait - SNP set association.}
 \usage{
-aSPU(Y, X, cov = NULL, resample = c("perm", "sim", "boot"),
+aSPU(Y, X, cov = NULL, resample = c("perm", "boot", "sim"),
   model = c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000)
 }
 \arguments{
