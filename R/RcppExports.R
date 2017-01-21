@@ -13,3 +13,7 @@ calcT0simM2 <- function(A, B, powV, pow2V, nperm, Pval, Ts) {
     .Call('aSPU_calcT0simM2', PACKAGE = 'aSPU', A, B, powV, pow2V, nperm, Pval, Ts)
 }
 
+aSPUsPathEngine <- function(CH, CHcovSq, pow1, pow2, nGenes, n_perm, k, Ps, nSNPs0, StdTs) {
+    .Call('aSPU_aSPUsPathEngine', PACKAGE = 'aSPU', CH, CHcovSq, pow1, pow2, nGenes, n_perm, k, Ps, nSNPs0, StdTs)
+}
+

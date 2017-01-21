@@ -50,3 +50,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// aSPUsPathEngine
+Rcpp::List aSPUsPathEngine(Rcpp::List CH, Rcpp::List CHcovSq, arma::vec pow1, arma::vec pow2, int nGenes, int n_perm, int k, int Ps, arma::vec nSNPs0, arma::vec StdTs);
+RcppExport SEXP aSPU_aSPUsPathEngine(SEXP CHSEXP, SEXP CHcovSqSEXP, SEXP pow1SEXP, SEXP pow2SEXP, SEXP nGenesSEXP, SEXP n_permSEXP, SEXP kSEXP, SEXP PsSEXP, SEXP nSNPs0SEXP, SEXP StdTsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type CH(CHSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type CHcovSq(CHcovSqSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type pow1(pow1SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type pow2(pow2SEXP);
+    Rcpp::traits::input_parameter< int >::type nGenes(nGenesSEXP);
+    Rcpp::traits::input_parameter< int >::type n_perm(n_permSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type Ps(PsSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type nSNPs0(nSNPs0SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type StdTs(StdTsSEXP);
+    rcpp_result_gen = Rcpp::wrap(aSPUsPathEngine(CH, CHcovSq, pow1, pow2, nGenes, n_perm, k, Ps, nSNPs0, StdTs));
+    return rcpp_result_gen;
+END_RCPP
+}

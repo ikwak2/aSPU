@@ -1,6 +1,6 @@
-#' Pathway based Sum of Powered Score tests (SPUsPath) and adaptive SPUpath (aSPUsPath) test for single trait - pathway association with GWAS summary statistics.
+#' Pathway based Sum of Powered Score tests (SPUsPath) and adaptive SPUpath (aSPUsPath) test for single trait - pathway association with GWAS summary statistics (C++ coded).
 #'
-#' It gives p-values of the SPUsPath tests and aSPUsPath test with GWAS summary statistics.
+#' It gives p-values of the SPUsPath tests and aSPUsPath test with GWAS summary statistics (C++ coded).
 #'
 #' @param Zs Z-scores for each SNPs. It could be P-values if the Ps option is TRUE. 
 #'
@@ -45,8 +45,7 @@
 #'
 #' @seealso \code{\link{aSPUs}}
 
-
-aSPUsPath <- function(Zs, corSNP, pow=c(1,2,4,8, Inf),
+aSPUsPathC <- function(Zs, corSNP, pow=c(1,2,4,8, Inf),
                       pow2 = c(1,2,4,8), 
                       snp.info, gene.info, n.perm=1000,
                       Ps = FALSE, prune=TRUE) {
@@ -117,13 +116,21 @@ aSPUsPath <- function(Zs, corSNP, pow=c(1,2,4,8, Inf),
 
     U <- Zs
 
+    if(max(pow) == Inf) {
+        pow[which(pow ==Inf)] = -1
+    }
+
+    if(max(pow2) == Inf) {
+        pow2[which(pow2 ==Inf)] = -1
+    }
+
     nGenes=length(nSNPs0)
     TsUnnorm<-Ts<-StdTs<-rep(0, length(pow)*nGenes)
     for(j in 1:length(pow))
         for(iGene in 1:nGenes){
             if (iGene==1) SNPstart=1 else SNPstart=sum(nSNPs0[1:(iGene-1)])+1
             indx=(SNPstart:(SNPstart+nSNPs0[iGene]-1))
-            if (pow[j] < Inf){
+            if (pow[j] > 0){
                 a= (sum(U[indx]^pow[j]))
                 TsUnnorm[(j-1)*nGenes+iGene] = a
                 Ts[(j-1)*nGenes+iGene] = sign(a)*((abs(a)) ^(1/pow[j]))
@@ -136,50 +143,12 @@ aSPUsPath <- function(Zs, corSNP, pow=c(1,2,4,8, Inf),
             }
         }
 
-    ## Permutations:
-    T0sUnnorm=T0s = StdT0s = matrix(0, nrow=n.perm, ncol=length(pow)*nGenes)
-    for(b in 1:n.perm){
+    
+    Results = aSPUsPathEngine(CH, CH.CovSsqrt, pow, pow2, nGenes, n.perm , k, Ps, nSNPs0, StdTs)
 
-        U00<-rnorm(k, 0, 1)
-        U0 <- NULL;
-        for( ss in 1:length(CH)) { # ss = 21
-          U0 <- c(U0, CH.CovSsqrt[[ss]] %*% U00[CH[[ss]]] )
-        }
-
-        if(Ps == TRUE)
-          U0 <- abs(U0)
-        ## test stat's:
-        for(j in 1:length(pow))
-            for(iGene in 1:nGenes){
-                if (iGene==1) SNPstart=1 else SNPstart=sum(nSNPs0[1:(iGene-1)])+1
-		   indx=(SNPstart:(SNPstart+nSNPs0[iGene]-1))
-                if (pow[j] < Inf){
-                    a = (sum(U0[indx]^pow[j]))
-                    StdT0s[b, (j-1)*nGenes+iGene] = sign(a)*((abs(a)/nSNPs0[iGene]) ^(1/pow[j]))
-                }
-
-                else StdT0s[b, (j-1)*nGenes+iGene] = max(abs(U0[indx]))
-            }
-    }
-
-   #combine gene-level stats to obtain pathway-lelev stats:
-    Ts2<-rep(0, length(pow)*length(pow2))
-    T0s2<-matrix(0, nrow=n.perm, ncol=length(pow)*length(pow2))
-    for(j2 in 1:length(pow2)){
-        for(j in 1:length(pow)){
-            if(pow2[j2] < Inf) {
-                Ts2[(j2-1)*length(pow) +j] = sum(StdTs[((j-1)*nGenes+1):(j*nGenes)]^pow2[j2])
-                for(b in 1:n.perm){
-                    T0s2[b, (j2-1)*length(pow) +j] = sum(StdT0s[b, ((j-1)*nGenes+1):(j*nGenes)]^pow2[j2])
-                }
-            } else {
-                Ts2[(j2-1)*length(pow) +j] = max(StdTs[((j-1)*nGenes+1):(j*nGenes)])
-                for(b in 1:n.perm){
-                    T0s2[b, (j2-1)*length(pow) +j] = max(StdT0s[b, ((j-1)*nGenes+1):(j*nGenes)])
-                }
-            }   
-        }
-    }
+    StdT0s <- Results$T0
+    Ts2 <- Results$Ts2
+    T0s2 <- Results$T0s2
 
    # permutation-based p-values:
     pPerm2 = rep(NA, length(pow)*length(pow2));
