@@ -182,128 +182,89 @@ Rcpp::List aSPUsPathEngine(Rcpp::List CH, Rcpp::List CHcovSq, arma::vec pow1, ar
   const int n_pow1 = pow1.size();
   const int n_pow2 = pow2.size();
   
-  //  Rcpp::NumericVector U0 = runif(k);
   arma::mat T0(n_perm, n_pow1*nGenes);
-  
-  //  printf("# genes : %d # n_perm : %d # k : %d\n", nGenes, n_perm, k);
-  //  printf("# n_pow1 : %d # n_pow2 : %d # n_ch : %d\n", n_pow1, n_pow2, n_ch);
 
+  // iterate for n_perm
   for(int b=0; b < n_perm; b++) {
-    //int b = 0; {
     Rcpp::NumericVector U00 = rnorm(k,0,1);
     arma::vec u0 = as<arma::vec>(U00);
     arma::vec U0(1);
-    
+
+    // iterate for chromosome
     for(int b2 = 0; b2 < n_ch ; b2++) {
       NumericVector CH1 = CH[b2] ;
       uvec idxu = as<uvec>(CH1) - 1 ;
       
-      //NumericVector u00 = U00(CH1);
-      //  u0.print();
-      
       arma::vec TT = as<arma::mat>(CHcovSq[b2])*u0.elem(idxu) ;
       U0 = join_cols(U0,TT) ;
-      //      printf("# UU : %d # UU2 : %d\n", UU.size(), UU2.size());
-      //      UU.print();
     }
     arma::vec UU2 = U0.subvec(1,U0.size()-1);
-    //    UU2.print();
 
+    // Use absolute values when inputs are p-values
     if( Ps == 1 ) {
       UU2 = abs(UU2);
     }
 
-    //    printf("# UUsize : %d\n", UU2.size());
-    //    UU2 = fU;
-    //    UU2.print();
-    
+    // iterate for pow1
     for( int j = 0 ; j < pow1.size() ; j++) {
-    //int j = 0 ; {
       int SNPstart = 0;
-      
+
+      // itreate for genes
       for(int iGene = 0 ; iGene < nGenes ; iGene++ ) {
-        //int iGene = 1 ; {
-        
         if( iGene != 0) {
           SNPstart = sum( nSNPs0.subvec(0,iGene-1) ) ; 
         }
         int idx1 = SNPstart;
         int idx2 = SNPstart+nSNPs0(iGene)-1;
-        //        printf("# UU : %d # UU2 : %d\n", idx1, idx2);
 
         if( pow1[j] > 0) {
           arma::vec tmp1 = pow(UU2.subvec(idx1, idx2),pow1[j]);
           double tmp2 = sum(tmp1);
 
+          // Calculate first level statistics
           if( tmp2 > 0 ) {
             T0(b, j*nGenes+iGene) = pow(std::abs(tmp2)/nSNPs0[iGene] , 1/pow1[j]);
           } else {
             T0(b, j*nGenes+iGene) =  -pow(std::abs(tmp2)/nSNPs0[iGene] , 1/pow1[j]);
           }
           
-          //          printf("# a : %f # v : %f\n", tmp2, T0(b, j*nGenes+iGene));
-          // printf("# x : %d # y : %d\n", b, j*nGenes+iGene);
-          
         } else {
           arma::vec T0tp = abs(UU2.subvec(idx1, idx2));
-          //T0tp.print();
           T0(b, j*nGenes+iGene) = max(abs(UU2.subvec(idx1, idx2)));
-          //printf(" # v : %f\n", T0(b, j*nGenes+iGene));
-          //printf("# x : %d # y : %d\n", b, j*nGenes+iGene);
         }
         
       }
     }
   }
+
+  // Calculate 2nd level Statistics 
   
   arma::vec Ts2(n_pow1*n_pow2);
   arma::mat T0s2(n_perm, n_pow1*n_pow2);
   
   for(int j2=0 ; j2 < n_pow2; j2++) {
-    //  int j2 = 0; {
     for(int j=0 ; j < n_pow1; j++) {
-      //    int j = 0; {
       if(pow2[j2] > 0) {
-        
-        //        printf("# s : %d # n : %d # j : %d \n", j*nGenes, (j+1)*nGenes-1, j);
-        
+
+        // Calculate 2nd level statistics
         arma::vec tmp3 = pow(StdTs.subvec(j*nGenes,(j+1)*nGenes-1), pow2[j2]);
         double tmp4 = sum(tmp3);
         Ts2(j2*n_pow1 +j) = tmp4;
-
-        //  printf("# idx : %d # Ts2(idx) : %f\n", j2*n_pow1 +j, tmp4);
         
         for(int b = 0 ; b < n_perm ; b++ ) {
-                    //int b=0; {
           arma::rowvec T0tmp = T0.row(b);
-
-          //          T0tmp.print();
           arma::rowvec tmp3 = pow(T0tmp.cols(j*nGenes,(j+1)*nGenes-1), pow2[j2]);
 
-          //     tmp3.print();
-          
           float tmp4 = sum(tmp3);
           T0s2(b, j2*n_pow1 +j) = tmp4;
-          
-          //printf("# tmp4 : %f # v : %f\n", tmp4, T0s2(b, j2*n_pow1 +j));
-          //printf("# x : %d # y : %d\n", b, j2*n_pow1 +j);
           
         }
       } else {
         Ts2(j2*n_pow1 + j) = max( arma::abs(StdTs.subvec(j*nGenes,(j+1)*nGenes-1)) ) ;
-        //printf("# v : %f\n", Ts2(j2*n_pow1 +j));
         
         for(int b = 0 ; b < n_perm ; b++ ) {
-          //int b=0; {
           arma::rowvec T0tmp = T0.row(b);
-          //arma::rowvec T0tmpsub = arma::abs(T0tmp.cols(j*nGenes,(j+1)*nGenes-1)) ;
-          //          T0s2(b, j2*n_pow1 + j) = max( T0tmpsub);
           T0s2(b, j2*n_pow1 + j) = max( arma::abs(T0tmp.cols(j*nGenes,(j+1)*nGenes-1)) ) ;
-          //printf("# v : %f\n", T0s2(b, j2*n_pow1 +j));
-          //printf("# x : %d # y : %d\n", b, j2*n_pow1 +j);
-          //printf("# s : %d # n : %d\n", j*nGenes, (j+1)*nGenes-1);
-          
-          //          T0tmp.print();
         }
       }
     }
