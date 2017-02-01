@@ -167,6 +167,14 @@ aSPUsPathC <- function(Zs, corSNP, pow=c(1,2,4,8, Inf),
     }
     pvs=c(pPerm2, minP2)
 
+    if(min(pow) == -1) {
+        pow[which(pow == -1 )] = Inf
+    }
+
+    if(min(pow2) == -1) {
+        pow2[which(pow2 == -1)] = Inf
+    }
+    
     nmvec <- NULL;
     for(ii in pow2) {
     	   for(jj in pow) {

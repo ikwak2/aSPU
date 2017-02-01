@@ -17,3 +17,15 @@ aSPUsPathEngine <- function(CH, CHcovSq, pow1, pow2, nGenes, n_perm, k, Ps, nSNP
     .Call('aSPU_aSPUsPathEngine', PACKAGE = 'aSPU', CH, CHcovSq, pow1, pow2, nGenes, n_perm, k, Ps, nSNPs0, StdTs)
 }
 
+set_seed <- function(seed) {
+    invisible(.Call('aSPU_set_seed', PACKAGE = 'aSPU', seed))
+}
+
+avg_rank <- function(x) {
+    .Call('aSPU_avg_rank', PACKAGE = 'aSPU', x)
+}
+
+aSPUsPathEngine2 <- function(CH, CHcovSq, pow1, pow2, nGenes, n_perm, k, Ps, nSNPs0, Ts2, s) {
+    .Call('aSPU_aSPUsPathEngine2', PACKAGE = 'aSPU', CH, CHcovSq, pow1, pow2, nGenes, n_perm, k, Ps, nSNPs0, Ts2, s)
+}
+

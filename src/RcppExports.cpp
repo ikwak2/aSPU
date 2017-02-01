@@ -70,3 +70,45 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// set_seed
+void set_seed(unsigned int seed);
+RcppExport SEXP aSPU_set_seed(SEXP seedSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< unsigned int >::type seed(seedSEXP);
+    set_seed(seed);
+    return R_NilValue;
+END_RCPP
+}
+// avg_rank
+Rcpp::NumericVector avg_rank(Rcpp::NumericVector x);
+RcppExport SEXP aSPU_avg_rank(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(avg_rank(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// aSPUsPathEngine2
+Rcpp::List aSPUsPathEngine2(Rcpp::List CH, Rcpp::List CHcovSq, arma::vec pow1, arma::vec pow2, int nGenes, int n_perm, int k, int Ps, arma::vec nSNPs0, arma::vec Ts2, int s);
+RcppExport SEXP aSPU_aSPUsPathEngine2(SEXP CHSEXP, SEXP CHcovSqSEXP, SEXP pow1SEXP, SEXP pow2SEXP, SEXP nGenesSEXP, SEXP n_permSEXP, SEXP kSEXP, SEXP PsSEXP, SEXP nSNPs0SEXP, SEXP Ts2SEXP, SEXP sSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type CH(CHSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type CHcovSq(CHcovSqSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type pow1(pow1SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type pow2(pow2SEXP);
+    Rcpp::traits::input_parameter< int >::type nGenes(nGenesSEXP);
+    Rcpp::traits::input_parameter< int >::type n_perm(n_permSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type Ps(PsSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type nSNPs0(nSNPs0SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type Ts2(Ts2SEXP);
+    Rcpp::traits::input_parameter< int >::type s(sSEXP);
+    rcpp_result_gen = Rcpp::wrap(aSPUsPathEngine2(CH, CHcovSq, pow1, pow2, nGenes, n_perm, k, Ps, nSNPs0, Ts2, s));
+    return rcpp_result_gen;
+END_RCPP
+}
