@@ -65,6 +65,15 @@ aSPUpath <- function(Y, X, cov = NULL, model=c("binomial", "gaussian"),
 
     model = match.arg(model)
 
+    ## some input checking stuff in here
+    if( any(is.na(X)) ) {
+        stop("NA exist in gene matrix. ")
+    }
+
+    if( any(is.na(Y)) ) {
+        stop("NA exist in phenotype. ")
+    }
+        
     n.gene <- nrow(gene.info)
     GL <- list(0)
     i = 1
