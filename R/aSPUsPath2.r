@@ -1,6 +1,6 @@
 #' Pathway based Sum of Powered Score tests (SPUsPath) and adaptive SPUpath (aSPUsPath) test for single trait - pathway association with GWAS summary statistics. (vector version, fast when n is large)
 #'
-#' It gives p-values of the SPUsPath tests and aSPUsPath test with GWAS summary statistics. Faster than aSPUsPath function when n is large (N > 10^5).
+#' It gives p-values of the SPUsPath tests and aSPUsPath test with GWAS summary statistics. Faster than aSPUsPath function when n is large (N > 10^4).
 #'
 #' @param Zs Z-scores for each SNPs. It could be P-values if the Ps option is TRUE. 
 #'
@@ -36,7 +36,7 @@
 #' data(kegg9)
 #'
 #' # p-values of SPUpath and aSPUpath tests.
-#' out.a <- aSPUsPath(kegg9$nP, corSNP = kegg9$ldmatrix, pow=c(1:8, Inf),
+#' out.a <- aSPUsPath2(kegg9$nP, corSNP = kegg9$ldmatrix, pow=c(1:8, Inf),
 #'                   pow2 = c(1,2,4,8), 
 #'                   snp.info=kegg9$snp.info, gene.info = kegg9$gene.info,
 #'                   n.perm=10, Ps = TRUE)
@@ -171,7 +171,7 @@ aSPUsPath2 <- function (Zs, corSNP, pow = c(1, 2, 4, 8, Inf), pow2 = c(1, 2, 4, 
             
             pPerm0[(j2 - 1) * length(pow) + j] = sum(abs(Ts2[(j2 - 1) * length(pow) + j]) <= abs(T0s))/n.perm
             P0s = ((n.perm - rank(abs(T0s))) + 1)/(n.perm)
-            if (j == 1) 
+            if (j == 1 && j2 ==1) 
                 minp0 = P0s
             else minp0[which(minp0 > P0s)] = P0s[which(minp0 > P0s)]
         }

@@ -426,7 +426,7 @@ Rcpp::List aSPUsPathEngine2(Rcpp::List CH, Rcpp::List CHcovSq, arma::vec pow1, a
       
       minp0 = P0s;
          
-      if(j == 1) {
+      if(j == 1 & j2 ==1) {
         for( int ii=0; ii < n_perm; ii++) {
           minp0(ii) = P0s(ii);
         }
