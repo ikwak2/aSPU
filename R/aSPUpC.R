@@ -34,7 +34,50 @@
 aSPUpC <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8, Inf), n.perm=1000){
 
     model = match.arg(model)
+    n <- length(Y)
+    if (is.null(X) && length(X) > 0) 
+        X = as.matrix(X, ncol = 1)
+    k <- ncol(X)
+    if (is.null(cov)) {
+        XUs <- Xg <- X
+        r <- Y - mean(Y)
+        U <- as.vector(t(Xg) %*% r)
+    } else {
+        tdat1 <- data.frame(trait = Y, cov)
+        if (is.null(colnames(cov))) {
+            colnames(tdat1) = c("trait", paste("cov", 1:dim(cov)[2], 
+                sep = ""))
+        } else {
+            colnames(tdat1) = c("trait", colnames(cov))
+        }
+        fit1 <- glm(trait ~ ., family = model, data = tdat1)
+        pis <- fitted.values(fit1)
+        XUs <- matrix(0, nrow = n, ncol = k)
+        Xmus = X
+        for (i in 1:k) {
+            tdat2 <- data.frame(X1 = X[, i], cov)
+            fit2 <- glm(X1 ~ ., data = tdat2)
+            Xmus[, i] <- fitted.values(fit2)
+            XUs[, i] <- (X[, i] - Xmus[, i])
+        }
+        r <- Y - pis
+        U <- t(XUs) %*% r
+    }
+    Ts = rep(NA, length(pow))
+    for (j in 1:length(pow)) {
+        if (pow[j] < Inf) {
+            Ts[j] = sum(U^pow[j])
+        } else Ts[j] = max(abs(U))
+    }
+    pPerm0 = rep(NA, length(pow))
+    T0s = numeric(n.perm)
+    s <- sample(1:10^5, 1)
+    
+    if(max(pow) == Inf) {
+        pow[which(pow ==Inf)] = -1
+    }
 
+    
     n <- length(Y)
     if (is.null(X) && length(X)>0) X=as.matrix(X, ncol=1)
     k <- ncol(X)
@@ -74,7 +117,6 @@ aSPUpC <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8, 
         if (pow[j]<Inf) Ts[j] = sum(U^pow[j]) else Ts[j] = max(abs(U))
     }
     ## cat("statistic calculated","\n")
-
     ## residual permutation
 
 
@@ -82,24 +124,25 @@ aSPUpC <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8, 
         pow[which(pow ==Inf)] = -1
     }
 
-    s <- sample(1:10^5, 1)    
-    Results = aSPUpermEngine(t(XUs), r, pow, n.perm, Ts, s)
+    s <- sample(1:10^5, 1)
 
+    Results = aSPUpermEngine(t(XUs), r, pow, n.perm, Ts, s)
+    
     minp0 <- Results$minp0
     pPerm0 <- Results$pPerm0
     P0s <- Results$P0
-
+    
     Paspu <- (sum(minp0 <= min(pPerm0)) + 1)/(n.perm + 1)
     pvs <- c(pPerm0, Paspu)
     Ts <- c(Ts, min(pPerm0))
-
+    
     if(min(pow) == -1) {
         pow[which(pow == -1 )] = Inf
     }
-
-    names(Ts) <- c(paste("SPU", pow, sep=""), "aSPU")
+    
+    names(Ts) <- c(paste("SPU", pow, sep = ""), "aSPU")
     names(pvs) = names(Ts)
-
     list(Ts = Ts, pvs = pvs)
 }
 
+    
