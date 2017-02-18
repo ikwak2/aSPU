@@ -29,10 +29,6 @@ aSPUsPathEngine2 <- function(CH, CHcovSq, pow1, pow2, nGenes, n_perm, k, Ps, nSN
     .Call('aSPU_aSPUsPathEngine2', PACKAGE = 'aSPU', CH, CHcovSq, pow1, pow2, nGenes, n_perm, k, Ps, nSNPs0, Ts2, s)
 }
 
-aSPUpathEngine <- function(tXUs, r, pow1, pow2, nGenes, n_perm, k, nSNPs0, Ts2, s) {
-    .Call('aSPU_aSPUpathEngine', PACKAGE = 'aSPU', tXUs, r, pow1, pow2, nGenes, n_perm, k, nSNPs0, Ts2, s)
-}
-
 aSPUpermEngine <- function(tXUs, r, pow1, n_perm, Ts, s) {
     .Call('aSPU_aSPUpermEngine', PACKAGE = 'aSPU', tXUs, r, pow1, n_perm, Ts, s)
 }
