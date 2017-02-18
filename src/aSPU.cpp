@@ -549,6 +549,80 @@ Rcpp::List aSPUpathEngine(arma::mat tXUs, Rcpp::NumericVector r, arma::vec pow1,
                             Rcpp::Named("P0s") = P0s);
 }
 
+// [[Rcpp::depends(RcppArmadillo)]]
+// [[Rcpp::export]]
+Rcpp::List aSPUpermEngine2(arma::mat tXUs, Rcpp::NumericVector r, arma::vec pow1, int n_perm, arma::vec Ts, int s) {
+  const int n_pow1 = pow1.size();
+
+  arma::vec T0s(n_perm);
+  arma::vec pPerm0(n_pow1);
+  arma::vec minp0(n_perm);
+  arma::vec P0s(n_perm);
+  
+  for(int j=0 ; j < n_pow1; j++) {
+    set_seed(s);
+    // set seed to use same random numbers for same b's
+    // This is necessary to use efficient memory
+    for(int b=0; b < n_perm; b++) { 
+      // Generate Score from null distribution
+      Rcpp::NumericVector U00 = sample(r,r.size());
+      arma::vec u0 = as<arma::vec>(U00);
+      arma::vec UU2 = tXUs * u0;
+        
+      // calculate 1st level test statistic
+      if( pow1[j] > 0) {
+        arma::vec tmp1 = pow(UU2,pow1[j]);
+        double tmp2 = sum(tmp1);
+            
+        if( tmp2 > 0 ) {
+          T0s(b) = pow(std::abs(tmp2) , 1/pow1[j]);
+        } else {
+          T0s(b) =  -pow(std::abs(tmp2) , 1/pow1[j]);
+        }
+            
+      } else {
+        arma::vec T0tp = abs(UU2);
+        T0s(b) = max(abs(T0tp));
+      }
+
+    }
+
+    int tmp3 = 0;
+    arma::vec T0sabs = arma::abs(T0s);
+    Rcpp::NumericVector a( T0sabs.begin(), T0sabs.end() );
+    Rcpp::NumericVector ranka = avg_rank(a);
+    arma::vec rankarma = as<arma::vec>(ranka);
+    
+    for( int tt=0 ; tt < n_perm ; tt++) {
+      if( std::abs(Ts(j) ) <= std::abs(T0s(tt))) {
+         tmp3++;
+      }
+        
+      P0s(tt) = (double) (n_perm - rankarma(tt) + 1) / (double) n_perm;
+    }
+    
+
+    // Calculate P-values 
+    if(j == 0 ) {
+      minp0 = P0s;
+    } else {
+      for( int ii=0; ii < n_perm; ii++) {
+        if( minp0(ii) > P0s(ii) ) {
+          minp0(ii) = P0s(ii);
+        }
+      }
+    }
+    
+    pPerm0(j) = (double) tmp3/ (double) n_perm;
+    
+  }
+
+  
+  return Rcpp::List::create(Rcpp::Named("minp0") = minp0,
+                            Rcpp::Named("pPerm0") = pPerm0,
+                            Rcpp::Named("P0s") = P0s);
+}
+
 
 // [[Rcpp::depends(RcppArmadillo)]]
 // [[Rcpp::export]]
