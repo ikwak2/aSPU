@@ -45,10 +45,10 @@
 #'             nSNP0=1, LOR=.2, n=40, MAFlim=c(0.05, 0.4), p0=0.05 ) }
 #'
 #' # p-values of SPUpath and aSPUpath tests.
-#' \dontrun{p.pathaspu<- aSPUpath2(dat1$Y, dat1$X, snp.info = dat1$snp.info,
+#' \dontrun{p.pathaspu<- aSPUpath2C(dat1$Y, dat1$X, snp.info = dat1$snp.info,
 #'          gene.info = dat1$gene.info,
 #'          model = "binomial", pow=1:8, pow2=c(1, 2, 4, 8), n.perm=1000) }
-#' \dontshow{p.pathaspu<- aSPUpath2(dat1$Y, dat1$X, snp.info = dat1$snp.info,
+#' \dontshow{p.pathaspu<- aSPUpath2C(dat1$Y, dat1$X, snp.info = dat1$snp.info,
 #'          gene.info = dat1$gene.info,
 #'          model = "binomial", pow=1:8, pow2=c(1, 2, 4, 8), n.perm=30) }
 #' p.pathaspu
