@@ -1,5 +1,6 @@
 export(aSPUpath)
 export(aSPUpath2)
+export(aSPUpath2C)
 export(aSPUsPath)
 export(aSPUsPath2)
 export(aSPUsPathC)
