@@ -49,7 +49,7 @@ length(kegg9$Ps)
 kegg9$Ps[1:10]
 ```
 
-Using [plink](http://pngu.mgh.harvard.edu/~purcell/plink/index.shtml),
+Using plink,
 we mapped our SNPs to the reference population ( Hapmap CEU phase 2
 ). We dropped the SNPs of minor allele frequency (MAF) less then 5
 percent. Among `r length(kegg9$Ps)` SNPs mapped on 9th Kegg pathway,

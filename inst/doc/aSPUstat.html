@@ -124,7 +124,7 @@ kegg9$PPs[<span class="dv">3</span>:<span class="dv">4</span>]</code></pre></div
 ##  0.2115124  0.9898204  0.9488433  0.4944396  0.5838916  0.4224329 
 ## rs12752307 rs12036052 rs12134601 rs10159443 
 ##  0.3675058  0.1982464  0.9293256  0.9375789</code></pre>
-<p>Using <a href="http://pngu.mgh.harvard.edu/~purcell/plink/index.shtml">plink</a>, we mapped our SNPs to the reference population ( Hapmap CEU phase 2 ). We dropped the SNPs of minor allele frequency (MAF) less then 5 percent. Among 394 SNPs mapped on 9th Kegg pathway, 330 SNPs are mapped on the reference data. P-values of these SNPs and correlation matirx of SNPs using the reference population, saved on <code>nP</code> and <code>ldmatrix</code> object.</p>
+Using plink, we mapped our SNPs to the reference population ( Hapmap CEU phase 2 ). We dropped the SNPs of minor allele frequency (MAF) less then 5 percent. Among 394 SNPs mapped on 9th Kegg pathway, 330 SNPs are mapped on the reference data. P-values of these SNPs and correlation matirx of SNPs using the reference population, saved on <code>nP</code> and <code>ldmatrix</code> object.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kegg9$nP[<span class="dv">1</span>:<span class="dv">10</span>]</code></pre></div>
 <pre><code>##   rs487230   rs593398  rs6694813   rs550336 rs17111584   rs683880 
 ##  0.9209627  0.8499274  0.9741802  0.6074471  0.5866373  0.9607142 
