@@ -51,14 +51,6 @@ aSPUsPath <- function(Zs, corSNP, pow=c(1,2,4,8, Inf),
                       snp.info, gene.info, n.perm=1000,
                       Ps = FALSE, prune=TRUE) {
 
-    ## some input checking stuff in here
-    if( any(is.na(X)) ) {
-        stop("NA exist in gene matrix. ")
-    }
-
-    if( any(is.na(Y)) ) {
-        stop("NA exist in phenotype. ")
-    }
     
     if(prune== TRUE) {
         pr <- pruneSNP(corSNP)
