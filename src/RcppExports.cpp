@@ -132,22 +132,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// aSPUpermEngine2
-Rcpp::List aSPUpermEngine2(arma::mat tXUs, Rcpp::NumericVector r, arma::vec pow1, int n_perm, arma::vec Ts, int s);
-RcppExport SEXP aSPU_aSPUpermEngine2(SEXP tXUsSEXP, SEXP rSEXP, SEXP pow1SEXP, SEXP n_permSEXP, SEXP TsSEXP, SEXP sSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type tXUs(tXUsSEXP);
-    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type r(rSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type pow1(pow1SEXP);
-    Rcpp::traits::input_parameter< int >::type n_perm(n_permSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type Ts(TsSEXP);
-    Rcpp::traits::input_parameter< int >::type s(sSEXP);
-    rcpp_result_gen = Rcpp::wrap(aSPUpermEngine2(tXUs, r, pow1, n_perm, Ts, s));
-    return rcpp_result_gen;
-END_RCPP
-}
 // aSPUpermEngine
 Rcpp::List aSPUpermEngine(arma::mat tXUs, Rcpp::NumericVector r, arma::vec pow1, int n_perm, arma::vec Ts, int s);
 RcppExport SEXP aSPU_aSPUpermEngine(SEXP tXUsSEXP, SEXP rSEXP, SEXP pow1SEXP, SEXP n_permSEXP, SEXP TsSEXP, SEXP sSEXP) {

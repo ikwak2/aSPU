@@ -550,7 +550,6 @@ Rcpp::List aSPUpathEngine(arma::mat tXUs, Rcpp::NumericVector r, arma::vec pow1,
 }
 
 
-
 // [[Rcpp::depends(RcppArmadillo)]]
 // [[Rcpp::export]]
 Rcpp::List aSPUpermEngine(arma::mat tXUs, Rcpp::NumericVector r, arma::vec pow1, int n_perm, arma::vec Ts, int s) {
@@ -563,6 +562,7 @@ Rcpp::List aSPUpermEngine(arma::mat tXUs, Rcpp::NumericVector r, arma::vec pow1,
   arma::vec P0s(n_perm);
   
   for(int j=0 ; j < n_pow1; j++) {
+    // int j = 0; {
     set_seed(s);
     for(int b=0; b < n_perm; b++) { 
       Rcpp::NumericVector U00 = sample(r,r.size());
@@ -571,49 +571,55 @@ Rcpp::List aSPUpermEngine(arma::mat tXUs, Rcpp::NumericVector r, arma::vec pow1,
         
       if( pow1[j] > 0) {
         arma::vec tmp1 = pow(UU2,pow1[j]);
-        T0s(b) = sum(tmp1);
+        double tmp2 = sum(tmp1);
+
+        if( tmp2 > 0 ) {
+          T0s(b) = std::abs(tmp2);
+        } else {
+          T0s(b) =  -std::abs(tmp2);
+        }
         
       } else {
         arma::vec T0tp = abs(UU2);
         T0s(b) = max(abs(T0tp));
       }
-    }
-    
-    int tmp3 = 0;
-    arma::vec T0sabs = arma::abs(T0s);
-    Rcpp::NumericVector a( T0sabs.begin(), T0sabs.end() );
-    Rcpp::NumericVector ranka = avg_rank(a);
-    arma::vec rankarma = as<arma::vec>(ranka);
-      
-    for( int tt=0 ; tt < n_perm ; tt++) {
-      
-      if( std::abs(Ts(j) ) <= std::abs(T0s(tt))) {
-        tmp3++;
-      }
-      
-      P0s(tt) = (double) (n_perm - rankarma(tt) + 1) / (double) n_perm;
-    }
       
 
-    if(j == 0) {
-      minp0 = P0s;
-    } else {
-      for( int ii=0; ii < n_perm; ii++) {
-        if( minp0(ii) > P0s(ii) ) {
-          minp0(ii) = P0s(ii);
+      int tmp3 = 0;
+      arma::vec T0sabs = arma::abs(T0s);
+      Rcpp::NumericVector a( T0sabs.begin(), T0sabs.end() );
+      Rcpp::NumericVector ranka = avg_rank(a);
+      arma::vec rankarma = as<arma::vec>(ranka);
+      
+      for( int tt=0 ; tt < n_perm ; tt++) {
+        
+        if( std::abs(Ts(j) ) <= std::abs(T0s(tt))) {
+          tmp3++;
+        }
+        
+        P0s(tt) = (double) (n_perm - rankarma(tt) + 1) / (double) n_perm;
+      }
+      
+
+      if(j == 0) {
+        minp0 = P0s;
+      } else {
+        for( int ii=0; ii < n_perm; ii++) {
+          if( minp0(ii) > P0s(ii) ) {
+            minp0(ii) = P0s(ii);
+          }
         }
       }
+      
+      pPerm0(j) = (double) tmp3/ (double) n_perm;
+
     }
-    
-    pPerm0(j) = (double) tmp3/ (double) n_perm;
-    
   }
   
   return Rcpp::List::create(Rcpp::Named("minp0") = minp0,
                             Rcpp::Named("pPerm0") = pPerm0,
                             Rcpp::Named("P0s") = P0s);
 }
-
 
 
 
