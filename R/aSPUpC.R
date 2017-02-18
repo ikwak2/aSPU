@@ -83,7 +83,7 @@ aSPUpC <- function(Y, X, cov = NULL, model=c("gaussian","binomial"), pow=c(1:8, 
     }
 
     s <- sample(1:10^5, 1)    
-    Results = aSPUpermEngine2(t(XUs), r, pow, n.perm, Ts, s)
+    Results = aSPUpermEngine(t(XUs), r, pow, n.perm, Ts, s)
 
     minp0 <- Results$minp0
     pPerm0 <- Results$pPerm0
