@@ -1,5 +1,5 @@
 Package: aSPU
-Version: 1.46.5
+Version: 1.47
 Date: 2017-2-18
 Title: Adaptive Sum of Powered Score Test
 Description: R codes for the (adaptive) Sum of Powered Score ('SPU' and 'aSPU')
