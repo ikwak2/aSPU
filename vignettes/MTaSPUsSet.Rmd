@@ -61,17 +61,16 @@ You can see that `corSNPM` and `corSNPF` are same. Yes, they are calculated from
 
 ## Data analysis
 
-Now, let's perform `MTaSPUsSet` and `MTaSPUsSetC` functions. `MTaSPUsSetC` is C coded version it impemented using Rcpp and RcppArmadillo package. The C coded version is faster when n.perm < 10^4. However it used (n.perm $\times$ npow1 $\times$ npow2 space) in calculation while R version just used n.perm space in calculation (complexity of C version is higher). So R version is faster when n.perm is big like n.perm = $10^6$. Thus, use C version for the 1st screening using n.perm = 1000 or $10^5$ for all the genes, and increase the number of permutation for the genens with small p-value. 
-
+We can perform MTaSPUsSet using following command.
 ```{r outFZ}
-(outFZC <- MTaSPUsSetC(ZsF, corSNP=corSNPF, corPhe = corPheF,
-           pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=FALSE))
 (outFZ <- MTaSPUsSet(ZsF, corSNP=corSNPF, corPhe = corPheF,
            pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=FALSE))
+
+# available in R/aSPUc from my github
+#(outFZC <- MTaSPUsSetC(ZsF, corSNP=corSNPF, corPhe = corPheF,
+#           pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=FALSE))
+
 ```
-
-You can check that `MTaSPUsSetC` is much faster here. The speed was similar when n.perm=10^4 for this example and R coded version is faster when n.perm > 10^4. If the speed matters, you can try python version which have same complexity as R version. it is a bit faster then R version. (like 1.5 times)
-
 To use Python version, first save files in `.txt` format.
 
 ```{r wrwr}
@@ -83,21 +82,24 @@ To use Python version, first save files in `.txt` format.
 `MTaSPUsSet.py` function in [py/aSPU_py](https://github.com/ikwak2/aSPU_py) do the same job with `./MTaSPUsSet.py ZsF.txt corPheF.txt corSNPF.txt 100 outF.txt`.
 
 
-Next, We can use the P-values for MTaSPUsSet test using `MTaSPUsSetC` and `MTaSPUsSet` functions. Put P-value matrix `PsF` and set `Ps=TRUE` in the option.
+Next, We can use the P-values for MTaSPUsSet test using `MTaSPUsSet` functions. Put P-value matrix `PsF` and set `Ps=TRUE` in the option.
 ```{r outFP}
-(outFPC <- MTaSPUsSetC(PsF, corSNP=corSNPF, corPhe = corPheF,
-           pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=TRUE))
 (outFP <- MTaSPUsSet(PsF, corSNP=corSNPF, corPhe = corPheF,
            pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=TRUE))
+
+# available in R/aSPUc from my github
+#(outFPC <- MTaSPUsSetC(PsF, corSNP=corSNPF, corPhe = corPheF,
+#           pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=TRUE))
+
 ```
 Results are not much different.
 
 
 Next, let's try MTaSPUsSet test using GIANT Man data with input of P-values and Z-scores.
 ```{r outMPZ}
-(outMPC <- MTaSPUsSetC(PsM, corSNP=corSNPM, corPhe = corPheM,
+(outMPC <- MTaSPUsSet(PsM, corSNP=corSNPM, corPhe = corPheM,
            pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=TRUE))
-(outMZC <- MTaSPUsSetC(ZsM, corSNP=corSNPM, corPhe = corPheM,
+(outMZC <- MTaSPUsSet(ZsM, corSNP=corSNPM, corPhe = corPheM,
            pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=100, Ps=FALSE))
 ```
 This time we got smaller P-value using `ZsM` input than `PsM` input. Why is it so? This can be answered from `corSNPM`, `corPheM` and `ZsM`.
