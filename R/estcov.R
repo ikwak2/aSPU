@@ -37,7 +37,7 @@
 #' @seealso \code{\link{MTaSPUs}} \code{\link{minP}}
 
 estcov <- function(allZ, Ps=FALSE){
-    if(Ps = TRUE)
+    if(Ps == TRUE)
         allZ <- qnorm(1 - allZ/2)
         
     n.snp <- dim(allZ)[1]
