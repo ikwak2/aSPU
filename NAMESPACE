@@ -33,6 +33,6 @@ importFrom("stats", "fitted.values", "glm", "pchisq", "prcomp", "approx",
 importFrom("utils", "head", "tail")
 importFrom(grDevices, rgb)
 importFrom(graphics, par, layout, image, title, text, axis)
-importFrom(Rcpp, evalCpp)
+#importFrom(Rcpp, evalCpp)
 
 #useDynLib(aSPU)
