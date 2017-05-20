@@ -26,7 +26,6 @@
 #'
 #' @param prune if it is TRUE, do pruing before the test using pruneSNP function. 
 #'
-#' @export
 #' @return P-values for MTSPUsSetpath tests and MTaSPUsSetpPath test.
 #'
 #' @author Il-Youp Kwak and Wei Pan
@@ -58,7 +57,7 @@
 #'             n.perm = 100, snp.info = snp.info, gene.info = gene.info)
 #' out
 #'
-#' @seealso \code{\link{MTaSPUsSetC}}, \code{\link{MTaSPUsSet}}
+#' @seealso \code{\link{MTaSPUsSet}}
 
 
 MTaSPUsSetPath <- function(Zs, corPhe, corSNP, pow1=c(1,2,4,8),

@@ -37,12 +37,11 @@ out <- GEEaSPU(traits, geno, Z = NULL, model = "gaussian",
 	  gamma = c(1:8,Inf), n.sim = 100)
 
 }
-\author{
-Junghi Kim, Wei Pan and Il-Youp Kwak
-}
 \references{
 Yiwei Zhang, Zhiyuan Xu, Xiaotong Shen, Wei Pan (2014)
 Testing for association with multiple traits in generalized estimation equations, with application to neuroimaging data.
 Neuroimage. 96:309-25
 }
-
+\author{
+Junghi Kim, Wei Pan and Il-Youp Kwak
+}

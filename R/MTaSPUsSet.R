@@ -39,7 +39,6 @@
 #'       pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=10, Ps=FALSE))
 #'
 #' 
-#' @seealso \code{\link{MTaSPUsSetC}} 
 
 
 MTaSPUsSet <- function(Zs, corSNP, corPhe, pow=c(1,2,4,8),
