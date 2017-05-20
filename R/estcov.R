@@ -4,6 +4,8 @@
 #'
 #' @param allZ matrix of summary Z-scores for all SNP. each row for SNP; each column for single trait.
 #'
+#' @param Ps TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.
+#' 
 #' @return estimated correlation matrix.
 #'
 #' @author Junghi Kim, Yun Bai and Wei Pan 
@@ -34,10 +36,13 @@
 #'
 #' @seealso \code{\link{MTaSPUs}} \code{\link{minP}}
 
-estcov <- function(allZ){
+estcov <- function(allZ, Ps=FALSE){
+    if(Ps = TRUE)
+        allZ <- qnorm(1 - allZ/2)
+        
     n.snp <- dim(allZ)[1]
     n.traits <- dim(allZ)[2]
     minZ = rowMins(2*pnorm(-abs(allZ)))
     nullSNPs = which(minZ>(0.05/(n.snp/n.traits)))
-    return( cor(allZ[nullSNPs,]))
+    return( cor(allZ[nullSNPs,], use = "complete.obs"))
 }

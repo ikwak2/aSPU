@@ -259,7 +259,7 @@ GEEspu.score <- function(U, V, gamma = c(1:8,Inf), B)
 	return(pvs)
 }
 
-MTaSPUsmallB <- function(Z, v, B, pow, transform = FALSE){
+MTaSPUsmallB <- function(Z, v, B, pow, transform = FALSE, Ps = FALSE){
   # -- Z: matrix of summary Z-scores, SNPs in rows and traits in columns  
   # -- Or a vector of summary Z-scores for a single snp
   # -- v: output of estcov
@@ -269,12 +269,14 @@ MTaSPUsmallB <- function(Z, v, B, pow, transform = FALSE){
   # -- results: compute p-values for SPU(gamma) i.e. pow=1:8, and infinity
   # --          aSPU, based on the minimum p-values over SPU(power)
   # --          each row for single SNP    
-  
-    
+
     if (transform){
         v <- ginv(v)
         Z <- tcrossprod(Z, v)
     }
+
+    if(Ps == TRUE)
+        Z <- qnorm(1 - Z/2)
     
     if (is.vector(Z)) {
         N <- 1; K <- length(Z)
@@ -290,7 +292,11 @@ MTaSPUsmallB <- function(Z, v, B, pow, transform = FALSE){
 	 
     set.seed(1000)
     Z0 <- rmvnorm(B, mean = rep(0, nrow(v)), sigma = v)
-	 ## SPU for integer power
+
+    if(Ps == TRUE)
+        Z0 <- abs(Z0)
+
+    ## SPU for integer power
     for(k0 in 1:length(ponum)){
         k <- ponum[k0]  
         z1 <- abs(rowSums(Z^k))
@@ -317,7 +323,6 @@ MTaSPUsmallB <- function(Z, v, B, pow, transform = FALSE){
         zb <- abs(rowSums(Z0^k))
         p0[,k0] <- (1+B-rank(abs(zb)))/B
     }
-
     
     if (Inf %in% pow){
       zb <- rowMaxs(abs(Z0))

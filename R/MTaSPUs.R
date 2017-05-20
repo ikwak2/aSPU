@@ -12,6 +12,8 @@
 #' 
 #' @param B number of Monte Carlo samples simulated to compute p-values, the maximum number of MC simulations is 1e8
 #'
+#' @param Ps TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.
+#' 
 #' @return compute p-values for SPU(gamma) i.e. pow=1:8, and infinity
 #'             aSPU, based on the minimum p-values over SPU(power)
 #'             each row for single SNP
@@ -45,7 +47,7 @@
 #'
 #' @seealso \code{\link{minP}} \code{\link{estcov}}
 
-MTaSPUs <- function(Z, v, B, pow, transform = FALSE){
+MTaSPUs <- function(Z, v, B, pow, transform = FALSE, Ps = FALSE){
    # -- Z: matrix of summary Z-scores, SNPs in rows and traits in columns  
    # -- Or a vector of summary Z-scores for a single snp
    # -- v: output of estcov
@@ -57,7 +59,7 @@ MTaSPUs <- function(Z, v, B, pow, transform = FALSE){
    # --          each row for single SNP    
 
     ##	if (B < 1e8) p <- MTaSPUsmallB(Z, v, B, pow, transform) else  p <- MTaSPUsB1e8(Z, v, pow, transform)
-    p <- MTaSPUsmallB(Z, v, B, pow, transform)
+    p <- MTaSPUsmallB(Z, v, B, pow, transform, Ps = Ps)
 	return(p)
 }
 
