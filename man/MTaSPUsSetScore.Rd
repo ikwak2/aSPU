@@ -45,9 +45,6 @@ Il-Youp Kwak, Wei Pan (2016)
 Gene- and pathway-based association tests for multiple
      traits with GWAS summary statistics
 }
-\seealso{
-\code{\link{MTaSPUsSetC}}
-}
 \author{
 Il-Youp Kwak and Wei Pan
 }

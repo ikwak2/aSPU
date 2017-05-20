@@ -68,7 +68,7 @@ Gene- and pathway-based association tests for multiple
      traits with GWAS summary statistics, Bioinformatics, doi:10.1093/bioinformatics/btw577
 }
 \seealso{
-\code{\link{MTaSPUsSetC}}, \code{\link{MTaSPUsSet}}
+\code{\link{MTaSPUsSet}}
 }
 \author{
 Il-Youp Kwak and Wei Pan
