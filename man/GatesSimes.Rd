@@ -36,9 +36,6 @@ out
 
 
 }
-\author{
-Il-Youp Kwak and Wei Pan
-}
 \references{
 Hongsheng Gui, Miaoxin Li, Pak C Sham and Stacey S Cherny (2011)
 Comparisons of seven algorithms for pathway analysis using the WTCCC Crohn's Disease
@@ -47,4 +44,6 @@ BMC Research Notes, 4:386
 \seealso{
 \code{\link{Hyst}}  \code{\link{GATES2}}
 }
-
+\author{
+Il-Youp Kwak and Wei Pan
+}

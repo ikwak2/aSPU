@@ -1,6 +1,6 @@
 ## R package, aSPU
 
-[![License](https://img.shields.io/badge/license-GPL%203-brightgreen.svg)](http://www.gnu.org/licenses/gpl-3.0.html) [![CRAN](http://www.r-pkg.org/badges/version/aSPU)](https://CRAN.R-project.org/package=aSPU)
+[![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0.html) [![CRAN](http://www.r-pkg.org/badges/version/aSPU)](https://CRAN.R-project.org/package=aSPU)
 
 
 Il-Youp Kwak <ikwak@umn.edu>

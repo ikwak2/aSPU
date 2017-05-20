@@ -10,7 +10,6 @@
 #'
 #' @param p p-value for each SNPs.
 #'
-#' @export
 #' @return A p-value of GATES and the key gene location (to be used by Hyst).
 #'
 #' @references Miao-Xin Li, Hong-Sheng Gui, Johnny S.H. Kwan and Pak C. Sham (2011)

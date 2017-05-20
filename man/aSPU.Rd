@@ -53,9 +53,6 @@ out$pvs
 # The last element is p-value of aSPU test.
 
 }
-\author{
-Il-Youp Kwak, Junghi Kim, Yiwei Zhang and Wei Pan
-}
 \references{
 Wei Pan, Junghi Kim, Yiwei Zhang, Xiaotong Shen and Peng Wei (2014)
 A powerful and adaptive association test for rare variants,
@@ -66,4 +63,6 @@ Junghi Kim, Jeffrey R Wozniak, Bryon A Mueller, Xiaotong Shen and Wei Pan (2014)
 \seealso{
 \code{\link{aSPUw}}
 }
-
+\author{
+Il-Youp Kwak, Junghi Kim, Yiwei Zhang and Wei Pan
+}

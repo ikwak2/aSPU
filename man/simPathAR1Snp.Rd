@@ -63,4 +63,3 @@ It gives a simulated SNPs consisting of multiple genes in a pathway. Each SNPs f
 \seealso{
 \code{\link{aSPUpath}}
 }
-

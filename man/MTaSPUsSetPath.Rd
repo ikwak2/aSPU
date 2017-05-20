@@ -62,9 +62,6 @@ snp.info = data.frame( rsid = c("rs1", "rs2", "rs3", "rs4", "rs5"),
 out
 
 }
-\author{
-Il-Youp Kwak and Wei Pan
-}
 \references{
 Il-Youp Kwak, Wei Pan (2016)
 Gene- and pathway-based association tests for multiple
@@ -73,4 +70,6 @@ Gene- and pathway-based association tests for multiple
 \seealso{
 \code{\link{MTaSPUsSetC}}, \code{\link{MTaSPUsSet}}
 }
-
+\author{
+Il-Youp Kwak and Wei Pan
+}

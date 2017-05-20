@@ -46,9 +46,6 @@ out.a <- aSPUsPath2(kegg9$nP, corSNP = kegg9$ldmatrix, pow=c(1:8, Inf),
 out.a
 
 }
-\author{
-Il-Youp Kwak and Wei Pan
-}
 \references{
 Il-Youp Kwak, Wei Pan (2015)
 Adaptive Gene- and Pathway-Trait Association Testing with GWAS Summary Statistics,
@@ -57,4 +54,6 @@ Bioinformatics, 32(8):1178-1184
 \seealso{
 \code{\link{aSPUs}}
 }
-
+\author{
+Il-Youp Kwak and Wei Pan
+}

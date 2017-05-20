@@ -4,10 +4,12 @@
 \alias{estcov}
 \title{estcov}
 \usage{
-estcov(allZ)
+estcov(allZ, Ps = FALSE)
 }
 \arguments{
 \item{allZ}{matrix of summary Z-scores for all SNP. each row for SNP; each column for single trait.}
+
+\item{Ps}{TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.}
 }
 \value{
 estimated correlation matrix.
@@ -37,13 +39,12 @@ MTaSPUs(Z = allZ[1,], v = r, B = 100, pow = c(1:4, Inf), transform = FALSE)
 minP(Zi= allZ[1,], r = r)
 
 }
-\author{
-Junghi Kim, Yun Bai and Wei Pan
-}
 \references{
 Junghi Kim, Yun Bai and Wei Pan (2015) An Adaptive Association Test for Multiple Phenotypes with GWAS Summary Statistics, Genetic Epidemiology, 8:651-663
 }
 \seealso{
 \code{\link{MTaSPUs}} \code{\link{minP}}
 }
-
+\author{
+Junghi Kim, Yun Bai and Wei Pan
+}

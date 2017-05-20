@@ -28,7 +28,6 @@
 #' @param varprop the proportion of the variations explained (cutoff) that
 #'                 determines how many top PCs to use.
 #'
-#' @export
 #' @return P-values for SPUpath tests and aSPUpath test.
 #'
 #' @author Il-Youp Kwak and Wei Pan

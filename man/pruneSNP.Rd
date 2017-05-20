@@ -55,10 +55,9 @@ out$pvs
 # The last element is p-value of aSPUs test.
 
 }
-\author{
-Il Youp Kwak
-}
 \seealso{
 \code{\link{aSPUs}} \code{\link{aSPUsPath}} \code{\link{MTaSPUsSet}}
 }
-
+\author{
+Il Youp Kwak
+}

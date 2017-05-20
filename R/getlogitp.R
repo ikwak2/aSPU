@@ -8,7 +8,6 @@
 #'     for an SNP (or a predictor). The value of each SNP is the # of the copies
 #'     for an allele. A matrix with dimension n by p (n : number of observation, p : number of SNPs (or predictors) ).
 #'
-#' @export
 #' @return p-values for each SNPs.
 #'
 #' @examples

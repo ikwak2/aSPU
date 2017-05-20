@@ -22,7 +22,6 @@
 #'
 #' @param prune if it is TRUE, do pruing before the test using pruneSNP function. 
 #'
-#' @export
 #' @return P-values for SPUMpath tests and aSPUMpath test.
 #'
 #' @author Il-Youp Kwak and Wei Pan

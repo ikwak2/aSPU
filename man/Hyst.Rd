@@ -34,9 +34,6 @@ out <- Hyst(pvec = logitp, ldmatrix = ldmat, snp.info = simula$snp.info,
             gene.info = simula$gene.info)
 
 }
-\author{
-Il-Youp Kwak and Wei Pan
-}
 \references{
 Miao-Xin Li, Johnny S.H. Kwan and Pak C. Sham (2012)
 HYST: A Hybrid Set-Based Test for Genome-wide Association Studies, with Application to Protein-Protein Interaction-Based Association Analysis
@@ -45,4 +42,6 @@ The American Journal of Human Genetics, 91, 478-488.
 \seealso{
 \code{\link{GatesSimes}} \code{\link{GATES2}}
 }
-
+\author{
+Il-Youp Kwak and Wei Pan
+}

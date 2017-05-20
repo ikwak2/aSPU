@@ -39,13 +39,12 @@ MTaSPUs(Z = allZ[1,], v = r, B = 100, pow = c(1:4, Inf), transform = FALSE)
 minP(Zi= allZ[1,], r = r)
 
 }
-\author{
-Junghi Kim, Yun Bai and Wei Pan
-}
 \references{
 Junghi Kim, Yun Bai and Wei Pan (2015) An Adaptive Association Test for Multiple Phenotypes with GWAS Summary Statistics, Genetic Epidemiology, 8:651-663
 }
 \seealso{
 \code{\link{estcov}} \code{\link{MTaSPUs}}
 }
-
+\author{
+Junghi Kim, Yun Bai and Wei Pan
+}

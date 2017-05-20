@@ -51,9 +51,6 @@ out$pvs
 # The last element is p-value of aSPU test.
 
 }
-\author{
-Il-Youp Kwak, Junghi Kim and Wei Pan
-}
 \references{
 Junghi Kim, Jeffrey R Wozniak, Bryon A Mueller, Xiaotong Shen and Wei Pan (2014)
 Comparison of statistical tests for group differences in brain functional networks,
@@ -62,4 +59,6 @@ Neuroimage, 1;101:681-694
 \seealso{
 \code{\link{aSPU}}
 }
-
+\author{
+Il-Youp Kwak, Junghi Kim and Wei Pan
+}

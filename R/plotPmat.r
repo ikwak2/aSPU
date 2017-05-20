@@ -16,7 +16,6 @@
 #'
 #' @param yt it controls the location of trait names. 
 #'
-#' @export
 #' @return Image of P-values matrix.
 #'
 #' @author Il-Youp Kwak and Wei Pan

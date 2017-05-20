@@ -39,9 +39,6 @@ out <- aSPUsD(newP, corrSNP=ldsub, Ps=TRUE)
 out
 
 }
-\author{
-Il-Youp Kwak and Wei Pan
-}
 \references{
 Il-Youp Kwak, Wei Pan (2015)
 Adaptive Gene- and Pathway-Trait Association Testing with GWAS Summary Statistics,
@@ -50,4 +47,6 @@ Bioinformatics, doi: 10.1093/bioinformatics/btv719
 \seealso{
 \code{\link{aSPUs}} \code{\link{aSPU}}
 }
-
+\author{
+Il-Youp Kwak and Wei Pan
+}

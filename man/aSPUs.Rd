@@ -58,9 +58,6 @@ out$pvs
 # The last element is p-value of aSPUs test.
 
 }
-\author{
-Il-Youp Kwak and Wei Pan
-}
 \references{
 Il-Youp Kwak, Wei Pan (2015)
 Adaptive Gene- and Pathway-Trait Association Testing with GWAS Summary Statistics,
@@ -69,4 +66,6 @@ Bioinformatics, 32(8), 1178-1184.
 \seealso{
 \code{\link{aSPUw}} \code{\link{aSPU}} \code{\link{aSPUsPath}}
 }
-
+\author{
+Il-Youp Kwak and Wei Pan
+}

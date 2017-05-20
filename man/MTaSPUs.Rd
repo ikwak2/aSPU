@@ -4,7 +4,7 @@
 \alias{MTaSPUs}
 \title{The SPU and aSPU tests for multiple traits - single SNP association with GWAS summary statistics.}
 \usage{
-MTaSPUs(Z, v, B, pow, transform = FALSE)
+MTaSPUs(Z, v, B, pow, transform = FALSE, Ps = FALSE)
 }
 \arguments{
 \item{Z}{matrix of summary Z-scores, SNPs in rows and traits in columns. Or a vector of summary Z-scores for a single snp}
@@ -16,6 +16,8 @@ MTaSPUs(Z, v, B, pow, transform = FALSE)
 \item{pow}{power used in SPU test. A vector of the powers.}
 
 \item{transform}{if TRUE, the inference is made on transformed Z}
+
+\item{Ps}{TRUE if input is p-value, FALSE if input is Z-scores. The default is FALSE.}
 }
 \value{
 compute p-values for SPU(gamma) i.e. pow=1:8, and infinity
@@ -47,13 +49,12 @@ MTaSPUs(Z = allZ[1,], v = r, B = 100, pow = c(1:4, Inf), transform = FALSE)
 minP(Zi= allZ[1,], r = r)
 
 }
-\author{
-Junghi Kim, Yun Bai and Wei Pan
-}
 \references{
 Junghi Kim, Yun Bai and Wei Pan (2015) An Adaptive Association Test for Multiple Phenotypes with GWAS Summary Statistics, Genetic Epidemiology, 8:651-663
 }
 \seealso{
 \code{\link{minP}} \code{\link{estcov}}
 }
-
+\author{
+Junghi Kim, Yun Bai and Wei Pan
+}

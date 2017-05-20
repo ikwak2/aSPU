@@ -20,7 +20,6 @@
 #'
 #' @param n.perm number of permutations or bootstraps.
 #'
-#' @export
 #' @return A list object, Ts : Test Statistics for the SPUw and aSPUw test.
 #'         pvs : p-values for the SPUw and aSPUw test.
 #'
@@ -66,11 +65,7 @@ aSPUw <- function(Y, X, cov=NULL, resample = c("perm", "boot", "sim"), model=c("
                 aSPUwboot2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
             }
         } else {
-            if(n.perm > 10^5) {
-                aSPUwperm(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
-            } else {
-                aSPUwpermC(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model, userank = userank)
-            }
+            aSPUwperm(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
         }
     }
 }

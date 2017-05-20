@@ -39,13 +39,12 @@ plotPmat(Ps)
 
 
 }
-\author{
-Il-Youp Kwak and Wei Pan
-}
 \references{
 Gene- and pathway-based association tests for multiple traits with GWAS summary statistics (2016) Kwak I-Y, Pan W., Bioinformatics.
 }
 \seealso{
 \code{\link{aSPUs}}
 }
-
+\author{
+Il-Youp Kwak and Wei Pan
+}

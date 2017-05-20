@@ -28,7 +28,6 @@
 #'
 #' @param noncausal exclude causal SNPs if TRUE, it is the simulation set up d in the paper(Pan et al 2015).
 #'
-#' @export
 #' @return a list of the binary outcome Y (=0 or 1) and SNPs (=0, 1 or 2);
 #'               Y is a vector of length 2n; X is a matrix of 2n by nSNP.
 #'

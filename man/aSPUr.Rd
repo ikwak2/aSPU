@@ -45,13 +45,12 @@ out
 ## The last element is p-value of aSPUr test.
 
 }
-\author{
-Yiwei Zhang and Wei Pan
-}
 \references{
 Peng Wei, Ying Cao, Yiwei Zhang, Zhiyuan Xu, Il-Youp Kwak, Eric Boerwinkle, Wei Pan (in press) On Robust Association Testing for Quantitative Traits and Rare Variants, G3.
 }
 \seealso{
 \code{\link{aSPU}}
 }
-
+\author{
+Yiwei Zhang and Wei Pan
+}

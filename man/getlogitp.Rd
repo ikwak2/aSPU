@@ -31,4 +31,3 @@ logitp <- getlogitp(simula$Y, simula$X)
 \seealso{
 \code{\link{GATES2}} \code{\link{GatesSimes}} \code{\link{Hyst}}
 }
-

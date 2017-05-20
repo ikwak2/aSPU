@@ -37,9 +37,6 @@ o.pvec = order(Ps)
 
 
 }
-\author{
-Milan Hiersche(taken from pastgwas package), Il-Youp Kwak(modified a little)
-}
 \references{
 Miao-Xin Li, Hong-Sheng Gui, Johnny S.H. Kwan and Pak C. Sham (2011)
 GATES: A Rapid and Powerful Gene-Based Association Test Using Extended Simes Procedure
@@ -48,4 +45,6 @@ The American Journal of Human Genetics 88, 283-293
 \seealso{
 \code{\link{Hyst}} \code{\link{GatesSimes}}
 }
-
+\author{
+Milan Hiersche(taken from pastgwas package), Il-Youp Kwak(modified a little)
+}

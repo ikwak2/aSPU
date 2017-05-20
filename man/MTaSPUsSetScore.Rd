@@ -40,9 +40,6 @@ attach(SAMD11)
 
 
 }
-\author{
-Il-Youp Kwak and Wei Pan
-}
 \references{
 Il-Youp Kwak, Wei Pan (2016)
 Gene- and pathway-based association tests for multiple
@@ -51,4 +48,6 @@ Gene- and pathway-based association tests for multiple
 \seealso{
 \code{\link{MTaSPUsSetC}}
 }
-
+\author{
+Il-Youp Kwak and Wei Pan
+}
