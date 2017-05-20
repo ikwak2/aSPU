@@ -35,6 +35,5 @@ Depends:
     fields,
     matrixStats
 License: GPL-3
-LinkingTo: Rcpp, RcppArmadillo
 URL: https://github.com/ikwak2/aSPU
 RoxygenNote: 6.0.1
