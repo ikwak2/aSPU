@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="date" content="2015-07-31" />
+
+<title>Adaptive Gene- and Pathway- Trait Association testing with GWAS Summary Statistics (aSPUs() and aSPUsPath())</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0A%7D%0Apre%20%7B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div id="header">
+<h1 class="title">Adaptive Gene- and Pathway- Trait Association testing with GWAS Summary Statistics (aSPUs() and aSPUsPath())</h1>
+<h4 class="date"><em>2015-07-31</em></h4>
+</div>
+
+
+<p>This vignette illustrates the use of the aSPU package with GWAS Summary Statistics.</p>
+<div id="data" class="section level2">
+<h2>Data</h2>
+<p>We will consider the analysis of a coronary artery disease (CAD) data from the CARDIoGRAM and C4D consortium. The data set contains P value data for coronary artery disease (CAD). This study comprised 63,746 CAD cases and 130,681 controls. We mapped these SNPs to the 9th KEGG pathway (<a href="http://www.broadinstitute.org/gsea/msigdb/cards/KEGG_STEROID_BIOSYNTHESIS">KEGG_STEROID_BIOSYNTHESIS</a>) . Let’s load this subset.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(aSPU)
+<span class="kw">data</span>(kegg9)</code></pre></div>
+<p>The 9th Kegg pathway contains 16 genes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kegg9$gene.info</code></pre></div>
+<pre><code>##         V4 V1        V2        V3
+## 1    SOAT1  1 179261017 179326453
+## 2      LSS 21  47606360  47650738
+## 3     SQLE  8 126008720 126036525
+## 5  CYP51A1  7  91739463  91766059
+## 6    DHCR7 11  71143457  71161477
+## 7  CYP27B1 12  58154117  58162976
+## 8   DHCR24  1  55313300  55354921
+## 9  HSD17B7  1 162758496 162784608
+## 10   MSMO1  4 166246818 166266225
+## 11   FDFT1  8  11658190  11698818
+## 12    LIPA 10  90971326  91013660
+## 13     CEL  9 135935365 135949248
+## 14  TM7SF2 11  64877341  64885707
+## 16   SOAT2 12  53495274  53520323</code></pre>
+<p>The <code>PPs</code> is a list object contains the SNP information for each genes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## SNPs mapped on 3rd and 4th genes of 9th Kegg pathway
+kegg9$PPs[<span class="dv">3</span>:<span class="dv">4</span>]</code></pre></div>
+<pre><code>## $CYP51A1
+##                    V1 V2       V3        V4
+## rs7796370   rs7796370  7 91739652 0.9035991
+## rs12056285 rs12056285  7 91743745 0.7552544
+## rs10953067 rs10953067  7 91746159 0.9138308
+## rs6965936   rs6965936  7 91752154 0.2282090
+## rs10953068 rs10953068  7 91752687 0.7363687
+## rs10488513 rs10488513  7 91752911 0.9015296
+## rs10953069 rs10953069  7 91760477 0.9718199
+## rs721015     rs721015  7 91763192 0.3465701
+## 
+## $CYP27B1
+##                    V1 V2       V3        V4
+## rs7306830   rs7306830 12 58154246 0.8323711
+## rs10783975 rs10783975 12 58157977 0.7783928
+## rs276054     rs276054 12 58161746 0.9735500</code></pre>
+<p>The <code>Ps</code> object contains p-value information for mapped SNPs. Total 394SNPs are mapped on 9th kegg pathway.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(kegg9$Ps)</code></pre></div>
+<pre><code>## [1] 394</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kegg9$Ps[<span class="dv">1</span>:<span class="dv">10</span>]</code></pre></div>
+<pre><code>##  rs2331902 rs10159067  rs3806284  rs3806283  rs6692913  rs1411479 
+##  0.2115124  0.9898204  0.9488433  0.4944396  0.5838916  0.4224329 
+## rs12752307 rs12036052 rs12134601 rs10159443 
+##  0.3675058  0.1982464  0.9293256  0.9375789</code></pre>
+<p>Using <a href="http://pngu.mgh.harvard.edu/~purcell/plink/index.shtml">plink</a>, we mapped our SNPs to the reference population ( Hapmap CEU phase 2 ). We dropped the SNPs of minor allele frequency (MAF) less then 5 percent. Among 394 SNPs mapped on 9th Kegg pathway, 330 SNPs are mapped on the reference data. P-values of these SNPs and correlation matirx of SNPs using the reference population, saved on <code>nP</code> and <code>ldmatrix</code> object.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kegg9$nP[<span class="dv">1</span>:<span class="dv">10</span>]</code></pre></div>
+<pre><code>##   rs487230   rs593398  rs6694813   rs550336 rs17111584   rs683880 
+##  0.9209627  0.8499274  0.9741802  0.6074471  0.5866373  0.9607142 
+##  rs6588545   rs679804   rs555687   rs497159 
+##  0.3860578  0.8845177  0.9036468  0.8872636</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kegg9$ldmatrix[<span class="dv">1</span>:<span class="dv">10</span>,<span class="dv">1</span>:<span class="dv">10</span>]</code></pre></div>
+<pre><code>##              rs487230    rs593398   rs6694813   rs550336  rs17111584
+## rs487230    1.0000000 -0.19188474  0.72579887  0.8910864  0.45580139
+## rs593398   -0.1918847  1.00000000 -0.17488093 -0.1880254 -0.06052275
+## rs6694813   0.7257989 -0.17488093  1.00000000  0.8350461 -0.08326255
+## rs550336    0.8910864 -0.18802536  0.83504607  1.0000000  0.47874154
+## rs17111584  0.4558014 -0.06052275 -0.08326255  0.4787415  1.00000000
+## rs683880    0.9742395 -0.17778169  0.74380068  0.8600249  0.37081386
+## rs6588545   0.4128228 -0.02037425 -0.07921255  0.4209425  1.00000000
+## rs679804    0.7257989 -0.17488093  1.00000000  0.8350461 -0.08326255
+## rs555687    1.0000000 -0.18763049  0.73226324  0.8901041  0.45918526
+## rs497159    0.7257989 -0.17488093  1.00000000  0.8350461 -0.08326255
+##              rs683880   rs6588545    rs679804   rs555687    rs497159
+## rs487230    0.9742395  0.41282283  0.72579887  1.0000000  0.72579887
+## rs593398   -0.1777817 -0.02037425 -0.17488093 -0.1876305 -0.17488093
+## rs6694813   0.7438007 -0.07921255  1.00000000  0.7322632  1.00000000
+## rs550336    0.8600249  0.42094247  0.83504607  0.8901041  0.83504607
+## rs17111584  0.3708139  1.00000000 -0.08326255  0.4591853 -0.08326255
+## rs683880    1.0000000  0.35886033  0.74380068  0.9740010  0.74380068
+## rs6588545   0.3588603  1.00000000 -0.07921255  0.4170467 -0.07921255
+## rs679804    0.7438007 -0.07921255  1.00000000  0.7322632  1.00000000
+## rs555687    0.9740010  0.41704671  0.73226324  1.0000000  0.73226324
+## rs497159    0.7438007 -0.07921255  1.00000000  0.7322632  1.00000000</code></pre>
+<p>The <code>snp.info</code> data object have snp information for each mapped SNPs. The 1st column is rsID, 2nd column is Chr, 3rd column is location and 4th column is p-value.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kegg9$snp.info[<span class="dv">1</span>:<span class="dv">10</span>,]</code></pre></div>
+<pre><code>##                  rsID Chr      Loc      Pval
+## rs487230     rs487230   1 55313762 0.9209627
+## rs593398     rs593398   1 55314484 0.8499274
+## rs6694813   rs6694813   1 55315191 0.9741802
+## rs550336     rs550336   1 55318103 0.6074471
+## rs17111584 rs17111584   1 55319284 0.5866373
+## rs683880     rs683880   1 55319483 0.9607142
+## rs6588545   rs6588545   1 55321962 0.3860578
+## rs679804     rs679804   1 55325157 0.8845177
+## rs555687     rs555687   1 55325692 0.9036468
+## rs497159     rs497159   1 55326142 0.8872636</code></pre>
+</div>
+<div id="use-of-aspus-function" class="section level2">
+<h2>Use of aSPUs function</h2>
+<p>Using the following code we can use <code>aSPUs()</code> and <code>GATES2()</code> function to get gene-wise aSPU and GATES p-value for each gene in 9th Kegg pathway.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Gps&lt;-<span class="ot">NULL</span>;
+gl &lt;-<span class="st"> </span><span class="ot">NULL</span>;
+for( g in kegg9$gene.info[,<span class="dv">1</span>]) {
+    snps &lt;-
+<span class="st">    </span><span class="kw">which</span>( ( kegg9$snp.info[,<span class="dv">2</span>] ==<span class="st"> </span>kegg9$gene.info[kegg9$gene.info[,<span class="dv">1</span>]==g,<span class="dv">2</span>]) &amp;
+<span class="st">           </span>(kegg9$snp.info[,<span class="dv">3</span>] &gt;<span class="st"> </span>kegg9$gene.info[kegg9$gene.info[,<span class="dv">1</span>] ==<span class="st"> </span>g, <span class="dv">3</span>])&amp;
+<span class="st">           </span>(kegg9$snp.info[,<span class="dv">3</span>] &lt;<span class="st"> </span>kegg9$gene.info[kegg9$gene.info[,<span class="dv">1</span>] ==<span class="st"> </span>g, <span class="dv">4</span>]))
+
+    newP &lt;-<span class="st"> </span>kegg9$nP[snps] ;
+    ldsub &lt;-<span class="st"> </span>kegg9$ldmatrix[snps, snps];
+
+    if( <span class="kw">length</span>(snps) &gt;<span class="st"> </span><span class="dv">1</span>) {
+        out &lt;-<span class="st"> </span><span class="kw">aSPUs</span>(newP, <span class="dt">corrSNP=</span>ldsub , <span class="dt">pow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>, <span class="ot">Inf</span>),
+                     <span class="dt">n.perm=</span><span class="dv">10000</span>, <span class="dt">Ps=</span><span class="ot">TRUE</span>)
+
+        o.pvec =<span class="st"> </span><span class="kw">order</span>(newP)
+        ldmat &lt;-<span class="st"> </span>ldsub[o.pvec, o.pvec]
+        gatesp &lt;-<span class="st"> </span><span class="kw">GATES2</span>(ldmat, <span class="kw">sort</span>(newP))[<span class="dv">1</span>]
+        Gps &lt;-<span class="st"> </span><span class="kw">rbind</span>(Gps, <span class="kw">c</span>(<span class="kw">length</span>(newP),out$pvs, gatesp))
+        gl &lt;-<span class="st"> </span><span class="kw">c</span>(gl, g)
+    } else if (<span class="kw">length</span>(snps) ==<span class="st"> </span><span class="dv">1</span>) {
+        out &lt;-<span class="st"> </span><span class="kw">aSPUs</span>(newP, <span class="dt">corrSNP=</span>ldsub , <span class="dt">pow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>, <span class="ot">Inf</span>),
+                     <span class="dt">n.perm=</span><span class="dv">10000</span>, <span class="dt">Ps=</span><span class="ot">TRUE</span>)
+        gatesp &lt;-<span class="st"> </span>newP
+        Gps &lt;-<span class="st"> </span><span class="kw">rbind</span>(Gps, <span class="kw">c</span>(<span class="kw">length</span>(newP),out$pvs, gatesp) )
+        gl &lt;-<span class="st"> </span><span class="kw">c</span>(gl, g)
+    }
+}
+<span class="kw">colnames</span>(Gps)[<span class="dv">1</span>] &lt;-<span class="st"> &quot;nSNP&quot;</span>
+<span class="kw">rownames</span>(Gps) &lt;-<span class="st"> </span>gl
+Gps</code></pre></div>
+<pre><code>##         nSNP  SPUs1  SPUs2  SPUs4  SPUs8 SPUsInf      aSPUs           Pg
+## SOAT1     63 0.6539 0.6299 0.6040 0.5039  0.3176 0.43465653 0.3994139131
+## SQLE      49 0.7354 0.7231 0.7050 0.6704  0.5657 0.67203280 0.6527898971
+## CYP51A1    8 0.8205 0.7473 0.6460 0.5825  0.5074 0.62173783 0.6798247959
+## CYP27B1    3 0.9503 0.9502 0.9501 0.9496  0.9451 0.95770423 0.9735500000
+## DHCR24    26 0.9235 0.8779 0.8368 0.8173  0.8141 0.88541146 0.9777507000
+## HSD17B7   43 0.6627 0.7526 0.8112 0.7616  0.6275 0.75042496 0.6360037948
+## MSMO1      7 0.0207 0.0194 0.0212 0.0269  0.0432 0.03219678 0.0228054242
+## FDFT1     54 0.3199 0.3301 0.3247 0.2640  0.1491 0.20787921 0.1360214136
+## LIPA      57 0.0000 0.0000 0.0000 0.0000  0.0001 0.00009999 0.0001396509
+## CEL        5 0.1696 0.1867 0.2308 0.2762  0.2990 0.23737626 0.2953563549
+## TM7SF2     1 0.7787 0.7787 0.7787 0.7787  0.7787 0.77872213 0.7816163000
+## SOAT2     14 0.1846 0.2131 0.2608 0.2988  0.2756 0.23827617 0.3239918282</code></pre>
+<p>The row of <code>Gps</code> means each gene, 1st column indicate the number of SNPs for each gene. 2nd to 6th column indicate SPUs p-values for each power ( 1,2,4,8 and Inf), 7th column indicate aSPUs p-value and 8th column indicate p-value of GATES method. We can see that a gene <em>LIPA</em> is very significant.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g =<span class="st"> &quot;LIPA&quot;</span>
+    snps &lt;-
+<span class="st">    </span><span class="kw">which</span>( ( kegg9$snp.info[,<span class="dv">2</span>] ==<span class="st"> </span>kegg9$gene.info[kegg9$gene.info[,<span class="dv">1</span>]==g,<span class="dv">2</span>]) &amp;
+<span class="st">           </span>(kegg9$snp.info[,<span class="dv">3</span>] &gt;<span class="st"> </span>kegg9$gene.info[kegg9$gene.info[,<span class="dv">1</span>] ==<span class="st"> </span>g, <span class="dv">3</span>])&amp;
+<span class="st">           </span>(kegg9$snp.info[,<span class="dv">3</span>] &lt;<span class="st"> </span>kegg9$gene.info[kegg9$gene.info[,<span class="dv">1</span>] ==<span class="st"> </span>g, <span class="dv">4</span>]))
+
+newP &lt;-<span class="st"> </span>kegg9$nP[snps] ;
+newP</code></pre></div>
+<pre><code>## rs10509568 rs10509569 rs12780342  rs7922269  rs6586175 rs12358054 
+## 0.00031650 0.09359480 0.04754370 0.00000756 0.00216860 0.13601460 
+##  rs1556478 rs12415827  rs2297475  rs2297473  rs2297472  rs2254747 
+## 0.01681000 0.14171810 0.07292150 0.01016540 0.00001680 0.41696630 
+##  rs2254670  rs2254636  rs2071510  rs2071509 rs11203041 rs11203042 
+## 0.00027910 0.46203620 0.00078460 0.00234250 0.00013330 0.00007830 
+##  rs1041390  rs7896502  rs1041389   rs885561   rs951647 rs12257915 
+## 0.00009400 0.35422370 0.00165870 0.00016280 0.00140590 0.00023720 
+##  rs1576818  rs1576817  rs1029074 rs17117789  rs2902563  rs7074555 
+## 0.00173150 0.00102450 0.93826590 0.32191190 0.07394800 0.40199450 
+## rs11203047  rs3892343 rs12267584  rs1320496  rs1412444 rs12240489 
+## 0.16127510 0.68171880 0.05303330 0.00019150 0.00091350 0.36096050 
+##  rs2246949  rs2246942  rs2246941 rs10887934  rs3740044  rs2246833 
+## 0.00007240 0.00008090 0.00008000 0.74540170 0.02227500 0.00004490 
+##  rs2246828   rs928415  rs6586179  rs1051338  rs2250781  rs2250644 
+## 0.00018290 0.05361800 0.04649850 0.00019460 0.00025170 0.00004480 
+##  rs2902561  rs2243548  rs2243547  rs1332327  rs2183933  rs1332325 
+## 0.57388670 0.00011620 0.00002260 0.00015360 0.72022840 0.01776480 
+## rs10887936  rs7094601  rs7922193 
+## 0.01108720 0.08830380 0.08558400</code></pre>
+<p><em>LIPA</em> have 57 SNPs mapped and we can see that there are many significant SNPs. It makes sense that SPUs(1) have less p-value then SPUs(inf) since there are multiple significant SNPs. GATES have more power when there are small number of significant SNPs in the Gene (similar to minP test), so aSPUs have less p-value than GATES.</p>
+</div>
+<div id="use-of-aspuspath-function" class="section level2">
+<h2>Use of aSPUsPath function</h2>
+<p>We can get p-value for pathways as follows. Let’s perform pathway based analysis using aSPUsPath, Gates-Simes and HYST.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">out.g &lt;-<span class="st"> </span><span class="kw">GatesSimes</span>(<span class="dt">pvec =</span> kegg9$nP, <span class="dt">ldmatrix =</span> kegg9$ldmatrix,
+                    <span class="dt">snp.info=</span>kegg9$snp.info, <span class="dt">gene.info =</span> kegg9$gene.info)
+
+out.h &lt;-<span class="st"> </span><span class="kw">Hyst</span>(<span class="dt">pvec =</span> kegg9$nP, <span class="dt">ldmatrix =</span> kegg9$ldmatrix,
+              <span class="dt">snp.info=</span>kegg9$snp.info, <span class="dt">gene.info =</span> kegg9$gene.info)
+
+out.a &lt;-<span class="st"> </span><span class="kw">aSPUsPath</span>(kegg9$nP, <span class="dt">corrSNP =</span> kegg9$ldmatrix, <span class="dt">pow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>, <span class="ot">Inf</span>),
+                   <span class="dt">pow2 =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>),
+                   <span class="dt">snp.info=</span>kegg9$snp.info, <span class="dt">gene.info =</span> kegg9$gene.info,
+                   <span class="dt">n.perm=</span><span class="dv">1000</span>, <span class="dt">Ps =</span> <span class="ot">TRUE</span>)
+
+out.g; out.h; out.a</code></pre></div>
+<pre><code>## [1] 0.00167581</code></pre>
+<pre><code>## [1] 0.07557735</code></pre>
+<pre><code>##   SPUsPath1,1   SPUsPath2,1   SPUsPath4,1   SPUsPath8,1 SPUsPathInf,1 
+##         0.265         0.293         0.353         0.388         0.334 
+##   SPUsPath1,2   SPUsPath2,2   SPUsPath4,2   SPUsPath8,2 SPUsPathInf,2 
+##         0.061         0.059         0.093         0.127         0.124 
+##   SPUsPath1,4   SPUsPath2,4   SPUsPath4,4   SPUsPath8,4 SPUsPathInf,4 
+##         0.013         0.007         0.008         0.012         0.015 
+##   SPUsPath1,8   SPUsPath2,8   SPUsPath4,8   SPUsPath8,8 SPUsPathInf,8 
+##         0.008         0.001         0.001         0.001         0.003 
+##     aSPUsPath 
+##         0.003</code></pre>
+<p>As we can see from the gene-wise analysis, there is only one very significant gene <code>LIPA</code>. In this situation Gates-Simes works well and Gate-Simes p-value is 0.0016758. On the other hand, HYST works well when there are many significant genes with similar effects.</p>
+<p>The aSPUsPath adaptively consider all SPUsPath(i,j). We can see that the p-value decrease as our 2nd parameter , <code>pow2</code>, increases. It makes sense because larger <code>pow2</code> is more effective if there are fewer associated genes.</p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

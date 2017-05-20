@@ -25,8 +25,6 @@ Maintainer: Il-Youp Kwak <ikwak@umn.edu>
 Suggests:
     knitr
 VignetteBuilder: knitr
-Imports:
-    Rcpp (>= 0.12.1)
 Depends:
     R(>= 3.1.0),
     gee,
