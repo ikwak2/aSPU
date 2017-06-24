@@ -23,7 +23,7 @@ R/aSPU is an R package for Genetic association testing methods such as aSPU, aSP
 
 *Data type indicate the structure of data set. "Individual" for individual level data. "Summary" for summary statistics data (such as Z scores or p-values of each SNP) 
 
-* aSPU is the function for original aSPU test (Pan et al. 2014), aSPUw is weghted version of it (Kim et al. 2014), aSPUr is robust version of aSPU test (Wei et al. 2016), aSPUd is aSPU test using asymptotic distribution of SPU statistics (Gong et al. 2016). The original version of aSPUd is two sample mean comparison available in R [highmean](https://cran.r-project.org/web/packages/highmean/index.html) package.
+* aSPU is the function for original aSPU test (Pan et al. 2014), aSPUw is weghted version of it (Kim et al. 2014), aSPUr is robust version of aSPU test (Wei et al. 2016), aSPUd is aSPU test using asymptotic distribution of SPU statistics (Gong et al. 2016). The original version of aSPUd is two sample mean comparison available in R [highmean](https://CRAN.R-project.org/package=highmean) package.
 
 ### Tutorials 
 
