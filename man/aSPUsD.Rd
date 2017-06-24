@@ -40,9 +40,10 @@ out
 
 }
 \references{
-Il-Youp Kwak, Wei Pan (2015)
-Adaptive Gene- and Pathway-Trait Association Testing with GWAS Summary Statistics,
-Bioinformatics, doi: 10.1093/bioinformatics/btv719
+Gongjun Xu, Lifeng Lin, Peng Wei and Wei Pan (2016)
+An adaptive two-sample test for high-dimensional means, Biometrika (2016) 103 (3): 609-624.
+Il-Youp Kwak, Wei Pan (2015) Adaptive Gene- and Pathway-Trait Association Testing with GWAS Summary Statistics,
+Bioinformatics, 32(8), 1178-1184
 }
 \seealso{
 \code{\link{aSPUs}} \code{\link{aSPU}}

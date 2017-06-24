@@ -11,7 +11,7 @@ R/aSPU is an R package for Genetic association testing methods such as aSPU, aSP
 
 | Function Name         | Data Type  | Description                                    |
 |-----------------------|------------|------------------------------------------------|
-| aSPU, aSPUw, aSPUr    | Individual | Single trait; gene-based                       |
+| aSPU, aSPUw, aSPUr, aSPUd    | Individual | Single trait; gene-based                       |
 | aSPUs                 | Summary    | Single trait; gene-based                       |
 | aSPUpath              | Individual | Single trait; pathway-based                    |
 | aSPUsPath             | Summary    | Single trait; pathway-based                    |
@@ -22,6 +22,8 @@ R/aSPU is an R package for Genetic association testing methods such as aSPU, aSP
 
 
 *Data type indicate the structure of data set. "Individual" for individual level data. "Summary" for summary statistics data (such as Z scores or p-values of each SNP) 
+
+* aSPU is the function for original aSPU test (Pan et al. 2014), aSPUw is weghted version of it (Kim et al. 2014), aSPUr is robust version of aSPU test (Wei et al. 2016), aSPUd is aSPU test using asymptotic distribution of SPU statistics (Gong et al. 2016). The original version of aSPUd is two sample mean comparison available in R [highmean](https://cran.r-project.org/web/packages/highmean/index.html) package.
 
 ### Tutorials 
 
@@ -52,8 +54,16 @@ NeuroImage, 1;101:681-694
 
 For 'aSPUr'
 ```
-Peng Wei, Ying Cao, Yiwei Zhang, Zhiyuan Xu, Il-Youp Kwak, Eric Boerwinkle, Wei Pan (In press)
-On Robust Association Testing for Quantitative Traits and Rare Variants, G3.
+Peng Wei, Ying Cao, Yiwei Zhang, Zhiyuan Xu, Il-Youp Kwak, Eric Boerwinkle, Wei Pan (2016)
+On Robust Association Testing for Quantitative Traits and Rare Variants, 
+G3, 6(12) 3941-3950. 
+```
+
+For 'aSPUd'
+```
+Gongjun Xu, Lifeng Lin, Peng Wei and Wei Pan (2016) 
+An adaptive two-sample test for high-dimensional means, 
+Biometrika (2016) 103 (3): 609-624.
 ```
 
 For 'aSPUpath'
@@ -86,8 +96,8 @@ Genetic Epidemiology, 8:651-663
 
 For 'MTaSPUsSet' and 'MTaSPUsSetPath'
 ```
-Il-Youp Kwak, Wei Pan (2016)
-Gene- and pathway-based association tests for multiple traits with GWAS summary statistics, Bioinformatics. doi:10.1093/bioinformatics/btw577
+Il-Youp Kwak, Wei Pan (2017)
+Gene- and pathway-based association tests for multiple traits with GWAS summary statistics, Bioinformatics. 33(1), 64-71
 ```
 
 

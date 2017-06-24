@@ -21,7 +21,8 @@
 #' @author Il-Youp Kwak and Wei Pan
 #'
 #' @references
-#' Gene- and pathway-based association tests for multiple traits with GWAS summary statistics (2016) Kwak I-Y, Pan W., Bioinformatics.
+#' Il-Youp Kwak, Wei Pan (2017)
+#' Gene- and pathway-based association tests for multiple traits with GWAS summary statistics, Bioinformatics. 33(1), 64-71
 #'
 #' @examples
 #' ## Say we have 3 traits and their p-values at 5 SNPs. 
