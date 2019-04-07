@@ -3,7 +3,7 @@
 [![CRAN](http://www.r-pkg.org/badges/version/aSPU)](https://CRAN.R-project.org/package=aSPU)
 
 
-Il-Youp Kwak <ikwak@umn.edu>
+Il-Youp Kwak <ilyoup.kwak@gmail.com>
 
 R/aSPU is an R package for Genetic association testing methods such as aSPU, aSPUw, aSPUpath, aSPUs, aSPUsPath, GEEaSPU, MTaSPUs, GATES, GATE-Simes, HYST etc.
 
@@ -28,13 +28,13 @@ R/aSPU is an R package for Genetic association testing methods such as aSPU, aSP
 ### Tutorials 
 
 Some [tutorials](https://github.com/ikwak2/aSPU_tutorials) for aSPUs, aSPUsPath and MTaSPUsSet are available. 
- - [Mapping Snp to Gene](http://www.tc.umn.edu/~ikwak/tutorials/mappingSnpToGene2.html)
- - [Getting correlation estimate among SNPs from reference panel](http://www.tc.umn.edu/~ikwak/tutorials/CorrFromRef.html)
- - [R and Perl codes to perform aSPUs and MTaSPUsSet](http://www.tc.umn.edu/~ikwak/tutorials/ForMTgenes.html)
- - [Pathway data manipulation](http://www.tc.umn.edu/~ikwak/tutorials/pathwayMani.html)
- - [Speed comparison using R, awk and Perl](http://www.tc.umn.edu/~ikwak/tutorials/SpeedComp.html)
- - [Vignette for aSPUs and aSPUsPath](http://www.tc.umn.edu/~ikwak/tutorials/aSPUstat.html)
- - [Vignette for MTaSPUsSet](http://www.tc.umn.edu/~ikwak/tutorials/MTaSPUsSet.html)
+ - [Mapping Snp to Gene](https://ikwak2.github.io/tutorials/mappingSnpToGene2.html)
+ - [Getting correlation estimate among SNPs from reference panel](https://ikwak2.github.io/tutorials/CorrFromRef.html)
+ - [R and Perl codes to perform aSPUs and MTaSPUsSet](https://ikwak2.github.io/tutorials/ForMTgenes.html)
+ - [Pathway data manipulation](https://ikwak2.github.io/tutorials/pathwayMani.html)
+ - [Speed comparison using R, awk and Perl](https://ikwak2.github.io/tutorials/SpeedComp.html)
+ - [Vignette for aSPUs and aSPUsPath](https://ikwak2.github.io/tutorials/aSPUstat.html)
+ - [Vignette for MTaSPUsSet](https://ikwak2.github.io/tutorials/MTaSPUsSet.html)
 
 ### Citations
 
