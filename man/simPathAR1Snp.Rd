@@ -28,7 +28,7 @@ simPathAR1Snp(
 
 \item{ncSNPs}{A vector, length matched with total number of genes. Each elements of vector indicate the number of causal SNPs in the gene. Default is ncSNPs = NULL, in this case the number of ncSNPs are randomly selected from nSNP0.}
 
-\item{nSNPlim}{If nSNPs = NULL, the number of SNPs in Gene randomly selected from Unif(nSNPlim[1], nSNPlim[2]).}
+\item{nSNPlim}{If nSNPs = NULL, the number of SNPs in Gene randomly selected in nSNPlim.}
 
 \item{nSNP0}{If ncSNPs = NULL, the number of causal SNPs in Gene randomly selected from nSNP0. Default is 1:3.}
 
