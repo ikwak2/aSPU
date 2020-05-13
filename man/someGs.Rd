@@ -10,8 +10,7 @@ data(someGs)
   data contain P-values of 2.7 million SNPs with six anthropometric
   traits that are well established to represent body size and shape:
   height, weight, BMI, waist circumference (WC), hip
-  circumference(HIP). The data is downloadable from
-  https://www.broadinstitute.org/collaboration/giant/index.php/GIANT_consortium_data_files
+  circumference(HIP). 
 
   We mapped SNPs on gene LCORL, RASA2, STK33 and RPGRIP1L. This subdata
   contains P values, correlation matrices for demostrated example of

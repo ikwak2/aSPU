@@ -10,8 +10,7 @@ data(SAMD11)
   data contain P-values of 2.7 million SNPs with six anthropometric
   traits that are well established to represent body size and shape:
   height, weight, BMI, waist circumference (WC), hip
-  circumference(HIP). The data is downloadable from
-  https://www.broadinstitute.org/collaboration/giant/index.php/GIANT_consortium_data_files
+  circumference(HIP). 
 
   We mapped SNPs on gene SAMD11. This subdata contains P values, Z
   scores of SNPs mapped on gene SAMD11. It also contains correlation
