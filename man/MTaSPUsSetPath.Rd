@@ -4,9 +4,19 @@
 \alias{MTaSPUsSetPath}
 \title{Multitraits - Pathway based Sum of Powered Score tests (MTSPUsSetPath) and adaptive MTSPUsSetpath (MTaSPUsSetPath) test for multi trait - pathway association with GWAS summary statistics.}
 \usage{
-MTaSPUsSetPath(Zs, corPhe, corSNP, pow1 = c(1, 2, 4, 8), pow2 = c(1, 2, 4,
-  8), pow3 = c(1, 2, 4, 8), snp.info, gene.info, n.perm = 1000,
-  Ps = FALSE, prune = TRUE)
+MTaSPUsSetPath(
+  Zs,
+  corPhe,
+  corSNP,
+  pow1 = c(1, 2, 4, 8),
+  pow2 = c(1, 2, 4, 8),
+  pow3 = c(1, 2, 4, 8),
+  snp.info,
+  gene.info,
+  n.perm = 1000,
+  Ps = FALSE,
+  prune = TRUE
+)
 }
 \arguments{
 \item{Zs}{Z-score matrix. row represent SNPs and column represent traits. It could be P-values if the Ps option is TRUE.}

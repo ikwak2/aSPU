@@ -36,7 +36,7 @@
 #' (outFZ <- MTaSPUsSetScore(ZsF, corSNP=corSNPF, corPhe = corPheF,
 #'       pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=10, Ps=FALSE))
 #'
-#' 
+#' @export
 
 
 MTaSPUsSetScore <- function(Zs, corSNP, corPhe, pow=c(1,2,4,8),

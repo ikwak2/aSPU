@@ -4,8 +4,15 @@
 \alias{plotPmat}
 \title{Image plot of P-value matrix.}
 \usage{
-plotPmat(Ps, zlim = NULL, main = NULL, yt = NULL, xlab = "SNPs",
-  thresh = -log(5e-08, 10), trait.names = NULL)
+plotPmat(
+  Ps,
+  zlim = NULL,
+  main = NULL,
+  yt = NULL,
+  xlab = "SNPs",
+  thresh = -log(5e-08, 10),
+  trait.names = NULL
+)
 }
 \arguments{
 \item{Ps}{P-value matrix. Row represent traits, column represent SNPs}

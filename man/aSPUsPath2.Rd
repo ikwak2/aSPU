@@ -4,8 +4,17 @@
 \alias{aSPUsPath2}
 \title{Pathway based Sum of Powered Score tests (SPUsPath) and adaptive SPUpath (aSPUsPath) test for single trait - pathway association with GWAS summary statistics. (vector version, fast when n is large)}
 \usage{
-aSPUsPath2(Zs, corSNP, pow = c(1, 2, 4, 8, Inf), pow2 = c(1, 2, 4, 8),
-  snp.info, gene.info, n.perm = 1000, Ps = FALSE, prune = TRUE)
+aSPUsPath2(
+  Zs,
+  corSNP,
+  pow = c(1, 2, 4, 8, Inf),
+  pow2 = c(1, 2, 4, 8),
+  snp.info,
+  gene.info,
+  n.perm = 1000,
+  Ps = FALSE,
+  prune = TRUE
+)
 }
 \arguments{
 \item{Zs}{Z-scores for each SNPs. It could be P-values if the Ps option is TRUE.}

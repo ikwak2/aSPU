@@ -48,6 +48,8 @@
 #' # The last element is p-value of aSPU test.
 #'
 #' @seealso \code{\link{aSPU}}
+#'
+#' @export
 
 
 aSPUw <- function(Y, X, cov=NULL, resample = c("perm", "boot", "sim"), model=c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000) {

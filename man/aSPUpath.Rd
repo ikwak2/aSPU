@@ -4,9 +4,19 @@
 \alias{aSPUpath}
 \title{Pathway based Sum of Powered Score tests (SPUpath) and adaptive SPUpath (aSPUpath) test for single trait - pathway association.}
 \usage{
-aSPUpath(Y, X, cov = NULL, model = c("binomial", "gaussian"), snp.info,
-  gene.info, pow = c(1:8, Inf), pow2 = c(1, 2, 4, 8), n.perm = 200,
-  usePCs = F, varprop = 0.95)
+aSPUpath(
+  Y,
+  X,
+  cov = NULL,
+  model = c("binomial", "gaussian"),
+  snp.info,
+  gene.info,
+  pow = c(1:8, Inf),
+  pow2 = c(1, 2, 4, 8),
+  n.perm = 200,
+  usePCs = F,
+  varprop = 0.95
+)
 }
 \arguments{
 \item{Y}{Response or phenotype data. It can be a disease indicator; =0 for controls, =1 for cases.

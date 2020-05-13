@@ -19,6 +19,8 @@
 #'
 #'
 #' @seealso \code{\link{GATES2}} \code{\link{GatesSimes}} \code{\link{Hyst}}
+#'
+#' @export
 
 
 getlogitp <- function(Y, X) {

@@ -41,6 +41,8 @@
 #' ## The last element is p-value of aSPUr test.
 #'
 #' @seealso \code{\link{aSPU}}
+#'
+#' @export
 
 aSPUr<-function(Y, X, cov=NULL, pow=c(1:8, Inf), B=1000,C=1.345){
     

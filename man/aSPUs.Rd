@@ -4,8 +4,7 @@
 \alias{aSPUs}
 \title{Sum of Powered Score (SPUs) tests and adaptive SPU (aSPUs) test for single trait - SNP set association with GWAS summary statistics.}
 \usage{
-aSPUs(Zs, corSNP, pow = c(1:8, Inf), n.perm = 1000, Ps = FALSE,
-  prune = TRUE)
+aSPUs(Zs, corSNP, pow = c(1:8, Inf), n.perm = 1000, Ps = FALSE, prune = TRUE)
 }
 \arguments{
 \item{Zs}{Z-scores for each SNPs. It could be P-values if the Ps option is TRUE.}

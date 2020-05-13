@@ -19,6 +19,8 @@
 #'
 #' @param n.perm number of permutations or bootstraps.
 #'
+#' @param threshold When n.perm is less than the threshold, we use faster version of aSPU but use more memory. (default is 10^5)
+#'
 #' @return A list object, Ts : test statistics for the SPU tests (in the order of the specified pow) and finally for the aSPU test.
 #'         pvs : p-values for the SPU and aSPU tests.
 #'
@@ -52,27 +54,30 @@
 #' # The last element is p-value of aSPU test.
 #'
 #' @seealso \code{\link{aSPUw}}
+#'
+#' @export
 
-aSPU <- function(Y, X, cov=NULL, resample = c("perm", "boot", "sim"), model=c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000) {
+
+aSPU <- function(Y, X, cov=NULL, resample = c("perm", "boot", "sim"), model=c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000, threshold = 10^5) {
     X <- as.matrix(X)
     model <- match.arg(model)
     resample <- match.arg(resample)
 
     if(resample == "boot") {
-        if(n.perm > 10^5) {
+        if(n.perm > threshold) {
             aSPUboot(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
         } else {
             aSPUboot2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
         }
     } else {
         if(resample == "sim") {
-            if(n.perm > 10^5) {
+            if(n.perm > threshold) {
                 aSPUsim1(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
             } else {
                 aSPUsim2(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
             }
         } else {
-            if(n.perm > 10^5) {
+            if(n.perm > threshold) {
                 ## aSPUperm(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
                 aSPUperm(Y = Y, X = X, cov = cov, pow = pow, n.perm = n.perm, model = model)
             } else {

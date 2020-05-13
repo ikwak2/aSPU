@@ -35,6 +35,8 @@
 #' minP(Zi= allZ[1,], r = r)
 #'
 #' @seealso \code{\link{estcov}} \code{\link{MTaSPUs}}
+#'
+#' @export
 
 minP <- function(Zi, r){
     n <- dim(r)[1]

@@ -49,6 +49,8 @@
 #'
 #'
 #' @seealso \code{\link{aSPUpath}}
+#'
+#' @export
 
 
 simPathAR1Snp<-function(nGenes=10, nGenes1=5, nSNPs=NULL, ncSNPs = NULL,

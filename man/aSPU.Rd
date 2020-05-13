@@ -4,8 +4,16 @@
 \alias{aSPU}
 \title{Sum of Powered Score (SPU) tests and adaptive SPU (aSPU) test for single trait - SNP set association.}
 \usage{
-aSPU(Y, X, cov = NULL, resample = c("perm", "boot", "sim"),
-  model = c("gaussian", "binomial"), pow = c(1:8, Inf), n.perm = 1000)
+aSPU(
+  Y,
+  X,
+  cov = NULL,
+  resample = c("perm", "boot", "sim"),
+  model = c("gaussian", "binomial"),
+  pow = c(1:8, Inf),
+  n.perm = 1000,
+  threshold = 10^5
+)
 }
 \arguments{
 \item{Y}{Response or phenotype data. It can be a disease indicator; =0 for controls, =1 for cases.
@@ -24,6 +32,8 @@ for an allele. A matrix with dimension n by k (n : number of observation, k : nu
 \item{pow}{power used in SPU test. A vector of the powers.}
 
 \item{n.perm}{number of permutations or bootstraps.}
+
+\item{threshold}{When n.perm is less than the threshold, we use faster version of aSPU but use more memory. (default is 10^5)}
 }
 \value{
 A list object, Ts : test statistics for the SPU tests (in the order of the specified pow) and finally for the aSPU test.

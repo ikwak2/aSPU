@@ -43,6 +43,8 @@
 #' out.a
 #'
 #' @seealso \code{\link{aSPUs}}
+#'
+#' @export
 
 aSPUsPath2 <- function (Zs, corSNP, pow = c(1, 2, 4, 8, Inf), pow2 = c(1, 2, 4, 8),
                         snp.info, gene.info, n.perm = 1000, Ps = FALSE, prune = TRUE) {

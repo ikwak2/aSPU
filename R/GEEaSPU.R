@@ -34,6 +34,7 @@
 #' out <- GEEaSPU(traits, geno, Z = NULL, model = "gaussian", 
 #'		  gamma = c(1:8,Inf), n.sim = 100)
 #'
+#' @export
 
 GEEaSPU <- function(traits, geno, 
 	  Z = NULL, model = c("binomial", "gaussian"), 

@@ -34,6 +34,8 @@
 #'
 #'
 #' @seealso \code{\link{Hyst}}  \code{\link{GATES2}}
+#'
+#' @export
 
 GatesSimes <- function(pvec, ldmatrix, snp.info, gene.info) {
 

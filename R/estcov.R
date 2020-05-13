@@ -35,6 +35,8 @@
 #' minP(Zi= allZ[1,], r = r)
 #'
 #' @seealso \code{\link{MTaSPUs}} \code{\link{minP}}
+#'
+#' @export
 
 estcov <- function(allZ, Ps=FALSE){
     if(Ps == TRUE)

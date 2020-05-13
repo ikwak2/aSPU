@@ -46,6 +46,8 @@
 #' minP(Zi= allZ[1,], r = r)
 #'
 #' @seealso \code{\link{minP}} \code{\link{estcov}}
+#'
+#' @export
 
 MTaSPUs <- function(Z, v, B, pow, transform = FALSE, Ps = FALSE){
    # -- Z: matrix of summary Z-scores, SNPs in rows and traits in columns  

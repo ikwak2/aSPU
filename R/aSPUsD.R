@@ -38,7 +38,9 @@
 #'
 #' out
 #'
-#' @seealso \code{\link{aSPUs}} \code{\link{aSPU}} 
+#' @seealso \code{\link{aSPUs}} \code{\link{aSPU}}
+#'
+#' @export
 
 aSPUsD <- function(Zs, corrSNP, Ps = FALSE)
 {

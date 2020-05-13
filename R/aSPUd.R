@@ -26,6 +26,8 @@
 #' out
 #'
 #' @seealso \code{\link{aSPU}}
+#'
+#' @export
 
 
 aSPUd <- function(Y, X, cov = NULL, model=c("gaussian","binomial") ){

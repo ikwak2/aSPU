@@ -35,6 +35,8 @@
 #' 
 #' 
 #' @seealso \code{\link{aSPUs}}
+#'
+#' @export
 
 plotPmat <- function(Ps, zlim=NULL, main = NULL, yt = NULL, xlab = "SNPs", thresh=-log(5e-8,10), trait.names=NULL  ) {
 

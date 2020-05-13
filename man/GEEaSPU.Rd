@@ -4,8 +4,15 @@
 \alias{GEEaSPU}
 \title{The SPU and aSPU tests for multiple traits - single SNP association in generalized estimating equations.}
 \usage{
-GEEaSPU(traits, geno, Z = NULL, model = c("binomial", "gaussian"),
-  gamma = c(1:8, Inf), n.sim = 1000, corstr = "independence")
+GEEaSPU(
+  traits,
+  geno,
+  Z = NULL,
+  model = c("binomial", "gaussian"),
+  gamma = c(1:8, Inf),
+  n.sim = 1000,
+  corstr = "independence"
+)
 }
 \arguments{
 \item{traits}{trait matrix. The row for individuals and the column for traits.}

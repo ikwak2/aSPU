@@ -4,9 +4,20 @@
 \alias{simPathAR1Snp}
 \title{Simulating a pathway with multiple SNPs.}
 \usage{
-simPathAR1Snp(nGenes = 10, nGenes1 = 5, nSNPs = NULL, ncSNPs = NULL,
-  nSNPlim = c(1, 20), nSNP0 = 1:3, LOR = 0.3, n = 100,
-  MAFlim = c(0.05, 0.4), rholim = c(0, 0), p0 = 0.05, noncausal = FALSE)
+simPathAR1Snp(
+  nGenes = 10,
+  nGenes1 = 5,
+  nSNPs = NULL,
+  ncSNPs = NULL,
+  nSNPlim = c(1, 20),
+  nSNP0 = 1:3,
+  LOR = 0.3,
+  n = 100,
+  MAFlim = c(0.05, 0.4),
+  rholim = c(0, 0),
+  p0 = 0.05,
+  noncausal = FALSE
+)
 }
 \arguments{
 \item{nGenes}{The number of total genes.}

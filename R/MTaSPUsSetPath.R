@@ -58,6 +58,8 @@
 #' out
 #'
 #' @seealso \code{\link{MTaSPUsSet}}
+#'
+#' @export
 
 
 MTaSPUsSetPath <- function(Zs, corPhe, corSNP, pow1=c(1,2,4,8),

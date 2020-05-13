@@ -33,6 +33,8 @@
 #'             gene.info = simula$gene.info)
 #'
 #' @seealso \code{\link{GatesSimes}} \code{\link{GATES2}}
+#'
+#' @export
 
 Hyst <- function(pvec, ldmatrix, snp.info, gene.info) {
     n.gene <- nrow(gene.info)

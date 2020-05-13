@@ -4,8 +4,15 @@
 \alias{MTaSPUsSetScore}
 \title{gene-Multitrait Sum of Powered Score (MTSPUsSetScore) tests and adaptive MTSPUsSet (MTaSPUsSet) test for multi trait - SNP set association with GWAS summary statistics. (Score version added)}
 \usage{
-MTaSPUsSetScore(Zs, corSNP, corPhe, pow = c(1, 2, 4, 8), pow2 = c(1, 2, 4,
-  8), n.perm = 5000, Ps = FALSE)
+MTaSPUsSetScore(
+  Zs,
+  corSNP,
+  corPhe,
+  pow = c(1, 2, 4, 8),
+  pow2 = c(1, 2, 4, 8),
+  n.perm = 5000,
+  Ps = FALSE
+)
 }
 \arguments{
 \item{Zs}{Z-score matrix. row represent SNPs and column represent traits. It could be P-values if the Ps option is TRUE.}
@@ -37,7 +44,6 @@ attach(SAMD11)
 ## example analysis using aSPUM test.
 (outFZ <- MTaSPUsSetScore(ZsF, corSNP=corSNPF, corPhe = corPheF,
       pow=c(1,2,4,8),  pow2 = c(1,2,4,8), n.perm=10, Ps=FALSE))
-
 
 }
 \references{

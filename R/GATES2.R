@@ -34,6 +34,8 @@
 #'
 #'
 #' @seealso \code{\link{Hyst}} \code{\link{GatesSimes}}
+#'
+#' @export
 
 
 GATES2 <- function (ldmatrix, p)

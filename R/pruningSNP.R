@@ -48,6 +48,8 @@
 #' # The last element is p-value of aSPUs test.
 #'
 #' @seealso \code{\link{aSPUs}} \code{\link{aSPUsPath}} \code{\link{MTaSPUsSet}}
+#'
+#' @export
 
 pruneSNP <- function(corSNP, rup = .95, rdown = -.95) {
 

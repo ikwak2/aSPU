@@ -56,6 +56,8 @@
 #' # The last element is p-value of aSPUs test.
 #'
 #' @seealso \code{\link{aSPUw}} \code{\link{aSPU}} \code{\link{aSPUsPath}}
+#'
+#' @export
 
 aSPUs <- function(Zs, corSNP, pow = c(1:8, Inf), n.perm = 1000, Ps = FALSE, prune = TRUE)
 {
