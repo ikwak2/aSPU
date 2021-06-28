@@ -21,10 +21,10 @@ Get p-value using logistic regresion for each of the multiple SNPs
 }
 \examples{
 
-simula <- simPathAR1Snp(nGenes=20, nGenes1=1, nSNPlim=c(1, 20), nSNP0=1:3,
-                           LOR=.2, rholim=c(0,0),
-                           n=10, MAFlim=c(0.05, 0.4), p0=0.05)
-logitp <- getlogitp(simula$Y, simula$X)
+#simula <- simPathAR1Snp(nGenes=20, nGenes1=1, nSNPlim=c(1, 20), nSNP0=1:3,
+#                           LOR=.2, rholim=c(0,0),
+#                           n=10, MAFlim=c(0.05, 0.4), p0=0.05)
+#logitp <- getlogitp(simula$Y, simula$X)
 
 
 }

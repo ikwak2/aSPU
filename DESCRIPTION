@@ -23,15 +23,14 @@ Description: R codes for the (adaptive) Sum of Powered Score ('SPU' and 'aSPU')
 Author: Il-Youp Kwak and others (See Author(s) in each function manual)
 Maintainer: Il-Youp Kwak <ikwak2@cau.ac.kr>
 VignetteBuilder: knitr
-Suggests: rmarkdown, markdown
+Suggests: rmarkdown, markdown, knitr
 Depends:
     R(>= 3.6.0),
     gee,
     MASS,
     mvtnorm,
     fields,
-    matrixStats,
-    knitr
+    matrixStats
 License: GPL-3
 URL: https://github.com/ikwak2/aSPU
 RoxygenNote: 7.1.0
