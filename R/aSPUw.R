@@ -33,7 +33,9 @@
 #' @examples
 #'
 #' data(exdat)
-#' out <- aSPUw(exdat$Y, exdat$X, pow = c(1:8, Inf), n.perm = 1000)
+#' # increase n.perm for accurate p-value
+#' \dontrun{out <- aSPUw(exdat$Y, exdat$X, pow = c(1:8, Inf), n.perm = 1000) }
+#' \dontshow{out <- aSPUw(exdat$Y, exdat$X, pow = c(1:8, Inf), n.perm = 5)}
 #'
 #' out$Ts
 #' # This is a vector of Test Statistics for SPU and aSPU tests.

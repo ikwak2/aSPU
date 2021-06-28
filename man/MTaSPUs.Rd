@@ -38,7 +38,7 @@ n.traits <- 10
 n.subjects <- 1000
 traits <- matrix(rnorm(n.subjects*n.traits), n.subjects, n.traits)
 v <- cov(traits)
-allZ <- rmvnorm(n.snp, sigma=v)
+allZ <- rmvnorm(n.snp, Sigma=v)
 colnames(allZ) <- paste("trait", 1:n.traits, sep="")
 rownames(allZ) <- paste("snp", 1:n.snp, sep="")
 

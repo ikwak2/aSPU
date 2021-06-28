@@ -38,8 +38,10 @@
 #' data(exdat)
 #'
 #' ## example analysis using aSPU test on exdat data.
-#' out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot",
-#'            model = "binomial", pow = c(1:8, Inf), n.perm = 1000)
+#' \dontrun{out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot",
+#'            model = "binomial", pow = c(1:8, Inf), n.perm = 1000) }
+#' \dontshow{out <- aSPU(exdat$Y, exdat$X, cov = NULL, resample = "boot",
+#'            model = "binomial", pow = c(1:8, Inf), n.perm = 10) }
 #'
 #' out$Ts
 #' # This is a vector of Test Statistics for SPU and aSPU tests.

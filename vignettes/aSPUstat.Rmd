@@ -22,7 +22,7 @@ We will consider the analysis of a coronary artery disease (CAD)
 data from the CARDIoGRAM and C4D consortium. The data set contains P value
 data for coronary artery disease (CAD). This study comprised 63,746
 CAD cases and 130,681 controls. We mapped these SNPs to the 9th KEGG
-pathway ([KEGG_STEROID_BIOSYNTHESIS](http://www.broadinstitute.org/gsea/msigdb/cards/KEGG_STEROID_BIOSYNTHESIS))
+pathway ([KEGG_STEROID_BIOSYNTHESIS](http://software.broadinstitute.org/gsea/msigdb/cards/KEGG_STEROID_BIOSYNTHESIS))
 . Let's load this subset.
 
 ```{r loading}

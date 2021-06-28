@@ -19,7 +19,7 @@ This vignette illustrates the use of MTaSPUsSet test, an adaptive gene-multitrai
 ## Data preparation
 
 We first downloaded GWAS summary statistics of Genetic
-Investigation of ANthropometric Traits ([GIANT](https://www.broadinstitute.org/collaboration/giant/index.php/GIANT_consortium_data_files)) consortium data. We get the genomic coordinates of SNPs using [SnpTracker](http://www.g3journal.org/content/early/2015/11/17/g3.115.021832) software (hg19 used), and then we mapped SNPs to Genes using [MAGMA](http://ctg.cncr.nl/software/magma) software (build 37 used). We will consider testing a gene named *SAMD11* for example.
+Investigation of ANthropometric Traits ([GIANT](http://portals.broadinstitute.org/collaboration/giant/index.php/GIANT_consortium_data_files)) consortium data. We get the genomic coordinates of SNPs using [SnpTracker](https://www.g3journal.org/content/6/1/205) software (hg19 used), and then we mapped SNPs to Genes using [MAGMA](http://ctg.cncr.nl/software/magma) software (build 37 used). We will consider testing a gene named *SAMD11* for example.
 
 Let's load *SAMD11* data first.
 ```{r loading, include=FALSE}
@@ -167,7 +167,7 @@ plotLD <- function(ldmatrix, zlim = NULL, main = NULL, yt = NULL, title = "SNPs"
 ## Data Visualization of some detected genes
 So far, we demostrated how we can use the software. In this section we will visualize some identified genes. 
 
-Gene *LCORL* and *RASA2* are two of identified genes by [MGAS](http://www.ncbi.nlm.nih.gov/pubmed/25431328) using their software.  
+Gene *LCORL* and *RASA2* are two of identified genes by [MGAS](https://pubmed.ncbi.nlm.nih.gov/25431328/) using their software.  
 
 ```{r plot_MGAS, echo=FALSE, fig.width=7, fig.height=7}
 data(someGs)
